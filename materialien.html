@@ -501,7 +501,8 @@
                 { pos: '1.12', title: 'Mehrsparteneinführung & Grundleitungsset DN110/125', usage: 'Hauseinführung Wasser/Strom/Telekom unter XPS', qty: 1, unit: 'Set', price: 1450.00 },
                 { pos: '1.13', title: 'Dachrinnen & Fallrohre Set (Titanzink / Aluminium)', usage: 'Entwässerung Steildach & Garage', qty: 1, unit: 'Set', price: 1850.00 },
                 { pos: '1.14', title: 'Raffstores / Elektrische Rollläden Set (Süd/West)', usage: 'Sommerlicher Wärmeschutz Fenster', qty: 1, unit: 'Set', price: 4200.00 },
-                { pos: '1.15', title: 'Schall- & Brandschutzpaket Trennwand ELW (53 dB)', usage: 'Entkopplung & Beplankung ELW-Wand', qty: 1, unit: 'Paket', price: 1250.00 }
+                { pos: '1.15', title: 'Schall- & Brandschutzpaket Trennwand ELW (53 dB)', usage: 'Entkopplung & Beplankung ELW-Wand', qty: 1, unit: 'Paket', price: 1250.00 },
+                { pos: '1.16', title: 'EPDM-Flachdach-Abdichtungsset Garage (36 m² EPDM-Folie)', usage: 'Nahtlose & wurzelfeste Garagendachabdichtung (>50 Jahre)', qty: 36, unit: 'm²', price: 45.00 }
             ],
             finish: [
                 { pos: '2.1', title: 'Fugenspachtel & Bewehrungsstreifen (Q2 / Q3 Standard)', usage: 'Spachteln der 840 m² Gipsfaserflächen', qty: 840, unit: 'm²', price: 3.50 },
@@ -581,10 +582,10 @@
             ]
         };
 
-        let appData = JSON.parse(localStorage.getItem('kfw40_material_data_v11')) || DEFAULT_DATA;
+        let appData = JSON.parse(localStorage.getItem('kfw40_material_data_v12')) || DEFAULT_DATA;
 
         function saveData() {
-            localStorage.setItem('kfw40_material_data_v11', JSON.stringify(appData));
+            localStorage.setItem('kfw40_material_data_v12', JSON.stringify(appData));
         }
 
         function renderCategory(catKey, tbodyId, subtotalId) {
