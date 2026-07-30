@@ -500,7 +500,7 @@
                 { pos: '1.11', title: 'Miete Zellulose-Einblasmaschine (EM300)', usage: 'Verarbeitungsgerät', qty: 4, unit: 'Tage', price: 250.00 },
                 { pos: '1.12', title: 'Mehrsparteneinführung & Grundleitungsset DN110/125', usage: 'Hauseinführung Wasser/Strom/Telekom unter XPS', qty: 1, unit: 'Set', price: 1450.00 },
                 { pos: '1.13', title: 'Dachrinnen & Fallrohre Set (Titanzink / Aluminium)', usage: 'Entwässerung Steildach & Garage', qty: 1, unit: 'Set', price: 1850.00 },
-                { pos: '1.14', title: 'Raffstores / Elektrische Rollläden Set (Süd/West)', usage: 'Sommerlicher Wärmeschutz Fenster', qty: 1, unit: 'Set', price: 4200.00 },
+                { pos: '1.14', title: 'Rollladen-Schalter & Smart-Home Tasterpaket (Sonnenschutz)', usage: 'Taster & Relais für 16 elektrische Rollläden', qty: 1, unit: 'Set', price: 650.00 },
                 { pos: '1.15', title: 'Schall- & Brandschutzpaket Trennwand ELW (53 dB)', usage: 'Entkopplung & Beplankung ELW-Wand', qty: 1, unit: 'Paket', price: 1250.00 },
                 { pos: '1.16', title: 'EPDM-Flachdach-Abdichtungsset Garage (36 m² EPDM-Folie)', usage: 'Nahtlose & wurzelfeste Garagendachabdichtung (>50 Jahre)', qty: 36, unit: 'm²', price: 45.00 }
             ],
@@ -575,17 +575,17 @@
                 { pos: '8.13', title: 'Bauherrenversicherungen (Haftpflicht, Bauleistung, Feuerrohbau)', usage: 'Risikoabsicherung Bauphase', qty: 1, unit: 'Paket', price: 800.00 }
             ],
             bauelemente: [
-                { pos: '9.1', title: 'Passivhaus-Fenster Paket 3-fach Glas (Uw ≤ 0.8 W/m²K)', usage: '16 Fenster komplett inkl. Montage & RAL-Dichtung', qty: 16, unit: 'Stk', price: 900.00 },
+                { pos: '9.1', title: 'Passivhaus-Fenster 3-fach Glas inkl. elektrischer Aufsatz-Rollläden (Uw ≤ 0.8 W/m²K)', usage: '16 Fenster komplett inkl. gedämmtem Kasten, Motorantrieb, Montage & RAL-Dichtung', qty: 16, unit: 'Stk', price: 1250.00 },
                 { pos: '9.2', title: 'Haupteingangstür (Alu/Holz hochgedämmt)', usage: 'Eingang Hauptwohnung inkl. Sicherheitszylinder', qty: 1, unit: 'Stk', price: 3200.00 },
                 { pos: '9.3', title: 'Zweite Haustür (Einliegerwohnung ELW)', usage: 'Eingang ELW gedämmt mit Mehrfachverriegelung', qty: 1, unit: 'Stk', price: 2200.00 },
                 { pos: '9.4', title: 'Sektional-Garagentor 40 mm ISO (elektrisch)', usage: 'Garage Zugangs- & Zufahrtstor inkl. Motor & 2 Handsender', qty: 1, unit: 'Stk', price: 2400.00 }
             ]
         };
 
-        let appData = JSON.parse(localStorage.getItem('kfw40_material_data_v12')) || DEFAULT_DATA;
+        let appData = JSON.parse(localStorage.getItem('kfw40_material_data_v13')) || DEFAULT_DATA;
 
         function saveData() {
-            localStorage.setItem('kfw40_material_data_v12', JSON.stringify(appData));
+            localStorage.setItem('kfw40_material_data_v13', JSON.stringify(appData));
         }
 
         function renderCategory(catKey, tbodyId, subtotalId) {
