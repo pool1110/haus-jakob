@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="de" class="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Haus Jakob | Schnittmodelle &amp; Materialplanung</title>
+    <meta name="description" content="Übersicht aller Schnittzeichnungen & Materialplaner für das KfW-40 Holzrahmenhaus Projekt Haus Jakob.">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Outfit', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Lucide Icons CDN -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        body {
+            background-color: #FAFAFA;
+            color: #0f172a;
+        }
+        .nav-tab.active {
+            background-color: #0f172a !important;
+            color: #ffffff !important;
+            box-shadow: 0 2px 8px rgba(15, 23, 42, 0.12);
+        }
+        iframe {
+            border: none !important;
+            outline: none !important;
+            box-shadow: none !important;
+        }
+    </style>
+</head>
+<body class="bg-[#FAFAFA] text-slate-900 font-sans antialiased selection:bg-slate-800 selection:text-white min-h-screen">
+
+    <!-- Clean, Spacious Header -->
+    <header class="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md border-b border-slate-200 px-6 py-3">
+        <div class="max-w-[1920px] mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+            
+            <!-- Project Title & Logo (Haus Jakob) -->
+            <div class="flex items-center gap-3">
+                <div class="px-3.5 py-1.5 bg-slate-900 text-white rounded-xl font-display font-extrabold text-lg tracking-wide shadow-sm">
+                    HAUS JAKOB
+                </div>
+                <div class="h-6 w-px bg-slate-300 hidden sm:block"></div>
+                <span class="font-display font-semibold text-sm md:text-base text-slate-700 hidden sm:inline">KfW-40 Schnittmodelle</span>
+            </div>
+
+            <!-- Tab Navigation Buttons -->
+            <nav class="flex items-center p-1 bg-slate-100 rounded-xl border border-slate-200 gap-1 overflow-x-auto max-w-full">
+                <button id="btn-tab-boden" class="nav-tab active px-4 py-2 rounded-lg text-xs font-bold transition-all text-slate-600 hover:text-slate-900 whitespace-nowrap">
+                    1. Bodenplatte
+                </button>
+                <button id="btn-tab-wand" class="nav-tab px-4 py-2 rounded-lg text-xs font-bold transition-all text-slate-600 hover:text-slate-900 whitespace-nowrap">
+                    2. Wandaufbau
+                </button>
+                <button id="btn-tab-dach" class="nav-tab px-4 py-2 rounded-lg text-xs font-bold transition-all text-slate-600 hover:text-slate-900 whitespace-nowrap">
+                    3. Dachaufbau
+                </button>
+                <button id="btn-tab-zwischen" class="nav-tab px-4 py-2 rounded-lg text-xs font-bold transition-all text-slate-600 hover:text-slate-900 whitespace-nowrap">
+                    4. Zwischendecke
+                </button>
+                <button id="btn-tab-all" class="nav-tab px-4 py-2 rounded-lg text-xs font-bold transition-all text-slate-600 hover:text-slate-900 whitespace-nowrap">
+                    Alle Skizzen
+                </button>
+            </nav>
+
+            <!-- Right Action: Materialplaner Button -->
+            <div>
+                <a href="materialien.html" class="px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs rounded-xl flex items-center gap-2 shadow-sm transition-all whitespace-nowrap">
+                    <i data-lucide="calculator" class="w-4 h-4"></i>
+                    Materialplaner &amp; Kosten
+                </a>
+            </div>
+
+        </div>
+    </header>
+
+    <!-- Main Section Viewports: COMPLETELY FRAMELESS -->
+    <main class="relative pt-16 w-full min-h-[calc(100vh-4rem)] p-0 space-y-4">
+
+        <!-- SKIZZE 1: Thermobodenplatte (FRAMELESS) -->
+        <section id="sec-boden" class="sketch-section w-full bg-[#FAFAFA]">
+            <div class="flex items-center justify-between px-6 py-2 bg-slate-100/70 border-b border-slate-200">
+                <span class="text-xs font-bold text-slate-700">1. Thermobodenplatte (140 mm XPS + 200 mm Betonkern)</span>
+                <a href="bodenplatte.html" target="_blank" class="text-xs text-slate-600 hover:text-slate-900 font-bold flex items-center gap-1">
+                    <span>Vollbild</span>
+                    <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+                </a>
+            </div>
+            
+            <div class="w-full h-[calc(100vh-6.5rem)] min-h-[660px] bg-[#FAFAFA]">
+                <iframe src="bodenplatte.html" class="w-full h-full border-0 block bg-[#FAFAFA]" title="Thermobodenplatte Skizze"></iframe>
+            </div>
+        </section>
+
+        <!-- SKIZZE 2: Wandaufbau (FRAMELESS) -->
+        <section id="sec-wand" class="sketch-section hidden w-full bg-[#FAFAFA]">
+            <div class="flex items-center justify-between px-6 py-2 bg-slate-100/70 border-b border-slate-200">
+                <span class="text-xs font-bold text-slate-700">2. Wandaufbau KfW-40 (358 mm | U-Wert ≈ 0,13 W/m²K)</span>
+                <a href="wand.html" target="_blank" class="text-xs text-slate-600 hover:text-slate-900 font-bold flex items-center gap-1">
+                    <span>Vollbild</span>
+                    <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+                </a>
+            </div>
+            
+            <div class="w-full h-[calc(100vh-6.5rem)] min-h-[500px] bg-[#FAFAFA]">
+                <iframe src="wand.html" class="w-full h-full border-0 block bg-[#FAFAFA]" title="Wandaufbau Skizze"></iframe>
+            </div>
+        </section>
+
+        <!-- SKIZZE 3: Dachaufbau (FRAMELESS) -->
+        <section id="sec-dach" class="sketch-section hidden w-full bg-[#FAFAFA]">
+            <div class="flex items-center justify-between px-6 py-2 bg-slate-100/70 border-b border-slate-200">
+                <span class="text-xs font-bold text-slate-700">3. Dachaufbau KfW-40 (415 mm Sparrendach | U-Wert ≈ 0,12 W/m²K)</span>
+                <a href="dach.html" target="_blank" class="text-xs text-slate-600 hover:text-slate-900 font-bold flex items-center gap-1">
+                    <span>Vollbild</span>
+                    <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+                </a>
+            </div>
+            
+            <div class="w-full h-[calc(100vh-6.5rem)] min-h-[640px] bg-[#FAFAFA]">
+                <iframe src="dach.html" class="w-full h-full border-0 block bg-[#FAFAFA]" title="Dachaufbau Skizze"></iframe>
+            </div>
+        </section>
+
+        <!-- SKIZZE 4: Zwischendecke (FRAMELESS) -->
+        <section id="sec-zwischen" class="sketch-section hidden w-full bg-[#FAFAFA]">
+            <div class="flex items-center justify-between px-6 py-2 bg-slate-100/70 border-b border-slate-200">
+                <span class="text-xs font-bold text-slate-700">4. Zwischendecke EG/OG (240 mm Balken + Selfio FBH)</span>
+                <a href="zwischendecke.html" target="_blank" class="text-xs text-slate-600 hover:text-slate-900 font-bold flex items-center gap-1">
+                    <span>Vollbild</span>
+                    <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+                </a>
+            </div>
+            
+            <div class="w-full h-[calc(100vh-6.5rem)] min-h-[640px] bg-[#FAFAFA]">
+                <iframe src="zwischendecke.html" class="w-full h-full border-0 block bg-[#FAFAFA]" title="Zwischendecke Skizze"></iframe>
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            lucide.createIcons();
+
+            const btnBoden = document.getElementById('btn-tab-boden');
+            const btnWand = document.getElementById('btn-tab-wand');
+            const btnDach = document.getElementById('btn-tab-dach');
+            const btnZwischen = document.getElementById('btn-tab-zwischen');
+            const btnAll = document.getElementById('btn-tab-all');
+
+            const secBoden = document.getElementById('sec-boden');
+            const secWand = document.getElementById('sec-wand');
+            const secDach = document.getElementById('sec-dach');
+            const secZwischen = document.getElementById('sec-zwischen');
+
+            const allNavBtns = [btnBoden, btnWand, btnDach, btnZwischen, btnAll];
+            const allSections = [secBoden, secWand, secDach, secZwischen];
+
+            function activateTab(activeBtn, targetSec) {
+                allNavBtns.forEach(b => b.classList.remove('active'));
+                activeBtn.classList.add('active');
+
+                if (targetSec === 'all') {
+                    allSections.forEach(s => s.classList.remove('hidden'));
+                } else {
+                    allSections.forEach(s => s.classList.add('hidden'));
+                    targetSec.classList.remove('hidden');
+                }
+            }
+
+            btnBoden.addEventListener('click', () => activateTab(btnBoden, secBoden));
+            btnWand.addEventListener('click', () => activateTab(btnWand, secWand));
+            btnDach.addEventListener('click', () => activateTab(btnDach, secDach));
+            btnZwischen.addEventListener('click', () => activateTab(btnZwischen, secZwischen));
+            btnAll.addEventListener('click', () => activateTab(btnAll, 'all'));
+        });
+    </script>
+</body>
+</html>
