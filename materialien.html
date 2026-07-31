@@ -200,8 +200,8 @@
                 <div class="flex items-center gap-3">
                     <span class="w-3.5 h-3.5 rounded-full bg-amber-600 flex items-center justify-center text-[10px] font-bold text-white">3</span>
                     <div>
-                        <h3 class="font-display font-bold text-lg text-slate-900">3. Phase 3: Palmatin Holzrahmenbausatz &amp; Treppe</h3>
-                        <p class="text-xs text-slate-500">KVH-Wandständer 220mm, Deckenbalken 240mm, Konterlattung 50mm, Dachsparren 240mm, Palmatin Echtholztreppe &amp; LKW-Transport (1 Sattelzug)</p>
+                        <h3 class="font-display font-bold text-lg text-slate-900">3. Phase 3: Palmatin Holzrahmenbausatz &amp; Treppe (Komplettes Holz-Set)</h3>
+                        <p class="text-xs text-slate-500">KVH-Wandständer 220mm, Deckenbalken 240mm, Deckenlattung, Fassadenlattung, Installationsebenenlattung, Sparren, Treppe &amp; LKW-Transport</p>
                     </div>
                 </div>
                 
@@ -514,16 +514,18 @@
                 { pos: '2.10', title: 'Miete Flügelglätter / Helikopter (Glätten in Eigenleistung)', usage: '1 Tag Maschinenverleih + Benzin & Curing-Folie', qty: 1, unit: 'Pauschale', price: 250.00 }
             ],
             palmatin: [
-                { pos: '3.1', title: 'Palmatin KVH-Wandständerwerk 220 mm & Schwellen/Rähm', usage: 'Werkseitiger Abbund Wandelemente', qty: 1, unit: 'Set', price: 55000.00 },
+                { pos: '3.1', title: 'Palmatin KVH-Wandständerwerk 220 mm & Schwellen/Rähm', usage: 'Werkseitiger Abbund Wandelemente komplett', qty: 1, unit: 'Set', price: 55000.00 },
                 { pos: '3.2', title: 'Palmatin Deckenbalken KVH 240 mm (Zwischendecke EG/OG)', usage: 'Balkenlage Holzbalkendecke 95 m²', qty: 1, unit: 'Set', price: 9500.00 },
-                { pos: '3.3', title: 'Palmatin Konterlattung 50 mm (für abgehängte Decke EG)', usage: 'Entkopplungs-Lattung Decke', qty: 1, unit: 'Set', price: 1200.00 },
+                { pos: '3.3', title: 'Palmatin Decken-Konterlattung 50 mm (für abgehängte Decke EG)', usage: 'Entkopplungs- & Deckenlattung (Palmatin Werkslieferung)', qty: 1, unit: 'Set', price: 1200.00 },
                 { pos: '3.4', title: 'Palmatin Dachsparren 240 mm & Pfetten/Träger', usage: 'Dachkonstruktion komplett', qty: 1, unit: 'Set', price: 22000.00 },
-                { pos: '3.5', title: 'Palmatin Echtholz-Geschosstreppe EG-OG', usage: 'Verbindungstreppe Hauptwohnung (Palmatin Werkslieferung)', qty: 1, unit: 'Set', price: 3000.00 },
-                { pos: '3.6', title: 'LKW-Transport & Logistik Palmatin Werkssatz (1 Sattelzug)', usage: 'Anlieferung Baustelle (1 LKW-Fahrt)', qty: 1, unit: 'Fahrt', price: 2500.00 }
+                { pos: '3.5', title: 'Palmatin Fassaden-Hinterlüftungslattung 30x50 mm (200 m²)', usage: 'Senkrechte Hinterlüftungslattung Fassade (Palmatin Werkslieferung)', qty: 1, unit: 'Set', price: 1400.00 },
+                { pos: '3.6', title: 'Palmatin Installationsebenen-Lattung 50x50 mm KVH C24 (650 lfm)', usage: 'Holzunterkonstruktion Wand & Decke innen (Palmatin Werkslieferung)', qty: 1, unit: 'Set', price: 850.00 },
+                { pos: '3.7', title: 'Palmatin Echtholz-Geschosstreppe EG-OG', usage: 'Verbindungstreppe Hauptwohnung (Palmatin Werkslieferung)', qty: 1, unit: 'Set', price: 3000.00 },
+                { pos: '3.8', title: 'LKW-Transport & Logistik Palmatin Werkssatz (1 Sattelzug)', usage: 'Anlieferung Baustelle (1 LKW-Fahrt)', qty: 1, unit: 'Fahrt', price: 2500.00 }
             ],
             huelle: [
                 { pos: '4.1', title: 'Holzfaser-Unterdeckplatte 35mm Wand + 50mm Dach (STEICO / Gutex)', usage: 'Außenseitige Beplankung (Kauf DE Baustoffhändler)', qty: 325, unit: 'm²', price: 26.00 },
-                { pos: '4.2', title: 'HardiePlank Zementfaser-Fassade + Lattung 30 mm', usage: 'Fassadenverkleidung 200 m² (Kauf DE Baustoffhändler)', qty: 200, unit: 'm²', price: 48.00 },
+                { pos: '4.2', title: 'HardiePlank Zementfaser-Fassadenpaneele (ohne Lattung)', usage: 'Fassadenverkleidung 200 m² (Kauf DE, Lattung bei Palmatin)', qty: 200, unit: 'm²', price: 41.00 },
                 { pos: '4.3', title: 'EPDM-Flachdach-Abdichtungsset Garage (36 m² EPDM-Folie)', usage: 'Nahtlose & wurzelfeste Garagendachabdichtung (>50 Jahre)', qty: 36, unit: 'm²', price: 45.00 },
                 { pos: '4.4', title: 'Dachrinnen & Fallrohre Set (Titanzink / Aluminium)', usage: 'Entwässerung Steildach & Garage', qty: 1, unit: 'Set', price: 1850.00 }
             ],
@@ -554,12 +556,11 @@
                 { pos: '7.3', title: 'Feuchtevariable Dampfbremsbahn (pro clima INTELLO PLUS)', usage: 'Wand- & Dachluftdichtung', qty: 5, unit: 'Rollen', price: 240.00 },
                 { pos: '7.4', title: 'System-Klebeband & Dichtkleber (TESCON VANA / ORCON F)', usage: 'Verklebung Überlappung & Schwelle', qty: 1, unit: 'Paket', price: 650.00 },
                 { pos: '7.5', title: 'Holzfaser-Dämmplatte 50 mm (STEICOflex 036)', usage: 'Installationsebene Wand & Untersparren', qty: 325, unit: 'm²', price: 10.00 },
-                { pos: '7.6', title: 'Installationsebenen-Lattung 50 x 50 mm KVH C24', usage: 'Unterkonstruktion Wand & Decke', qty: 650, unit: 'lfm', price: 1.30 },
-                { pos: '7.7', title: 'OSB/3 Wandbeplankung 15 mm (Schallschutz & Lastenmontage)', usage: 'Wand-Innenbeplankung vor Rigips (450 m²)', qty: 450, unit: 'm²', price: 7.50 },
-                { pos: '7.8', title: 'OSB/3 Nut-und-Feder-Platten 22 mm (Tragschicht Decke)', usage: 'Oberseite Zwischendecke OG (95 m²)', qty: 95, unit: 'm²', price: 13.50 },
-                { pos: '7.9', title: 'Trockenschüttung + Selfio Trockenestrich FBH OG', usage: 'Trittschall & FBH-Verlegung OG (95 m²)', qty: 95, unit: 'm²', price: 58.00 },
-                { pos: '7.10', title: 'Rigips Gipskartonplatten 12,5 mm (Standard Bauplatte RB)', usage: 'Beplankung Wände auf OSB, Dachschrägen & Decken (805 m²)', qty: 805, unit: 'm²', price: 4.50 },
-                { pos: '7.11', title: 'Schall- & Brandschutzpaket Trennwand ELW (53 dB)', usage: 'Entkopplung & Beplankung ELW-Wand', qty: 1, unit: 'Paket', price: 1250.00 }
+                { pos: '7.6', title: 'OSB/3 Wandbeplankung 15 mm (Schallschutz & Lastenmontage)', usage: 'Wand-Innenbeplankung vor Rigips (450 m²)', qty: 450, unit: 'm²', price: 7.50 },
+                { pos: '7.7', title: 'OSB/3 Nut-und-Feder-Platten 22 mm (Tragschicht Decke)', usage: 'Oberseite Zwischendecke OG (95 m²)', qty: 95, unit: 'm²', price: 13.50 },
+                { pos: '7.8', title: 'Trockenschüttung + Selfio Trockenestrich FBH OG', usage: 'Trittschall & FBH-Verlegung OG (95 m²)', qty: 95, unit: 'm²', price: 58.00 },
+                { pos: '7.9', title: 'Rigips Gipskartonplatten 12,5 mm (Standard Bauplatte RB)', usage: 'Beplankung Wände auf OSB, Dachschrägen & Decken (805 m²)', qty: 805, unit: 'm²', price: 4.50 },
+                { pos: '7.10', title: 'Schall- & Brandschutzpaket Trennwand ELW (53 dB)', usage: 'Entkopplung & Beplankung ELW-Wand', qty: 1, unit: 'Paket', price: 1250.00 }
             ],
             finish: [
                 { pos: '8.1', title: 'Fugenspachtel & Bewehrungsstreifen (Q2 / Q3 Standard)', usage: 'Spachteln der 840 m² Flächen', qty: 840, unit: 'm²', price: 3.50 },
@@ -579,10 +580,10 @@
             ]
         };
 
-        let appData = JSON.parse(localStorage.getItem('kfw40_material_data_v24')) || DEFAULT_DATA;
+        let appData = JSON.parse(localStorage.getItem('kfw40_material_data_v25')) || DEFAULT_DATA;
 
         function saveData() {
-            localStorage.setItem('kfw40_material_data_v24', JSON.stringify(appData));
+            localStorage.setItem('kfw40_material_data_v25', JSON.stringify(appData));
         }
 
         function renderCategory(catKey, tbodyId, subtotalId) {
