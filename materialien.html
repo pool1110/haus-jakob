@@ -557,7 +557,7 @@
                 { pos: '7.3', title: 'Palmatin Konterlattung 50 mm (für abgehängte Decke EG)', usage: 'Entkopplungs-Lattung Decke', qty: 1, unit: 'Set', price: 1200.00 },
                 { pos: '7.4', title: 'Palmatin Dachsparren 240 mm & Pfetten/Träger', usage: 'Dachkonstruktion komplett', qty: 1, unit: 'Set', price: 22000.00 },
                 { pos: '7.5', title: 'Palmatin Echtholz-Geschosstreppe EG-OG', usage: 'Verbindungstreppe Hauptwohnung (Palmatin Werkslieferung)', qty: 1, unit: 'Set', price: 3000.00 },
-                { pos: '7.6', title: 'LKW-Transport & Logistik Palmatin Werkssatz', usage: 'Anlieferung Baustelle', qty: 3, unit: 'Fahrten', price: 1500.00 }
+                { pos: '7.6', title: 'LKW-Transport & Logistik Palmatin Werkssatz (1 Sattelzug)', usage: 'Anlieferung Baustelle (1 LKW-Fahrt)', qty: 1, unit: 'Fahrt', price: 2500.00 }
             ],
             nebenkosten: [
                 { pos: '8.1', title: 'Grundstückskauf (444 m² @ 200 €/m²)', usage: 'Grundstücksfläche Haus Jakob', qty: 444, unit: 'm²', price: 200.00 },
@@ -582,10 +582,10 @@
             ]
         };
 
-        let appData = JSON.parse(localStorage.getItem('kfw40_material_data_v17')) || DEFAULT_DATA;
+        let appData = JSON.parse(localStorage.getItem('kfw40_material_data_v18')) || DEFAULT_DATA;
 
         function saveData() {
-            localStorage.setItem('kfw40_material_data_v17', JSON.stringify(appData));
+            localStorage.setItem('kfw40_material_data_v18', JSON.stringify(appData));
         }
 
         function renderCategory(catKey, tbodyId, subtotalId) {
