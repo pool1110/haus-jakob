@@ -548,7 +548,7 @@
                 { pos: '6.5', title: 'Integrierte Fußbodenheizung (PEX 17x2.0, Verteiler)', usage: 'Thermoverlegung in Betonsohle EG', qty: 100, unit: 'm²', price: 22.00 },
                 { pos: '6.6', title: 'Bitumen-Abdichtungsbahn / Dampfsperre Katja BA', usage: 'Schwellenabdichtung', qty: 150, unit: 'm²', price: 4.50 },
                 { pos: '6.7', title: 'Edelstahl V4A Fundamenterder (DIN 18014 Blitzschutz)', usage: 'Erdung unter XPS Dämmung', qty: 1, unit: 'Set', price: 480.00 },
-                { pos: '6.8', title: 'Maschinelles Glätten / Helikoptern der Betonsohle', usage: 'Sichtbeton-Finish', qty: 136, unit: 'm²', price: 18.00 }
+                { pos: '6.8', title: 'Miete Flügelglätter / Helikopter (Glätten in Eigenleistung)', usage: '1 Tag Maschinenverleih + Benzin & Curing-Folie', qty: 1, unit: 'Pauschale', price: 250.00 }
             ],
             palmatin: [
                 { pos: '7.1', title: 'Palmatin KVH-Wandständerwerk 220 mm & Schwellen/Rähm', usage: 'Werkseitiger Abbund Wandelemente', qty: 1, unit: 'Set', price: 55000.00 },
@@ -582,10 +582,10 @@
             ]
         };
 
-        let appData = JSON.parse(localStorage.getItem('kfw40_material_data_v14')) || DEFAULT_DATA;
+        let appData = JSON.parse(localStorage.getItem('kfw40_material_data_v15')) || DEFAULT_DATA;
 
         function saveData() {
-            localStorage.setItem('kfw40_material_data_v14', JSON.stringify(appData));
+            localStorage.setItem('kfw40_material_data_v15', JSON.stringify(appData));
         }
 
         function renderCategory(catKey, tbodyId, subtotalId) {
