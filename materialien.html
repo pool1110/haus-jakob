@@ -542,7 +542,7 @@
             ],
             boden: [
                 { pos: '6.1', title: 'Schottertragschicht (0-45 mm) inkl. Verdichtung', usage: 'Kapillarbrechende Schicht unter XPS', qty: 75, unit: 'Tonnen', price: 30.00 },
-                { pos: '6.2', title: 'Passivhaus-XPS Dämmung 140 mm (300-500 kPa) + L-Randschale', usage: 'Unter-Platten- & Perimeterdämmung', qty: 136, unit: 'm²', price: 38.00 },
+                { pos: '6.2', title: 'Passivhaus-XPS Dämmung 200 mm (300-500 kPa) + L-Randschale', usage: 'Unter-Platten- & Perimeterdämmung (200 mm)', qty: 136, unit: 'm²', price: 52.00 },
                 { pos: '6.3', title: 'Transportbeton C25/30 (200mm Sohle Haus + 180mm Garage)', usage: 'Gegossener Betonkern mit Pumpe', qty: 26.5, unit: 'm³', price: 145.00 },
                 { pos: '6.4', title: 'Gitterbewehrung Q257A / Q335A + Drunterleisten', usage: 'Betonbewehrung', qty: 1450, unit: 'kg', price: 1.35 },
                 { pos: '6.5', title: 'Integrierte Fußbodenheizung (PEX 17x2.0, Verteiler)', usage: 'Thermoverlegung in Betonsohle EG', qty: 100, unit: 'm²', price: 22.00 },
@@ -582,10 +582,10 @@
             ]
         };
 
-        let appData = JSON.parse(localStorage.getItem('kfw40_material_data_v13')) || DEFAULT_DATA;
+        let appData = JSON.parse(localStorage.getItem('kfw40_material_data_v14')) || DEFAULT_DATA;
 
         function saveData() {
-            localStorage.setItem('kfw40_material_data_v13', JSON.stringify(appData));
+            localStorage.setItem('kfw40_material_data_v14', JSON.stringify(appData));
         }
 
         function renderCategory(catKey, tbodyId, subtotalId) {
