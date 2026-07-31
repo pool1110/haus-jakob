@@ -364,8 +364,8 @@
                 <div class="flex items-center gap-3">
                     <span class="w-3 h-3 rounded-full bg-amber-600"></span>
                     <div>
-                        <h3 class="font-display font-bold text-lg text-slate-900">7. Palmatin Werkssatz (Holzrahmenbausatz &amp; Hülle)</h3>
-                        <p class="text-xs text-slate-500">Wandständer (220mm), Deckenbalken (240mm), Konterlattung (50mm), Sparren &amp; HardiePlank</p>
+                        <h3 class="font-display font-bold text-lg text-slate-900">7. Palmatin Werkssatz (Holzrahmenbausatz rein Abbund)</h3>
+                        <p class="text-xs text-slate-500">Wandständer (220mm), Deckenbalken (240mm), Lattung (50mm), Dachsparren &amp; Logistik (ohne Holzfaser &amp; Fassade)</p>
                     </div>
                 </div>
                 
@@ -502,7 +502,9 @@
                 { pos: '1.13', title: 'Dachrinnen & Fallrohre Set (Titanzink / Aluminium)', usage: 'Entwässerung Steildach & Garage', qty: 1, unit: 'Set', price: 1850.00 },
                 { pos: '1.14', title: 'Rollladen-Schalter & Smart-Home Tasterpaket (Sonnenschutz)', usage: 'Taster & Relais für 16 elektrische Rollläden', qty: 1, unit: 'Set', price: 650.00 },
                 { pos: '1.15', title: 'Schall- & Brandschutzpaket Trennwand ELW (53 dB)', usage: 'Entkopplung & Beplankung ELW-Wand', qty: 1, unit: 'Paket', price: 1250.00 },
-                { pos: '1.16', title: 'EPDM-Flachdach-Abdichtungsset Garage (36 m² EPDM-Folie)', usage: 'Nahtlose & wurzelfeste Garagendachabdichtung (>50 Jahre)', qty: 36, unit: 'm²', price: 45.00 }
+                { pos: '1.16', title: 'EPDM-Flachdach-Abdichtungsset Garage (36 m² EPDM-Folie)', usage: 'Nahtlose & wurzelfeste Garagendachabdichtung (>50 Jahre)', qty: 36, unit: 'm²', price: 45.00 },
+                { pos: '1.17', title: 'Holzfaser-Unterdeckplatte 35mm Wand + 50mm Dach (STEICO / Gutex)', usage: 'Außenseitige Beplankung (Kauf DE Baustoffhändler)', qty: 325, unit: 'm²', price: 26.00 },
+                { pos: '1.18', title: 'HardiePlank Zementfaser-Fassade + Lattung 30 mm', usage: 'Fassadenverkleidung 200 m² (Kauf DE Baustoffhändler)', qty: 200, unit: 'm²', price: 48.00 }
             ],
             finish: [
                 { pos: '2.1', title: 'Fugenspachtel & Bewehrungsstreifen (Q2 / Q3 Standard)', usage: 'Spachteln der 840 m² Gipsfaserflächen', qty: 840, unit: 'm²', price: 3.50 },
@@ -555,9 +557,7 @@
                 { pos: '7.2', title: 'Palmatin Deckenbalken KVH 240 mm (Zwischendecke EG/OG)', usage: 'Balkenlage Holzbalkendecke 95 m²', qty: 1, unit: 'Set', price: 9500.00 },
                 { pos: '7.3', title: 'Palmatin Konterlattung 50 mm (für abgehängte Decke EG)', usage: 'Entkopplungs-Lattung Decke', qty: 1, unit: 'Set', price: 1200.00 },
                 { pos: '7.4', title: 'Palmatin Dachsparren 240 mm & Pfetten/Träger', usage: 'Dachkonstruktion komplett', qty: 1, unit: 'Set', price: 22000.00 },
-                { pos: '7.5', title: 'Holzfaser-Unterdeckplatte 35mm Wand + 50mm Dach', usage: 'Außenseitige Beplankung', qty: 1, unit: 'Set', price: 8500.00 },
-                { pos: '7.6', title: 'HardiePlank Zementfaser-Fassade + Lattung 30 mm', usage: 'Fassadenverkleidung 200 m²', qty: 1, unit: 'Set', price: 10000.00 },
-                { pos: '7.7', title: 'LKW-Transport & Logistik Palmatin Werkssatz', usage: 'Anlieferung Baustelle', qty: 3, unit: 'Fahrten', price: 1500.00 }
+                { pos: '7.5', title: 'LKW-Transport & Logistik Palmatin Werkssatz', usage: 'Anlieferung Baustelle', qty: 3, unit: 'Fahrten', price: 1500.00 }
             ],
             nebenkosten: [
                 { pos: '8.1', title: 'Grundstückskauf (444 m² @ 200 €/m²)', usage: 'Grundstücksfläche Haus Jakob', qty: 444, unit: 'm²', price: 200.00 },
@@ -582,10 +582,10 @@
             ]
         };
 
-        let appData = JSON.parse(localStorage.getItem('kfw40_material_data_v15')) || DEFAULT_DATA;
+        let appData = JSON.parse(localStorage.getItem('kfw40_material_data_v16')) || DEFAULT_DATA;
 
         function saveData() {
-            localStorage.setItem('kfw40_material_data_v15', JSON.stringify(appData));
+            localStorage.setItem('kfw40_material_data_v16', JSON.stringify(appData));
         }
 
         function renderCategory(catKey, tbodyId, subtotalId) {
