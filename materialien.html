@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Haus Jakob | Materialien &amp; Gewerkeplaner</title>
-    <meta name="description" content="Lückenloser Material-, Mengen- und Kostenplaner inkl. Grundstückskosten für das Projekt Haus Jakob (140 m² Haus + 50 m² ELW + Garage + 444 m² Grundstück).">
+    <title>Haus Jakob | Chronologischer Gewerke- &amp; Einkaufsplaner</title>
+    <meta name="description" content="Chronologischer Material-, Mengen- und Einkaufsplaner nach Bauphasen für das Projekt Haus Jakob (140 m² Haus + 50 m² ELW + Garage + 444 m² Grundstück).">
     
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -62,7 +62,7 @@
                         HAUS JAKOB
                     </div>
                     <div class="h-6 w-px bg-slate-300 hidden sm:block"></div>
-                    <span class="font-display font-semibold text-sm md:text-base text-slate-700 hidden sm:inline">Vollständiger Gewerke- &amp; Kostenplaner</span>
+                    <span class="font-display font-semibold text-sm md:text-base text-slate-700 hidden sm:inline">Chronologischer Bauablauf- &amp; Einkaufsplaner</span>
                 </div>
             </div>
 
@@ -93,10 +93,10 @@
             <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
                 <div>
                     <span class="text-xs font-bold uppercase tracking-wider text-slate-500 flex items-center gap-1">
-                        <i data-lucide="edit-3" class="w-3.5 h-3.5"></i>
-                        Projekt Haus Jakob (Lückenlose Gesamtaufstellung)
+                        <i data-lucide="check-square" class="w-3.5 h-3.5 text-emerald-600"></i>
+                        Projekt Haus Jakob (Kalkulation nach Baufortschritt 1 bis 9)
                     </span>
-                    <h2 class="font-display font-bold text-xl text-slate-900">Gesamtkalkulation Grundstück + Hülle + Ausbau + Bauelemente + Technik + Nebenkosten</h2>
+                    <h2 class="font-display font-bold text-xl text-slate-900">Einkaufs- &amp; Bauphasenplaner: Vom Grundstückskauf bis zur Sanitär-Endmontage</h2>
                 </div>
 
                 <!-- Live Total Cost Summary Card -->
@@ -112,301 +112,14 @@
             </div>
         </div>
 
-        <!-- CATEGORY 1: Eigenleistung & Rohausbau -->
+        <!-- PHASE 1: Grundstück & Baunebenkosten -->
         <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm print-card space-y-4">
             <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-slate-200">
                 <div class="flex items-center gap-3">
-                    <span class="w-3 h-3 rounded-full bg-blue-600"></span>
+                    <span class="w-3.5 h-3.5 rounded-full bg-emerald-600 flex items-center justify-center text-[10px] font-bold text-white">1</span>
                     <div>
-                        <h3 class="font-display font-bold text-lg text-slate-900">1. Baustoffhändler vor Ort (Ausbau, Dämmung &amp; Entwässerung)</h3>
-                        <p class="text-xs text-slate-500">Zellulose, Dampfbremsen, OSB, Schüttung, Gipsfaser, Selfio FBH, Mehrsparten &amp; Dachrinnen</p>
-                    </div>
-                </div>
-                
-                <div class="flex items-center gap-3">
-                    <span id="subtotal-diy" class="font-mono font-bold text-blue-600 text-base">0 €</span>
-                    <button id="add-row-diy" class="no-print px-3 py-1.5 bg-blue-50 hover:bg-blue-100 text-blue-700 border border-blue-200 rounded-lg text-xs font-bold flex items-center gap-1 transition-all">
-                        <i data-lucide="plus-circle" class="w-3.5 h-3.5"></i>
-                        Zeile hinzufügen
-                    </button>
-                </div>
-            </div>
-
-            <div class="overflow-x-auto">
-                <table class="w-full text-left text-xs font-sans">
-                    <thead>
-                        <tr class="border-b border-slate-200 text-slate-600 uppercase tracking-wider text-[11px] bg-slate-50">
-                            <th class="py-3 px-2 w-16">Pos.</th>
-                            <th class="py-3 px-2">Materialbezeichnung &amp; Spezifikation</th>
-                            <th class="py-3 px-2">Einsatzbereich</th>
-                            <th class="py-3 px-2 text-right w-24">Menge</th>
-                            <th class="py-3 px-2 text-left w-20">Einheit</th>
-                            <th class="py-3 px-2 text-right w-28">Preis / Einw. (€)</th>
-                            <th class="py-3 px-2 text-right w-32">Gesamtwert (€)</th>
-                            <th class="py-3 px-2 text-center w-12 action-col no-print">Aktion</th>
-                        </tr>
-                    </thead>
-                    <tbody id="tbody-diy" class="divide-y divide-slate-200 text-slate-700">
-                        <!-- Dynamic Rows -->
-                    </tbody>
-                </table>
-            </div>
-        </div>
-
-        <!-- CATEGORY 2: Innenausbau Finish (Spachteln, Maler, Böden, Türen, Leisten & Treppe) -->
-        <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm print-card space-y-4">
-            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-slate-200">
-                <div class="flex items-center gap-3">
-                    <span class="w-3 h-3 rounded-full bg-purple-600"></span>
-                    <div>
-                        <h3 class="font-display font-bold text-lg text-slate-900">2. Innenausbau Finish (Spachteln, Maler, Böden, Türen &amp; Treppe)</h3>
-                        <p class="text-xs text-slate-500">Spachteln Q2/Q3, Malervlies, Wandfarbe, Fußleisten, 12 Innentüren, T30 Tür, Böden &amp; Holztreppe</p>
-                    </div>
-                </div>
-                
-                <div class="flex items-center gap-3">
-                    <span id="subtotal-finish" class="font-mono font-bold text-purple-600 text-base">0 €</span>
-                    <button id="add-row-finish" class="no-print px-3 py-1.5 bg-purple-50 hover:bg-purple-100 text-purple-700 border border-purple-200 rounded-lg text-xs font-bold flex items-center gap-1 transition-all">
-                        <i data-lucide="plus-circle" class="w-3.5 h-3.5"></i>
-                        Zeile hinzufügen
-                    </button>
-                </div>
-            </div>
-
-            <div class="overflow-x-auto">
-                <table class="w-full text-left text-xs font-sans">
-                    <thead>
-                        <tr class="border-b border-slate-200 text-slate-600 uppercase tracking-wider text-[11px] bg-slate-50">
-                            <th class="py-3 px-2 w-16">Pos.</th>
-                            <th class="py-3 px-2">Materialbezeichnung &amp; Spezifikation</th>
-                            <th class="py-3 px-2">Einsatzbereich</th>
-                            <th class="py-3 px-2 text-right w-24">Menge</th>
-                            <th class="py-3 px-2 text-left w-20">Einheit</th>
-                            <th class="py-3 px-2 text-right w-28">Preis / Einw. (€)</th>
-                            <th class="py-3 px-2 text-right w-32">Gesamtwert (€)</th>
-                            <th class="py-3 px-2 text-center w-12 action-col no-print">Aktion</th>
-                        </tr>
-                    </thead>
-                    <tbody id="tbody-finish" class="divide-y divide-slate-200 text-slate-700">
-                        <!-- Dynamic Rows -->
-                    </tbody>
-                </table>
-            </div>
-        </div>
-
-        <!-- CATEGORY 3: Elektrotechnik, PV & Wallbox -->
-        <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm print-card space-y-4">
-            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-slate-200">
-                <div class="flex items-center gap-3">
-                    <span class="w-3 h-3 rounded-full bg-amber-500"></span>
-                    <div>
-                        <h3 class="font-display font-bold text-lg text-slate-900">3. Elektrotechnik, PV-Vorbereitung &amp; Wallbox</h3>
-                        <p class="text-xs text-slate-500">Zählerschrank (2 Zähler), Kabelset, Schalter, PV-Leerrohre, Wallbox &amp; Blower-Door-Test</p>
-                    </div>
-                </div>
-                
-                <div class="flex items-center gap-3">
-                    <span id="subtotal-elektrik" class="font-mono font-bold text-amber-600 text-base">0 €</span>
-                    <button id="add-row-elektrik" class="no-print px-3 py-1.5 bg-amber-50 hover:bg-amber-100 text-amber-800 border border-amber-200 rounded-lg text-xs font-bold flex items-center gap-1 transition-all">
-                        <i data-lucide="plus-circle" class="w-3.5 h-3.5"></i>
-                        Zeile hinzufügen
-                    </button>
-                </div>
-            </div>
-
-            <div class="overflow-x-auto">
-                <table class="w-full text-left text-xs font-sans">
-                    <thead>
-                        <tr class="border-b border-slate-200 text-slate-600 uppercase tracking-wider text-[11px] bg-slate-50">
-                            <th class="py-3 px-2 w-16">Pos.</th>
-                            <th class="py-3 px-2">Materialbezeichnung &amp; Spezifikation</th>
-                            <th class="py-3 px-2">Einsatzbereich</th>
-                            <th class="py-3 px-2 text-right w-24">Menge</th>
-                            <th class="py-3 px-2 text-left w-20">Einheit</th>
-                            <th class="py-3 px-2 text-right w-28">Preis / Einw. (€)</th>
-                            <th class="py-3 px-2 text-right w-32">Gesamtwert (€)</th>
-                            <th class="py-3 px-2 text-center w-12 action-col no-print">Aktion</th>
-                        </tr>
-                    </thead>
-                    <tbody id="tbody-elektrik" class="divide-y divide-slate-200 text-slate-700">
-                        <!-- Dynamic Rows -->
-                    </tbody>
-                </table>
-            </div>
-        </div>
-
-        <!-- CATEGORY 4: Heizung & Wärmepumpe & KWL Lüftung -->
-        <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm print-card space-y-4">
-            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-slate-200">
-                <div class="flex items-center gap-3">
-                    <span class="w-3 h-3 rounded-full bg-pink-500"></span>
-                    <div>
-                        <h3 class="font-display font-bold text-lg text-slate-900">4. Heizung &amp; Lüftung (Wärmepumpe, Speicher &amp; KWL)</h3>
-                        <p class="text-xs text-slate-500">Luft-Wasser-Wärmepumpe R290, Warmwasser- &amp; Pufferspeicher, Kontrollierte Wohnraumlüftung</p>
-                    </div>
-                </div>
-                
-                <div class="flex items-center gap-3">
-                    <span id="subtotal-heizung" class="font-mono font-bold text-pink-600 text-base">0 €</span>
-                    <button id="add-row-heizung" class="no-print px-3 py-1.5 bg-pink-50 hover:bg-pink-100 text-pink-700 border border-pink-200 rounded-lg text-xs font-bold flex items-center gap-1 transition-all">
-                        <i data-lucide="plus-circle" class="w-3.5 h-3.5"></i>
-                        Zeile hinzufügen
-                    </button>
-                </div>
-            </div>
-
-            <div class="overflow-x-auto">
-                <table class="w-full text-left text-xs font-sans">
-                    <thead>
-                        <tr class="border-b border-slate-200 text-slate-600 uppercase tracking-wider text-[11px] bg-slate-50">
-                            <th class="py-3 px-2 w-16">Pos.</th>
-                            <th class="py-3 px-2">Materialbezeichnung &amp; Spezifikation</th>
-                            <th class="py-3 px-2">Einsatzbereich</th>
-                            <th class="py-3 px-2 text-right w-24">Menge</th>
-                            <th class="py-3 px-2 text-left w-20">Einheit</th>
-                            <th class="py-3 px-2 text-right w-28">Preis / Einw. (€)</th>
-                            <th class="py-3 px-2 text-right w-32">Gesamtwert (€)</th>
-                            <th class="py-3 px-2 text-center w-12 action-col no-print">Aktion</th>
-                        </tr>
-                    </thead>
-                    <tbody id="tbody-heizung" class="divide-y divide-slate-200 text-slate-700">
-                        <!-- Dynamic Rows -->
-                    </tbody>
-                </table>
-            </div>
-        </div>
-
-        <!-- CATEGORY 5: Sanitärtechnik -->
-        <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm print-card space-y-4">
-            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-slate-200">
-                <div class="flex items-center gap-3">
-                    <span class="w-3 h-3 rounded-full bg-cyan-500"></span>
-                    <div>
-                        <h3 class="font-display font-bold text-lg text-slate-900">5. Sanitärtechnik (3 Bäder &amp; Außenarmatur)</h3>
-                        <p class="text-xs text-slate-500">Verbundrohre, HT-Abwasser, Hauptbad (Dusche/Wanne), Duschbad, Gäste-WC &amp; Frostfreie Außenarmatur</p>
-                    </div>
-                </div>
-                
-                <div class="flex items-center gap-3">
-                    <span id="subtotal-sanitaer" class="font-mono font-bold text-cyan-600 text-base">0 €</span>
-                    <button id="add-row-sanitaer" class="no-print px-3 py-1.5 bg-cyan-50 hover:bg-cyan-100 text-cyan-700 border border-cyan-200 rounded-lg text-xs font-bold flex items-center gap-1 transition-all">
-                        <i data-lucide="plus-circle" class="w-3.5 h-3.5"></i>
-                        Zeile hinzufügen
-                    </button>
-                </div>
-            </div>
-
-            <div class="overflow-x-auto">
-                <table class="w-full text-left text-xs font-sans">
-                    <thead>
-                        <tr class="border-b border-slate-200 text-slate-600 uppercase tracking-wider text-[11px] bg-slate-50">
-                            <th class="py-3 px-2 w-16">Pos.</th>
-                            <th class="py-3 px-2">Materialbezeichnung &amp; Spezifikation</th>
-                            <th class="py-3 px-2">Einsatzbereich</th>
-                            <th class="py-3 px-2 text-right w-24">Menge</th>
-                            <th class="py-3 px-2 text-left w-20">Einheit</th>
-                            <th class="py-3 px-2 text-right w-28">Preis / Einw. (€)</th>
-                            <th class="py-3 px-2 text-right w-32">Gesamtwert (€)</th>
-                            <th class="py-3 px-2 text-center w-12 action-col no-print">Aktion</th>
-                        </tr>
-                    </thead>
-                    <tbody id="tbody-sanitaer" class="divide-y divide-slate-200 text-slate-700">
-                        <!-- Dynamic Rows -->
-                    </tbody>
-                </table>
-            </div>
-        </div>
-
-        <!-- CATEGORY 6: Thermobodenplatte Fachbetrieb -->
-        <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm print-card space-y-4">
-            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-slate-200">
-                <div class="flex items-center gap-3">
-                    <span class="w-3 h-3 rounded-full bg-slate-500"></span>
-                    <div>
-                        <h3 class="font-display font-bold text-lg text-slate-900">6. Thermobodenplatte (Fachbetrieb + Beton/XPS/Erdung)</h3>
-                        <p class="text-xs text-slate-500">Haussohle ($100\text{ m²}$) $+ 36\text{ m²}$ Garage (insgesamt $136\text{ m²}$ Sohlenplatte &amp; V4A Erdung)</p>
-                    </div>
-                </div>
-                
-                <div class="flex items-center gap-3">
-                    <span id="subtotal-boden" class="font-mono font-bold text-slate-700 text-base">0 €</span>
-                    <button id="add-row-boden" class="no-print px-3 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-200 rounded-lg text-xs font-bold flex items-center gap-1 transition-all">
-                        <i data-lucide="plus-circle" class="w-3.5 h-3.5"></i>
-                        Zeile hinzufügen
-                    </button>
-                </div>
-            </div>
-
-            <div class="overflow-x-auto">
-                <table class="w-full text-left text-xs font-sans">
-                    <thead>
-                        <tr class="border-b border-slate-200 text-slate-600 uppercase tracking-wider text-[11px] bg-slate-50">
-                            <th class="py-3 px-2 w-16">Pos.</th>
-                            <th class="py-3 px-2">Materialbezeichnung &amp; Spezifikation</th>
-                            <th class="py-3 px-2">Einsatzbereich</th>
-                            <th class="py-3 px-2 text-right w-24">Menge</th>
-                            <th class="py-3 px-2 text-left w-20">Einheit</th>
-                            <th class="py-3 px-2 text-right w-28">Preis / Einw. (€)</th>
-                            <th class="py-3 px-2 text-right w-32">Gesamtwert (€)</th>
-                            <th class="py-3 px-2 text-center w-12 action-col no-print">Aktion</th>
-                        </tr>
-                    </thead>
-                    <tbody id="tbody-boden" class="divide-y divide-slate-200 text-slate-700">
-                        <!-- Dynamic Rows -->
-                    </tbody>
-                </table>
-            </div>
-        </div>
-
-        <!-- CATEGORY 7: Palmatin Werkssatz -->
-        <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm print-card space-y-4">
-            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-slate-200">
-                <div class="flex items-center gap-3">
-                    <span class="w-3 h-3 rounded-full bg-amber-600"></span>
-                    <div>
-                        <h3 class="font-display font-bold text-lg text-slate-900">7. Palmatin Werkssatz (Holzrahmenbausatz &amp; Treppe)</h3>
-                        <p class="text-xs text-slate-500">Wandständer (220mm), Deckenbalken (240mm), Lattung (50mm), Sparren, Palmatin Holztreppe (3.000 €) &amp; Logistik</p>
-                    </div>
-                </div>
-                
-                <div class="flex items-center gap-3">
-                    <span id="subtotal-palmatin" class="font-mono font-bold text-amber-600 text-base">0 €</span>
-                    <button id="add-row-palmatin" class="no-print px-3 py-1.5 bg-amber-50 hover:bg-amber-100 text-amber-800 border border-amber-200 rounded-lg text-xs font-bold flex items-center gap-1 transition-all">
-                        <i data-lucide="plus-circle" class="w-3.5 h-3.5"></i>
-                        Zeile hinzufügen
-                    </button>
-                </div>
-            </div>
-
-            <div class="overflow-x-auto">
-                <table class="w-full text-left text-xs font-sans">
-                    <thead>
-                        <tr class="border-b border-slate-200 text-slate-600 uppercase tracking-wider text-[11px] bg-slate-50">
-                            <th class="py-3 px-2 w-16">Pos.</th>
-                            <th class="py-3 px-2">Materialbezeichnung &amp; Spezifikation</th>
-                            <th class="py-3 px-2">Einsatzbereich</th>
-                            <th class="py-3 px-2 text-right w-24">Menge</th>
-                            <th class="py-3 px-2 text-left w-20">Einheit</th>
-                            <th class="py-3 px-2 text-right w-28">Preis / Einw. (€)</th>
-                            <th class="py-3 px-2 text-right w-32">Gesamtwert (€)</th>
-                            <th class="py-3 px-2 text-center w-12 action-col no-print">Aktion</th>
-                        </tr>
-                    </thead>
-                    <tbody id="tbody-palmatin" class="divide-y divide-slate-200 text-slate-700">
-                        <!-- Dynamic Rows -->
-                    </tbody>
-                </table>
-            </div>
-        </div>
-
-        <!-- CATEGORY 8: Grundstück & Baunebenkosten, Gutachten & Logistik -->
-        <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm print-card space-y-4">
-            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-slate-200">
-                <div class="flex items-center gap-3">
-                    <span class="w-3 h-3 rounded-full bg-emerald-600"></span>
-                    <div>
-                        <h3 class="font-display font-bold text-lg text-slate-900">8. Grundstück, Kaufnebenkosten &amp; Baunebenkosten</h3>
-                        <p class="text-xs text-slate-500">Grundstückskauf, Grunderwerbsteuer, Notar, Anwalt, Architekt (Bauantrag), Vermesser, Statik, Baugenehmigung, Hausanschlüsse &amp; Versicherungen</p>
+                        <h3 class="font-display font-bold text-lg text-slate-900">1. Phase 1: Grundstück, Kaufnebenkosten &amp; Planung</h3>
+                        <p class="text-xs text-slate-500">Grundstück (444 m²), Steuer, Notar, Anwalt, Architekt (LPH 1-4 Bauantrag), Vermesser, Statik, Baugenehmigung, Hausanschlüsse &amp; Versicherungen</p>
                     </div>
                 </div>
                 
@@ -440,14 +153,137 @@
             </div>
         </div>
 
-        <!-- CATEGORY 9: Fenster, Haustüren & Garagentor (Bauelemente) -->
+        <!-- PHASE 2: Erdarbeiten & Thermobodenplatte -->
         <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm print-card space-y-4">
             <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-slate-200">
                 <div class="flex items-center gap-3">
-                    <span class="w-3 h-3 rounded-full bg-teal-600"></span>
+                    <span class="w-3.5 h-3.5 rounded-full bg-slate-700 flex items-center justify-center text-[10px] font-bold text-white">2</span>
                     <div>
-                        <h3 class="font-display font-bold text-lg text-slate-900">9. Fenster, Haustüren &amp; Garagentor (Bauelemente)</h3>
-                        <p class="text-xs text-slate-500">3-fach Passivhausfenster, Haupteingangstür, 2. Haustür (ELW) &amp; elektrisches Sektional-Garagentor</p>
+                        <h3 class="font-display font-bold text-lg text-slate-900">2. Phase 2: Erdarbeiten &amp; Thermobodenplatte</h3>
+                        <p class="text-xs text-slate-500">Schottertragschicht, 200 mm XPS-Dämmung + L-Randschalen, Transportbeton C25/30, Bewehrung, Sohlen-FBH, Katja BA, Erdung &amp; Helikopter-Miete</p>
+                    </div>
+                </div>
+                
+                <div class="flex items-center gap-3">
+                    <span id="subtotal-boden" class="font-mono font-bold text-slate-700 text-base">0 €</span>
+                    <button id="add-row-boden" class="no-print px-3 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-200 rounded-lg text-xs font-bold flex items-center gap-1 transition-all">
+                        <i data-lucide="plus-circle" class="w-3.5 h-3.5"></i>
+                        Zeile hinzufügen
+                    </button>
+                </div>
+            </div>
+
+            <div class="overflow-x-auto">
+                <table class="w-full text-left text-xs font-sans">
+                    <thead>
+                        <tr class="border-b border-slate-200 text-slate-600 uppercase tracking-wider text-[11px] bg-slate-50">
+                            <th class="py-3 px-2 w-16">Pos.</th>
+                            <th class="py-3 px-2">Materialbezeichnung &amp; Spezifikation</th>
+                            <th class="py-3 px-2">Einsatzbereich</th>
+                            <th class="py-3 px-2 text-right w-24">Menge</th>
+                            <th class="py-3 px-2 text-left w-20">Einheit</th>
+                            <th class="py-3 px-2 text-right w-28">Preis / Einw. (€)</th>
+                            <th class="py-3 px-2 text-right w-32">Gesamtwert (€)</th>
+                            <th class="py-3 px-2 text-center w-12 action-col no-print">Aktion</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbody-boden" class="divide-y divide-slate-200 text-slate-700">
+                        <!-- Dynamic Rows -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- PHASE 3: Palmatin Werkssatz -->
+        <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm print-card space-y-4">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-slate-200">
+                <div class="flex items-center gap-3">
+                    <span class="w-3.5 h-3.5 rounded-full bg-amber-600 flex items-center justify-center text-[10px] font-bold text-white">3</span>
+                    <div>
+                        <h3 class="font-display font-bold text-lg text-slate-900">3. Phase 3: Palmatin Holzrahmenbausatz &amp; Treppe</h3>
+                        <p class="text-xs text-slate-500">KVH-Wandständer 220mm, Deckenbalken 240mm, Konterlattung 50mm, Dachsparren 240mm, Palmatin Echtholztreppe &amp; LKW-Transport (1 Sattelzug)</p>
+                    </div>
+                </div>
+                
+                <div class="flex items-center gap-3">
+                    <span id="subtotal-palmatin" class="font-mono font-bold text-amber-600 text-base">0 €</span>
+                    <button id="add-row-palmatin" class="no-print px-3 py-1.5 bg-amber-50 hover:bg-amber-100 text-amber-800 border border-amber-200 rounded-lg text-xs font-bold flex items-center gap-1 transition-all">
+                        <i data-lucide="plus-circle" class="w-3.5 h-3.5"></i>
+                        Zeile hinzufügen
+                    </button>
+                </div>
+            </div>
+
+            <div class="overflow-x-auto">
+                <table class="w-full text-left text-xs font-sans">
+                    <thead>
+                        <tr class="border-b border-slate-200 text-slate-600 uppercase tracking-wider text-[11px] bg-slate-50">
+                            <th class="py-3 px-2 w-16">Pos.</th>
+                            <th class="py-3 px-2">Materialbezeichnung &amp; Spezifikation</th>
+                            <th class="py-3 px-2">Einsatzbereich</th>
+                            <th class="py-3 px-2 text-right w-24">Menge</th>
+                            <th class="py-3 px-2 text-left w-20">Einheit</th>
+                            <th class="py-3 px-2 text-right w-28">Preis / Einw. (€)</th>
+                            <th class="py-3 px-2 text-right w-32">Gesamtwert (€)</th>
+                            <th class="py-3 px-2 text-center w-12 action-col no-print">Aktion</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbody-palmatin" class="divide-y divide-slate-200 text-slate-700">
+                        <!-- Dynamic Rows -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- PHASE 4: Gebäudehülle & Außenhaut -->
+        <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm print-card space-y-4">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-slate-200">
+                <div class="flex items-center gap-3">
+                    <span class="w-3.5 h-3.5 rounded-full bg-orange-600 flex items-center justify-center text-[10px] font-bold text-white">4</span>
+                    <div>
+                        <h3 class="font-display font-bold text-lg text-slate-900">4. Phase 4: Gebäudehülle, Fassade &amp; Dachtatabdichtung (Kauf DE)</h3>
+                        <p class="text-xs text-slate-500">Holzfaser-Unterdeckplatten (STEICO/Gutex 35/50mm), HardiePlank Fassade (200 m²), EPDM-Garagendach-Abdichtung &amp; Titanzink-Dachrinnen</p>
+                    </div>
+                </div>
+                
+                <div class="flex items-center gap-3">
+                    <span id="subtotal-huelle" class="font-mono font-bold text-orange-600 text-base">0 €</span>
+                    <button id="add-row-huelle" class="no-print px-3 py-1.5 bg-orange-50 hover:bg-orange-100 text-orange-700 border border-orange-200 rounded-lg text-xs font-bold flex items-center gap-1 transition-all">
+                        <i data-lucide="plus-circle" class="w-3.5 h-3.5"></i>
+                        Zeile hinzufügen
+                    </button>
+                </div>
+            </div>
+
+            <div class="overflow-x-auto">
+                <table class="w-full text-left text-xs font-sans">
+                    <thead>
+                        <tr class="border-b border-slate-200 text-slate-600 uppercase tracking-wider text-[11px] bg-slate-50">
+                            <th class="py-3 px-2 w-16">Pos.</th>
+                            <th class="py-3 px-2">Materialbezeichnung &amp; Spezifikation</th>
+                            <th class="py-3 px-2">Einsatzbereich</th>
+                            <th class="py-3 px-2 text-right w-24">Menge</th>
+                            <th class="py-3 px-2 text-left w-20">Einheit</th>
+                            <th class="py-3 px-2 text-right w-28">Preis / Einw. (€)</th>
+                            <th class="py-3 px-2 text-right w-32">Gesamtwert (€)</th>
+                            <th class="py-3 px-2 text-center w-12 action-col no-print">Aktion</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbody-huelle" class="divide-y divide-slate-200 text-slate-700">
+                        <!-- Dynamic Rows -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- PHASE 5: Bauelemente -->
+        <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm print-card space-y-4">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-slate-200">
+                <div class="flex items-center gap-3">
+                    <span class="w-3.5 h-3.5 rounded-full bg-teal-600 flex items-center justify-center text-[10px] font-bold text-white">5</span>
+                    <div>
+                        <h3 class="font-display font-bold text-lg text-slate-900">5. Phase 5: Fenster, Rollläden &amp; Außentüren (Bauelemente)</h3>
+                        <p class="text-xs text-slate-500">16 Passivhausfenster 3-fach Glas inkl. elektrischer Rollläden, Haupteingangstür, 2. Haustür (ELW) &amp; ISO Sektional-Garagentor</p>
                     </div>
                 </div>
                 
@@ -465,7 +301,7 @@
                     <thead>
                         <tr class="border-b border-slate-200 text-slate-600 uppercase tracking-wider text-[11px] bg-slate-50">
                             <th class="py-3 px-2 w-16">Pos.</th>
-                            <th class="py-3 px-2">Bauelement &amp; Spezifikation</th>
+                            <th class="py-3 px-2">Materialbezeichnung &amp; Spezifikation</th>
                             <th class="py-3 px-2">Einsatzbereich</th>
                             <th class="py-3 px-2 text-right w-24">Menge</th>
                             <th class="py-3 px-2 text-left w-20">Einheit</th>
@@ -481,111 +317,270 @@
             </div>
         </div>
 
+        <!-- PHASE 6: Haustechnik Rohinstallation, PV & Wallbox -->
+        <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm print-card space-y-4">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-slate-200">
+                <div class="flex items-center gap-3">
+                    <span class="w-3.5 h-3.5 rounded-full bg-indigo-600 flex items-center justify-center text-[10px] font-bold text-white">6</span>
+                    <div>
+                        <h3 class="font-display font-bold text-lg text-slate-900">6. Phase 6: Haustechnik Rohinstallation (Elektro, Heizung, KWL, PV &amp; Wallbox)</h3>
+                        <p class="text-xs text-slate-500">Zählerschrank, NYM-Kabelset, Wärmepumpe 9-12 kW, Warmwasserspeicher, KWL-Lüftungsanlage, PV-Anlage (10 kWp + Speicher), Wallbox (11 kW) &amp; Blower-Door-Test</p>
+                    </div>
+                </div>
+                
+                <div class="flex items-center gap-3">
+                    <span id="subtotal-haustechnik" class="font-mono font-bold text-indigo-600 text-base">0 €</span>
+                    <button id="add-row-haustechnik" class="no-print px-3 py-1.5 bg-indigo-50 hover:bg-indigo-100 text-indigo-700 border border-indigo-200 rounded-lg text-xs font-bold flex items-center gap-1 transition-all">
+                        <i data-lucide="plus-circle" class="w-3.5 h-3.5"></i>
+                        Zeile hinzufügen
+                    </button>
+                </div>
+            </div>
+
+            <div class="overflow-x-auto">
+                <table class="w-full text-left text-xs font-sans">
+                    <thead>
+                        <tr class="border-b border-slate-200 text-slate-600 uppercase tracking-wider text-[11px] bg-slate-50">
+                            <th class="py-3 px-2 w-16">Pos.</th>
+                            <th class="py-3 px-2">Materialbezeichnung &amp; Spezifikation</th>
+                            <th class="py-3 px-2">Einsatzbereich</th>
+                            <th class="py-3 px-2 text-right w-24">Menge</th>
+                            <th class="py-3 px-2 text-left w-20">Einheit</th>
+                            <th class="py-3 px-2 text-right w-28">Preis / Einw. (€)</th>
+                            <th class="py-3 px-2 text-right w-32">Gesamtwert (€)</th>
+                            <th class="py-3 px-2 text-center w-12 action-col no-print">Aktion</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbody-haustechnik" class="divide-y divide-slate-200 text-slate-700">
+                        <!-- Dynamic Rows -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- PHASE 7: Dämmung, Luftdichtung & Trockenbau -->
+        <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm print-card space-y-4">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-slate-200">
+                <div class="flex items-center gap-3">
+                    <span class="w-3.5 h-3.5 rounded-full bg-blue-600 flex items-center justify-center text-[10px] font-bold text-white">7</span>
+                    <div>
+                        <h3 class="font-display font-bold text-lg text-slate-900">7. Phase 7: Dämmung, Luftdichtung &amp; Trockenbau (Innenbeplankung)</h3>
+                        <p class="text-xs text-slate-500">Zellulose-Einblasdämmung + Miete, Dampfbremse INTELLO, STEICOflex Dämmung, OSB 15mm Wand (Schallschutz &amp; Lasten), OSB 22mm Decke + Trockenschüttung + Selfio FBH, Rigips 12,5mm &amp; Schallpaket ELW</p>
+                    </div>
+                </div>
+                
+                <div class="flex items-center gap-3">
+                    <span id="subtotal-trockenbau" class="font-mono font-bold text-blue-600 text-base">0 €</span>
+                    <button id="add-row-trockenbau" class="no-print px-3 py-1.5 bg-blue-50 hover:bg-blue-100 text-blue-700 border border-blue-200 rounded-lg text-xs font-bold flex items-center gap-1 transition-all">
+                        <i data-lucide="plus-circle" class="w-3.5 h-3.5"></i>
+                        Zeile hinzufügen
+                    </button>
+                </div>
+            </div>
+
+            <div class="overflow-x-auto">
+                <table class="w-full text-left text-xs font-sans">
+                    <thead>
+                        <tr class="border-b border-slate-200 text-slate-600 uppercase tracking-wider text-[11px] bg-slate-50">
+                            <th class="py-3 px-2 w-16">Pos.</th>
+                            <th class="py-3 px-2">Materialbezeichnung &amp; Spezifikation</th>
+                            <th class="py-3 px-2">Einsatzbereich</th>
+                            <th class="py-3 px-2 text-right w-24">Menge</th>
+                            <th class="py-3 px-2 text-left w-20">Einheit</th>
+                            <th class="py-3 px-2 text-right w-28">Preis / Einw. (€)</th>
+                            <th class="py-3 px-2 text-right w-32">Gesamtwert (€)</th>
+                            <th class="py-3 px-2 text-center w-12 action-col no-print">Aktion</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbody-trockenbau" class="divide-y divide-slate-200 text-slate-700">
+                        <!-- Dynamic Rows -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- PHASE 8: Innenausbau Finish & Maler -->
+        <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm print-card space-y-4">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-slate-200">
+                <div class="flex items-center gap-3">
+                    <span class="w-3.5 h-3.5 rounded-full bg-purple-600 flex items-center justify-center text-[10px] font-bold text-white">8</span>
+                    <div>
+                        <h3 class="font-display font-bold text-lg text-slate-900">8. Phase 8: Innenausbau Finish, Maler, Böden &amp; Türen</h3>
+                        <p class="text-xs text-slate-500">Spachteln Q2/Q3, Malervlies, Silikat-Farbe weiß, Wasserfester Klick-Vinylboden (190 m² vollflächig), Sockelleisten, 12 Innentüren CPL + T30 Brandschutztür &amp; Fensterbänke</p>
+                    </div>
+                </div>
+                
+                <div class="flex items-center gap-3">
+                    <span id="subtotal-finish" class="font-mono font-bold text-purple-600 text-base">0 €</span>
+                    <button id="add-row-finish" class="no-print px-3 py-1.5 bg-purple-50 hover:bg-purple-100 text-purple-700 border border-purple-200 rounded-lg text-xs font-bold flex items-center gap-1 transition-all">
+                        <i data-lucide="plus-circle" class="w-3.5 h-3.5"></i>
+                        Zeile hinzufügen
+                    </button>
+                </div>
+            </div>
+
+            <div class="overflow-x-auto">
+                <table class="w-full text-left text-xs font-sans">
+                    <thead>
+                        <tr class="border-b border-slate-200 text-slate-600 uppercase tracking-wider text-[11px] bg-slate-50">
+                            <th class="py-3 px-2 w-16">Pos.</th>
+                            <th class="py-3 px-2">Materialbezeichnung &amp; Spezifikation</th>
+                            <th class="py-3 px-2">Einsatzbereich</th>
+                            <th class="py-3 px-2 text-right w-24">Menge</th>
+                            <th class="py-3 px-2 text-left w-20">Einheit</th>
+                            <th class="py-3 px-2 text-right w-28">Preis / Einw. (€)</th>
+                            <th class="py-3 px-2 text-right w-32">Gesamtwert (€)</th>
+                            <th class="py-3 px-2 text-center w-12 action-col no-print">Aktion</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbody-finish" class="divide-y divide-slate-200 text-slate-700">
+                        <!-- Dynamic Rows -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- PHASE 9: Sanitär-Endmontage & Bäder -->
+        <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm print-card space-y-4">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-slate-200">
+                <div class="flex items-center gap-3">
+                    <span class="w-3.5 h-3.5 rounded-full bg-cyan-600 flex items-center justify-center text-[10px] font-bold text-white">9</span>
+                    <div>
+                        <h3 class="font-display font-bold text-lg text-slate-900">9. Phase 9: Sanitär-Endmontage &amp; Bäder-Ausstattung</h3>
+                        <p class="text-xs text-slate-500">Trinkwasser- &amp; Abwasser-Rohinstallationspaket, Hauptbad (Dusche/Wanne), Duschbad (ELW), Gäste-WC &amp; Kemper-Außenarmatur</p>
+                    </div>
+                </div>
+                
+                <div class="flex items-center gap-3">
+                    <span id="subtotal-sanitaer" class="font-mono font-bold text-cyan-600 text-base">0 €</span>
+                    <button id="add-row-sanitaer" class="no-print px-3 py-1.5 bg-cyan-50 hover:bg-cyan-100 text-cyan-700 border border-cyan-200 rounded-lg text-xs font-bold flex items-center gap-1 transition-all">
+                        <i data-lucide="plus-circle" class="w-3.5 h-3.5"></i>
+                        Zeile hinzufügen
+                    </button>
+                </div>
+            </div>
+
+            <div class="overflow-x-auto">
+                <table class="w-full text-left text-xs font-sans">
+                    <thead>
+                        <tr class="border-b border-slate-200 text-slate-600 uppercase tracking-wider text-[11px] bg-slate-50">
+                            <th class="py-3 px-2 w-16">Pos.</th>
+                            <th class="py-3 px-2">Materialbezeichnung &amp; Spezifikation</th>
+                            <th class="py-3 px-2">Einsatzbereich</th>
+                            <th class="py-3 px-2 text-right w-24">Menge</th>
+                            <th class="py-3 px-2 text-left w-20">Einheit</th>
+                            <th class="py-3 px-2 text-right w-28">Preis / Einw. (€)</th>
+                            <th class="py-3 px-2 text-right w-32">Gesamtwert (€)</th>
+                            <th class="py-3 px-2 text-center w-12 action-col no-print">Aktion</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbody-sanitaer" class="divide-y divide-slate-200 text-slate-700">
+                        <!-- Dynamic Rows -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
     </main>
 
     <!-- Table Editing Engine Script -->
     <script>
         const DEFAULT_DATA = {
-            diy: [
-                { pos: '1.1', title: 'Zellulose-Einblasdämmung (Sackware 12.5 kg)', usage: 'Wandgefach (220mm) + Dach (240mm)', qty: 326, unit: 'Säcke', price: 20.00 },
-                { pos: '1.2', title: 'Feuchtevariable Dampfbremsbahn (pro clima INTELLO PLUS)', usage: 'Wand- & Dachluftdichtung', qty: 5, unit: 'Rollen', price: 240.00 },
-                { pos: '1.3', title: 'System-Klebeband & Dichtkleber (TESCON VANA / ORCON F)', usage: 'Verklebung Überlappung & Schwelle', qty: 1, unit: 'Paket', price: 650.00 },
-                { pos: '1.4', title: 'OSB/3 Nut-und-Feder-Platten 22 mm (Tragschicht Decke)', usage: 'Oberseite Zwischendecke OG (95 m²)', qty: 95, unit: 'm²', price: 13.50 },
-                { pos: '1.5', title: 'Trockenschüttung / Gebundene Schüttung (50 Liter Säcke)', usage: 'Trittschalldämmung Zwischendecke (40mm)', qty: 76, unit: 'Säcke', price: 16.00 },
-                { pos: '1.6', title: 'Selfio Trockenestrich-System inkl. Fußbodenheizung', usage: 'Trockene FBH-Verlegung OG (95 m²)', qty: 95, unit: 'm²', price: 42.00 },
-                { pos: '1.7', title: 'Holzfaser-Dämmplatte 50 mm (STEICOflex 036)', usage: 'Installationsebene Wand & Untersparren', qty: 325, unit: 'm²', price: 10.00 },
-                { pos: '1.8', title: 'Installationsebenen-Lattung 50 x 50 mm KVH C24', usage: 'Unterkonstruktion Wand & Decke', qty: 650, unit: 'lfm', price: 1.30 },
-                { pos: '1.9', title: 'Rigips Gipskartonplatten 12,5 mm (Standard Bauplatte RB)', usage: 'Beplankung Wände auf OSB, Dachschrägen & Decken (805 m²)', qty: 805, unit: 'm²', price: 4.50 },
-                { pos: '1.10', title: 'Fermacell Fugenkleber & Schrauben Paket', usage: 'Beplankungszubehör', qty: 1, unit: 'Paket', price: 750.00 },
-                { pos: '1.11', title: 'Miete Zellulose-Einblasmaschine (EM300)', usage: 'Verarbeitungsgerät', qty: 4, unit: 'Tage', price: 250.00 },
-                { pos: '1.12', title: 'Mehrsparteneinführung & Grundleitungsset DN110/125', usage: 'Hauseinführung Wasser/Strom/Telekom unter XPS', qty: 1, unit: 'Set', price: 1450.00 },
-                { pos: '1.13', title: 'Dachrinnen & Fallrohre Set (Titanzink / Aluminium)', usage: 'Entwässerung Steildach & Garage', qty: 1, unit: 'Set', price: 1850.00 },
-                { pos: '1.14', title: 'Rollladen-Schalter & Smart-Home Tasterpaket (Sonnenschutz)', usage: 'Taster & Relais für 16 elektrische Rollläden', qty: 1, unit: 'Set', price: 650.00 },
-                { pos: '1.15', title: 'Schall- & Brandschutzpaket Trennwand ELW (53 dB)', usage: 'Entkopplung & Beplankung ELW-Wand', qty: 1, unit: 'Paket', price: 1250.00 },
-                { pos: '1.16', title: 'EPDM-Flachdach-Abdichtungsset Garage (36 m² EPDM-Folie)', usage: 'Nahtlose & wurzelfeste Garagendachabdichtung (>50 Jahre)', qty: 36, unit: 'm²', price: 45.00 },
-                { pos: '1.17', title: 'Holzfaser-Unterdeckplatte 35mm Wand + 50mm Dach (STEICO / Gutex)', usage: 'Außenseitige Beplankung (Kauf DE Baustoffhändler)', qty: 325, unit: 'm²', price: 26.00 },
-                { pos: '1.18', title: 'HardiePlank Zementfaser-Fassade + Lattung 30 mm', usage: 'Fassadenverkleidung 200 m² (Kauf DE Baustoffhändler)', qty: 200, unit: 'm²', price: 48.00 },
-                { pos: '1.19', title: 'OSB/3 Wandbeplankung 15 mm (Schallschutz & Lastenmontage)', usage: 'Wand-Innenbeplankung vor Gipsfaser (450 m²)', qty: 450, unit: 'm²', price: 7.50 }
-            ],
-            finish: [
-                { pos: '2.1', title: 'Fugenspachtel & Bewehrungsstreifen (Q2 / Q3 Standard)', usage: 'Spachteln der 840 m² Gipsfaserflächen', qty: 840, unit: 'm²', price: 3.50 },
-                { pos: '2.2', title: 'Malervlies / Glattvlies (150 g/m²) & Vlieskleber Set', usage: 'Rissüberbrückender Untergrund Wände/Decken', qty: 840, unit: 'm²', price: 2.20 },
-                { pos: '2.3', title: 'Silikat- / Wandfarbe hochdeckend weiß (Anstrich Set)', usage: '2x Anstrich Wände & Decken (ca. 180L)', qty: 840, unit: 'm²', price: 1.75 },
-                { pos: '2.4', title: 'Sockelleisten / Fußleisten weiß (60 mm) inkl. Montage', usage: 'Bodenabschlüsse Haus & ELW (ca. 280 lfm)', qty: 280, unit: 'lfm', price: 4.50 },
-                { pos: '2.5', title: 'Innentüren Set CPL weiß inkl. Zargen & Drücker', usage: '12 Innentüren (8 Hauptw. + 4 ELW)', qty: 12, unit: 'Stk', price: 280.00 },
-                { pos: '2.6', title: 'T30 Brandschutztür (Garage zu Haus)', usage: 'Feuerschutz-Zugangstür', qty: 1, unit: 'Stk', price: 450.00 },
-                { pos: '2.7', title: 'Wasserfester Klick-Vinylboden (vollflächig alle Räume & Bäder)', usage: 'Bodenbelag komplett Haus, ELW, Bäder, Flur & HWR (190 m²)', qty: 190, unit: 'm²', price: 32.00 },
-                { pos: '2.8', title: 'Fensterbänke Set (Innen Holz/Stein + Außen Alu)', usage: '16 Fensterbänke komplett', qty: 16, unit: 'Stk', price: 75.00 }
-            ],
-            elektrik: [
-                { pos: '3.1', title: 'Zählerschrank & Verteilung (2 Zählerplätze + Reserve WP)', usage: 'Elektro-Hauptverteilung Haus + ELW', qty: 1, unit: 'Komplett', price: 3800.00 },
-                { pos: '3.2', title: 'Elektrokabel Set (NYM-J 3x1.5 / 5x1.5 / 5x2.5 + Cat.7)', usage: 'Elektro-Rohinstallation (ca. 2.500 lfm)', qty: 1, unit: 'Paket', price: 2200.00 },
-                { pos: '3.3', title: 'Schalter- & Steckdosenprogramm (z.B. Gira E2 / Busch-Jaeger)', usage: '180 Steckdosen, 60 Schalter & Dosen', qty: 1, unit: 'Paket', price: 2400.00 },
-                { pos: '3.4', title: 'LED-Einbauspots, Außenleuchten & Wallbox-Kabel', usage: 'Beleuchtung & E-Mobilität', qty: 1, unit: 'Paket', price: 1800.00 },
-                { pos: '3.5', title: 'Photovoltaik-Anlage Komplettset (ca. 10 kWp + Hybrid-Wechselrichter & Speicher)', usage: 'Stromerzeugung Dach komplett inkl. PV-Module & Batterie-Speicher', qty: 1, unit: 'Komplett', price: 11000.00 },
-                { pos: '3.6', title: 'Wallbox 11 kW Ladesäule (Garage)', usage: 'E-Auto Ladestation 11 kW', qty: 1, unit: 'Stk', price: 500.00 },
-                { pos: '3.7', title: 'Blower-Door-Test & Zertifikat (Luftdichtigkeit KfW 40)', usage: 'Pflichtprüfungsnachweis Förderbank', qty: 1, unit: 'Pauschale', price: 450.00 },
-                { pos: '3.8', title: 'Elektro-Inbetriebnahme & Messprotokoll (Elektriker)', usage: 'Abnahme & Zählersetzung', qty: 1, unit: 'Pauschale', price: 2500.00 }
-            ],
-            heizung: [
-                { pos: '4.1', title: 'Luft-Wasser-Wärmepumpe 9-12 kW (aroTHERM plus / Vitocal)', usage: 'Wärmeerzeuger R290 Propan', qty: 1, unit: 'Gerät', price: 11500.00 },
-                { pos: '4.2', title: 'Warmwasserspeicher 300L + Pufferspeicher 100L', usage: 'Heizung & Brauchwasser', qty: 1, unit: 'Set', price: 2800.00 },
-                { pos: '4.3', title: 'Verrohrung, Pumpengruppe, Ausdehnungsgefäß & Kältemittel', usage: 'Heizungsanschluss & Hydraulik', qty: 1, unit: 'Set', price: 2400.00 },
-                { pos: '4.4', title: 'Kontrollierte Wohnraumlüftung (KWL mit WRG Set)', usage: 'Lüftungsanlage KfW-40', qty: 1, unit: 'Set', price: 6500.00 },
-                { pos: '4.5', title: 'Wärmepumpen-Inbetriebnahme (Werkskundendienst)', usage: 'Einregulierung & Hydraulischer Abgleich', qty: 1, unit: 'Pauschale', price: 1800.00 }
-            ],
-            sanitaer: [
-                { pos: '5.1', title: 'Trinkwasser- & Abwasser-Rohinstallationspaket', usage: 'Mehrschichtverbundrohre & HT-Rohre', qty: 1, unit: 'Paket', price: 3200.00 },
-                { pos: '5.2', title: 'Hauptbad (1x Bodenebene Dusche + 1x Badewanne + WC + Waschtisch)', usage: 'Hauptbad Sanitärobjekte & Armaturen', qty: 1, unit: 'Set', price: 4800.00 },
-                { pos: '5.3', title: 'Duschbad / ELW-Bad (1x Bodenebene Dusche + 1x WC + Waschtisch)', usage: 'Zusatzbad / ELW Sanitärobjekte', qty: 1, unit: 'Set', price: 2600.00 },
-                { pos: '5.4', title: 'Gäste-WC (1x Wand-WC + 1x Handwaschbecken & Armatur)', usage: 'Gäste-WC Sanitärobjekte', qty: 1, unit: 'Set', price: 1100.00 },
-                { pos: '5.5', title: 'Frostfreie Kemper-Außenarmatur (Gartenwasseranschluss)', usage: 'Außenzapfstelle Außenwand', qty: 1, unit: 'Stk', price: 280.00 }
+            nebenkosten: [
+                { pos: '1.1', title: 'Grundstückskauf (444 m² @ 200 €/m²)', usage: 'Grundstücksfläche Haus Jakob', qty: 444, unit: 'm²', price: 200.00 },
+                { pos: '1.2', title: 'Grunderwerbsteuer (ca. 5,0% vom Grundstück)', usage: 'Steuer Finanzamt Grundstückskauf', qty: 1, unit: 'Pauschale', price: 4440.00 },
+                { pos: '1.3', title: 'Notar- & Grundbuchkosten (ca. 1,5% - 2,0%)', usage: 'Beurkundung & Grundbucheintragung', qty: 1, unit: 'Pauschale', price: 1600.00 },
+                { pos: '1.4', title: 'Rechtsanwalt / Vertragsprüfung Kaufvertrag', usage: 'Rechtliche Beratung & Prüfung', qty: 1, unit: 'Pauschale', price: 750.00 },
+                { pos: '1.5', title: 'Architekt / Bauvorlageberechtigter (Entwurf & Bauantrag LPH 1-4)', usage: 'Genehmigungsplanung, Bauantrag & Entwässerung', qty: 1, unit: 'Pauschale', price: 5800.00 },
+                { pos: '1.6', title: 'Vermesser (Grob-/Feinabsteckung & Gebäude-Einmessung)', usage: 'Amtliche Vermessung vor & nach Bau', qty: 1, unit: 'Pauschale', price: 2400.00 },
+                { pos: '1.7', title: 'Baugrundgutachten / Bodengutachten', usage: 'Tragfähigkeitsnachweis Schotter/XPS', qty: 1, unit: 'Gutachten', price: 1200.00 },
+                { pos: '1.8', title: 'Statik & Tragwerksplanung (Prüfstatik, Nachweise)', usage: 'Tragwerksplanung & Standsicherheit', qty: 1, unit: 'Pauschale', price: 3200.00 },
+                { pos: '1.9', title: 'Baugenehmigungsgebühren / Bauamt', usage: 'Amtliche Prüf- & Genehmigungsgebühr', qty: 1, unit: 'Gebühr', price: 1200.00 },
+                { pos: '1.10', title: 'Energieberater & KfW-Baubegleitung (Effizienzhaus 40)', usage: 'Förderantrag & Baustellenprüfungen', qty: 1, unit: 'Pauschale', price: 3500.00 },
+                { pos: '1.11', title: 'Hausanschlusskosten Versorger (Strom, Wasser, Kanal, Telekom)', usage: 'Anschlussgebühren Stadtwerke / Netz', qty: 1, unit: 'Paket', price: 6500.00 },
+                { pos: '1.12', title: 'Baustelleneinrichtung (Baustrom, Bau-WC, Container & Gerüst)', usage: 'Infrastruktur Roh- & Ausbau', qty: 1, unit: 'Set', price: 2800.00 },
+                { pos: '1.13', title: 'Bauherrenversicherungen (Haftpflicht, Bauleistung, Feuerrohbau)', usage: 'Risikoabsicherung Bauphase', qty: 1, unit: 'Paket', price: 800.00 }
             ],
             boden: [
-                { pos: '6.1', title: 'Schottertragschicht (0-45 mm) inkl. Verdichtung', usage: 'Kapillarbrechende Schicht unter XPS', qty: 75, unit: 'Tonnen', price: 30.00 },
-                { pos: '6.2', title: 'Passivhaus-XPS Dämmung 200 mm (300-500 kPa) + L-Randschale', usage: 'Unter-Platten- & Perimeterdämmung (200 mm)', qty: 136, unit: 'm²', price: 52.00 },
-                { pos: '6.3', title: 'Transportbeton C25/30 (200mm Sohle Haus + 180mm Garage)', usage: 'Gegossener Betonkern mit Pumpe', qty: 26.5, unit: 'm³', price: 145.00 },
-                { pos: '6.4', title: 'Gitterbewehrung Q257A / Q335A + Drunterleisten', usage: 'Betonbewehrung', qty: 1450, unit: 'kg', price: 1.35 },
-                { pos: '6.5', title: 'Integrierte Fußbodenheizung (PEX 17x2.0, Verteiler)', usage: 'Thermoverlegung in Betonsohle EG', qty: 100, unit: 'm²', price: 22.00 },
-                { pos: '6.6', title: 'Bitumen-Abdichtungsbahn / Dampfsperre Katja BA', usage: 'Schwellenabdichtung', qty: 150, unit: 'm²', price: 4.50 },
-                { pos: '6.7', title: 'Edelstahl V4A Fundamenterder (DIN 18014 Blitzschutz)', usage: 'Erdung unter XPS Dämmung', qty: 1, unit: 'Set', price: 480.00 },
-                { pos: '6.8', title: 'Miete Flügelglätter / Helikopter (Glätten in Eigenleistung)', usage: '1 Tag Maschinenverleih + Benzin & Curing-Folie', qty: 1, unit: 'Pauschale', price: 250.00 }
+                { pos: '2.1', title: 'Schottertragschicht (0-45 mm) inkl. Verdichtung', usage: 'Kapillarbrechende Schicht unter XPS (35 cm)', qty: 75, unit: 'Tonnen', price: 30.00 },
+                { pos: '2.2', title: 'Passivhaus-XPS Dämmung 200 mm (300-500 kPa) + L-Randschale', usage: 'Unter-Platten- & Perimeterdämmung (200 mm)', qty: 136, unit: 'm²', price: 52.00 },
+                { pos: '2.3', title: 'Transportbeton C25/30 (200mm Sohle Haus + 180mm Garage)', usage: 'Gegossener Betonkern mit Pumpe', qty: 26.5, unit: 'm³', price: 145.00 },
+                { pos: '2.4', title: 'Gitterbewehrung Q257A / Q335A + Drunterleisten', usage: 'Betonbewehrung', qty: 1450, unit: 'kg', price: 1.35 },
+                { pos: '2.5', title: 'Integrierte Fußbodenheizung (PEX 17x2.0, Verteiler)', usage: 'Thermoverlegung in Betonsohle EG', qty: 100, unit: 'm²', price: 22.00 },
+                { pos: '2.6', title: 'Bitumen-Abdichtungsbahn / Dampfsperre Katja BA', usage: 'Schwellenabdichtung', qty: 150, unit: 'm²', price: 4.50 },
+                { pos: '2.7', title: 'Edelstahl V4A Fundamenterder (DIN 18014 Blitzschutz)', usage: 'Erdung unter XPS Dämmung', qty: 1, unit: 'Set', price: 480.00 },
+                { pos: '2.8', title: 'Miete Flügelglätter / Helikopter (Glätten in Eigenleistung)', usage: '1 Tag Maschinenverleih + Benzin & Curing-Folie', qty: 1, unit: 'Pauschale', price: 250.00 }
             ],
             palmatin: [
-                { pos: '7.1', title: 'Palmatin KVH-Wandständerwerk 220 mm & Schwellen/Rähm', usage: 'Werkseitiger Abbund Wandelemente', qty: 1, unit: 'Set', price: 55000.00 },
-                { pos: '7.2', title: 'Palmatin Deckenbalken KVH 240 mm (Zwischendecke EG/OG)', usage: 'Balkenlage Holzbalkendecke 95 m²', qty: 1, unit: 'Set', price: 9500.00 },
-                { pos: '7.3', title: 'Palmatin Konterlattung 50 mm (für abgehängte Decke EG)', usage: 'Entkopplungs-Lattung Decke', qty: 1, unit: 'Set', price: 1200.00 },
-                { pos: '7.4', title: 'Palmatin Dachsparren 240 mm & Pfetten/Träger', usage: 'Dachkonstruktion komplett', qty: 1, unit: 'Set', price: 22000.00 },
-                { pos: '7.5', title: 'Palmatin Echtholz-Geschosstreppe EG-OG', usage: 'Verbindungstreppe Hauptwohnung (Palmatin Werkslieferung)', qty: 1, unit: 'Set', price: 3000.00 },
-                { pos: '7.6', title: 'LKW-Transport & Logistik Palmatin Werkssatz (1 Sattelzug)', usage: 'Anlieferung Baustelle (1 LKW-Fahrt)', qty: 1, unit: 'Fahrt', price: 2500.00 }
+                { pos: '3.1', title: 'Palmatin KVH-Wandständerwerk 220 mm & Schwellen/Rähm', usage: 'Werkseitiger Abbund Wandelemente', qty: 1, unit: 'Set', price: 55000.00 },
+                { pos: '3.2', title: 'Palmatin Deckenbalken KVH 240 mm (Zwischendecke EG/OG)', usage: 'Balkenlage Holzbalkendecke 95 m²', qty: 1, unit: 'Set', price: 9500.00 },
+                { pos: '3.3', title: 'Palmatin Konterlattung 50 mm (für abgehängte Decke EG)', usage: 'Entkopplungs-Lattung Decke', qty: 1, unit: 'Set', price: 1200.00 },
+                { pos: '3.4', title: 'Palmatin Dachsparren 240 mm & Pfetten/Träger', usage: 'Dachkonstruktion komplett', qty: 1, unit: 'Set', price: 22000.00 },
+                { pos: '3.5', title: 'Palmatin Echtholz-Geschosstreppe EG-OG', usage: 'Verbindungstreppe Hauptwohnung (Palmatin Werkslieferung)', qty: 1, unit: 'Set', price: 3000.00 },
+                { pos: '3.6', title: 'LKW-Transport & Logistik Palmatin Werkssatz (1 Sattelzug)', usage: 'Anlieferung Baustelle (1 LKW-Fahrt)', qty: 1, unit: 'Fahrt', price: 2500.00 }
             ],
-            nebenkosten: [
-                { pos: '8.1', title: 'Grundstückskauf (444 m² @ 200 €/m²)', usage: 'Grundstücksfläche Haus Jakob', qty: 444, unit: 'm²', price: 200.00 },
-                { pos: '8.2', title: 'Grunderwerbsteuer (ca. 5,0% vom Grundstück)', usage: 'Steuer Finanzamt Grundstückskauf', qty: 1, unit: 'Pauschale', price: 4440.00 },
-                { pos: '8.3', title: 'Notar- & Grundbuchkosten (ca. 1,5% - 2,0%)', usage: 'Beurkundung & Grundbucheintragung', qty: 1, unit: 'Pauschale', price: 1600.00 },
-                { pos: '8.4', title: 'Rechtsanwalt / Vertragsprüfung Kaufvertrag', usage: 'Rechtliche Beratung & Prüfung', qty: 1, unit: 'Pauschale', price: 750.00 },
-                { pos: '8.5', title: 'Architekt / Bauvorlageberechtigter (Entwurf & Bauantrag LPH 1-4)', usage: 'Genehmigungsplanung, Bauantrag & Entwässerung', qty: 1, unit: 'Pauschale', price: 5800.00 },
-                { pos: '8.6', title: 'Vermesser (Grob-/Feinabsteckung & Gebäude-Einmessung)', usage: 'Amtliche Vermessung vor & nach Bau', qty: 1, unit: 'Pauschale', price: 2400.00 },
-                { pos: '8.7', title: 'Baugrundgutachten / Bodengutachten', usage: 'Tragfähigkeitsnachweis Schotter/XPS', qty: 1, unit: 'Gutachten', price: 1200.00 },
-                { pos: '8.8', title: 'Statik & Tragwerksplanung (Prüfstatik, Nachweise)', usage: 'Tragwerksplanung & Standsicherheit', qty: 1, unit: 'Pauschale', price: 3200.00 },
-                { pos: '8.9', title: 'Baugenehmigungsgebühren / Bauamt', usage: 'Amtliche Prüf- & Genehmigungsgebühr', qty: 1, unit: 'Gebühr', price: 1200.00 },
-                { pos: '8.10', title: 'Energieberater & KfW-Baubegleitung (Effizienzhaus 40)', usage: 'Förderantrag & Baustellenprüfungen', qty: 1, unit: 'Pauschale', price: 3500.00 },
-                { pos: '8.11', title: 'Hausanschlusskosten Versorger (Strom, Wasser, Kanal, Telekom)', usage: 'Anschlussgebühren Stadtwerke / Netz', qty: 1, unit: 'Paket', price: 6500.00 },
-                { pos: '8.12', title: 'Baustelleneinrichtung (Baustrom, Bau-WC, Container & Gerüst)', usage: 'Infrastruktur Roh- & Ausbau', qty: 1, unit: 'Set', price: 2800.00 },
-                { pos: '8.13', title: 'Bauherrenversicherungen (Haftpflicht, Bauleistung, Feuerrohbau)', usage: 'Risikoabsicherung Bauphase', qty: 1, unit: 'Paket', price: 800.00 }
+            huelle: [
+                { pos: '4.1', title: 'Holzfaser-Unterdeckplatte 35mm Wand + 50mm Dach (STEICO / Gutex)', usage: 'Außenseitige Beplankung (Kauf DE Baustoffhändler)', qty: 325, unit: 'm²', price: 26.00 },
+                { pos: '4.2', title: 'HardiePlank Zementfaser-Fassade + Lattung 30 mm', usage: 'Fassadenverkleidung 200 m² (Kauf DE Baustoffhändler)', qty: 200, unit: 'm²', price: 48.00 },
+                { pos: '4.3', title: 'EPDM-Flachdach-Abdichtungsset Garage (36 m² EPDM-Folie)', usage: 'Nahtlose & wurzelfeste Garagendachabdichtung (>50 Jahre)', qty: 36, unit: 'm²', price: 45.00 },
+                { pos: '4.4', title: 'Dachrinnen & Fallrohre Set (Titanzink / Aluminium)', usage: 'Entwässerung Steildach & Garage', qty: 1, unit: 'Set', price: 1850.00 }
             ],
             bauelemente: [
-                { pos: '9.1', title: 'Passivhaus-Fenster 3-fach Glas inkl. elektrischer Aufsatz-Rollläden (Uw ≤ 0.8 W/m²K)', usage: '16 Fenster komplett inkl. gedämmtem Kasten, Motorantrieb, Montage & RAL-Dichtung', qty: 16, unit: 'Stk', price: 1250.00 },
-                { pos: '9.2', title: 'Haupteingangstür (Alu/Holz hochgedämmt)', usage: 'Eingang Hauptwohnung inkl. Sicherheitszylinder', qty: 1, unit: 'Stk', price: 3200.00 },
-                { pos: '9.3', title: 'Zweite Haustür (Einliegerwohnung ELW)', usage: 'Eingang ELW gedämmt mit Mehrfachverriegelung', qty: 1, unit: 'Stk', price: 2200.00 },
-                { pos: '9.4', title: 'Sektional-Garagentor 40 mm ISO (elektrisch)', usage: 'Garage Zugangs- & Zufahrtstor inkl. Motor & 2 Handsender', qty: 1, unit: 'Stk', price: 2400.00 }
+                { pos: '5.1', title: 'Passivhaus-Fenster 3-fach Glas inkl. elektrischer Aufsatz-Rollläden (Uw ≤ 0.8 W/m²K)', usage: '16 Fenster komplett inkl. gedämmtem Kasten, Motorantrieb & RAL-Dichtung', qty: 16, unit: 'Stk', price: 1250.00 },
+                { pos: '5.2', title: 'Haupteingangstür (Alu/Holz hochgedämmt)', usage: 'Eingang Hauptwohnung inkl. Sicherheitszylinder', qty: 1, unit: 'Stk', price: 3200.00 },
+                { pos: '5.3', title: 'Zweite Haustür (Einliegerwohnung ELW)', usage: 'Eingang ELW gedämmt mit Mehrfachverriegelung', qty: 1, unit: 'Stk', price: 2200.00 },
+                { pos: '5.4', title: 'Sektional-Garagentor 40 mm ISO (elektrisch)', usage: 'Garage Zugangs- & Zufahrtstor inkl. Motor & 2 Handsender', qty: 1, unit: 'Stk', price: 2400.00 }
+            ],
+            haustechnik: [
+                { pos: '6.1', title: 'Luft-Wasser-Wärmepumpe 9-12 kW (aroTHERM plus / Vitocal)', usage: 'Wärmeerzeuger R290 Propan', qty: 1, unit: 'Gerät', price: 11500.00 },
+                { pos: '6.2', title: 'Warmwasserspeicher 300L + Pufferspeicher 100L', usage: 'Heizung & Brauchwasser', qty: 1, unit: 'Set', price: 2800.00 },
+                { pos: '6.3', title: 'Verrohrung, Pumpengruppe, Ausdehnungsgefäß & Kältemittel', usage: 'Heizungsanschluss & Hydraulik', qty: 1, unit: 'Set', price: 2400.00 },
+                { pos: '6.4', title: 'Kontrollierte Wohnraumlüftung (KWL mit WRG Set)', usage: 'Lüftungsanlage KfW-40', qty: 1, unit: 'Set', price: 6500.00 },
+                { pos: '6.5', title: 'Wärmepumpen-Inbetriebnahme (Werkskundendienst)', usage: 'Einregulierung & Hydraulischer Abgleich', qty: 1, unit: 'Pauschale', price: 1800.00 },
+                { pos: '6.6', title: 'Zählerschrank & Verteilung (2 Zählerplätze + Reserve WP)', usage: 'Elektro-Hauptverteilung Haus + ELW', qty: 1, unit: 'Komplett', price: 3800.00 },
+                { pos: '6.7', title: 'Elektrokabel Set (NYM-J 3x1.5 / 5x1.5 / 5x2.5 + Cat.7)', usage: 'Elektro-Rohinstallation (ca. 2.500 lfm)', qty: 1, unit: 'Paket', price: 2200.00 },
+                { pos: '6.8', title: 'Schalter- & Steckdosenprogramm (z.B. Gira E2 / Busch-Jaeger)', usage: '180 Steckdosen, 60 Schalter & Dosen', qty: 1, unit: 'Paket', price: 2400.00 },
+                { pos: '6.9', title: 'LED-Einbauspots, Außenleuchten & Wallbox-Kabel', usage: 'Beleuchtung & E-Mobilität', qty: 1, unit: 'Paket', price: 1800.00 },
+                { pos: '6.10', title: 'Photovoltaik-Anlage Komplettset (ca. 10 kWp + Hybrid-Wechselrichter & Speicher)', usage: 'Stromerzeugung Dach komplett inkl. PV-Module & Batterie-Speicher', qty: 1, unit: 'Komplett', price: 11000.00 },
+                { pos: '6.11', title: 'Wallbox 11 kW Ladesäule (Garage)', usage: 'E-Auto Ladestation 11 kW', qty: 1, unit: 'Stk', price: 500.00 },
+                { pos: '6.12', title: 'Blower-Door-Test & Zertifikat (Luftdichtigkeit KfW 40)', usage: 'Pflichtprüfungsnachweis Förderbank', qty: 1, unit: 'Pauschale', price: 450.00 },
+                { pos: '6.13', title: 'Elektro-Inbetriebnahme & Messprotokoll (Elektriker)', usage: 'Abnahme & Zählersetzung', qty: 1, unit: 'Pauschale', price: 2500.00 }
+            ],
+            trockenbau: [
+                { pos: '7.1', title: 'Zellulose-Einblasdämmung (Sackware 12.5 kg)', usage: 'Wandgefach (220mm) + Dach (240mm)', qty: 326, unit: 'Säcke', price: 20.00 },
+                { pos: '7.2', title: 'Miete Zellulose-Einblasmaschine (EM300)', usage: 'Verarbeitungsgerät', qty: 4, unit: 'Tage', price: 250.00 },
+                { pos: '7.3', title: 'Feuchtevariable Dampfbremsbahn (pro clima INTELLO PLUS)', usage: 'Wand- & Dachluftdichtung', qty: 5, unit: 'Rollen', price: 240.00 },
+                { pos: '7.4', title: 'System-Klebeband & Dichtkleber (TESCON VANA / ORCON F)', usage: 'Verklebung Überlappung & Schwelle', qty: 1, unit: 'Paket', price: 650.00 },
+                { pos: '7.5', title: 'Holzfaser-Dämmplatte 50 mm (STEICOflex 036)', usage: 'Installationsebene Wand & Untersparren', qty: 325, unit: 'm²', price: 10.00 },
+                { pos: '7.6', title: 'Installationsebenen-Lattung 50 x 50 mm KVH C24', usage: 'Unterkonstruktion Wand & Decke', qty: 650, unit: 'lfm', price: 1.30 },
+                { pos: '7.7', title: 'OSB/3 Wandbeplankung 15 mm (Schallschutz & Lastenmontage)', usage: 'Wand-Innenbeplankung vor Rigips (450 m²)', qty: 450, unit: 'm²', price: 7.50 },
+                { pos: '7.8', title: 'OSB/3 Nut-und-Feder-Platten 22 mm (Tragschicht Decke)', usage: 'Oberseite Zwischendecke OG (95 m²)', qty: 95, unit: 'm²', price: 13.50 },
+                { pos: '7.9', title: 'Trockenschüttung + Selfio Trockenestrich FBH OG', usage: 'Trittschall & FBH-Verlegung OG (95 m²)', qty: 95, unit: 'm²', price: 58.00 },
+                { pos: '7.10', title: 'Rigips Gipskartonplatten 12,5 mm (Standard Bauplatte RB)', usage: 'Beplankung Wände auf OSB, Dachschrägen & Decken (805 m²)', qty: 805, unit: 'm²', price: 4.50 },
+                { pos: '7.11', title: 'Schall- & Brandschutzpaket Trennwand ELW (53 dB)', usage: 'Entkopplung & Beplankung ELW-Wand', qty: 1, unit: 'Paket', price: 1250.00 }
+            ],
+            finish: [
+                { pos: '8.1', title: 'Fugenspachtel & Bewehrungsstreifen (Q2 / Q3 Standard)', usage: 'Spachteln der 840 m² Flächen', qty: 840, unit: 'm²', price: 3.50 },
+                { pos: '8.2', title: 'Malervlies / Glattvlies (150 g/m²) & Vlieskleber Set', usage: 'Rissüberbrückender Untergrund Wände/Decken', qty: 840, unit: 'm²', price: 2.20 },
+                { pos: '8.3', title: 'Silikat- / Wandfarbe hochdeckend weiß (Anstrich Set)', usage: '2x Anstrich Wände & Decken (ca. 180L)', qty: 840, unit: 'm²', price: 1.75 },
+                { pos: '8.4', title: 'Wasserfester Klick-Vinylboden (vollflächig alle Räume & Bäder)', usage: 'Bodenbelag komplett Haus, ELW, Bäder, Flur & HWR (190 m²)', qty: 190, unit: 'm²', price: 32.00 },
+                { pos: '8.5', title: 'Sockelleisten / Fußleisten weiß (60 mm) inkl. Montage', usage: 'Bodenabschlüsse Haus & ELW (ca. 280 lfm)', qty: 280, unit: 'lfm', price: 4.50 },
+                { pos: '8.6', title: 'Innentüren Set CPL weiß inkl. Zargen & Drücker + T30 Tür', usage: '12 Innentüren + 1 T30 Feuerschutztür Garage', qty: 13, unit: 'Stk', price: 295.00 },
+                { pos: '8.7', title: 'Fensterbänke Set (Innen Holz/Stein + Außen Alu)', usage: '16 Fensterbänke komplett', qty: 16, unit: 'Stk', price: 75.00 }
+            ],
+            sanitaer: [
+                { pos: '9.1', title: 'Trinkwasser- & Abwasser-Rohinstallationspaket', usage: 'Mehrschichtverbundrohre & HT-Rohre', qty: 1, unit: 'Paket', price: 3200.00 },
+                { pos: '9.2', title: 'Hauptbad (1x Bodenebene Dusche + 1x Badewanne + WC + Waschtisch)', usage: 'Hauptbad Sanitärobjekte & Armaturen', qty: 1, unit: 'Set', price: 4800.00 },
+                { pos: '9.3', title: 'Duschbad / ELW-Bad (1x Bodenebene Dusche + 1x WC + Waschtisch)', usage: 'Zusatzbad / ELW Sanitärobjekte', qty: 1, unit: 'Set', price: 2600.00 },
+                { pos: '9.4', title: 'Gäste-WC (1x Wand-WC + 1x Handwaschbecken & Armatur)', usage: 'Gäste-WC Sanitärobjekte', qty: 1, unit: 'Set', price: 1100.00 },
+                { pos: '9.5', title: 'Frostfreie Kemper-Außenarmatur (Gartenwasseranschluss)', usage: 'Außenzapfstelle Außenwand', qty: 1, unit: 'Stk', price: 280.00 }
             ]
         };
 
-        let appData = JSON.parse(localStorage.getItem('kfw40_material_data_v22')) || DEFAULT_DATA;
+        let appData = JSON.parse(localStorage.getItem('kfw40_material_data_v23')) || DEFAULT_DATA;
 
         function saveData() {
-            localStorage.setItem('kfw40_material_data_v22', JSON.stringify(appData));
+            localStorage.setItem('kfw40_material_data_v23', JSON.stringify(appData));
         }
 
         function renderCategory(catKey, tbodyId, subtotalId) {
@@ -639,15 +634,15 @@
         }
 
         function renderAll() {
-            const t1 = renderCategory('diy', 'tbody-diy', 'subtotal-diy');
-            const t2 = renderCategory('finish', 'tbody-finish', 'subtotal-finish');
-            const t3 = renderCategory('elektrik', 'tbody-elektrik', 'subtotal-elektrik');
-            const t4 = renderCategory('heizung', 'tbody-heizung', 'subtotal-heizung');
-            const t5 = renderCategory('sanitaer', 'tbody-sanitaer', 'subtotal-sanitaer');
-            const t6 = renderCategory('boden', 'tbody-boden', 'subtotal-boden');
-            const t7 = renderCategory('palmatin', 'tbody-palmatin', 'subtotal-palmatin');
-            const t8 = renderCategory('nebenkosten', 'tbody-nebenkosten', 'subtotal-nebenkosten');
-            const t9 = renderCategory('bauelemente', 'tbody-bauelemente', 'subtotal-bauelemente');
+            const t1 = renderCategory('nebenkosten', 'tbody-nebenkosten', 'subtotal-nebenkosten');
+            const t2 = renderCategory('boden', 'tbody-boden', 'subtotal-boden');
+            const t3 = renderCategory('palmatin', 'tbody-palmatin', 'subtotal-palmatin');
+            const t4 = renderCategory('huelle', 'tbody-huelle', 'subtotal-huelle');
+            const t5 = renderCategory('bauelemente', 'tbody-bauelemente', 'subtotal-bauelemente');
+            const t6 = renderCategory('haustechnik', 'tbody-haustechnik', 'subtotal-haustechnik');
+            const t7 = renderCategory('trockenbau', 'tbody-trockenbau', 'subtotal-trockenbau');
+            const t8 = renderCategory('finish', 'tbody-finish', 'subtotal-finish');
+            const t9 = renderCategory('sanitaer', 'tbody-sanitaer', 'subtotal-sanitaer');
 
             const grandTotal = t1 + t2 + t3 + t4 + t5 + t6 + t7 + t8 + t9;
             document.getElementById('grand-total-display').innerText = grandTotal.toLocaleString('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' €';
@@ -686,53 +681,53 @@
             });
         }
 
-        document.getElementById('add-row-diy').addEventListener('click', () => {
-            appData.diy.push({ pos: '1.' + (appData.diy.length + 1), title: 'Neues Ausbaumaterial', usage: 'Eigenleistung', qty: 1, unit: 'Stk', price: 0 });
-            saveData(); renderAll();
-        });
-
-        document.getElementById('add-row-finish').addEventListener('click', () => {
-            appData.finish.push({ pos: '2.' + (appData.finish.length + 1), title: 'Neues Ausbaumaterial', usage: 'Maler/Böden/Türen', qty: 1, unit: 'Stk', price: 0 });
-            saveData(); renderAll();
-        });
-
-        document.getElementById('add-row-elektrik').addEventListener('click', () => {
-            appData.elektrik.push({ pos: '3.' + (appData.elektrik.length + 1), title: 'Neues Elektromaterial', usage: 'Elektro/PV', qty: 1, unit: 'Stk', price: 0 });
-            saveData(); renderAll();
-        });
-
-        document.getElementById('add-row-heizung').addEventListener('click', () => {
-            appData.heizung.push({ pos: '4.' + (appData.heizung.length + 1), title: 'Neues Heizungsmaterial', usage: 'Wärmepumpe/KWL', qty: 1, unit: 'Stk', price: 0 });
-            saveData(); renderAll();
-        });
-
-        document.getElementById('add-row-sanitaer').addEventListener('click', () => {
-            appData.sanitaer.push({ pos: '5.' + (appData.sanitaer.length + 1), title: 'Neues Sanitärmaterial', usage: 'Sanitär / Bäder', qty: 1, unit: 'Stk', price: 0 });
+        document.getElementById('add-row-nebenkosten').addEventListener('click', () => {
+            appData.nebenkosten.push({ pos: '1.' + (appData.nebenkosten.length + 1), title: 'Neue Nebenkosten', usage: 'Planung/Behörde', qty: 1, unit: 'Stk', price: 0 });
             saveData(); renderAll();
         });
 
         document.getElementById('add-row-boden').addEventListener('click', () => {
-            appData.boden.push({ pos: '6.' + (appData.boden.length + 1), title: 'Neues Bodenplattenmaterial', usage: 'Fachbetrieb', qty: 1, unit: 'Stk', price: 0 });
+            appData.boden.push({ pos: '2.' + (appData.boden.length + 1), title: 'Neues Bodenplattenmaterial', usage: 'Gründung', qty: 1, unit: 'Stk', price: 0 });
             saveData(); renderAll();
         });
 
         document.getElementById('add-row-palmatin').addEventListener('click', () => {
-            appData.palmatin.push({ pos: '7.' + (appData.palmatin.length + 1), title: 'Neues Werkspaketelement', usage: 'Palmatin', qty: 1, unit: 'Set', price: 0 });
+            appData.palmatin.push({ pos: '3.' + (appData.palmatin.length + 1), title: 'Neues Werkssatzelement', usage: 'Palmatin', qty: 1, unit: 'Set', price: 0 });
             saveData(); renderAll();
         });
 
-        document.getElementById('add-row-nebenkosten').addEventListener('click', () => {
-            appData.nebenkosten.push({ pos: '8.' + (appData.nebenkosten.length + 1), title: 'Neue Baunebenkosten', usage: 'Gutachten/Baustelle', qty: 1, unit: 'Stk', price: 0 });
+        document.getElementById('add-row-huelle').addEventListener('click', () => {
+            appData.huelle.push({ pos: '4.' + (appData.huelle.length + 1), title: 'Neues Fassaden-/Dachmaterial', usage: 'Hülle DE', qty: 1, unit: 'm²', price: 0 });
             saveData(); renderAll();
         });
 
         document.getElementById('add-row-bauelemente').addEventListener('click', () => {
-            appData.bauelemente.push({ pos: '9.' + (appData.bauelemente.length + 1), title: 'Neues Bauelement', usage: 'Fenster/Türen/Tor', qty: 1, unit: 'Stk', price: 0 });
+            appData.bauelemente.push({ pos: '5.' + (appData.bauelemente.length + 1), title: 'Neues Bauelement', usage: 'Fenster/Türen', qty: 1, unit: 'Stk', price: 0 });
+            saveData(); renderAll();
+        });
+
+        document.getElementById('add-row-haustechnik').addEventListener('click', () => {
+            appData.haustechnik.push({ pos: '6.' + (appData.haustechnik.length + 1), title: 'Neues Haustechnikmaterial', usage: 'Elektro/Heizung/PV', qty: 1, unit: 'Stk', price: 0 });
+            saveData(); renderAll();
+        });
+
+        document.getElementById('add-row-trockenbau').addEventListener('click', () => {
+            appData.trockenbau.push({ pos: '7.' + (appData.trockenbau.length + 1), title: 'Neues Trockenbaumaterial', usage: 'Dämmung/Platten', qty: 1, unit: 'm²', price: 0 });
+            saveData(); renderAll();
+        });
+
+        document.getElementById('add-row-finish').addEventListener('click', () => {
+            appData.finish.push({ pos: '8.' + (appData.finish.length + 1), title: 'Neues Finishmaterial', usage: 'Maler/Böden', qty: 1, unit: 'Stk', price: 0 });
+            saveData(); renderAll();
+        });
+
+        document.getElementById('add-row-sanitaer').addEventListener('click', () => {
+            appData.sanitaer.push({ pos: '9.' + (appData.sanitaer.length + 1), title: 'Neues Sanitärobjekt', usage: 'Bäder', qty: 1, unit: 'Stk', price: 0 });
             saveData(); renderAll();
         });
 
         document.getElementById('btn-reset-data').addEventListener('click', () => {
-            if (confirm('Möchtest du alle Materiallisten auf die Standardwerte zurücksetzen?')) {
+            if (confirm('Möchtest du alle Materiallisten auf die chronologischen Standardwerte zurücksetzen?')) {
                 appData = JSON.parse(JSON.stringify(DEFAULT_DATA));
                 saveData();
                 renderAll();
@@ -740,21 +735,21 @@
         });
 
         document.getElementById('btn-export-csv').addEventListener('click', () => {
-            let csv = 'Pos;Gewerk_Kategorie;Material;Einsatzbereich;Menge;Einheit;Einzelpreis_EUR;Gesamtwert_EUR\n';
+            let csv = 'Pos;Bauphase;Material;Einsatzbereich;Menge;Einheit;Einzelpreis_EUR;Gesamtwert_EUR\n';
             
             const catNames = {
-                diy: '1. Ausbau & Baustoffhaendler',
-                finish: '2. Innenausbau Finish (Spachtel, Maler, Böden, Türen, Treppe)',
-                elektrik: '3. Elektrotechnik, PV & Wallbox',
-                heizung: '4. Heizung & Waermepumpe & KWL',
-                sanitaer: '5. Sanitaertechnik & Baeder',
-                boden: '6. Thermobodenplatte Fachbetrieb',
-                palmatin: '7. Palmatin Werkssatz',
-                nebenkosten: '8. Grundstück, Kaufnebenkosten & Baunebenkosten',
-                bauelemente: '9. Fenster, Haustüren & Garagentor (Bauelemente)'
+                nebenkosten: '1. Phase 1: Grundstück & Baunebenkosten',
+                boden: '2. Phase 2: Erdarbeiten & Thermobodenplatte',
+                palmatin: '3. Phase 3: Palmatin Holzrahmenbausatz & Treppe',
+                huelle: '4. Phase 4: Gebäudehülle & Fassade (Kauf DE)',
+                bauelemente: '5. Phase 5: Fenster, Rollläden & Außentüren',
+                haustechnik: '6. Phase 6: Haustechnik, PV & Wallbox',
+                trockenbau: '7. Phase 7: Dämmung, Luftdichtung & Trockenbau',
+                finish: '8. Phase 8: Innenausbau Finish, Maler & Böden',
+                sanitaer: '9. Phase 9: Sanitär-Endmontage & Bäder'
             };
 
-            ['diy', 'finish', 'elektrik', 'heizung', 'sanitaer', 'boden', 'palmatin', 'nebenkosten', 'bauelemente'].forEach(cat => {
+            ['nebenkosten', 'boden', 'palmatin', 'huelle', 'bauelemente', 'haustechnik', 'trockenbau', 'finish', 'sanitaer'].forEach(cat => {
                 if (appData[cat]) {
                     appData[cat].forEach(item => {
                         const total = (item.qty || 0) * (item.price || 0);
@@ -767,13 +762,14 @@
             const url = URL.createObjectURL(blob);
             const a = document.createElement('a');
             a.href = url;
-            a.download = 'Haus_Jakob_Lueckenlose_Materialliste.csv';
+            a.download = 'Haus_Jakob_Chronologischer_Einkaufsplaner.csv';
+            document.body.appendChild(a);
             a.click();
+            document.body.removeChild(a);
         });
 
-        document.addEventListener('DOMContentLoaded', () => {
-            renderAll();
-        });
+        // Initial Render
+        renderAll();
     </script>
 </body>
 </html>
