@@ -495,7 +495,7 @@
                 { pos: '1.6', title: 'Selfio Trockenestrich-System inkl. Fußbodenheizung', usage: 'Trockene FBH-Verlegung OG (95 m²)', qty: 95, unit: 'm²', price: 42.00 },
                 { pos: '1.7', title: 'Holzfaser-Dämmplatte 50 mm (STEICOflex 036)', usage: 'Installationsebene Wand & Untersparren', qty: 325, unit: 'm²', price: 10.00 },
                 { pos: '1.8', title: 'Installationsebenen-Lattung 50 x 50 mm KVH C24', usage: 'Unterkonstruktion Wand & Decke', qty: 650, unit: 'lfm', price: 1.30 },
-                { pos: '1.9', title: 'Gipsfaserplatten 15 mm (z.B. Fermacell / Rigips)', usage: 'Wände, Dachschrägen & Decke EG abgehängt', qty: 805, unit: 'm²', price: 14.00 },
+                { pos: '1.9', title: 'Rigips Gipskartonplatten 12,5 mm (Standard Bauplatte RB)', usage: 'Beplankung Wände auf OSB, Dachschrägen & Decken (805 m²)', qty: 805, unit: 'm²', price: 4.50 },
                 { pos: '1.10', title: 'Fermacell Fugenkleber & Schrauben Paket', usage: 'Beplankungszubehör', qty: 1, unit: 'Paket', price: 750.00 },
                 { pos: '1.11', title: 'Miete Zellulose-Einblasmaschine (EM300)', usage: 'Verarbeitungsgerät', qty: 4, unit: 'Tage', price: 250.00 },
                 { pos: '1.12', title: 'Mehrsparteneinführung & Grundleitungsset DN110/125', usage: 'Hauseinführung Wasser/Strom/Telekom unter XPS', qty: 1, unit: 'Set', price: 1450.00 },
@@ -582,10 +582,10 @@
             ]
         };
 
-        let appData = JSON.parse(localStorage.getItem('kfw40_material_data_v21')) || DEFAULT_DATA;
+        let appData = JSON.parse(localStorage.getItem('kfw40_material_data_v22')) || DEFAULT_DATA;
 
         function saveData() {
-            localStorage.setItem('kfw40_material_data_v21', JSON.stringify(appData));
+            localStorage.setItem('kfw40_material_data_v22', JSON.stringify(appData));
         }
 
         function renderCategory(catKey, tbodyId, subtotalId) {
