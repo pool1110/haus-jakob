@@ -513,9 +513,8 @@
                 { pos: '2.4', title: 'Sockelleisten / Fußleisten weiß (60 mm) inkl. Montage', usage: 'Bodenabschlüsse Haus & ELW (ca. 280 lfm)', qty: 280, unit: 'lfm', price: 4.50 },
                 { pos: '2.5', title: 'Innentüren Set CPL weiß inkl. Zargen & Drücker', usage: '12 Innentüren (8 Hauptw. + 4 ELW)', qty: 12, unit: 'Stk', price: 280.00 },
                 { pos: '2.6', title: 'T30 Brandschutztür (Garage zu Haus)', usage: 'Feuerschutz-Zugangstür', qty: 1, unit: 'Stk', price: 450.00 },
-                { pos: '2.7', title: 'Designboden Klick-Vinyl / Parkett (Wohnen & Schlafen)', usage: 'Bodenbelag Trockenbereiche (140 m²)', qty: 140, unit: 'm²', price: 32.00 },
-                { pos: '2.8', title: 'Fliesen Set Feinsteinzeug + Flexkleber & Fuge', usage: 'Bodenbelag Bäder, Flur & HWR (50 m²)', qty: 50, unit: 'm²', price: 35.00 },
-                { pos: '2.9', title: 'Fensterbänke Set (Innen Holz/Stein + Außen Alu)', usage: '16 Fensterbänke komplett', qty: 16, unit: 'Stk', price: 75.00 }
+                { pos: '2.7', title: 'Wasserfester Klick-Vinylboden (vollflächig alle Räume & Bäder)', usage: 'Bodenbelag komplett Haus, ELW, Bäder, Flur & HWR (190 m²)', qty: 190, unit: 'm²', price: 32.00 },
+                { pos: '2.8', title: 'Fensterbänke Set (Innen Holz/Stein + Außen Alu)', usage: '16 Fensterbänke komplett', qty: 16, unit: 'Stk', price: 75.00 }
             ],
             elektrik: [
                 { pos: '3.1', title: 'Zählerschrank & Verteilung (2 Zählerplätze + Reserve WP)', usage: 'Elektro-Hauptverteilung Haus + ELW', qty: 1, unit: 'Komplett', price: 3800.00 },
@@ -582,10 +581,10 @@
             ]
         };
 
-        let appData = JSON.parse(localStorage.getItem('kfw40_material_data_v19')) || DEFAULT_DATA;
+        let appData = JSON.parse(localStorage.getItem('kfw40_material_data_v20')) || DEFAULT_DATA;
 
         function saveData() {
-            localStorage.setItem('kfw40_material_data_v19', JSON.stringify(appData));
+            localStorage.setItem('kfw40_material_data_v20', JSON.stringify(appData));
         }
 
         function renderCategory(catKey, tbodyId, subtotalId) {
