@@ -160,7 +160,7 @@
                     <span class="w-3.5 h-3.5 rounded-full bg-slate-700 flex items-center justify-center text-[10px] font-bold text-white">2</span>
                     <div>
                         <h3 class="font-display font-bold text-lg text-slate-900">2. Phase 2: Erdarbeiten &amp; Thermobodenplatte</h3>
-                        <p class="text-xs text-slate-500">Schottertragschicht, 200 mm XPS-Dämmung + L-Randschalen, Transportbeton C25/30, Bewehrung, Sohlen-FBH, Katja BA, Erdung &amp; Helikopter-Miete</p>
+                        <p class="text-xs text-slate-500">Baggerfahrer &amp; Erdaushub, Betonschacht setzen, Schottertragschicht, 200 mm XPS-Dämmung, Transportbeton C25/30, Bewehrung, Sohlen-FBH &amp; Erdung</p>
                     </div>
                 </div>
                 
@@ -502,14 +502,16 @@
                 { pos: '1.13', title: 'Bauherrenversicherungen (Haftpflicht, Bauleistung, Feuerrohbau)', usage: 'Risikoabsicherung Bauphase', qty: 1, unit: 'Paket', price: 800.00 }
             ],
             boden: [
-                { pos: '2.1', title: 'Schottertragschicht (0-45 mm) inkl. Verdichtung', usage: 'Kapillarbrechende Schicht unter XPS (35 cm)', qty: 75, unit: 'Tonnen', price: 30.00 },
-                { pos: '2.2', title: 'Passivhaus-XPS Dämmung 200 mm (300-500 kPa) + L-Randschale', usage: 'Unter-Platten- & Perimeterdämmung (200 mm)', qty: 136, unit: 'm²', price: 52.00 },
-                { pos: '2.3', title: 'Transportbeton C25/30 (200mm Sohle Haus + 180mm Garage)', usage: 'Gegossener Betonkern mit Pumpe', qty: 26.5, unit: 'm³', price: 145.00 },
-                { pos: '2.4', title: 'Gitterbewehrung Q257A / Q335A + Drunterleisten', usage: 'Betonbewehrung', qty: 1450, unit: 'kg', price: 1.35 },
-                { pos: '2.5', title: 'Integrierte Fußbodenheizung (PEX 17x2.0, Verteiler)', usage: 'Thermoverlegung in Betonsohle EG', qty: 100, unit: 'm²', price: 22.00 },
-                { pos: '2.6', title: 'Bitumen-Abdichtungsbahn / Dampfsperre Katja BA', usage: 'Schwellenabdichtung', qty: 150, unit: 'm²', price: 4.50 },
-                { pos: '2.7', title: 'Edelstahl V4A Fundamenterder (DIN 18014 Blitzschutz)', usage: 'Erdung unter XPS Dämmung', qty: 1, unit: 'Set', price: 480.00 },
-                { pos: '2.8', title: 'Miete Flügelglätter / Helikopter (Glätten in Eigenleistung)', usage: '1 Tag Maschinenverleih + Benzin & Curing-Folie', qty: 1, unit: 'Pauschale', price: 250.00 }
+                { pos: '2.1', title: 'Baggerfahrer & Erdaushub (Bagger 8-14t inkl. Fahrer & Kraftstoff)', usage: 'Aushub Baugrube, Planum & Schachtgrube (2 Arbeitstage)', qty: 2, unit: 'Tage', price: 750.00 },
+                { pos: '2.2', title: 'Betonschacht-Set (DN 1000, Revisions-/Kontrollschacht) inkl. Setzen', usage: 'Schachtunterteil, Schachtringe, Konus, Abdeckung Class D & Versetzen via Bagger', qty: 1, unit: 'Set', price: 1100.00 },
+                { pos: '2.3', title: 'Schottertragschicht (0-45 mm) inkl. Verdichtung', usage: 'Kapillarbrechende Schicht unter XPS (35 cm)', qty: 75, unit: 'Tonnen', price: 30.00 },
+                { pos: '2.4', title: 'Passivhaus-XPS Dämmung 200 mm (300-500 kPa) + L-Randschale', usage: 'Unter-Platten- & Perimeterdämmung (200 mm)', qty: 136, unit: 'm²', price: 52.00 },
+                { pos: '2.5', title: 'Transportbeton C25/30 (200mm Sohle Haus + 180mm Garage)', usage: 'Gegossener Betonkern mit Pumpe', qty: 26.5, unit: 'm³', price: 145.00 },
+                { pos: '2.6', title: 'Gitterbewehrung Q257A / Q335A + Drunterleisten', usage: 'Betonbewehrung', qty: 1450, unit: 'kg', price: 1.35 },
+                { pos: '2.7', title: 'Integrierte Fußbodenheizung (PEX 17x2.0, Verteiler)', usage: 'Thermoverlegung in Betonsohle EG', qty: 100, unit: 'm²', price: 22.00 },
+                { pos: '2.8', title: 'Bitumen-Abdichtungsbahn / Dampfsperre Katja BA', usage: 'Schwellenabdichtung', qty: 150, unit: 'm²', price: 4.50 },
+                { pos: '2.9', title: 'Edelstahl V4A Fundamenterder (DIN 18014 Blitzschutz)', usage: 'Erdung unter XPS Dämmung', qty: 1, unit: 'Set', price: 480.00 },
+                { pos: '2.10', title: 'Miete Flügelglätter / Helikopter (Glätten in Eigenleistung)', usage: '1 Tag Maschinenverleih + Benzin & Curing-Folie', qty: 1, unit: 'Pauschale', price: 250.00 }
             ],
             palmatin: [
                 { pos: '3.1', title: 'Palmatin KVH-Wandständerwerk 220 mm & Schwellen/Rähm', usage: 'Werkseitiger Abbund Wandelemente', qty: 1, unit: 'Set', price: 55000.00 },
@@ -577,10 +579,10 @@
             ]
         };
 
-        let appData = JSON.parse(localStorage.getItem('kfw40_material_data_v23')) || DEFAULT_DATA;
+        let appData = JSON.parse(localStorage.getItem('kfw40_material_data_v24')) || DEFAULT_DATA;
 
         function saveData() {
-            localStorage.setItem('kfw40_material_data_v23', JSON.stringify(appData));
+            localStorage.setItem('kfw40_material_data_v24', JSON.stringify(appData));
         }
 
         function renderCategory(catKey, tbodyId, subtotalId) {
