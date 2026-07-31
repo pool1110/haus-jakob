@@ -522,8 +522,8 @@
                 { pos: '3.2', title: 'Elektrokabel Set (NYM-J 3x1.5 / 5x1.5 / 5x2.5 + Cat.7)', usage: 'Elektro-Rohinstallation (ca. 2.500 lfm)', qty: 1, unit: 'Paket', price: 2200.00 },
                 { pos: '3.3', title: 'Schalter- & Steckdosenprogramm (z.B. Gira E2 / Busch-Jaeger)', usage: '180 Steckdosen, 60 Schalter & Dosen', qty: 1, unit: 'Paket', price: 2400.00 },
                 { pos: '3.4', title: 'LED-Einbauspots, Außenleuchten & Wallbox-Kabel', usage: 'Beleuchtung & E-Mobilität', qty: 1, unit: 'Paket', price: 1800.00 },
-                { pos: '3.5', title: 'PV-Anlagen-Vorbereitung (DC-Leerrohre, Dachgestell & Schalter)', usage: 'Vorbereitung Photovoltaik Dach', qty: 1, unit: 'Set', price: 1200.00 },
-                { pos: '3.6', title: 'Wallbox Ladesäule 11/22 kW (Garage)', usage: 'E-Auto Schnellladestation', qty: 1, unit: 'Stk', price: 850.00 },
+                { pos: '3.5', title: 'Photovoltaik-Anlage Komplettset (ca. 10 kWp + Hybrid-Wechselrichter & Speicher)', usage: 'Stromerzeugung Dach komplett inkl. PV-Module & Batterie-Speicher', qty: 1, unit: 'Komplett', price: 11000.00 },
+                { pos: '3.6', title: 'Wallbox 11 kW Ladesäule (Garage)', usage: 'E-Auto Ladestation 11 kW', qty: 1, unit: 'Stk', price: 500.00 },
                 { pos: '3.7', title: 'Blower-Door-Test & Zertifikat (Luftdichtigkeit KfW 40)', usage: 'Pflichtprüfungsnachweis Förderbank', qty: 1, unit: 'Pauschale', price: 450.00 },
                 { pos: '3.8', title: 'Elektro-Inbetriebnahme & Messprotokoll (Elektriker)', usage: 'Abnahme & Zählersetzung', qty: 1, unit: 'Pauschale', price: 2500.00 }
             ],
@@ -582,10 +582,10 @@
             ]
         };
 
-        let appData = JSON.parse(localStorage.getItem('kfw40_material_data_v18')) || DEFAULT_DATA;
+        let appData = JSON.parse(localStorage.getItem('kfw40_material_data_v19')) || DEFAULT_DATA;
 
         function saveData() {
-            localStorage.setItem('kfw40_material_data_v18', JSON.stringify(appData));
+            localStorage.setItem('kfw40_material_data_v19', JSON.stringify(appData));
         }
 
         function renderCategory(catKey, tbodyId, subtotalId) {
