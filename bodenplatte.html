@@ -89,7 +89,6 @@
     <rect x="110" y="410" width="280" height="70" fill="url(#pat-xps)" stroke="#CA8A04" stroke-width="1.5"/>
     
     <!-- Durchgehende 150 mm breite XPS-Randschale (Sockel & Gründung) -->
-    <!-- Von y=270 bis y=480, x=390 bis x=455 (Breite 65px = 150 mm XPS!) -->
     <rect x="390" y="270" width="65" height="210" fill="url(#pat-xps)" stroke="#CA8A04" stroke-width="1.5"/>
     
     <!-- Sockelputz Außenseite -->
@@ -135,12 +134,8 @@
     <text x="155" y="266" fill="#1E293B" font-size="9" font-weight="700" text-anchor="middle">6. Oberbelag</text>
   </g>
 
-  <!-- 7. Palmatin Schwelle & Wandständer in 70/30 Auflager-Position -->
-  <g id="layer-palmatin-wand">
-    <!-- Schwelle 220 mm breit:
-         x=200 bis x=420 (220 mm Gesamtbreite).
-         Davon x=200 bis x=390 (190 mm = 70% auf Beton)
-         Davon x=390 bis x=420 (30 mm = 30% auf druckfestem XPS-Rand!) -->
+  <!-- 7. Schwelle & Wandständer in 70/30 Auflager-Position -->
+  <g id="layer-holz-wand">
     <rect x="200" y="230" width="220" height="40" fill="url(#pat-holz)" stroke="#D97706" stroke-width="2"/>
     
     <!-- Ankerbolzen im Betonbereich (70% Zone) -->
@@ -148,28 +143,23 @@
     <circle cx="330" cy="215" r="4" fill="#64748B"/>
     <text x="330" y="208" font-size="8" font-weight="800" fill="#0F172A" text-anchor="middle">M12 Anker</text>
 
-    <text x="310" y="254" fill="#78350F" font-size="11" font-weight="800" text-anchor="middle">7. Palmatin Schwelle (70/30)</text>
+    <text x="310" y="254" fill="#78350F" font-size="11" font-weight="800" text-anchor="middle">7. Holzschwelle (70/30)</text>
 
     <!-- Wandständer KVH (220 mm Gefach) -->
     <rect x="200" y="90" width="30" height="140" fill="#F59E0B" stroke="#B45309" stroke-width="1.5"/>
     <rect x="390" y="90" width="30" height="140" fill="#F59E0B" stroke="#B45309" stroke-width="1.5"/>
     <rect x="230" y="90" width="160" height="140" fill="#FEF3C7" stroke="#F59E0B" stroke-width="1.5" stroke-dasharray="4,3"/>
     
-    <text x="310" y="150" fill="#92400E" font-size="11" font-weight="700" text-anchor="middle">Palmatin Wandständer</text>
+    <text x="310" y="150" fill="#92400E" font-size="11" font-weight="700" text-anchor="middle">KVH Wandständer</text>
     <text x="310" y="166" fill="#B45309" font-size="10" font-weight="600" text-anchor="middle">(220 mm Gefach)</text>
 
-    <!-- Fassadenaufbau Außen (73 mm: STEICO 35mm + Lattung 30mm + HardiePlank 8mm) -->
-    <!-- X = 420 bis X = 468 (Breite 48px kragt über den 455 Sockel aus!) -->
-    
-    <!-- STEICO Holzfaserplatte (35 mm) -->
+    <!-- Fassadenaufbau Außen (73 mm) -->
     <rect x="420" y="90" width="20" height="165" fill="url(#pat-steico)" stroke="#CA8A04" stroke-width="1"/>
     
-    <!-- Lattung & Hinterlüftung (30 mm) -->
     <rect x="440" y="90" width="18" height="165" fill="#F1F5F9" stroke="#94A3B8" stroke-dasharray="3,3"/>
     <rect x="440" y="110" width="18" height="30" fill="#DBEAFE" stroke="#2563EB"/>
     <rect x="440" y="190" width="18" height="30" fill="#DBEAFE" stroke="#2563EB"/>
     
-    <!-- HardiePlank Zementfaser (8 mm) -->
     <rect x="458" y="90" width="10" height="165" fill="#475569" stroke="#0F172A" stroke-width="1"/>
 
     <!-- Sockel-Tropfblech Z-Profil -->
@@ -186,11 +176,9 @@
 
   <!-- Visual Highlight Callout for Sockelrücksprung Tropfkante -->
   <g transform="translate(475, 230)">
-    <!-- Red Drip Arrow -->
     <path d="M 0 35 L 0 55 M -4 50 L 0 58 L 4 50" stroke="#DC2626" stroke-width="2" fill="none"/>
     <circle cx="0" cy="65" r="2.5" fill="#0284C7"/>
 
-    <!-- Callout Box -->
     <rect x="15" y="15" width="135" height="50" rx="6" fill="#EFF6FF" stroke="#0284C7" stroke-width="1.5"/>
     <text x="23" y="32" font-size="10" font-weight="800" fill="#0369A1">Perfekte Tropfkante</text>
     <text x="23" y="46" font-size="9" font-weight="600" fill="#0284C7">Fassade kragt 13 mm über</text>
@@ -213,14 +201,14 @@
     <text x="376" y="34" font-size="11" font-weight="700" fill="#64748B" text-anchor="end">Dämm-Optimiert</text>
     <line x1="0" y1="55" x2="400" y2="55" stroke="#E2E8F0" stroke-width="1"/>
 
-    <!-- Table Content -->
+    <!-- Table Content (Neutral Specs) -->
     <g transform="translate(24, 75)" font-size="11">
       
       <!-- Row 7 -->
       <g transform="translate(0, 0)">
         <text x="0" y="12" font-weight="700" fill="#92400E">7. Schwelle (70% Beton / 30% XPS)</text>
         <rect x="250" y="-2" width="100" height="20" rx="6" fill="#FEF3C7" stroke="#F59E0B" stroke-width="1"/>
-        <text x="300" y="12" font-weight="800" fill="#B45309" text-anchor="middle">Palmatin</text>
+        <text x="300" y="12" font-weight="800" fill="#B45309" text-anchor="middle">220 mm KVH</text>
         <line x1="0" y1="26" x2="350" y2="26" stroke="#F1F5F9"/>
       </g>
 
@@ -228,7 +216,7 @@
       <g transform="translate(0, 38)">
         <text x="0" y="12" font-weight="700" fill="#334155">6. Oberbelag / Glattschliff (15 mm)</text>
         <rect x="250" y="-2" width="100" height="20" rx="6" fill="#F1F5F9" stroke="#94A3B8" stroke-width="1"/>
-        <text x="300" y="12" font-weight="700" fill="#475569" text-anchor="middle">Fachbetrieb / DIY</text>
+        <text x="300" y="12" font-weight="700" fill="#475569" text-anchor="middle">15 mm Belag</text>
         <line x1="0" y1="26" x2="350" y2="26" stroke="#F1F5F9"/>
       </g>
 
@@ -236,7 +224,7 @@
       <g transform="translate(0, 76)">
         <text x="0" y="12" font-weight="700" fill="#1D4ED8">5. Bitumen-Dampfsperre Katja BA</text>
         <rect x="250" y="-2" width="100" height="20" rx="6" fill="#EFF6FF" stroke="#3B82F6" stroke-width="1"/>
-        <text x="300" y="12" font-weight="700" fill="#1D4ED8" text-anchor="middle">Fachbetrieb</text>
+        <text x="300" y="12" font-weight="700" fill="#1D4ED8" text-anchor="middle">Katja BA</text>
         <line x1="0" y1="26" x2="350" y2="26" stroke="#F1F5F9"/>
       </g>
 
@@ -244,7 +232,7 @@
       <g transform="translate(0, 114)">
         <text x="0" y="12" font-weight="700" fill="#B91C1C">4. Integrierte PEX-Heizrohre (FBH)</text>
         <rect x="250" y="-2" width="100" height="20" rx="6" fill="#FEF2F2" stroke="#EF4444" stroke-width="1"/>
-        <text x="300" y="12" font-weight="700" fill="#B91C1C" text-anchor="middle">Fachbetrieb</text>
+        <text x="300" y="12" font-weight="700" fill="#B91C1C" text-anchor="middle">PEX 17x2.0</text>
         <line x1="0" y1="26" x2="350" y2="26" stroke="#F1F5F9"/>
       </g>
 
@@ -252,7 +240,7 @@
       <g transform="translate(0, 152)">
         <text x="0" y="12" font-weight="700" fill="#0F172A">3. Stahlbetonsohle 200 mm (C25/30)</text>
         <rect x="250" y="-2" width="100" height="20" rx="6" fill="#F1F5F9" stroke="#64748B" stroke-width="1"/>
-        <text x="300" y="12" font-weight="700" fill="#334155" text-anchor="middle">Fachbetrieb</text>
+        <text x="300" y="12" font-weight="700" fill="#334155" text-anchor="middle">C25/30 Kern</text>
         <line x1="0" y1="26" x2="350" y2="26" stroke="#F1F5F9"/>
       </g>
 
@@ -260,7 +248,7 @@
       <g transform="translate(0, 190)">
         <text x="0" y="12" font-weight="700" fill="#854D0E">2. XPS 200mm (Sockel 150mm!)</text>
         <rect x="250" y="-2" width="100" height="20" rx="6" fill="#FEF9C3" stroke="#CA8A04" stroke-width="1"/>
-        <text x="300" y="12" font-weight="700" fill="#854D0E" text-anchor="middle">Fachbetrieb</text>
+        <text x="300" y="12" font-weight="700" fill="#854D0E" text-anchor="middle">XPS 500 kPa</text>
         <line x1="0" y1="26" x2="350" y2="26" stroke="#F1F5F9"/>
       </g>
 
@@ -268,7 +256,7 @@
       <g transform="translate(0, 228)">
         <text x="0" y="12" font-weight="700" fill="#475569">1. Schottertragschicht 300 mm</text>
         <rect x="250" y="-2" width="100" height="20" rx="6" fill="#F8FAFC" stroke="#94A3B8" stroke-width="1"/>
-        <text x="300" y="12" font-weight="700" fill="#475569" text-anchor="middle">Bagger / Erdbau</text>
+        <text x="300" y="12" font-weight="700" fill="#475569" text-anchor="middle">0-45 mm Korn</text>
       </g>
 
     </g>
