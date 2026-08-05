@@ -276,7 +276,7 @@
                         Phase 4
                     </span>
                     <div class="space-y-0.5">
-                        <h3 class="font-display font-bold text-lg text-slate-900 tracking-tight">Gebäudehülle, Fassade &amp; Dachabdichtung (Kauf DE)</h3>
+                        <h3 class="font-display font-bold text-lg text-slate-900 tracking-tight">Gebäudehülle, Fassade &amp; Dachabdichtung</h3>
                         <p class="text-xs text-slate-500 leading-relaxed">Holzfaser-Unterdeckplatten (STEICO/Gutex 35/50mm), HardiePlank Fassade (200 m²), EPDM-Garagendach-Abdichtung &amp; Titanzink-Dachrinnen</p>
                     </div>
                 </div>
@@ -610,7 +610,7 @@
                 { pos: '2.7', title: 'Integrierte Fußbodenheizung (PEX 17x2.0, Verteiler)', usage: 'Thermoverlegung in Betonsohle EG', qty: 100, unit: 'm²', price: 22.00 },
                 { pos: '2.8', title: 'Bitumen-Abdichtungsbahn / Dampfsperre Katja BA', usage: 'Schwellenabdichtung', qty: 150, unit: 'm²', price: 4.50 },
                 { pos: '2.9', title: 'Edelstahl V4A Fundamenterder (DIN 18014 Blitzschutz)', usage: 'Erdung unter XPS Dämmung', qty: 1, unit: 'Set', price: 480.00 },
-                { pos: '2.10', title: 'Miete Flügelglätter / Helikopter (Glätten in Eigenleistung)', usage: '1 Tag Maschinenverleih + Benzin & Curing-Folie', qty: 1, unit: 'Pauschale', price: 250.00 }
+                { pos: '2.10', title: 'Miete Flügelglätter / Helikopter (Glätten Betonoberfläche)', usage: '1 Tag Maschinenverleih + Benzin & Curing-Folie', qty: 1, unit: 'Pauschale', price: 250.00 }
             ],
             palmatin: [
                 { pos: '3.1', title: 'Palmatin KVH-Wandständerwerk 220 mm & Schwellen/Rähm', usage: 'Werkseitiger Abbund Wandelemente komplett', qty: 1, unit: 'Set', price: 55000.00 },
@@ -623,8 +623,8 @@
                 { pos: '3.8', title: 'LKW-Transport & Logistik Palmatin Werkssatz (1 Sattelzug)', usage: 'Anlieferung Baustelle (1 LKW-Fahrt)', qty: 1, unit: 'Fahrt', price: 2500.00 }
             ],
             huelle: [
-                { pos: '4.1', title: 'Holzfaser-Unterdeckplatte 35mm Wand + 50mm Dach (STEICO / Gutex)', usage: 'Außenseitige Beplankung (Kauf DE Baustoffhändler)', qty: 325, unit: 'm²', price: 26.00 },
-                { pos: '4.2', title: 'HardiePlank Zementfaser-Fassadenpaneele (ohne Lattung)', usage: 'Fassadenverkleidung 200 m² (Kauf DE, Lattung bei Palmatin)', qty: 200, unit: 'm²', price: 41.00 },
+                { pos: '4.1', title: 'Holzfaser-Unterdeckplatte 35mm Wand + 50mm Dach (STEICO / Gutex)', usage: 'Außenseitige Beplankung Dämmebene', qty: 325, unit: 'm²', price: 26.00 },
+                { pos: '4.2', title: 'HardiePlank Zementfaser-Fassadenpaneele (ohne Lattung)', usage: 'Fassadenverkleidung 200 m²', qty: 200, unit: 'm²', price: 41.00 },
                 { pos: '4.3', title: 'EPDM-Flachdach-Abdichtungsset Garage (36 m² EPDM-Folie)', usage: 'Nahtlose & wurzelfeste Garagendachabdichtung (>50 Jahre)', qty: 36, unit: 'm²', price: 45.00 },
                 { pos: '4.4', title: 'Dachrinnen & Fallrohre Set (Titanzink / Aluminium)', usage: 'Entwässerung Steildach & Garage', qty: 1, unit: 'Set', price: 1850.00 }
             ],
@@ -679,10 +679,10 @@
             ]
         };
 
-        let appData = JSON.parse(localStorage.getItem('kfw40_material_data_v26')) || DEFAULT_DATA;
+        let appData = JSON.parse(localStorage.getItem('kfw40_material_data_v27')) || DEFAULT_DATA;
 
         function saveData() {
-            localStorage.setItem('kfw40_material_data_v26', JSON.stringify(appData));
+            localStorage.setItem('kfw40_material_data_v27', JSON.stringify(appData));
         }
 
         function renderCategory(catKey, tbodyId, subtotalId) {
@@ -843,7 +843,7 @@
                 nebenkosten: '1. Phase 1: Grundstück & Baunebenkosten',
                 boden: '2. Phase 2: Erdarbeiten & Thermobodenplatte',
                 palmatin: '3. Phase 3: Palmatin Holzrahmenbausatz & Treppe',
-                huelle: '4. Phase 4: Gebäudehülle & Fassade (Kauf DE)',
+                huelle: '4. Phase 4: Gebäudehülle & Fassade',
                 bauelemente: '5. Phase 5: Fenster, Rollläden & Außentüren',
                 haustechnik: '6. Phase 6: Haustechnik, PV & Wallbox',
                 trockenbau: '7. Phase 7: Dämmung, Luftdichtung & Trockenbau',

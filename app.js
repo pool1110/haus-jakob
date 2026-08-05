@@ -75,15 +75,15 @@ const HOTSPOTS_DATA = [
         id: 'sohle-anschluss',
         position: new THREE.Vector3(1.2, 0.45, 0.8),
         title: 'Wand-Sohlen-Anschluss & Schwelle',
-        badge: 'Palmatin + Schwedenplatte',
-        text: 'Das Palmatin-Wandständerwerk sitzt direkt auf der gedämmten Kante der Thermobodenplatte auf. Eine Bitumen-Dampfsperre unter der Holzschwelle verhindert jegliche aufsteigende Feuchte. Der Holzsockel steht konstruktiv erhöht und gerät nie mit Wasser in Kontakt.',
+        badge: 'Thermobodenplatte',
+        text: 'Das 220 mm KVH-Wandständerwerk sitzt direkt auf der gedämmten Kante der Thermobodenplatte auf. Eine Bitumen-Dampfsperre unter der Holzschwelle verhindert jegliche aufsteigende Feuchte. Der Holzsockel steht konstruktiv erhöht und gerät nie mit Wasser in Kontakt.',
         extra: '✓ 0 Wärmebrücke nach unten/außen<br>✓ Sockeldämmung lückenlos bis zur Wand'
     },
     {
         id: 'eps-wanne',
         position: new THREE.Vector3(-0.8, -0.25, 0.9),
         title: 'Passivhaus EPS-Wannenschalung',
-        badge: 'Bodenplatten-Fachbetrieb',
+        badge: 'Perimeterdämmung',
         text: 'Vollflächige Unter-Platten-Dämmung (200–300 mm EPS/XPS) und L-förmige Randschalelemente bilden eine geschlossene Thermowanne. Die Betonsohle wird komplett vom kalten Erdreich und Außenklima entkoppelt.',
         extra: '✓ Kapillarbrechende Schottertragschicht unter der Dämmung<br>✓ Hochdruckfeste Dämmelemente'
     },
@@ -99,15 +99,15 @@ const HOTSPOTS_DATA = [
         id: 'wand-zellulose',
         position: new THREE.Vector3(1.4, 1.6, 0.7),
         title: '220 mm Ständerwerk & Zellulose',
-        badge: 'Palmatin + DIY',
-        text: 'Das 220 mm KVH-Ständerwerk von Palmatin wird in Eigenleistung stahl- und lückenlos mit Zellulose ausgeblasen. Zusammen mit der 35 mm Holzfaser-Außendämmung wird ein U-Wert von ca. 0,13 W/m²K erreicht.',
+        badge: 'Holzrahmenbau',
+        text: 'Das 220 mm KVH-Ständerwerk wird lückenlos mit Zellulose ausgeblasen. Zusammen mit der 35 mm Holzfaser-Außendämmung wird ein U-Wert von ca. 0,13 W/m²K erreicht.',
         extra: '✓ Phasenverschiebung > 14 Stunden (Sommerlicher Hitzeschutz)<br>✓ Hohe Luftschalldämmung (R\'w ≈ 52 dB)'
     },
     {
         id: 'luftdicht-dach',
         position: new THREE.Vector3(1.2, 3.2, 0.4),
         title: 'Luftdichte Dampfbremse & Dachanschluss',
-        badge: 'Eigenleistung / Ausbau',
+        badge: 'Gebäudehülle',
         text: 'Die feuchtevariable Dampfbremsbahn wird von der Wand nahtlos und luftdicht an die Bodenplatten-Abdichtung sowie an den Dachbereich verklebt. Das schützt die Konstruktion zuverlässig vor Feuchteeintrag.',
         extra: '✓ Feuchtevariabel für maximale Austrocknung nach innen<br>✓ 50 mm Installationsebene schützt die Ebene vor Kabeldurchdringungen'
     }
