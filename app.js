@@ -372,7 +372,7 @@ function build3DModel() {
     groups.wallStuds = new THREE.Group();
     const studMat = sillWoodMat; // Same Palmatin wood
 
-    const studGeo = new THREE.BoxGeometry(0.22, 2.4, 0.08);
+    const studGeo = new THREE.BoxGeometry(0.18, 2.4, 0.08);
 
     // Place studs along z-axis
     for (let z = -1.0; z <= 1.2; z += 0.6) {
