@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 650" width="100%" height="100%" preserveAspectRatio="xMidYMid meet" style="background: #FAFAFA; font-family: 'Inter', system-ui, sans-serif; display: block; margin: 0; padding: 0;">
+  
+  <!-- Header -->
+  <text x="50" y="45" font-size="20" font-weight="700" fill="#0F172A">5. Oberste Geschossdecke OG-Dachboden (ca. 197 mm Gesamtdicke)</text>
+  <text x="50" y="68" font-size="13" font-weight="500" fill="#64748B">Schnittmodell: Begehbarer 22 mm OSB-Lagerausbau + Kehlbalken mit Schalldämmung + Rigips OG</text>
+
+  <line x1="50" y1="85" x2="950" y2="85" stroke="#E2E8F0" stroke-width="1"/>
+
+  <!-- Level Indicators Side -->
+  <text x="50" y="115" font-size="12" font-weight="700" fill="#2563EB">▲ UNBEHEIZTER DACHBODEN (Lagerraum / Speicher)</text>
+  <text x="50" y="555" font-size="12" font-weight="700" fill="#16A34A">▼ OBERGESCHOSS (Zimmer OG)</text>
+
+  <!-- VERTICAL 2D VECTOR CUTAWAY LAYERS (BOTTOM TO TOP) -->
+
+  <!-- 1. Rigips / Gipsfaser 15 mm (Decke OG Zimmer) -->
+  <g id="layer-rigips-og">
+    <rect x="140" y="480" width="400" height="20" fill="#94A3B8" stroke="#475569" stroke-width="1"/>
+    <text x="340" y="494" fill="#FFFFFF" font-size="11" font-weight="700" text-anchor="middle">1. Rigips Gipskartonplatte (15 mm Decke OG)</text>
+  </g>
+
+  <!-- 2. Kehlbalken 160 mm + Hohlraum-Schalldämmung -->
+  <g id="layer-kehlbalken">
+    <rect x="140" y="320" width="400" height="160" fill="#E2E8F0" opacity="0.6" stroke="#94A3B8"/>
+    <rect x="140" y="320" width="65" height="160" fill="#F59E0B" stroke="#D97706"/>
+    <rect x="307" y="320" width="65" height="160" fill="#F59E0B" stroke="#D97706"/>
+    <rect x="475" y="320" width="65" height="160" fill="#F59E0B" stroke="#D97706"/>
+    <text x="250" y="395" fill="#B45309" font-size="12" font-weight="700" text-anchor="middle">2. Kehlbalken / Zangen (160 mm)</text>
+    <text x="250" y="415" fill="#2563EB" font-size="11" font-weight="600" text-anchor="middle">+ Hohlraum-Schalldämmung (Mineralwolle)</text>
+  </g>
+
+  <!-- 3. 22 mm OSB/3 Nut-und-Feder Tragschicht / Dachbodenbelag -->
+  <g id="layer-osb-dachboden">
+    <rect x="140" y="290" width="400" height="30" fill="#D97706" stroke="#92400E" stroke-width="1.5"/>
+    <text x="340" y="310" fill="#FFFFFF" font-size="11" font-weight="700" text-anchor="middle">3. OSB/3 Nut-und-Feder-Platte (22 mm begehbar)</text>
+  </g>
+
+  <!-- Right: Clean Summary Table (Clean Schichtaufbau List) -->
+  <g transform="translate(560, 110)" font-size="12">
+    <rect x="0" y="0" width="390" height="490" rx="12" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1"/>
+    
+    <text x="20" y="30" font-size="14" font-weight="700" fill="#0F172A">Schichtaufbau &amp; Dimensionierung (197 mm)</text>
+    <text x="20" y="48" font-size="11" font-weight="500" fill="#64748B">Von oben (Dachboden) nach unten (Zimmer OG):</text>
+
+    <!-- Table Rows -->
+    <g transform="translate(20, 75)" font-size="11">
+      <!-- Row 3 -->
+      <text x="0" y="0" font-weight="700" fill="#D97706">3. Begehbarer Dachbodenbelag: 22 mm OSB/3</text>
+      <line x1="0" y1="15" x2="350" y2="15" stroke="#F1F5F9"/>
+
+      <!-- Row 2 -->
+      <text x="0" y="40" font-weight="700" fill="#B45309">2. Kehlbalken (160 mm) + Schalldämmung</text>
+      <line x1="0" y1="55" x2="350" y2="55" stroke="#F1F5F9"/>
+
+      <!-- Row 1 -->
+      <text x="0" y="80" font-weight="700" fill="#334155">1. Rigips Gipskartonplatte (15 mm Decke OG)</text>
+    </g>
+
+    <!-- Key Performance Box -->
+    <rect x="20" y="315" width="350" height="155" rx="8" fill="#F8FAFC" stroke="#E2E8F0"/>
+    <text x="35" y="340" font-size="12" font-weight="700" fill="#0F172A">Bauphysikalische Eigenschaften:</text>
+    <text x="35" y="363" font-size="11" fill="#16A34A">• Thermische Hülle: Liegt voll im Sparrendach (KfW-40)</text>
+    <text x="35" y="383" font-size="11" fill="#475569">• Keine Folie nötig: Dampfbremse bereits im Steildach</text>
+    <text x="35" y="403" font-size="11" fill="#475569">• Hohlraumbedämpfung: Verhindert Schallübertragung OG</text>
+    <text x="35" y="423" font-size="11" fill="#475569">• 100% Begehbar: Belastbar für Speicher &amp; Lagerung</text>
+  </g>
+
+</svg>
