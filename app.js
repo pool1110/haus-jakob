@@ -413,9 +413,9 @@ function build3DModel() {
         gewerke: { color: COLORS.palmatin },
         thermal: { color: COLORS.thermalMid }
     });
-    const wfGeo = new THREE.BoxGeometry(0.035, 2.55, 2.5);
+    const wfGeo = new THREE.BoxGeometry(0.06, 2.55, 2.5);
     const wfMesh = new THREE.Mesh(wfGeo, woodFiberMat);
-    wfMesh.position.set(1.7675, 1.275, 0.125);
+    wfMesh.position.set(1.78, 1.275, 0.125);
     wfMesh.castShadow = true;
     groups.wallOuterBoard.add(wfMesh);
     scene.add(groups.wallOuterBoard);
