@@ -1,14 +1,14 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 650" width="100%" height="100%" preserveAspectRatio="xMidYMid meet" style="background: #FAFAFA; font-family: 'Inter', system-ui, sans-serif; display: block; margin: 0; padding: 0;">
   
   <!-- Header -->
-  <text x="50" y="45" font-size="20" font-weight="700" fill="#0F172A">3. Dachaufbau KfW-40 (415 mm Sparrendach)</text>
-  <text x="50" y="68" font-size="13" font-weight="500" fill="#64748B">U-Wert ≈ 0,12 W/m²K | Phasenverschiebung > 14 Std. | Horizontaler Schnitt (Außen bis Innen)</text>
+  <text x="50" y="45" font-size="20" font-weight="700" fill="#0F172A">3. Dachaufbau KfW-40 (372 mm Sparrendach unbeheizt mit OSB als Dampfbremse)</text>
+  <text x="50" y="68" font-size="13" font-weight="500" fill="#64748B">U-Wert ≈ 0,13 W/m²K | Phasenverschiebung > 14 Std. | Horizontaler Schnitt (Außen bis Innen)</text>
 
   <line x1="50" y1="85" x2="950" y2="85" stroke="#E2E8F0" stroke-width="1"/>
 
   <!-- Outside/Inside Labels -->
   <text x="70" y="115" font-size="12" font-weight="700" fill="#DC2626">AUSSEN (Regen &amp; Hitze)</text>
-  <text x="520" y="115" font-size="12" font-weight="700" text-anchor="end" fill="#16A34A">INNEN (Wohnraum)</text>
+  <text x="500" y="115" font-size="12" font-weight="700" text-anchor="end" fill="#16A34A">INNEN (Dachraum unbeheizt)</text>
 
   <!-- 2D Vector Cutaway Layers (Left to Right) -->
   
@@ -34,62 +34,46 @@
   <text x="272" y="310" font-size="11" font-weight="600" fill="#334155" text-anchor="middle">(240 mm Zwischensparren)</text>
   <text x="272" y="495" font-size="11" font-weight="700" text-anchor="middle" fill="#0F172A">4</text>
 
-  <!-- 5. Dampfbremse (INTELLO) -->
-  <line x1="370" y1="130" x2="370" y2="470" stroke="#2563EB" stroke-width="3" stroke-dasharray="6,3"/>
-  <text x="370" y="495" font-size="11" font-weight="700" text-anchor="middle" fill="#0F172A">5</text>
-
-  <!-- 6. Untersparren-Lattung (50mm gedämmt) -->
-  <rect x="373" y="130" width="50" height="340" fill="#DBEAFE" stroke="#3B82F6" stroke-width="1.5"/>
-  <rect x="373" y="240" width="50" height="30" fill="#93C5FD" stroke="#2563EB"/>
-  <text x="398" y="495" font-size="11" font-weight="700" text-anchor="middle" fill="#0F172A">6</text>
-
-  <!-- 7. Gipsfaserplatte (15mm Fermacell) -->
-  <rect x="423" y="130" width="18" height="340" fill="#94A3B8" stroke="#475569"/>
-  <text x="432" y="495" font-size="11" font-weight="700" text-anchor="middle" fill="#0F172A">7</text>
+  <!-- 5. OSB/3 Platte (12 mm stoßverklebt als Dampfbremse & Luftdichtung direkt unter Sparren) -->
+  <rect x="370" y="130" width="18" height="340" fill="#FDE68A" stroke="#2563EB" stroke-width="2"/>
+  <text x="379" y="495" font-size="11" font-weight="700" text-anchor="middle" fill="#0F172A">5</text>
 
   <!-- Right: Clean Summary Table (Clean Schichtaufbau List) -->
-  <g transform="translate(580, 110)" font-size="12">
-    <rect x="0" y="0" width="370" height="490" rx="12" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1"/>
+  <g transform="translate(560, 110)" font-size="12">
+    <rect x="0" y="0" width="390" height="490" rx="12" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1"/>
     
-    <text x="20" y="30" font-size="14" font-weight="700" fill="#0F172A">Schichtaufbau &amp; Dimensionierung</text>
+    <text x="20" y="30" font-size="14" font-weight="700" fill="#0F172A">Schichtaufbau &amp; Dimensionierung (372 mm)</text>
     <text x="20" y="48" font-size="11" font-weight="500" fill="#64748B">Von außen (Dach) nach innen (Dachraum):</text>
 
     <!-- Table Rows -->
     <g transform="translate(20, 75)" font-size="11">
       <!-- Row 1 -->
-      <text x="0" y="0" font-weight="700" fill="#B91C1C">1. Dachziegel-Eindeckung</text>
-      <line x1="0" y1="12" x2="330" y2="12" stroke="#F1F5F9"/>
+      <text x="0" y="0" font-weight="700" fill="#B91C1C">1. Dachziegel-Eindeckung (ca. 20 mm)</text>
+      <line x1="0" y1="12" x2="350" y2="12" stroke="#F1F5F9"/>
 
       <!-- Row 2 -->
-      <text x="0" y="35" font-weight="700" fill="#334155">2. Lattung &amp; Konterlattung (70 mm)</text>
-      <line x1="0" y1="47" x2="330" y2="47" stroke="#F1F5F9"/>
+      <text x="0" y="35" font-weight="700" fill="#334155">2. Trag- &amp; Konterlattung (70 mm)</text>
+      <line x1="0" y1="47" x2="350" y2="47" stroke="#F1F5F9"/>
 
       <!-- Row 3 -->
-      <text x="0" y="70" font-weight="700" fill="#B45309">3. Holzfaser-Unterdeckplatte (50 mm)</text>
-      <line x1="0" y1="82" x2="330" y2="82" stroke="#F1F5F9"/>
+      <text x="0" y="70" font-weight="700" fill="#B45309">3. Holzfaser-Unterdeckplatte STEICO (50 mm)</text>
+      <line x1="0" y1="82" x2="350" y2="82" stroke="#F1F5F9"/>
 
       <!-- Row 4 -->
-      <text x="0" y="105" font-weight="700" fill="#0F172A">4. Dachsparren (240 mm) + Zellulose</text>
-      <line x1="0" y1="117" x2="330" y2="117" stroke="#F1F5F9"/>
+      <text x="0" y="105" font-weight="700" fill="#0F172A">4. Dachsparren (240 mm) + Zellulose-Dämmung</text>
+      <line x1="0" y1="117" x2="350" y2="117" stroke="#F1F5F9"/>
 
       <!-- Row 5 -->
-      <text x="0" y="140" font-weight="700" fill="#2563EB">5. Feuchtevariable Dampfbremse (INTELLO)</text>
-      <line x1="0" y1="152" x2="330" y2="152" stroke="#F1F5F9"/>
-
-      <!-- Row 6 -->
-      <text x="0" y="175" font-weight="700" fill="#2563EB">6. Untersparren-Lattung gedämmt (50 mm)</text>
-      <line x1="0" y1="187" x2="330" y2="187" stroke="#F1F5F9"/>
-
-      <!-- Row 7 -->
-      <text x="0" y="210" font-weight="700" fill="#334155">7. Gipsfaserplatte / Fermacell (15 mm)</text>
+      <text x="0" y="140" font-weight="700" fill="#2563EB">5. OSB/3 (12 mm stoßverklebt) als Dampfbremse &amp; Beplankung</text>
     </g>
 
     <!-- Key Performance Box -->
-    <rect x="20" y="355" width="330" height="115" rx="8" fill="#F8FAFC" stroke="#E2E8F0"/>
-    <text x="35" y="380" font-size="12" font-weight="700" fill="#0F172A">Dachleistung KfW-40:</text>
-    <text x="35" y="403" font-size="11" fill="#475569">• U-Wert: ca. 0,12 W/(m²K)</text>
-    <text x="35" y="423" font-size="11" fill="#475569">• Sommerlicher Hitzeschutz: > 14 Std. Phasenverschiebung</text>
-    <text x="35" y="443" font-size="11" fill="#475569">• Luftschalldämmung: Rw > 52 dB</text>
+    <rect x="20" y="335" width="350" height="135" rx="8" fill="#F8FAFC" stroke="#E2E8F0"/>
+    <text x="35" y="360" font-size="12" font-weight="700" fill="#0F172A">Dachleistung KfW-40 (unausgebaut):</text>
+    <text x="35" y="383" font-size="11" fill="#475569">• U-Wert: ca. 0,13 W/(m²K)</text>
+    <text x="35" y="403" font-size="11" fill="#475569">• Dampfbremse: OSB/3 stoßverklebt (keine Folie an Dach)</text>
+    <text x="35" y="423" font-size="11" fill="#475569">• Hitzeschutz &amp; Schallschutz: Phasenverschiebung > 14 Std.</text>
+    <text x="35" y="443" font-size="11" fill="#16A34A">• Robuster, sauberer Dachraumabschluss</text>
   </g>
 
 </svg>

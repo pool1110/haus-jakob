@@ -106,10 +106,10 @@ const HOTSPOTS_DATA = [
     {
         id: 'luftdicht-dach',
         position: new THREE.Vector3(1.2, 3.2, 0.4),
-        title: 'Luftdichte Dampfbremse & Dachanschluss',
+        title: 'Luftdichte OSB-Dampfbremse & Gebäudehülle',
         badge: 'Gebäudehülle',
-        text: 'Die feuchtevariable Dampfbremsbahn wird von der Wand nahtlos und luftdicht an die Bodenplatten-Abdichtung sowie an den Dachbereich verklebt. Das schützt die Konstruktion zuverlässig vor Feuchteeintrag.',
-        extra: '✓ Feuchtevariabel für maximale Austrocknung nach innen<br>✓ 50 mm Installationsebene schützt die Ebene vor Kabeldurchdringungen'
+        text: 'Die 12 mm OSB/3 Platten auf den Ständern und unter den Sparren dienen stoßverklebt direkt als Dampfbremse und Luftdichtungsebene. Keine separate Folie an den Außenwänden/Dach nötig.',
+        extra: '✓ OSB-Stöße mit TESCON VANA luftdicht verklebt<br>✓ 50 mm Installationsebene schützt die OSB-Dichtebene vor Kabeldurchdringungen'
     }
 ];
 
@@ -432,17 +432,17 @@ function build3DModel() {
         groups.wallFacade.add(battenMesh);
     }
 
-    // HardiePlank Cladding Panels
-    const hardieMat = createManagedMaterial({
-        standard: { color: COLORS.hardiePlank, roughness: 0.4 },
+    // HardiePlank / Fichtenholz Fassade (18 mm Fichtenholz-Schalung lackiert)
+    const facadeMat = createManagedMaterial({
+        standard: { color: 0xB45309, roughness: 0.6 },
         gewerke: { color: COLORS.palmatin },
         thermal: { color: COLORS.thermalCold } // Exterior cold
     });
 
     const plankHeight = 0.18;
     for (let y = 0.05; y <= 2.5; y += 0.16) {
-        const plankGeo = new THREE.BoxGeometry(0.01, plankHeight, 2.5);
-        const plankMesh = new THREE.Mesh(plankGeo, hardieMat);
+        const plankGeo = new THREE.BoxGeometry(0.018, plankHeight, 2.5);
+        const plankMesh = new THREE.Mesh(plankGeo, facadeMat);
         plankMesh.position.set(1.82, y, 0.125);
         plankMesh.rotation.z = -0.03; // Overlapping plank angle
         plankMesh.castShadow = true;
@@ -450,21 +450,32 @@ function build3DModel() {
     }
     scene.add(groups.wallFacade);
 
-    // F) Interior Side: Vapor Brake, 50 mm Installation Layer & 15 mm Plasterboard (Eigenleistung)
+    // F) Interior Side: 12 mm OSB directly on studs + Vapor Brake + 50 mm Inst. Layer + 12 mm OSB + 12 mm Rigips
     groups.wallInner = new THREE.Group();
 
-    // pro clima Dampfbremse (Vapor barrier film)
+    // 1. OSB/3 Platte 12 mm direkt auf Ständern
+    const osbMat = createManagedMaterial({
+        standard: { color: COLORS.wood, roughness: 0.7 },
+        gewerke: { color: COLORS.eigenleistung },
+        thermal: { color: COLORS.thermalWarm }
+    });
+    const osb1Geo = new THREE.BoxGeometry(0.012, 2.55, 2.5);
+    const osb1Mesh = new THREE.Mesh(osb1Geo, osbMat);
+    osb1Mesh.position.set(1.524, 1.275, 0.125);
+    groups.wallInner.add(osb1Mesh);
+
+    // 2. pro clima Dampfbremse (INTELLO)
     const vbMat = createManagedMaterial({
         standard: { color: COLORS.vaporBarrier, roughness: 0.3, transparent: true, opacity: 0.7 },
         gewerke: { color: COLORS.eigenleistung },
         thermal: { color: COLORS.thermalHot }
     });
-    const vbGeo = new THREE.BoxGeometry(0.005, 2.55, 2.5);
+    const vbGeo = new THREE.BoxGeometry(0.003, 2.55, 2.5);
     const vbMesh = new THREE.Mesh(vbGeo, vbMat);
-    vbMesh.position.set(1.5275, 1.275, 0.125);
+    vbMesh.position.set(1.5165, 1.275, 0.125);
     groups.wallInner.add(vbMesh);
 
-    // Installation Layer Battens & Insulation (50 mm)
+    // 3. Installation Layer Battens & Insulation (50 mm)
     const instMat = createManagedMaterial({
         standard: { color: 0xE2E8F0, roughness: 0.8 },
         gewerke: { color: COLORS.eigenleistung },
@@ -472,24 +483,30 @@ function build3DModel() {
     });
     const instGeo = new THREE.BoxGeometry(0.05, 2.55, 2.5);
     const instMesh = new THREE.Mesh(instGeo, instMat);
-    instMesh.position.set(1.5, 1.275, 0.125);
+    instMesh.position.set(1.49, 1.275, 0.125);
     groups.wallInner.add(instMesh);
 
-    // Plasterboard / Fermacell (15 mm)
+    // 4. OSB/3 Platte 12 mm über Installationsebene
+    const osb2Geo = new THREE.BoxGeometry(0.012, 2.55, 2.5);
+    const osb2Mesh = new THREE.Mesh(osb2Geo, osbMat);
+    osb2Mesh.position.set(1.459, 1.275, 0.125);
+    groups.wallInner.add(osb2Mesh);
+
+    // 5. Rigips Gipsplatte (12 mm)
     const plasterMat = createManagedMaterial({
         standard: { color: COLORS.plasterboard, roughness: 0.5 },
         gewerke: { color: COLORS.eigenleistung },
         thermal: { color: COLORS.thermalHot }
     });
-    const plasterGeo = new THREE.BoxGeometry(0.015, 2.55, 2.5);
+    const plasterGeo = new THREE.BoxGeometry(0.012, 2.55, 2.5);
     const plasterMesh = new THREE.Mesh(plasterGeo, plasterMat);
-    plasterMesh.position.set(1.4675, 1.275, 0.125);
+    plasterMesh.position.set(1.447, 1.275, 0.125);
     groups.wallInner.add(plasterMesh);
 
     scene.add(groups.wallInner);
 
     // ----------------------------------------------------
-    // 3. DACHAUFBAU (PALMATIN / DIY)
+    // 3. DACHAUFBAU (PALMATIN / DIY - Unausgebaut mit 12 mm OSB)
     // ----------------------------------------------------
     const roofAngle = 0.25; // Slope in radians (~14 deg)
 
@@ -549,12 +566,12 @@ function build3DModel() {
     groups.roofCovering.add(tileMesh);
     scene.add(groups.roofCovering);
 
-    // E) Roof Interior Finish (Vapor brake + 50 mm Untersparren + 15 mm Fermacell - Eigenleistung)
+    // E) Roof Interior Finish (Vapor brake + 12 mm OSB direkt unter Sparren)
     groups.roofInner = new THREE.Group();
 
-    const rInnerGeo = new THREE.BoxGeometry(2.4, 0.065, 2.5);
-    const rInnerMesh = new THREE.Mesh(rInnerGeo, instMat);
-    rInnerMesh.position.set(0.6, 2.70, 0.125);
+    const rInnerGeo = new THREE.BoxGeometry(2.4, 0.012, 2.5);
+    const rInnerMesh = new THREE.Mesh(rInnerGeo, osbMat);
+    rInnerMesh.position.set(0.6, 2.72, 0.125);
     rInnerMesh.rotation.z = roofAngle;
     groups.roofInner.add(rInnerMesh);
     scene.add(groups.roofInner);
