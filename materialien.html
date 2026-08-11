@@ -30,6 +30,10 @@
     <!-- Lucide Icons CDN -->
     <script src="https://unpkg.com/lucide@latest"></script>
 
+    <!-- Firebase SDK (Compat) -->
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+
     <style>
         body { background-color: #f8fafc; color: #0f172a; }
         input[type=number]::-webkit-inner-spin-button, 
@@ -68,6 +72,10 @@
 
             <!-- Action Buttons -->
             <div class="flex items-center gap-2 flex-wrap">
+                <div id="cloud-sync-badge" class="px-3 py-1.5 bg-emerald-100 border border-emerald-300 text-emerald-800 rounded-xl text-xs font-bold flex items-center gap-1.5 shadow-sm">
+                    <i data-lucide="cloud" class="w-3.5 h-3.5 text-emerald-600"></i>
+                    <span id="sync-status-text">Echtzeit Cloud-Sync</span>
+                </div>
                 <button id="btn-reset-data" class="px-3.5 py-2 bg-slate-100 hover:bg-red-50 hover:text-red-700 text-slate-700 border border-slate-200 font-bold text-xs rounded-xl flex items-center gap-1.5 transition-all">
                     <i data-lucide="rotate-ccw" class="w-3.5 h-3.5"></i>
                     Zurücksetzen
@@ -682,8 +690,74 @@
 
         let appData = JSON.parse(localStorage.getItem('kfw40_material_data_v27')) || DEFAULT_DATA;
 
+        // Firebase Configuration & Realtime Cloud Firestore Integration
+        const firebaseConfig = {
+            apiKey: "AIzaSyBhvIgmHuwRKBZVs5JBqBHXizvGKeTxJdk",
+            authDomain: "haus-jakob.firebaseapp.com",
+            projectId: "haus-jakob",
+            storageBucket: "haus-jakob.firebasestorage.app",
+            messagingSenderId: "48017255402",
+            appId: "1:48017255402:web:2d3d85aed3d16e8bc4a093"
+        };
+
+        let cloudDocRef = null;
+        let cloudSaveTimeout = null;
+
+        if (typeof firebase !== 'undefined') {
+            try {
+                firebase.initializeApp(firebaseConfig);
+                const db = firebase.firestore();
+                cloudDocRef = db.collection("materialien").doc("haus-jakob-data");
+
+                // Live Listener for all connected users/devices
+                cloudDocRef.onSnapshot((doc) => {
+                    if (doc.exists) {
+                        const cloudData = doc.data();
+                        if (JSON.stringify(cloudData) !== JSON.stringify(appData)) {
+                            appData = cloudData;
+                            localStorage.setItem('kfw40_material_data_v27', JSON.stringify(appData));
+                            renderAll();
+                        }
+                        updateSyncBadge('Live Cloud-Sync', 'emerald');
+                    } else {
+                        cloudDocRef.set(DEFAULT_DATA);
+                    }
+                }, (error) => {
+                    console.warn('Firestore fallback to localStorage:', error);
+                    updateSyncBadge('Lokale Sicherung', 'amber');
+                });
+            } catch(e) {
+                console.error('Firebase Init Error:', e);
+            }
+        }
+
+        function updateSyncBadge(text, color) {
+            const badge = document.getElementById('cloud-sync-badge');
+            const txt = document.getElementById('sync-status-text');
+            if (!badge || !txt) return;
+            txt.innerText = text;
+            if (color === 'emerald') {
+                badge.className = 'px-3 py-1.5 bg-emerald-100 border border-emerald-300 text-emerald-800 rounded-xl text-xs font-bold flex items-center gap-1.5 shadow-sm';
+            } else if (color === 'amber') {
+                badge.className = 'px-3 py-1.5 bg-amber-100 border border-amber-300 text-amber-800 rounded-xl text-xs font-bold flex items-center gap-1.5 shadow-sm';
+            }
+        }
+
         function saveData() {
             localStorage.setItem('kfw40_material_data_v27', JSON.stringify(appData));
+
+            if (cloudDocRef) {
+                updateSyncBadge('Speichert...', 'amber');
+                clearTimeout(cloudSaveTimeout);
+                cloudSaveTimeout = setTimeout(() => {
+                    cloudDocRef.set(appData).then(() => {
+                        updateSyncBadge('Live Cloud-Sync', 'emerald');
+                    }).catch(err => {
+                        console.error('Cloud save failed:', err);
+                        updateSyncBadge('Lokale Sicherung', 'amber');
+                    });
+                }, 400);
+            }
         }
 
         function renderCategory(catKey, tbodyId, subtotalId) {
