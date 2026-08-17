@@ -229,7 +229,11 @@
                         <p class="text-xs text-slate-500">Hier können alle Außen- und Innenwände mit Länge, Höhe und Abzügen (Fenster/Türen) eingegeben werden. Die resultierenden Beplankungsflächen für OSB, Rigips und Dämmung werden in Echtzeit berechnet.</p>
                     </div>
 
-                    <div class="flex items-center gap-2 no-print">
+                    <div class="flex items-center gap-2 no-print flex-wrap">
+                        <a href="materialien.html" class="px-3.5 py-2 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs rounded-xl flex items-center gap-1.5 shadow-sm transition-all" title="Zur Materialliste">
+                            <i data-lucide="calculator" class="w-3.5 h-3.5"></i>
+                            <span>Materialliste öffnen ➔</span>
+                        </a>
                         <button onclick="loadDefaultWalls()" class="px-3.5 py-2 bg-slate-100 hover:bg-slate-200 text-slate-800 border border-slate-200 font-bold text-xs rounded-xl flex items-center gap-1.5 transition-all">
                             <i data-lucide="refresh-cw" class="w-3.5 h-3.5 text-blue-600"></i>
                             <span>Standard-Set 8,5x14m laden</span>
@@ -241,8 +245,18 @@
                     </div>
                 </div>
 
+                <!-- Live Sync Status Banner -->
+                <div class="flex items-center justify-between p-3 bg-emerald-50/80 border border-emerald-200 rounded-xl text-xs text-emerald-900 no-print flex-wrap gap-2">
+                    <div class="flex items-center gap-2">
+                        <i data-lucide="refresh-cw" class="w-4 h-4 text-emerald-600 animate-spin-slow"></i>
+                        <span class="font-bold">Automatische Kopplung aktiv:</span>
+                        <span id="wall-sync-detail-text">Änderungen an Wänden aktualisieren automatisch Phase 7 (Trockenbau) &amp; Phase 8 (Finish) im Materialplaner.</span>
+                    </div>
+                    <span id="wall-sync-time-badge" class="px-2.5 py-0.5 bg-emerald-200 text-emerald-900 rounded-full font-bold text-[11px]">Echtzeit synchronisiert</span>
+                </div>
+
                 <!-- Quick Summary KPI Cards -->
-                <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-4 border-t border-slate-200">
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-2 border-t border-slate-200">
                     <div class="p-3.5 bg-blue-50 border border-blue-200 rounded-xl">
                         <span class="text-[11px] font-bold text-blue-700 uppercase tracking-wider block">Außenwand Brutto:</span>
                         <span id="kpi-aw-brutto" class="font-display font-extrabold text-xl text-blue-950 font-mono">0 m²</span>
@@ -1042,6 +1056,113 @@
             document.getElementById('kpi-aw-netto').innerText = totalAwNetto.toFixed(1) + ' m²';
             document.getElementById('kpi-osb-total').innerText = totalOsb.toFixed(1) + ' m²';
             document.getElementById('kpi-rigips-total').innerText = totalRigips.toFixed(1) + ' m²';
+
+            // Automatic live update of trader articles & material list
+            syncCalculatedWallsToMaterialData(totalOsb, totalRigips, totalAwNetto);
+        }
+
+        let matSyncTimeout = null;
+        function syncCalculatedWallsToMaterialData(osbWandQty, rigipsWandQty, awNetto) {
+            // Calculate totals including ceiling areas (2x 119m² = 238m² Decken)
+            const deckenM2 = 238;
+            const totalOsbRunden = Math.max(10, Math.round(osbWandQty));
+            const totalRigipsGesamt = Math.max(10, Math.round(rigipsWandQty + deckenM2));
+            const totalSpachtelKg = Math.round(totalRigipsGesamt * 0.65);
+            const totalFinishM2 = totalRigipsGesamt;
+
+            // 1. Sync internal trader items in appConfig
+            let traderUpdated = false;
+            const osbArt = appConfig.haendler_artikel?.find(a => a.id === 'mat-osb-12');
+            if (osbArt && osbArt.qty !== totalOsbRunden) {
+                osbArt.qty = totalOsbRunden;
+                traderUpdated = true;
+            }
+            const rigipsArt = appConfig.haendler_artikel?.find(a => a.id === 'mat-rigips-125');
+            if (rigipsArt && rigipsArt.qty !== totalRigipsGesamt) {
+                rigipsArt.qty = totalRigipsGesamt;
+                traderUpdated = true;
+            }
+            const spachtelArt = appConfig.haendler_artikel?.find(a => a.id === 'mat-spachtel-q3');
+            if (spachtelArt && spachtelArt.qty !== totalSpachtelKg) {
+                spachtelArt.qty = totalSpachtelKg;
+                traderUpdated = true;
+            }
+
+            if (traderUpdated) {
+                renderHaendlerTable();
+            }
+
+            // 2. Update UI details badge
+            const detailEl = document.getElementById('wall-sync-detail-text');
+            if (detailEl) {
+                detailEl.innerText = `OSB Wand: ${totalOsbRunden} m² | Rigips Wände+Decken: ${totalRigipsGesamt} m² | Finish: ${totalFinishM2} m²`;
+            }
+
+            // 3. Debounced sync to Firestore (materialien/haus-jakob-data) & LocalStorage
+            clearTimeout(matSyncTimeout);
+            matSyncTimeout = setTimeout(async () => {
+                try {
+                    if (!firebase.apps.length) return;
+                    const db = firebase.firestore();
+                    const matDocRef = db.collection("materialien").doc("haus-jakob-data");
+                    const snapshot = await matDocRef.get();
+                    if (snapshot.exists) {
+                        const matData = snapshot.data();
+                        let changed = false;
+
+                        // Phase 7: Trockenbau
+                        if (matData.trockenbau) {
+                            const posOsb = matData.trockenbau.find(p => p.pos === '7.1' || (p.title || '').toLowerCase().includes('osb/3 wandbeplankung'));
+                            if (posOsb && posOsb.qty !== totalOsbRunden) {
+                                posOsb.qty = totalOsbRunden;
+                                posOsb.usage = `Verschraubung bauseits vor Rigips für beide Vollgeschosse (${totalOsbRunden} m² berechnet)`;
+                                changed = true;
+                            }
+                            const posRigips = matData.trockenbau.find(p => p.pos === '7.2' || (p.title || '').toLowerCase().includes('gipskartonplatten'));
+                            if (posRigips && posRigips.qty !== totalRigipsGesamt) {
+                                posRigips.qty = totalRigipsGesamt;
+                                posRigips.usage = `Beplankung bauseits auf OSB für Wände & Decken (${totalRigipsGesamt} m² berechnet)`;
+                                changed = true;
+                            }
+                        }
+
+                        // Phase 8: Finish
+                        if (matData.finish) {
+                            const posSpachtel = matData.finish.find(p => p.pos === '8.1' || (p.title || '').toLowerCase().includes('fugenspachtel'));
+                            if (posSpachtel && posSpachtel.qty !== totalFinishM2) {
+                                posSpachtel.qty = totalFinishM2;
+                                posSpachtel.usage = `Spachteln der ${totalFinishM2} m² berechneten Wand- & Deckenflächen`;
+                                changed = true;
+                            }
+                            const posVlies = matData.finish.find(p => p.pos === '8.2' || (p.title || '').toLowerCase().includes('malervlies'));
+                            if (posVlies && posVlies.qty !== totalFinishM2) {
+                                posVlies.qty = totalFinishM2;
+                                posVlies.usage = `Rissüberbrückender Untergrund Wände/Decken (${totalFinishM2} m² berechnet)`;
+                                changed = true;
+                            }
+                            const posFarbe = matData.finish.find(p => p.pos === '8.3' || (p.title || '').toLowerCase().includes('silikat'));
+                            if (posFarbe && posFarbe.qty !== totalFinishM2) {
+                                posFarbe.qty = totalFinishM2;
+                                posFarbe.usage = `2x Anstrich Wände & Decken (${totalFinishM2} m² berechnet)`;
+                                changed = true;
+                            }
+                        }
+
+                        if (changed) {
+                            await matDocRef.set(matData);
+                            localStorage.setItem('kfw40_material_data_v28', JSON.stringify(matData));
+                            const timeBadge = document.getElementById('wall-sync-time-badge');
+                            if (timeBadge) {
+                                const nowStr = new Date().toLocaleTimeString('de-DE', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+                                timeBadge.innerText = `Synchronisiert (${nowStr})`;
+                                timeBadge.className = 'px-2.5 py-0.5 bg-emerald-200 text-emerald-900 rounded-full font-bold text-[11px]';
+                            }
+                        }
+                    }
+                } catch (e) {
+                    console.error("Firestore sync error from wall calc:", e);
+                }
+            }, 600);
         }
 
         function updateWall(idx, field, value) {
