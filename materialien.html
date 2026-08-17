@@ -120,6 +120,21 @@
             </div>
         </div>
 
+        <!-- Live Quick Search & Power Toolbar -->
+        <div class="bg-white border border-slate-200 rounded-2xl p-4 shadow-sm no-print flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="relative w-full md:w-96">
+                <i data-lucide="search" class="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2"></i>
+                <input id="search-input" type="text" placeholder="🔍 Positionen suchen (z.B. OSB, Holzfaser, Wärmepumpe...)" class="w-full pl-10 pr-4 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs font-medium focus:bg-white focus:border-slate-800 outline-none transition-all">
+            </div>
+
+            <div class="flex items-center gap-3 text-xs text-slate-500 font-medium flex-wrap">
+                <span class="px-2 py-1 bg-indigo-50 border border-indigo-200 rounded-lg text-[11px] font-bold text-indigo-700 flex items-center gap-1">
+                    <i data-lucide="mouse-pointer-click" class="w-3.5 h-3.5"></i> Rechtsklick auf jede Zeile
+                </span>
+                <span>= Phasen verschieben, Duplizieren, Verschieben &amp; Löschen</span>
+            </div>
+        </div>
+
         <!-- PHASE 1: Grundstück & Baunebenkosten -->
         <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm print-card">
             <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-4 border-b border-slate-200">
@@ -1168,8 +1183,256 @@
             if (e.key === 'Escape') closeToolsModal();
         });
 
-        document.getElementById('tools-modal')?.addEventListener('click', (e) => {
-            if (e.target.id === 'tools-modal') closeToolsModal();
+    <!-- Custom Context Menu Overlay -->
+    <div id="custom-context-menu" class="hidden fixed z-50 bg-white border border-slate-200 rounded-2xl shadow-2xl py-2 w-64 text-xs font-sans no-print select-none">
+        <div class="px-3.5 py-1.5 border-b border-slate-100 text-[10px] font-bold text-slate-400 uppercase tracking-wider flex items-center justify-between">
+            <span>Aktionen</span>
+            <span id="ctx-pos-label" class="font-mono text-slate-700 bg-slate-100 px-1.5 py-0.5 rounded">Pos 1.1</span>
+        </div>
+
+        <button id="ctx-insert-above" class="w-full px-3.5 py-2 text-left text-slate-700 hover:bg-slate-100 flex items-center gap-2 font-semibold transition-all">
+            <i data-lucide="arrow-up-to-line" class="w-4 h-4 text-slate-500"></i> Zeile darüber einfügen
+        </button>
+        <button id="ctx-insert-below" class="w-full px-3.5 py-2 text-left text-slate-700 hover:bg-slate-100 flex items-center gap-2 font-semibold transition-all">
+            <i data-lucide="arrow-down-to-line" class="w-4 h-4 text-slate-500"></i> Zeile darunter einfügen
+        </button>
+        <button id="ctx-duplicate" class="w-full px-3.5 py-2 text-left text-slate-700 hover:bg-slate-100 flex items-center gap-2 font-semibold transition-all">
+            <i data-lucide="copy" class="w-4 h-4 text-slate-500"></i> Zeile duplizieren
+        </button>
+
+        <div class="my-1 border-t border-slate-100"></div>
+
+        <button id="ctx-move-up" class="w-full px-3.5 py-2 text-left text-slate-700 hover:bg-slate-100 flex items-center gap-2 font-semibold transition-all">
+            <i data-lucide="arrow-up" class="w-4 h-4 text-slate-500"></i> Nach oben verschieben
+        </button>
+        <button id="ctx-move-down" class="w-full px-3.5 py-2 text-left text-slate-700 hover:bg-slate-100 flex items-center gap-2 font-semibold transition-all">
+            <i data-lucide="arrow-down" class="w-4 h-4 text-slate-500"></i> Nach unten verschieben
+        </button>
+
+        <div class="my-1 border-t border-slate-100"></div>
+
+        <!-- Submenu: In andere Phase verschieben -->
+        <div class="relative group">
+            <button class="w-full px-3.5 py-2 text-left text-slate-700 hover:bg-slate-100 flex items-center justify-between font-semibold transition-all">
+                <span class="flex items-center gap-2">
+                    <i data-lucide="folder-output" class="w-4 h-4 text-indigo-600"></i> In andere Phase verschieben
+                </span>
+                <i data-lucide="chevron-right" class="w-3.5 h-3.5 text-slate-400"></i>
+            </button>
+            <div class="hidden group-hover:block absolute left-full top-0 ml-1 bg-white border border-slate-200 rounded-xl shadow-2xl py-1.5 w-60 space-y-0.5 z-50">
+                <button data-target-cat="nebenkosten" class="ctx-move-phase-btn w-full px-3 py-1.5 text-left text-slate-700 hover:bg-indigo-50 hover:text-indigo-700 font-medium text-[11px] transition-all">Phase 1: Nebenkosten &amp; Planung</button>
+                <button data-target-cat="boden" class="ctx-move-phase-btn w-full px-3 py-1.5 text-left text-slate-700 hover:bg-indigo-50 hover:text-indigo-700 font-medium text-[11px] transition-all">Phase 2: Erdarbeiten &amp; Bodenplatte</button>
+                <button data-target-cat="palmatin" class="ctx-move-phase-btn w-full px-3 py-1.5 text-left text-slate-700 hover:bg-indigo-50 hover:text-indigo-700 font-medium text-[11px] transition-all">Phase 3: Palmatin Holz-Werkssatz</button>
+                <button data-target-cat="huelle" class="ctx-move-phase-btn w-full px-3 py-1.5 text-left text-slate-700 hover:bg-indigo-50 hover:text-indigo-700 font-medium text-[11px] transition-all">Phase 4: Gebäudehülle &amp; Dach</button>
+                <button data-target-cat="bauelemente" class="ctx-move-phase-btn w-full px-3 py-1.5 text-left text-slate-700 hover:bg-indigo-50 hover:text-indigo-700 font-medium text-[11px] transition-all">Phase 5: Bauelemente, Türen &amp; Tore</button>
+                <button data-target-cat="haustechnik" class="ctx-move-phase-btn w-full px-3 py-1.5 text-left text-slate-700 hover:bg-indigo-50 hover:text-indigo-700 font-medium text-[11px] transition-all">Phase 6: Haustechnik, WP, KWL &amp; PV</button>
+                <button data-target-cat="trockenbau" class="ctx-move-phase-btn w-full px-3 py-1.5 text-left text-slate-700 hover:bg-indigo-50 hover:text-indigo-700 font-medium text-[11px] transition-all">Phase 7: Dämmung, OSB &amp; Rigips</button>
+                <button data-target-cat="finish" class="ctx-move-phase-btn w-full px-3 py-1.5 text-left text-slate-700 hover:bg-indigo-50 hover:text-indigo-700 font-medium text-[11px] transition-all">Phase 8: Innenausbau &amp; Böden</button>
+                <button data-target-cat="sanitaer" class="ctx-move-phase-btn w-full px-3 py-1.5 text-left text-slate-700 hover:bg-indigo-50 hover:text-indigo-700 font-medium text-[11px] transition-all">Phase 9: Sanitär-Endmontage</button>
+            </div>
+        </div>
+
+        <div class="my-1 border-t border-slate-100"></div>
+
+        <button id="ctx-delete" class="w-full px-3.5 py-2 text-left text-red-600 hover:bg-red-50 flex items-center gap-2 font-bold transition-all">
+            <i data-lucide="trash-2" class="w-4 h-4 text-red-600"></i> Zeile löschen
+        </button>
+    </div>
+
+    <!-- Advanced Context Menu & Keyboard Navigation Engine -->
+    <script>
+        let currentCtxTarget = { cat: null, idx: -1 };
+
+        function initContextMenu() {
+            const ctxMenu = document.getElementById('custom-context-menu');
+            if (!ctxMenu) return;
+
+            // Context Menu positioning on row right click
+            document.addEventListener('contextmenu', (e) => {
+                const tr = e.target.closest('tr');
+                if (tr && tr.querySelector('.row-input')) {
+                    e.preventDefault();
+                    const input = tr.querySelector('.row-input');
+                    const cat = input.getAttribute('data-cat');
+                    const idx = parseInt(input.getAttribute('data-idx'));
+
+                    currentCtxTarget = { cat, idx };
+                    document.getElementById('ctx-pos-label').innerText = `Pos ${appData[cat][idx]?.pos || (idx+1)}`;
+
+                    // Position context menu
+                    let x = e.clientX;
+                    let y = e.clientY;
+                    const menuWidth = 260;
+                    const menuHeight = 280;
+                    if (x + menuWidth > window.innerWidth) x = window.innerWidth - menuWidth - 10;
+                    if (y + menuHeight > window.innerHeight) y = window.innerHeight - menuHeight - 10;
+
+                    ctxMenu.style.left = `${x}px`;
+                    ctxMenu.style.top = `${y}px`;
+                    ctxMenu.classList.remove('hidden');
+                    lucide.createIcons();
+                } else {
+                    ctxMenu.classList.add('hidden');
+                }
+            });
+
+            // Close context menu on click outside or Escape
+            document.addEventListener('click', (e) => {
+                if (!ctxMenu.contains(e.target)) {
+                    ctxMenu.classList.add('hidden');
+                }
+            });
+
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') ctxMenu.classList.add('hidden');
+            });
+
+            // Action: Insert Above
+            document.getElementById('ctx-insert-above')?.addEventListener('click', () => {
+                ctxMenu.classList.add('hidden');
+                if (!currentCtxTarget.cat) return;
+                const { cat, idx } = currentCtxTarget;
+                const newItem = { pos: `${idx + 1}`, title: 'Neue Position', usage: '', qty: 1, unit: 'Stk', price: 0 };
+                appData[cat].splice(idx, 0, newItem);
+                reindexCategory(cat);
+                saveData();
+                renderAll();
+            });
+
+            // Action: Insert Below
+            document.getElementById('ctx-insert-below')?.addEventListener('click', () => {
+                ctxMenu.classList.add('hidden');
+                if (!currentCtxTarget.cat) return;
+                const { cat, idx } = currentCtxTarget;
+                const newItem = { pos: `${idx + 2}`, title: 'Neue Position', usage: '', qty: 1, unit: 'Stk', price: 0 };
+                appData[cat].splice(idx + 1, 0, newItem);
+                reindexCategory(cat);
+                saveData();
+                renderAll();
+            });
+
+            // Action: Duplicate
+            document.getElementById('ctx-duplicate')?.addEventListener('click', () => {
+                ctxMenu.classList.add('hidden');
+                if (!currentCtxTarget.cat) return;
+                const { cat, idx } = currentCtxTarget;
+                const copy = JSON.parse(JSON.stringify(appData[cat][idx]));
+                copy.title += ' (Kopie)';
+                appData[cat].splice(idx + 1, 0, copy);
+                reindexCategory(cat);
+                saveData();
+                renderAll();
+            });
+
+            // Action: Move Up
+            document.getElementById('ctx-move-up')?.addEventListener('click', () => {
+                ctxMenu.classList.add('hidden');
+                if (!currentCtxTarget.cat) return;
+                const { cat, idx } = currentCtxTarget;
+                if (idx > 0) {
+                    const temp = appData[cat][idx];
+                    appData[cat][idx] = appData[cat][idx - 1];
+                    appData[cat][idx - 1] = temp;
+                    reindexCategory(cat);
+                    saveData();
+                    renderAll();
+                }
+            });
+
+            // Action: Move Down
+            document.getElementById('ctx-move-down')?.addEventListener('click', () => {
+                ctxMenu.classList.add('hidden');
+                if (!currentCtxTarget.cat) return;
+                const { cat, idx } = currentCtxTarget;
+                if (idx < appData[cat].length - 1) {
+                    const temp = appData[cat][idx];
+                    appData[cat][idx] = appData[cat][idx + 1];
+                    appData[cat][idx + 1] = temp;
+                    reindexCategory(cat);
+                    saveData();
+                    renderAll();
+                }
+            });
+
+            // Action: Move to another Phase
+            document.querySelectorAll('.ctx-move-phase-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    ctxMenu.classList.add('hidden');
+                    const targetCat = e.target.getAttribute('data-target-cat');
+                    if (!currentCtxTarget.cat || !targetCat || currentCtxTarget.cat === targetCat) return;
+
+                    const { cat, idx } = currentCtxTarget;
+                    const [movedItem] = appData[cat].splice(idx, 1);
+                    
+                    if (movedItem) {
+                        appData[targetCat].push(movedItem);
+                        reindexCategory(cat);
+                        reindexCategory(targetCat);
+                        saveData();
+                        renderAll();
+                    }
+                });
+            });
+
+            // Action: Delete
+            document.getElementById('ctx-delete')?.addEventListener('click', () => {
+                ctxMenu.classList.add('hidden');
+                if (!currentCtxTarget.cat) return;
+                const { cat, idx } = currentCtxTarget;
+                appData[cat].splice(idx, 1);
+                reindexCategory(cat);
+                saveData();
+                renderAll();
+            });
+        }
+
+        function reindexCategory(catKey) {
+            const phasePrefixes = {
+                nebenkosten: '1.', boden: '2.', palmatin: '3.', huelle: '4.',
+                bauelemente: '5.', haustechnik: '6.', trockenbau: '7.', finish: '8.', sanitaer: '9.'
+            };
+            const prefix = phasePrefixes[catKey] || '';
+            if (appData[catKey]) {
+                appData[catKey].forEach((item, index) => {
+                    item.pos = `${prefix}${index + 1}`;
+                });
+            }
+        }
+
+        // Live Search Filter logic
+        document.getElementById('search-input')?.addEventListener('input', (e) => {
+            const query = e.target.value.toLowerCase().trim();
+            document.querySelectorAll('tbody tr').forEach(tr => {
+                const text = tr.innerText.toLowerCase();
+                const inputsText = Array.from(tr.querySelectorAll('input')).map(i => i.value.toLowerCase()).join(' ');
+                if (!query || text.includes(query) || inputsText.includes(query)) {
+                    tr.style.display = '';
+                } else {
+                    tr.style.display = 'none';
+                }
+            });
+        });
+
+        // Excel-like Keyboard navigation (Enter key goes to next row)
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' && e.target.classList.contains('row-input')) {
+                e.preventDefault();
+                const currentInput = e.target;
+                const field = currentInput.getAttribute('data-field');
+                const tr = currentInput.closest('tr');
+                const nextTr = tr.nextElementSibling;
+                if (nextTr) {
+                    const nextInput = nextTr.querySelector(`[data-field="${field}"]`);
+                    if (nextInput) {
+                        nextInput.focus();
+                        nextInput.select();
+                    }
+                }
+            }
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            initContextMenu();
         });
     </script>
 </body>
