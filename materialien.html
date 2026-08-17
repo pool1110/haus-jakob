@@ -760,6 +760,36 @@
             }
         }
 
+        function recalcTotals() {
+            const categories = [
+                { key: 'nebenkosten', subId: 'subtotal-nebenkosten' },
+                { key: 'boden', subId: 'subtotal-boden' },
+                { key: 'palmatin', subId: 'subtotal-palmatin' },
+                { key: 'huelle', subId: 'subtotal-huelle' },
+                { key: 'bauelemente', subId: 'subtotal-bauelemente' },
+                { key: 'haustechnik', subId: 'subtotal-haustechnik' },
+                { key: 'trockenbau', subId: 'subtotal-trockenbau' },
+                { key: 'finish', subId: 'subtotal-finish' },
+                { key: 'sanitaer', subId: 'subtotal-sanitaer' }
+            ];
+
+            let grandTotal = 0;
+            categories.forEach(c => {
+                let catTotal = 0;
+                if (appData[c.key]) {
+                    appData[c.key].forEach(item => {
+                        catTotal += (item.qty || 0) * (item.price || 0);
+                    });
+                }
+                const el = document.getElementById(c.subId);
+                if (el) el.innerText = catTotal.toLocaleString('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' €';
+                grandTotal += catTotal;
+            });
+
+            const grandEl = document.getElementById('grand-total-display');
+            if (grandEl) grandEl.innerText = grandTotal.toLocaleString('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' €';
+        }
+
         function renderCategory(catKey, tbodyId, subtotalId) {
             const tbody = document.getElementById(tbodyId);
             if (!tbody) return 0;
@@ -793,7 +823,7 @@
                         <td class="py-2.5 px-2 text-right">
                             <input type="number" step="any" value="${item.price}" data-cat="${catKey}" data-idx="${index}" data-field="price" class="row-input w-full bg-transparent focus:bg-white border-b border-transparent focus:border-slate-500 outline-none font-mono text-right text-slate-700 text-xs py-1 px-1">
                         </td>
-                        <td class="py-2.5 px-2 font-mono font-bold text-right text-slate-900 py-1 px-1">
+                        <td class="row-total py-2.5 px-2 font-mono font-bold text-right text-slate-900 py-1 px-1">
                             ${total.toLocaleString('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} €
                         </td>
                         <td class="py-2.5 px-2 text-center action-col no-print">
@@ -829,24 +859,12 @@
 
         function attachEventListeners() {
             document.querySelectorAll('.row-input').forEach(input => {
-                input.addEventListener('input', (e) => {
-                    const cat = e.target.getAttribute('data-cat');
-                    const idx = parseInt(e.target.getAttribute('data-idx'));
-                    const field = e.target.getAttribute('data-field');
-
-                    let val = e.target.value;
-                    if (field === 'qty' || field === 'price') {
-                        val = parseFloat(val) || 0;
-                    }
-
-                    appData[cat][idx][field] = val;
-                    saveData();
-                    renderAll();
-                });
+                input.removeEventListener('input', handleRowInput);
+                input.addEventListener('input', handleRowInput);
             });
 
             document.querySelectorAll('.btn-del-row').forEach(btn => {
-                btn.addEventListener('click', (e) => {
+                btn.onclick = (e) => {
                     const targetBtn = e.currentTarget;
                     const cat = targetBtn.getAttribute('data-cat');
                     const idx = parseInt(targetBtn.getAttribute('data-idx'));
@@ -854,8 +872,36 @@
                     appData[cat].splice(idx, 1);
                     saveData();
                     renderAll();
-                });
+                };
             });
+        }
+
+        function handleRowInput(e) {
+            const cat = e.target.getAttribute('data-cat');
+            const idx = parseInt(e.target.getAttribute('data-idx'));
+            const field = e.target.getAttribute('data-field');
+
+            let val = e.target.value;
+            if (field === 'qty' || field === 'price') {
+                val = parseFloat(val) || 0;
+            }
+
+            if (appData[cat] && appData[cat][idx]) {
+                appData[cat][idx][field] = val;
+                
+                // Update Row Total UI locally without losing input focus
+                const tr = e.target.closest('tr');
+                if (tr) {
+                    const item = appData[cat][idx];
+                    const rowTotal = (item.qty || 0) * (item.price || 0);
+                    const totalTd = tr.querySelector('.row-total');
+                    if (totalTd) {
+                        totalTd.innerText = rowTotal.toLocaleString('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' €';
+                    }
+                }
+                recalcTotals();
+                saveData();
+            }
         }
 
         document.getElementById('add-row-nebenkosten').addEventListener('click', () => {
