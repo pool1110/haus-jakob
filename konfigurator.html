@@ -87,11 +87,15 @@
                 </button>
                 <button id="tab-btn-fenster" onclick="switchTab('fenster')" class="tab-btn px-4 py-2 rounded-lg text-xs font-bold transition-all text-slate-600 hover:text-slate-900 whitespace-nowrap flex items-center gap-1.5">
                     <i data-lucide="panels-top-left" class="w-3.5 h-3.5 text-amber-500"></i>
-                    <span>2. Fenster &amp; Türen</span>
+                    <span>2. Fenster &amp; Haustüren</span>
+                </button>
+                <button id="tab-btn-tueren" onclick="switchTab('tueren')" class="tab-btn px-4 py-2 rounded-lg text-xs font-bold transition-all text-slate-600 hover:text-slate-900 whitespace-nowrap flex items-center gap-1.5">
+                    <i data-lucide="door-closed" class="w-3.5 h-3.5 text-indigo-500"></i>
+                    <span>3. Innentüren-Planer</span>
                 </button>
                 <button id="tab-btn-ausstattung" onclick="switchTab('ausstattung')" class="tab-btn px-4 py-2 rounded-lg text-xs font-bold transition-all text-slate-600 hover:text-slate-900 whitespace-nowrap flex items-center gap-1.5">
                     <i data-lucide="bath" class="w-3.5 h-3.5 text-teal-500"></i>
-                    <span>3. Bäder &amp; Ausstattung</span>
+                    <span>4. Bäder &amp; Ausstattung</span>
                 </button>
             </div>
 
@@ -376,6 +380,96 @@
 
 
         <!-- ========================================================================= -->
+        <!-- TAB 3: INNENTÜREN-PLANER & BERECHNER                                      -->
+        <!-- ========================================================================= -->
+        <section id="sec-tueren" class="tab-content hidden space-y-6">
+            
+            <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm print-card space-y-4">
+                <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
+                    <div>
+                        <span class="px-2.5 py-1 rounded-lg bg-indigo-700 text-white font-display font-extrabold text-xs tracking-wider shadow-sm">
+                            3. Innentüren-Konfigurator
+                        </span>
+                        <h2 class="font-display font-bold text-2xl text-slate-900 mt-1">Innentüren- &amp; Zargenplaner Haus Jakob</h2>
+                        <p class="text-xs text-slate-500">Exakte raumweise Erfassung aller Innentüren mit Baurichtmaßen (Breite × Höhe), Zargen-Wandstärken (Maulweite), DIN-Richtung (L/R), Schlossart (BB/WC/PZ) und Oberfläche. Synchronisiert automatisch mit Material- und Händlerliste.</p>
+                    </div>
+
+                    <div class="flex items-center gap-2 no-print flex-wrap">
+                        <a href="materialien.html" class="px-3.5 py-2 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs rounded-xl flex items-center gap-1.5 shadow-sm transition-all" title="Zur Materialliste">
+                            <i data-lucide="calculator" class="w-3.5 h-3.5"></i>
+                            <span>Materialliste öffnen ➔</span>
+                        </a>
+                        <button onclick="loadDefaultInnentueren()" class="px-3.5 py-2 bg-slate-100 hover:bg-slate-200 text-slate-800 border border-slate-200 font-bold text-xs rounded-xl flex items-center gap-1.5 transition-all">
+                            <i data-lucide="refresh-cw" class="w-3.5 h-3.5 text-indigo-600"></i>
+                            <span>Standard-Set 14 Türen laden</span>
+                        </button>
+                        <button onclick="addNewDoorRow()" class="px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-xs rounded-xl flex items-center gap-1.5 shadow-sm transition-all">
+                            <i data-lucide="plus-circle" class="w-4 h-4"></i>
+                            <span>Innentür hinzufügen</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Live Sync Banner -->
+                <div class="flex items-center justify-between p-3 bg-indigo-50/80 border border-indigo-200 rounded-xl text-xs text-indigo-900 no-print flex-wrap gap-2">
+                    <div class="flex items-center gap-2">
+                        <i data-lucide="door-closed" class="w-4 h-4 text-indigo-600"></i>
+                        <span class="font-bold">Innentüren-Kopplung aktiv:</span>
+                        <span id="door-sync-detail-text">Gesamtzahl und Maßspezifikationen werden automatisch an Phase 8 (Pos 8.6) und die Baustoffhändler-Liste übermittelt.</span>
+                    </div>
+                    <span id="door-sync-time-badge" class="px-2.5 py-0.5 bg-indigo-200 text-indigo-900 rounded-full font-bold text-[11px]">Echtzeit gekoppelt</span>
+                </div>
+
+                <!-- Quick Summary KPI Cards -->
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-2 border-t border-slate-200">
+                    <div class="p-3.5 bg-indigo-50 border border-indigo-200 rounded-xl">
+                        <span class="text-[11px] font-bold text-indigo-800 uppercase tracking-wider block">Innentüren Gesamt:</span>
+                        <span id="kpi-doors-total" class="font-display font-extrabold text-xl text-indigo-950 font-mono">14 Stk</span>
+                    </div>
+                    <div class="p-3.5 bg-blue-50 border border-blue-200 rounded-xl">
+                        <span class="text-[11px] font-bold text-blue-800 uppercase tracking-wider block">Zimmertüren BB (86cm):</span>
+                        <span id="kpi-doors-bb" class="font-display font-extrabold text-xl text-blue-950 font-mono">10 Stk</span>
+                    </div>
+                    <div class="p-3.5 bg-teal-50 border border-teal-200 rounded-xl">
+                        <span class="text-[11px] font-bold text-teal-800 uppercase tracking-wider block">Bad / WC-Türen:</span>
+                        <span id="kpi-doors-wc" class="font-display font-extrabold text-xl text-teal-950 font-mono">3 Stk</span>
+                    </div>
+                    <div class="p-3.5 bg-purple-50 border border-purple-200 rounded-xl">
+                        <span class="text-[11px] font-bold text-purple-800 uppercase tracking-wider block">Spezial / Technik / Glas:</span>
+                        <span id="kpi-doors-spec" class="font-display font-extrabold text-xl text-purple-950 font-mono">1 Stk</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Doors Table -->
+            <div class="bg-white border border-slate-200 rounded-2xl shadow-sm print-card overflow-hidden">
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left text-xs font-sans">
+                        <thead>
+                            <tr class="border-b border-slate-200 text-slate-700 uppercase tracking-wider text-[11px] bg-slate-100">
+                                <th class="py-3 px-3 w-12 text-center">Nr.</th>
+                                <th class="py-3 px-3 w-48">Raum / Einbauort</th>
+                                <th class="py-3 px-2 text-right w-24">Breite (cm)</th>
+                                <th class="py-3 px-2 text-right w-24">Höhe (cm)</th>
+                                <th class="py-3 px-2 text-right w-28">Wandstärke (cm)</th>
+                                <th class="py-3 px-3 w-28">DIN-Richtung</th>
+                                <th class="py-3 px-3 w-56">Türausführung &amp; Einlage</th>
+                                <th class="py-3 px-3 w-36">Schlossart</th>
+                                <th class="py-3 px-2 text-right w-20">Anzahl</th>
+                                <th class="py-3 px-2 text-center w-14 action-col no-print">Aktion</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbody-innentueren" class="divide-y divide-slate-200 text-slate-700">
+                            <!-- Injected dynamically -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </section>
+
+
+        <!-- ========================================================================= -->
         <!-- TAB 4: BÄDER- & AUSSTATTUNGSMANAGER                                       -->
         <!-- ========================================================================= -->
         <section id="sec-ausstattung" class="tab-content hidden space-y-6">
@@ -485,11 +579,27 @@
                 { id: 'a5', category: 'Duschbad ELW EG', name: 'Bodenebene Dusche 90x90 cm inkl. Duschrinne, Glas-Eckeinstieg & Armatur', qty: 1, unit: 'Set', note: 'Komplettset' },
                 { id: 'a6', category: 'Duschbad ELW EG', name: 'Waschtisch 60cm inkl. Unterschrank & Wand-WC Set spülrandlos', qty: 1, unit: 'Set', note: 'Vorwandelement Geberit' },
                 { id: 'a7', category: 'Gäste-WC EG', name: 'Handwaschbecken 45cm mit Kalt-/Warm-Armatur & Wand-WC Set', qty: 1, unit: 'Set', note: 'Kompakt-Sanitär' },
-                { id: 'a8', category: 'Innentüren', name: 'CPL Innentüren Weißlack (Röhrenspan, Rundkante, inkl. Zarge & Drücker)', qty: 14, unit: 'Stk', note: 'Standardmaße 86,0 x 198,5 cm' },
                 { id: 'a9', category: 'Böden', name: 'Rigid-Klick-Vinylboden 100% wasserfest (Nutzschicht 0,55mm, Kl. 23/33)', qty: 210, unit: 'm²', note: 'Vollflächig EG + OG + Bäder' },
                 { id: 'a10', category: 'Böden', name: 'MDF-Sockelleisten weiß foliert 60x15 mm inkl. Montageclips', qty: 310, unit: 'lfm', note: 'Passend zu Vinylboden' },
                 { id: 'a11', category: 'Elektro', name: 'Schalter- & Steckdosenprogramm reinweiß glänzend (Gira E2 / Busch-Jaeger)', qty: 270, unit: 'Stk', note: '200 Steckdosen + 70 Schalter/Taster' },
                 { id: 'a12', category: 'Elektro', name: 'LED-Deckeneinbauspots warmweiß / dimmbar (IP44 in Bädern)', qty: 45, unit: 'Stk', note: 'Inkl. LED-Treiber' }
+            ],
+
+            innentueren: [
+                { id: 'it1', room: 'Wohnen / Essen EG', width: 86.0, height: 198.5, wallThick: 14.5, din: 'DIN Links', type: 'CPL Weißlack m. Lichtausschnitt LA-1', lock: 'Buntbart (BB)', qty: 1 },
+                { id: 'it2', room: 'HWR / Technik EG', width: 86.0, height: 198.5, wallThick: 12.0, din: 'DIN Rechts', type: 'CPL Weißlack Röhrenspan', lock: 'Profilzylinder (PZ)', qty: 1 },
+                { id: 'it3', room: 'Gäste-WC EG', width: 73.5, height: 198.5, wallThick: 10.0, din: 'DIN Links', type: 'CPL Weißlack Röhrenspan', lock: 'WC-Schlitzkopf (Bad)', qty: 1 },
+                { id: 'it4', room: 'Flur / Garderobe EG', width: 86.0, height: 198.5, wallThick: 12.0, din: 'DIN Rechts', type: 'CPL Weißlack Röhrenspan', lock: 'Buntbart (BB)', qty: 1 },
+                { id: 'it5', room: 'ELW Wohnen / Flur EG', width: 86.0, height: 198.5, wallThick: 12.0, din: 'DIN Links', type: 'CPL Weißlack Röhrenspan', lock: 'Buntbart (BB)', qty: 1 },
+                { id: 'it6', room: 'ELW Schlafzimmer EG', width: 86.0, height: 198.5, wallThick: 12.0, din: 'DIN Rechts', type: 'CPL Weißlack Röhrenspan', lock: 'Buntbart (BB)', qty: 1 },
+                { id: 'it7', room: 'ELW Duschbad EG', width: 73.5, height: 198.5, wallThick: 10.0, din: 'DIN Links', type: 'CPL Weißlack Röhrenspan', lock: 'WC-Schlitzkopf (Bad)', qty: 1 },
+                { id: 'it8', room: 'Eltern Schlafzimmer OG', width: 86.0, height: 198.5, wallThick: 12.0, din: 'DIN Links', type: 'CPL Weißlack Röhrenspan', lock: 'Buntbart (BB)', qty: 1 },
+                { id: 'it9', room: 'Ankleide OG', width: 86.0, height: 198.5, wallThick: 10.0, din: 'DIN Rechts', type: 'CPL Weißlack Röhrenspan', lock: 'Buntbart (BB)', qty: 1 },
+                { id: 'it10', room: 'Kinderzimmer 1 OG', width: 86.0, height: 198.5, wallThick: 12.0, din: 'DIN Links', type: 'CPL Weißlack Röhrenspan', lock: 'Buntbart (BB)', qty: 1 },
+                { id: 'it11', room: 'Kinderzimmer 2 OG', width: 86.0, height: 198.5, wallThick: 12.0, din: 'DIN Rechts', type: 'CPL Weißlack Röhrenspan', lock: 'Buntbart (BB)', qty: 1 },
+                { id: 'it12', room: 'Büro / Gast OG', width: 86.0, height: 198.5, wallThick: 12.0, din: 'DIN Links', type: 'CPL Weißlack Röhrenspan', lock: 'Buntbart (BB)', qty: 1 },
+                { id: 'it13', room: 'Hauptbad OG', width: 86.0, height: 198.5, wallThick: 12.0, din: 'DIN Rechts', type: 'CPL Weißlack Röhrenspan', lock: 'WC-Schlitzkopf (Bad)', qty: 1 },
+                { id: 'it14', room: 'Abstellraum OG', width: 73.5, height: 198.5, wallThick: 10.0, din: 'DIN Links', type: 'CPL Weißlack Röhrenspan', lock: 'Buntbart (BB)', qty: 1 }
             ],
 
             // Rich Material Definitions for Traders (Pre-populated with trade standards & specs)
@@ -862,6 +972,7 @@
             renderHaendlerTable();
             renderWaendeTable();
             renderFensterTable();
+            renderInnentuerenTable();
             renderAusstattungTable();
             if (window.lucide) lucide.createIcons();
         }
@@ -1285,7 +1396,177 @@
 
 
         // ==========================================
-        // 6. AUSSTATTUNG LOGIC
+        // 6. INNENTÜREN-PLANER LOGIC
+        // ==========================================
+
+        function renderInnentuerenTable() {
+            const tbody = document.getElementById('tbody-innentueren');
+            if (!tbody) return;
+
+            if (!appConfig.innentueren || !appConfig.innentueren.length) {
+                appConfig.innentueren = JSON.parse(JSON.stringify(DEFAULT_CONFIG.innentueren));
+            }
+
+            let totalCount = 0;
+            let bbCount = 0;
+            let wcCount = 0;
+            let specCount = 0;
+
+            let html = '';
+
+            appConfig.innentueren.forEach((door, idx) => {
+                totalCount += door.qty;
+                if (door.lock.includes('BB')) bbCount += door.qty;
+                else if (door.lock.includes('WC') || door.lock.includes('Bad')) wcCount += door.qty;
+                else specCount += door.qty;
+
+                html += `
+                    <tr class="hover:bg-slate-50 transition-colors">
+                        <td class="py-3 px-3 font-mono font-bold text-slate-500 text-center">${idx + 1}</td>
+                        <td class="py-3 px-3 font-bold text-slate-900">
+                            <input type="text" value="${door.room}" onchange="updateDoor(${idx}, 'room', this.value)" class="w-full bg-transparent border-b border-transparent hover:border-slate-300 focus:border-slate-800 outline-none font-bold text-xs py-0.5">
+                        </td>
+                        <td class="py-3 px-2 text-right">
+                            <input type="number" step="0.5" value="${door.width}" onchange="updateDoor(${idx}, 'width', parseFloat(this.value)||0)" class="w-20 text-right bg-slate-50 border border-slate-200 rounded-lg py-1 px-2 font-mono text-xs font-bold">
+                        </td>
+                        <td class="py-3 px-2 text-right">
+                            <input type="number" step="0.5" value="${door.height}" onchange="updateDoor(${idx}, 'height', parseFloat(this.value)||0)" class="w-20 text-right bg-slate-50 border border-slate-200 rounded-lg py-1 px-2 font-mono text-xs">
+                        </td>
+                        <td class="py-3 px-2 text-right">
+                            <input type="number" step="0.5" value="${door.wallThick}" onchange="updateDoor(${idx}, 'wallThick', parseFloat(this.value)||0)" class="w-20 text-right bg-slate-50 border border-slate-200 rounded-lg py-1 px-2 font-mono text-indigo-700 font-bold text-xs">
+                        </td>
+                        <td class="py-3 px-3">
+                            <select onchange="updateDoor(${idx}, 'din', this.value)" class="w-full bg-slate-50 border border-slate-200 rounded-lg text-xs py-1 px-2 font-medium">
+                                <option value="DIN Links" ${door.din === 'DIN Links' ? 'selected' : ''}>DIN Links</option>
+                                <option value="DIN Rechts" ${door.din === 'DIN Rechts' ? 'selected' : ''}>DIN Rechts</option>
+                            </select>
+                        </td>
+                        <td class="py-3 px-3">
+                            <input type="text" value="${door.type}" onchange="updateDoor(${idx}, 'type', this.value)" class="w-full bg-transparent border-b border-transparent hover:border-slate-300 focus:border-slate-800 outline-none text-xs py-0.5">
+                        </td>
+                        <td class="py-3 px-3">
+                            <select onchange="updateDoor(${idx}, 'lock', this.value)" class="w-full bg-slate-50 border border-slate-200 rounded-lg text-xs py-1 px-2 font-medium">
+                                <option value="Buntbart (BB)" ${door.lock.includes('BB') ? 'selected' : ''}>Buntbart (BB)</option>
+                                <option value="WC-Schlitzkopf (Bad)" ${door.lock.includes('WC') ? 'selected' : ''}>WC-Schlitzkopf (Bad)</option>
+                                <option value="Profilzylinder (PZ)" ${door.lock.includes('PZ') ? 'selected' : ''}>Profilzylinder (PZ)</option>
+                            </select>
+                        </td>
+                        <td class="py-3 px-2 text-right">
+                            <input type="number" value="${door.qty}" onchange="updateDoor(${idx}, 'qty', parseInt(this.value)||0)" class="w-16 text-right bg-slate-50 border border-slate-200 rounded-lg py-1 px-2 font-mono font-extrabold text-indigo-900 text-xs">
+                        </td>
+                        <td class="py-3 px-2 text-center action-col no-print">
+                            <button onclick="deleteDoorRow(${idx})" class="p-1.5 hover:bg-red-100 text-slate-400 hover:text-red-700 rounded-lg transition-all" title="Tür löschen">
+                                <i data-lucide="trash-2" class="w-4 h-4"></i>
+                            </button>
+                        </td>
+                    </tr>
+                `;
+            });
+
+            tbody.innerHTML = html;
+
+            const totalEl = document.getElementById('kpi-doors-total');
+            if (totalEl) totalEl.innerText = totalCount + ' Stk';
+            const bbEl = document.getElementById('kpi-doors-bb');
+            if (bbEl) bbEl.innerText = bbCount + ' Stk';
+            const wcEl = document.getElementById('kpi-doors-wc');
+            if (wcEl) wcEl.innerText = wcCount + ' Stk';
+            const specEl = document.getElementById('kpi-doors-spec');
+            if (specEl) specEl.innerText = specCount + ' Stk';
+
+            // Live sync to trader list and material planner Phase 8
+            syncInnentuerenToMaterials(totalCount);
+        }
+
+        let doorSyncTimeout = null;
+        function syncInnentuerenToMaterials(totalDoors) {
+            // 1. Sync trader article
+            let traderUpdated = false;
+            const doorArt = appConfig.haendler_artikel?.find(a => a.id === 'mat-tueren-cpl');
+            if (doorArt && doorArt.qty !== totalDoors) {
+                doorArt.qty = totalDoors;
+                traderUpdated = true;
+            }
+
+            if (traderUpdated) {
+                renderHaendlerTable();
+            }
+
+            // 2. Update UI details badge
+            const detailEl = document.getElementById('door-sync-detail-text');
+            if (detailEl) {
+                detailEl.innerText = `${totalDoors} Innentüren (Zimmertüren, Bad-WCs, Zargen & Beschläge) mit Phase 8 synchronisiert.`;
+            }
+
+            // 3. Debounced sync to Firestore materialien/haus-jakob-data & LocalStorage
+            clearTimeout(doorSyncTimeout);
+            doorSyncTimeout = setTimeout(async () => {
+                try {
+                    if (!firebase.apps.length) return;
+                    const db = firebase.firestore();
+                    const matDocRef = db.collection("materialien").doc("haus-jakob-data");
+                    const snapshot = await matDocRef.get();
+                    if (snapshot.exists) {
+                        const matData = snapshot.data();
+                        if (matData && matData.finish) {
+                            const posTueren = matData.finish.find(p => p.pos === '8.6' || (p.title || '').toLowerCase().includes('innentüren set'));
+                            if (posTueren && posTueren.qty !== totalDoors) {
+                                posTueren.qty = totalDoors;
+                                posTueren.usage = `${totalDoors} Innentüren komplett für 2 Vollgeschosse & ELW (berechnet aus Türenplaner)`;
+                                await matDocRef.set(matData);
+                                localStorage.setItem('kfw40_material_data_v28', JSON.stringify(matData));
+                                const timeBadge = document.getElementById('door-sync-time-badge');
+                                if (timeBadge) {
+                                    const nowStr = new Date().toLocaleTimeString('de-DE', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+                                    timeBadge.innerText = `Synchronisiert (${nowStr})`;
+                                }
+                            }
+                        }
+                    }
+                } catch (e) {
+                    console.error("Firestore sync error from door calc:", e);
+                }
+            }, 600);
+        }
+
+        function updateDoor(idx, field, value) {
+            if (appConfig.innentueren && appConfig.innentueren[idx]) {
+                appConfig.innentueren[idx][field] = value;
+                saveConfig();
+            }
+        }
+
+        function addNewDoorRow() {
+            if (!appConfig.innentueren) appConfig.innentueren = [];
+            appConfig.innentueren.push({
+                id: 'it_' + Date.now(),
+                room: 'Neuer Raum',
+                width: 86.0,
+                height: 198.5,
+                wallThick: 12.0,
+                din: 'DIN Links',
+                type: 'CPL Weißlack Röhrenspan',
+                lock: 'Buntbart (BB)',
+                qty: 1
+            });
+            saveConfig();
+        }
+
+        function deleteDoorRow(idx) {
+            if (appConfig.innentueren) {
+                appConfig.innentueren.splice(idx, 1);
+                saveConfig();
+            }
+        }
+
+        function loadDefaultInnentueren() {
+            appConfig.innentueren = JSON.parse(JSON.stringify(DEFAULT_CONFIG.innentueren));
+            saveConfig();
+        }
+
+
+        // ==========================================
+        // 7. AUSSTATTUNG LOGIC
         // ==========================================
 
         function renderAusstattungTable() {
