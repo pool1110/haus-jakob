@@ -751,6 +751,38 @@
                     console.warn("Firestore listener info:", error);
                     updateSyncBadge("Lokal gespeichert", "slate");
                 });
+
+                // Also listen to marked items from materialien/haus-jakob-data
+                db.collection("materialien").doc("haus-jakob-data").onSnapshot((doc) => {
+                    if (doc.exists) {
+                        const matData = doc.data();
+                        let updated = false;
+                        if (matData) {
+                            // Check if any items marked forTrader should sync selection
+                            Object.keys(matData).forEach(cat => {
+                                if (Array.isArray(matData[cat])) {
+                                    matData[cat].forEach(item => {
+                                        if (item.forTrader !== undefined) {
+                                            // Find matching item in haendler_artikel if exists
+                                            const match = appConfig.haendler_artikel.find(a => 
+                                                a.title.toLowerCase().includes((item.title || '').slice(0, 15).toLowerCase()) ||
+                                                (item.title || '').toLowerCase().includes(a.title.slice(0, 15).toLowerCase())
+                                            );
+                                            if (match && match.selected !== item.forTrader) {
+                                                match.selected = item.forTrader;
+                                                updated = true;
+                                            }
+                                        }
+                                    });
+                                }
+                            });
+                            if (updated) {
+                                renderHaendlerTable();
+                            }
+                        }
+                    }
+                });
+
             } catch (e) {
                 console.error("Firebase init failed:", e);
                 updateSyncBadge("Lokal gespeichert", "slate");
