@@ -80,10 +80,6 @@
                     <i data-lucide="cloud" class="w-3.5 h-3.5 text-emerald-600"></i>
                     <span id="sync-status-text">Echtzeit Cloud-Sync</span>
                 </div>
-                <button id="btn-reset-data" class="px-3.5 py-2 bg-slate-100 hover:bg-red-50 hover:text-red-700 text-slate-700 border border-slate-200 font-bold text-xs rounded-xl flex items-center gap-1.5 transition-all">
-                    <i data-lucide="rotate-ccw" class="w-3.5 h-3.5"></i>
-                    Zurücksetzen
-                </button>
                 <button onclick="window.print()" class="px-3.5 py-2 bg-slate-100 hover:bg-slate-200 text-slate-800 border border-slate-200 font-bold text-xs rounded-xl flex items-center gap-1.5 transition-all">
                     <i data-lucide="printer" class="w-3.5 h-3.5 text-slate-600"></i>
                     PDF / Drucken
@@ -1005,14 +1001,6 @@
         document.getElementById('add-row-sanitaer').addEventListener('click', () => {
             appData.sanitaer.push({ pos: '9.' + (appData.sanitaer.length + 1), title: 'Neues Sanitärobjekt', usage: 'Bäder', qty: 1, unit: 'Stk', price: 0 });
             saveData(); renderAll();
-        });
-
-        document.getElementById('btn-reset-data').addEventListener('click', () => {
-            if (confirm('Möchtest du alle Materiallisten auf die chronologischen Standardwerte zurücksetzen?')) {
-                appData = JSON.parse(JSON.stringify(DEFAULT_DATA));
-                saveData();
-                renderAll();
-            }
         });
 
         document.getElementById('btn-export-csv').addEventListener('click', () => {
