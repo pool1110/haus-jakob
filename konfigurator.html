@@ -1,0 +1,1209 @@
+<!DOCTYPE html>
+<html lang="de" class="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Haus Jakob | Wand- &amp; Baustoffhändler-Konfigurator</title>
+    <meta name="description" content="Maßgenaue Wand- und Raumkonfiguration, Fenster- und Sanitärausstattung sowie selektiver Baustoffhändler-Ausschreibungsgenerator für Haus Jakob.">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Outfit', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Lucide Icons CDN -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Firebase SDK (Compat) -->
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+
+    <style>
+        body { background-color: #f8fafc; color: #0f172a; }
+        input[type=number]::-webkit-inner-spin-button, 
+        input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
+        input[type=number] { -moz-appearance: textfield; }
+        .tab-btn.active {
+            background-color: #0f172a !important;
+            color: #ffffff !important;
+            box-shadow: 0 2px 8px rgba(15, 23, 42, 0.12);
+        }
+        @media print {
+            body { background: white !important; color: black !important; }
+            header, .no-print, .nav-tabs-container { display: none !important; }
+            .print-card { border: 1px solid #ddd !important; box-shadow: none !important; background: white !important; color: black !important; }
+            table { font-size: 10px !important; color: black !important; width: 100% !important; }
+            th { background: #f1f5f9 !important; color: black !important; border: 1px solid #ccc !important; }
+            td { border: 1px solid #ccc !important; color: black !important; }
+            input { border: none !important; background: transparent !important; color: black !important; }
+            .action-col, .checkbox-col { display: none !important; }
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-900 font-sans antialiased selection:bg-slate-800 selection:text-white min-h-screen">
+
+    <!-- Header Navigation -->
+    <header class="sticky top-0 z-50 bg-white border-b border-slate-200 shadow-sm px-4 md:px-6 py-3 no-print">
+        <div class="max-w-[1920px] mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+            
+            <div class="flex items-center gap-3">
+                <a href="materialien.html" class="p-2 bg-slate-100 border border-slate-200 rounded-xl text-slate-700 hover:text-slate-900 hover:bg-slate-200 transition-all" title="Zurück zum Materialplaner">
+                    <i data-lucide="arrow-left" class="w-5 h-5"></i>
+                </a>
+                <div class="flex items-center gap-3">
+                    <div class="px-3.5 py-1.5 bg-slate-900 text-white rounded-xl font-display font-extrabold text-lg tracking-wide shadow-sm">
+                        HAUS JAKOB
+                    </div>
+                    <div class="h-6 w-px bg-slate-300 hidden sm:block"></div>
+                    <span class="font-display font-semibold text-sm md:text-base text-slate-700 hidden sm:inline">Wand- &amp; Baustoffhändler-Konfigurator</span>
+                </div>
+            </div>
+
+            <!-- Tab Switcher Header -->
+            <div class="flex items-center p-1 bg-slate-100 rounded-xl border border-slate-200 gap-1 overflow-x-auto max-w-full">
+                <button id="tab-btn-haendler" onclick="switchTab('haendler')" class="tab-btn active px-4 py-2 rounded-lg text-xs font-bold transition-all text-slate-600 hover:text-slate-900 whitespace-nowrap flex items-center gap-1.5">
+                    <i data-lucide="file-spreadsheet" class="w-3.5 h-3.5 text-emerald-500"></i>
+                    <span>Baustoffhändler-Ausschreibung</span>
+                </button>
+                <button id="tab-btn-waende" onclick="switchTab('waende')" class="tab-btn px-4 py-2 rounded-lg text-xs font-bold transition-all text-slate-600 hover:text-slate-900 whitespace-nowrap flex items-center gap-1.5">
+                    <i data-lucide="layout-grid" class="w-3.5 h-3.5 text-blue-500"></i>
+                    <span>1. Wand- &amp; Flächenrechner</span>
+                </button>
+                <button id="tab-btn-fenster" onclick="switchTab('fenster')" class="tab-btn px-4 py-2 rounded-lg text-xs font-bold transition-all text-slate-600 hover:text-slate-900 whitespace-nowrap flex items-center gap-1.5">
+                    <i data-lucide="panels-top-left" class="w-3.5 h-3.5 text-amber-500"></i>
+                    <span>2. Fenster &amp; Türen</span>
+                </button>
+                <button id="tab-btn-ausstattung" onclick="switchTab('ausstattung')" class="tab-btn px-4 py-2 rounded-lg text-xs font-bold transition-all text-slate-600 hover:text-slate-900 whitespace-nowrap flex items-center gap-1.5">
+                    <i data-lucide="bath" class="w-3.5 h-3.5 text-teal-500"></i>
+                    <span>3. Bäder &amp; Ausstattung</span>
+                </button>
+            </div>
+
+            <!-- Header Actions -->
+            <div class="flex items-center gap-2 flex-wrap">
+                <div id="cloud-sync-badge" class="px-3 py-1.5 bg-emerald-100 border border-emerald-300 text-emerald-800 rounded-xl text-xs font-bold flex items-center gap-1.5 shadow-sm">
+                    <i data-lucide="cloud" class="w-3.5 h-3.5 text-emerald-600"></i>
+                    <span id="sync-status-text">Cloud Sync Aktiv</span>
+                </div>
+                <a href="index.html" class="px-3.5 py-2 bg-slate-100 hover:bg-slate-200 text-slate-800 border border-slate-200 font-bold text-xs rounded-xl flex items-center gap-1.5 transition-all">
+                    <i data-lucide="box" class="w-3.5 h-3.5 text-slate-600"></i>
+                    Schnittskizzen
+                </a>
+            </div>
+
+        </div>
+    </header>
+
+    <!-- Main Content Container -->
+    <main class="max-w-[1920px] mx-auto p-4 md:p-6 space-y-6">
+
+        <!-- ========================================================================= -->
+        <!-- TAB 1: BAUSTOFFHÄNDLER-AUSSCHREIBUNG & PREISANFRAGE (DEFAULT VIEW)        -->
+        <!-- ========================================================================= -->
+        <section id="sec-haendler" class="tab-content space-y-6">
+            
+            <!-- Top Card: Summary & Action Toolbar -->
+            <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm print-card space-y-4">
+                <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
+                    <div>
+                        <div class="flex items-center gap-2">
+                            <span class="px-2.5 py-1 rounded-lg bg-emerald-700 text-white font-display font-extrabold text-xs tracking-wider shadow-sm">
+                                Ausschreibung / Preisanfrage
+                            </span>
+                            <span class="text-xs text-slate-500 font-medium">Projekt Haus Jakob (8,5 × 14,0 m | 2 Vollgeschosse)</span>
+                        </div>
+                        <h2 class="font-display font-bold text-2xl text-slate-900 mt-1">Baustoffhändler-Anfrageliste mit exakten Produktspezifikationen</h2>
+                        <p class="text-xs text-slate-500">Wähle gezielt aus, welche Baustoffe und Gewerke in der Angebotsanfrage enthalten sein sollen. Alle Artikel sind mit genauen Maßen, Stärken, Qualitätsnormen und Verwendungszwecken für den Händler aufbereitet.</p>
+                    </div>
+
+                    <!-- Actions for Trader Export -->
+                    <div class="flex items-center gap-2 flex-wrap shrink-0 no-print">
+                        <button onclick="window.print()" class="px-4 py-2.5 bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs rounded-xl flex items-center gap-2 shadow-sm transition-all">
+                            <i data-lucide="printer" class="w-4 h-4 text-emerald-400"></i>
+                            <span>Drucken / PDF Angebot anfordern</span>
+                        </button>
+                        <button onclick="exportHaendlerCSV()" class="px-4 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs rounded-xl flex items-center gap-2 shadow-sm transition-all">
+                            <i data-lucide="download" class="w-4 h-4"></i>
+                            <span>CSV für Händler</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Filter & Selection Bar -->
+                <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 pt-4 border-t border-slate-200 no-print">
+                    <div class="flex items-center gap-2 flex-wrap text-xs">
+                        <span class="font-bold text-slate-700 mr-1">Schnellauswahl:</span>
+                        <button onclick="selectCategory('all')" class="px-3 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-800 rounded-lg font-semibold border border-slate-300 transition-all">Alle auswählen</button>
+                        <button onclick="selectCategory('trockenbau')" class="px-3 py-1.5 bg-blue-50 hover:bg-blue-100 text-blue-800 rounded-lg font-semibold border border-blue-200 transition-all">Nur Trockenbau (OSB &amp; Rigips)</button>
+                        <button onclick="selectCategory('daemmung')" class="px-3 py-1.5 bg-amber-50 hover:bg-amber-100 text-amber-800 rounded-lg font-semibold border border-amber-200 transition-all">Nur Dämmung &amp; Klebebänder</button>
+                        <button onclick="selectCategory('dach')" class="px-3 py-1.5 bg-orange-50 hover:bg-orange-100 text-orange-800 rounded-lg font-semibold border border-orange-200 transition-all">Nur Dacheindeckung &amp; Rinnen</button>
+                        <button onclick="selectCategory('ausbau')" class="px-3 py-1.5 bg-purple-50 hover:bg-purple-100 text-purple-800 rounded-lg font-semibold border border-purple-200 transition-all">Nur Fußboden &amp; Türen</button>
+                        <button onclick="selectCategory('sanitaer')" class="px-3 py-1.5 bg-teal-50 hover:bg-teal-100 text-teal-800 rounded-lg font-semibold border border-teal-200 transition-all">Nur Bäder &amp; Sanitär</button>
+                        <button onclick="selectCategory('none')" class="px-3 py-1.5 bg-slate-100 hover:bg-red-50 hover:text-red-700 text-slate-600 rounded-lg font-semibold border border-slate-300 transition-all">Alle abwählen</button>
+                    </div>
+
+                    <div class="flex items-center gap-4 text-xs font-bold text-slate-700">
+                        <label class="flex items-center gap-2 cursor-pointer select-none">
+                            <input id="chk-verschnitt" type="checkbox" onchange="renderHaendlerTable()" class="w-4 h-4 rounded text-emerald-600 focus:ring-emerald-500">
+                            <span>+10% Verschnittpuffer einrechnen</span>
+                        </label>
+                        <div class="px-3 py-1.5 bg-slate-100 rounded-lg border border-slate-200">
+                            <span id="selected-count-badge" class="text-emerald-700 font-extrabold">0</span> Positionen ausgewählt
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Trader Printable Letterhead (Printed only) -->
+            <div class="hidden print:block bg-white p-4 border-b-2 border-slate-900">
+                <div class="flex justify-between items-start">
+                    <div>
+                        <h1 class="text-xl font-bold font-display uppercase tracking-wide">MATERIAL-PREISANFRAGE &amp; AUSSCHREIBUNG</h1>
+                        <p class="text-xs text-slate-600 mt-1"><strong>Bauvorhaben:</strong> Neubau Einfamilienhaus KfW-40 mit Einliegerwohnung (Haus Jakob)</p>
+                        <p class="text-xs text-slate-600"><strong>Gebäudeabmessungen:</strong> 8,50 m × 14,00 m (2 Vollgeschosse, Carport &amp; Terrassenüberdachung)</p>
+                        <p class="text-xs text-slate-600"><strong>Lieferort:</strong> Baustelle Haus Jakob | Anlieferung frei Baustelle mit Kran-LKW erbeten</p>
+                    </div>
+                    <div class="text-right text-xs">
+                        <p class="font-bold">Bauherren-Anfrage</p>
+                        <p id="print-date">Datum: </p>
+                        <p class="mt-2 text-slate-500">Bitte um Angabe von Einzelpreisen, Staffelpreisen &amp; Lieferzeiten</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Trader Items Table -->
+            <div class="bg-white border border-slate-200 rounded-2xl shadow-sm print-card overflow-hidden">
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left text-xs font-sans">
+                        <thead>
+                            <tr class="border-b border-slate-200 text-slate-700 uppercase tracking-wider text-[11px] bg-slate-100">
+                                <th class="py-3 px-3 w-12 text-center checkbox-col no-print">Auswahl</th>
+                                <th class="py-3 px-2 w-14">Pos.</th>
+                                <th class="py-3 px-3 w-72">Materialbezeichnung &amp; Normung</th>
+                                <th class="py-3 px-3">Exakte Spezifikation &amp; Qualitätskriterien (für Angebot)</th>
+                                <th class="py-3 px-3 text-right w-24">Bedarfsmenge</th>
+                                <th class="py-3 px-2 text-left w-20">Einheit</th>
+                                <th class="py-3 px-3 w-48 text-slate-500">Angebotener Hersteller / Typ (vom Händler auszufüllen)</th>
+                                <th class="py-3 px-3 text-right w-32 text-slate-500">Einzelpreis (€)</th>
+                                <th class="py-3 px-3 text-right w-32 text-slate-500">Gesamtpreis (€)</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbody-haendler" class="divide-y divide-slate-200 text-slate-700">
+                            <!-- Injected dynamically with rich details -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </section>
+
+
+        <!-- ========================================================================= -->
+        <!-- TAB 2: WAND- & FLÄCHENRECHNER (MAßGENAUE WANDEINGABE)                     -->
+        <!-- ========================================================================= -->
+        <section id="sec-waende" class="tab-content hidden space-y-6">
+            
+            <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm print-card space-y-4">
+                <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
+                    <div>
+                        <span class="px-2.5 py-1 rounded-lg bg-blue-700 text-white font-display font-extrabold text-xs tracking-wider shadow-sm">
+                            1. Wand- &amp; Raumgeometrie
+                        </span>
+                        <h2 class="font-display font-bold text-2xl text-slate-900 mt-1">Exakte Wandabschnitts-Eingabe (8,5 × 14,0 m | 2 Vollgeschosse)</h2>
+                        <p class="text-xs text-slate-500">Hier können alle Außen- und Innenwände mit Länge, Höhe und Abzügen (Fenster/Türen) eingegeben werden. Die resultierenden Beplankungsflächen für OSB, Rigips und Dämmung werden in Echtzeit berechnet.</p>
+                    </div>
+
+                    <div class="flex items-center gap-2 no-print">
+                        <button onclick="loadDefaultWalls()" class="px-3.5 py-2 bg-slate-100 hover:bg-slate-200 text-slate-800 border border-slate-200 font-bold text-xs rounded-xl flex items-center gap-1.5 transition-all">
+                            <i data-lucide="refresh-cw" class="w-3.5 h-3.5 text-blue-600"></i>
+                            <span>Standard-Set 8,5x14m laden</span>
+                        </button>
+                        <button onclick="addNewWallRow()" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs rounded-xl flex items-center gap-1.5 shadow-sm transition-all">
+                            <i data-lucide="plus-circle" class="w-4 h-4"></i>
+                            <span>Wand hinzufügen</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Quick Summary KPI Cards -->
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-4 border-t border-slate-200">
+                    <div class="p-3.5 bg-blue-50 border border-blue-200 rounded-xl">
+                        <span class="text-[11px] font-bold text-blue-700 uppercase tracking-wider block">Außenwand Brutto:</span>
+                        <span id="kpi-aw-brutto" class="font-display font-extrabold text-xl text-blue-950 font-mono">0 m²</span>
+                    </div>
+                    <div class="p-3.5 bg-emerald-50 border border-emerald-200 rounded-xl">
+                        <span class="text-[11px] font-bold text-emerald-700 uppercase tracking-wider block">Außenwand Netto (Fassade):</span>
+                        <span id="kpi-aw-netto" class="font-display font-extrabold text-xl text-emerald-950 font-mono">0 m²</span>
+                    </div>
+                    <div class="p-3.5 bg-amber-50 border border-amber-200 rounded-xl">
+                        <span class="text-[11px] font-bold text-amber-700 uppercase tracking-wider block">OSB/3 Beplankung bauseits:</span>
+                        <span id="kpi-osb-total" class="font-display font-extrabold text-xl text-amber-950 font-mono">0 m²</span>
+                    </div>
+                    <div class="p-3.5 bg-purple-50 border border-purple-200 rounded-xl">
+                        <span class="text-[11px] font-bold text-purple-700 uppercase tracking-wider block">Rigips Gipskartonplatten:</span>
+                        <span id="kpi-rigips-total" class="font-display font-extrabold text-xl text-purple-950 font-mono">0 m²</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Walls Input Table -->
+            <div class="bg-white border border-slate-200 rounded-2xl shadow-sm print-card overflow-hidden">
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left text-xs font-sans">
+                        <thead>
+                            <tr class="border-b border-slate-200 text-slate-700 uppercase tracking-wider text-[11px] bg-slate-100">
+                                <th class="py-3 px-3 w-12">Nr.</th>
+                                <th class="py-3 px-3 w-48">Wandbezeichnung / Raum</th>
+                                <th class="py-3 px-3 w-44">Wandart / Aufbau</th>
+                                <th class="py-3 px-2 text-right w-24">Länge (m)</th>
+                                <th class="py-3 px-2 text-right w-24">Höhe (m)</th>
+                                <th class="py-3 px-2 text-right w-24">Brutto (m²)</th>
+                                <th class="py-3 px-2 text-right w-28">Abzüge (m²)</th>
+                                <th class="py-3 px-2 text-right w-28 font-bold text-blue-900">Netto (m²)</th>
+                                <th class="py-3 px-2 text-right w-28 font-bold text-amber-900">OSB bauseits (m²)</th>
+                                <th class="py-3 px-2 text-right w-28 font-bold text-purple-900">Rigips (m²)</th>
+                                <th class="py-3 px-2 text-center w-14 action-col no-print">Aktion</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbody-waende" class="divide-y divide-slate-200 text-slate-700">
+                            <!-- Injected dynamically -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </section>
+
+
+        <!-- ========================================================================= -->
+        <!-- TAB 3: FENSTER- & TÜRENPLANER                                              -->
+        <!-- ========================================================================= -->
+        <section id="sec-fenster" class="tab-content hidden space-y-6">
+            
+            <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm print-card space-y-4">
+                <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
+                    <div>
+                        <span class="px-2.5 py-1 rounded-lg bg-amber-700 text-white font-display font-extrabold text-xs tracking-wider shadow-sm">
+                            2. Fenster &amp; Außentüren
+                        </span>
+                        <h2 class="font-display font-bold text-2xl text-slate-900 mt-1">Fenster-, Schiebetür- &amp; Haustüren-Stückliste</h2>
+                        <p class="text-xs text-slate-500">Palmatin liefert alle Fenster und die Terrassenschiebetür ab Werk (im 12.000 € Werks-Komplettsatz). Die beiden Haustüren werden bauseits in Deutschland bezogen.</p>
+                    </div>
+
+                    <div class="flex items-center gap-2 no-print">
+                        <button onclick="addNewWindowRow()" class="px-4 py-2 bg-amber-600 hover:bg-amber-700 text-white font-bold text-xs rounded-xl flex items-center gap-1.5 shadow-sm transition-all">
+                            <i data-lucide="plus-circle" class="w-4 h-4"></i>
+                            <span>Element hinzufügen</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-4 border-t border-slate-200">
+                    <div class="p-3.5 bg-amber-50 border border-amber-200 rounded-xl">
+                        <span class="text-[11px] font-bold text-amber-800 uppercase tracking-wider block">Gesamtanzahl Fenster:</span>
+                        <span id="kpi-window-count" class="font-display font-extrabold text-xl text-amber-950 font-mono">18 Stk</span>
+                    </div>
+                    <div class="p-3.5 bg-blue-50 border border-blue-200 rounded-xl">
+                        <span class="text-[11px] font-bold text-blue-800 uppercase tracking-wider block">Terrassen-Schiebetüren:</span>
+                        <span id="kpi-slide-count" class="font-display font-extrabold text-xl text-blue-950 font-mono">1 Stk</span>
+                    </div>
+                    <div class="p-3.5 bg-emerald-50 border border-emerald-200 rounded-xl">
+                        <span class="text-[11px] font-bold text-emerald-800 uppercase tracking-wider block">Haustüren (Bauseits DE):</span>
+                        <span id="kpi-door-count" class="font-display font-extrabold text-xl text-emerald-950 font-mono">2 Stk</span>
+                    </div>
+                    <div class="p-3.5 bg-slate-50 border border-slate-200 rounded-xl">
+                        <span class="text-[11px] font-bold text-slate-700 uppercase tracking-wider block">Gesamt-Glasfläche:</span>
+                        <span id="kpi-glass-area" class="font-display font-extrabold text-xl text-slate-950 font-mono">ca. 42 m²</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Windows Table -->
+            <div class="bg-white border border-slate-200 rounded-2xl shadow-sm print-card overflow-hidden">
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left text-xs font-sans">
+                        <thead>
+                            <tr class="border-b border-slate-200 text-slate-700 uppercase tracking-wider text-[11px] bg-slate-100">
+                                <th class="py-3 px-3 w-12">Nr.</th>
+                                <th class="py-3 px-3 w-40">Raum &amp; Geschoss</th>
+                                <th class="py-3 px-3 w-44">Element-Typ</th>
+                                <th class="py-3 px-2 text-right w-24">Breite (cm)</th>
+                                <th class="py-3 px-2 text-right w-24">Höhe (cm)</th>
+                                <th class="py-3 px-2 text-right w-20">Anzahl</th>
+                                <th class="py-3 px-3 w-44">Sonnenschutz / Rollladen</th>
+                                <th class="py-3 px-3 w-36">Lieferant</th>
+                                <th class="py-3 px-2 text-center w-14 action-col no-print">Aktion</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbody-fenster" class="divide-y divide-slate-200 text-slate-700">
+                            <!-- Injected dynamically -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </section>
+
+
+        <!-- ========================================================================= -->
+        <!-- TAB 4: BÄDER- & AUSSTATTUNGSMANAGER                                       -->
+        <!-- ========================================================================= -->
+        <section id="sec-ausstattung" class="tab-content hidden space-y-6">
+            
+            <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm print-card space-y-4">
+                <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
+                    <div>
+                        <span class="px-2.5 py-1 rounded-lg bg-teal-700 text-white font-display font-extrabold text-xs tracking-wider shadow-sm">
+                            3. Bäder, Türen &amp; Elektroausstattung
+                        </span>
+                        <h2 class="font-display font-bold text-2xl text-slate-900 mt-1">Ausstattungs- &amp; Mengenkatalog Haus Jakob</h2>
+                        <p class="text-xs text-slate-500">Konfiguration aller 3 Sanitärbereiche (Hauptbad OG, ELW Duschbad EG, Gäste-WC EG) sowie Innentüren, Bodenflächen und Elektroinstallationen.</p>
+                    </div>
+
+                    <div class="flex items-center gap-2 no-print">
+                        <button onclick="addNewEquipRow()" class="px-4 py-2 bg-teal-600 hover:bg-teal-700 text-white font-bold text-xs rounded-xl flex items-center gap-1.5 shadow-sm transition-all">
+                            <i data-lucide="plus-circle" class="w-4 h-4"></i>
+                            <span>Ausstattung hinzufügen</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-4 border-t border-slate-200">
+                    <div class="p-3.5 bg-teal-50 border border-teal-200 rounded-xl">
+                        <span class="text-[11px] font-bold text-teal-800 uppercase tracking-wider block">Badezimmer / WCs:</span>
+                        <span class="font-display font-extrabold text-xl text-teal-950 font-mono">3 Bereiche</span>
+                    </div>
+                    <div class="p-3.5 bg-blue-50 border border-blue-200 rounded-xl">
+                        <span class="text-[11px] font-bold text-blue-800 uppercase tracking-wider block">Innentüren komplett:</span>
+                        <span class="font-display font-extrabold text-xl text-blue-950 font-mono">14 Stk</span>
+                    </div>
+                    <div class="p-3.5 bg-purple-50 border border-purple-200 rounded-xl">
+                        <span class="text-[11px] font-bold text-purple-800 uppercase tracking-wider block">Klick-Vinylbodenbelag:</span>
+                        <span class="font-display font-extrabold text-xl text-purple-950 font-mono">210 m²</span>
+                    </div>
+                    <div class="p-3.5 bg-emerald-50 border border-emerald-200 rounded-xl">
+                        <span class="text-[11px] font-bold text-emerald-800 uppercase tracking-wider block">Steckdosen &amp; Schalter:</span>
+                        <span class="font-display font-extrabold text-xl text-emerald-950 font-mono">270 Dosen</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Equipment Table -->
+            <div class="bg-white border border-slate-200 rounded-2xl shadow-sm print-card overflow-hidden">
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left text-xs font-sans">
+                        <thead>
+                            <tr class="border-b border-slate-200 text-slate-700 uppercase tracking-wider text-[11px] bg-slate-100">
+                                <th class="py-3 px-3 w-12">Nr.</th>
+                                <th class="py-3 px-3 w-48">Bereich / Gewerk</th>
+                                <th class="py-3 px-3">Ausstattungsbezeichnung &amp; Spezifikation</th>
+                                <th class="py-3 px-2 text-right w-24">Menge</th>
+                                <th class="py-3 px-2 text-left w-20">Einheit</th>
+                                <th class="py-3 px-3 w-48">Zusatzanmerkung</th>
+                                <th class="py-3 px-2 text-center w-14 action-col no-print">Aktion</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbody-ausstattung" class="divide-y divide-slate-200 text-slate-700">
+                            <!-- Injected dynamically -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </section>
+
+    </main>
+
+    <!-- Script Application Logic -->
+    <script>
+        // ==========================================
+        // 1. DATA MODELS & PRESETS
+        // ==========================================
+
+        const DEFAULT_CONFIG = {
+            waende: [
+                { id: 'w1', name: 'AW Nord (EG & OG)', type: 'Außenwand 374 mm (Fassade + STEICO + 180mm Ständer)', len: 14.0, height: 5.70, cutouts: 16.0 },
+                { id: 'w2', name: 'AW Süd mit Schiebetür & Fenster', type: 'Außenwand 374 mm (Fassade + STEICO + 180mm Ständer)', len: 14.0, height: 5.70, cutouts: 20.0 },
+                { id: 'w3', name: 'AW Ost (Giebelseite)', type: 'Außenwand 374 mm (Fassade + STEICO + 180mm Ständer)', len: 8.5, height: 5.70, cutouts: 4.5 },
+                { id: 'w4', name: 'AW West (Giebelseite mit Eingang)', type: 'Außenwand 374 mm (Fassade + STEICO + 180mm Ständer)', len: 8.5, height: 5.70, cutouts: 6.5 },
+                { id: 'w5', name: 'Wohnungstrennwand ELW (EG)', type: 'Schallschutzwand ELW (53 dB - 2x OSB + 2x Rigips)', len: 8.5, height: 2.80, cutouts: 0.0 },
+                { id: 'w6', name: 'Tragende Innenwand EG Längsachse', type: 'Tragende Innenwand (Ständer 120 mm)', len: 9.0, height: 2.80, cutouts: 4.0 },
+                { id: 'w7', name: 'Nichttragende Trennwände EG', type: 'Innenwand Raumteiler (Ständer 80 mm)', len: 16.0, height: 2.80, cutouts: 6.0 },
+                { id: 'w8', name: 'Tragende Innenwand OG Längsachse', type: 'Tragende Innenwand (Ständer 120 mm)', len: 10.0, height: 2.70, cutouts: 4.0 },
+                { id: 'w9', name: 'Nichttragende Trennwände OG (Zimmer/Bad)', type: 'Innenwand Raumteiler (Ständer 80 mm)', len: 24.0, height: 2.70, cutouts: 8.0 }
+            ],
+
+            fenster: [
+                { id: 'f1', room: 'Wohnen EG (Terrasse)', type: 'Hebe-Schiebetür 3-fach Glas', width: 300, height: 225, qty: 1, sun: 'Elektrischer Raffstore', supplier: 'Palmatin Werkssatz' },
+                { id: 'f2', room: 'Küche & Essen EG', type: 'Fenster 2-flügelig Dreh-Kipp', width: 180, height: 130, qty: 2, sun: 'Elektrischer Vorbau-Rollladen', supplier: 'Palmatin Werkssatz' },
+                { id: 'f3', room: 'Wohnen ELW EG', type: 'Fenster 2-flügelig Dreh-Kipp', width: 160, height: 130, qty: 2, sun: 'Elektrischer Vorbau-Rollladen', supplier: 'Palmatin Werkssatz' },
+                { id: 'f4', room: 'Schlafen ELW EG', type: 'Fenster 1-flügelig Dreh-Kipp', width: 120, height: 130, qty: 1, sun: 'Elektrischer Vorbau-Rollladen', supplier: 'Palmatin Werkssatz' },
+                { id: 'f5', room: 'Bäder & WCs (EG/OG)', type: 'Fenster satiniert / Ornamentglas', width: 100, height: 110, qty: 3, sun: 'Elektrischer Vorbau-Rollladen', supplier: 'Palmatin Werkssatz' },
+                { id: 'f6', room: 'Schlafzimmer OG', type: 'Fenster bodentief m. Absturzsicherung', width: 120, height: 215, qty: 2, sun: 'Elektrischer Vorbau-Rollladen', supplier: 'Palmatin Werkssatz' },
+                { id: 'f7', room: 'Kinderzimmer 1 & 2 OG', type: 'Fenster 2-flügelig Dreh-Kipp', width: 160, height: 130, qty: 4, sun: 'Elektrischer Vorbau-Rollladen', supplier: 'Palmatin Werkssatz' },
+                { id: 'f8', room: 'Büro / Gast OG', type: 'Fenster 2-flügelig Dreh-Kipp', width: 140, height: 130, qty: 2, sun: 'Elektrischer Vorbau-Rollladen', supplier: 'Palmatin Werkssatz' },
+                { id: 'f9', room: 'Flure & Treppenhaus', type: 'Fenster Festverglasung / Dreh-Kipp', width: 100, height: 130, qty: 2, sun: 'Elektrischer Vorbau-Rollladen', supplier: 'Palmatin Werkssatz' },
+                { id: 'f10', room: 'Haupteingang EG', type: 'Haustür Alu/Holz hochgedämmt', width: 110, height: 220, qty: 1, sun: 'Kein (Sicherheitsglas)', supplier: 'Bauseits in DE gekauft' },
+                { id: 'f11', room: 'Eingang ELW EG', type: 'Haustür Alu/Holz hochgedämmt', width: 100, height: 215, qty: 1, sun: 'Kein (Sicherheitsglas)', supplier: 'Bauseits in DE gekauft' }
+            ],
+
+            ausstattung: [
+                { id: 'a1', category: 'Hauptbad OG', name: 'Bodenebene Walk-In Dusche (befliesbare Duschrinne 90cm + Glaswand 120cm)', qty: 1, unit: 'Set', note: 'Inkl. Unterputz-Thermostatarmatur' },
+                { id: 'a2', category: 'Hauptbad OG', name: 'Acryl-Rechteckbadewanne 180x80 cm inkl. Wannenfüße & Ab-/Überlauf', qty: 1, unit: 'Stk', note: 'Schallentkoppelt eingebaut' },
+                { id: 'a3', category: 'Hauptbad OG', name: 'Doppelwaschtisch 120cm inkl. Unterschrank & 2x Einhebelmischer', qty: 1, unit: 'Set', note: 'Keramik weiß' },
+                { id: 'a4', category: 'Hauptbad OG', name: 'Wand-WC spülrandlos inkl. Softclose-Sitz & Geberit Sigma Vorwandelement', qty: 1, unit: 'Set', note: 'Betätigungsplatte Sigma20 weiß' },
+                { id: 'a5', category: 'Duschbad ELW EG', name: 'Bodenebene Dusche 90x90 cm inkl. Duschrinne, Glas-Eckeinstieg & Armatur', qty: 1, unit: 'Set', note: 'Komplettset' },
+                { id: 'a6', category: 'Duschbad ELW EG', name: 'Waschtisch 60cm inkl. Unterschrank & Wand-WC Set spülrandlos', qty: 1, unit: 'Set', note: 'Vorwandelement Geberit' },
+                { id: 'a7', category: 'Gäste-WC EG', name: 'Handwaschbecken 45cm mit Kalt-/Warm-Armatur & Wand-WC Set', qty: 1, unit: 'Set', note: 'Kompakt-Sanitär' },
+                { id: 'a8', category: 'Innentüren', name: 'CPL Innentüren Weißlack (Röhrenspan, Rundkante, inkl. Zarge & Drücker)', qty: 14, unit: 'Stk', note: 'Standardmaße 86,0 x 198,5 cm' },
+                { id: 'a9', category: 'Böden', name: 'Rigid-Klick-Vinylboden 100% wasserfest (Nutzschicht 0,55mm, Kl. 23/33)', qty: 210, unit: 'm²', note: 'Vollflächig EG + OG + Bäder' },
+                { id: 'a10', category: 'Böden', name: 'MDF-Sockelleisten weiß foliert 60x15 mm inkl. Montageclips', qty: 310, unit: 'lfm', note: 'Passend zu Vinylboden' },
+                { id: 'a11', category: 'Elektro', name: 'Schalter- & Steckdosenprogramm reinweiß glänzend (Gira E2 / Busch-Jaeger)', qty: 270, unit: 'Stk', note: '200 Steckdosen + 70 Schalter/Taster' },
+                { id: 'a12', category: 'Elektro', name: 'LED-Deckeneinbauspots warmweiß / dimmbar (IP44 in Bädern)', qty: 45, unit: 'Stk', note: 'Inkl. LED-Treiber' }
+            ],
+
+            // Rich Material Definitions for Traders (Pre-populated with trade standards & specs)
+            haendler_artikel: [
+                {
+                    id: 'mat-osb-12',
+                    category: 'trockenbau',
+                    pos: '1.1',
+                    title: 'OSB/3 Platten 12 mm ungeschliffen (CE nach EN 300, formaldehydfrei verleimt)',
+                    spec: 'Format 2.500 × 1.250 mm (stumpfe Kante) zur bauseitigen 2. Wandbeplankung über der Installationsebene (Außenwände) und 2. Beplankungsseite aller Innenwände.',
+                    qty: 480,
+                    unit: 'm²',
+                    selected: true
+                },
+                {
+                    id: 'mat-rigips-125',
+                    category: 'trockenbau',
+                    pos: '1.2',
+                    title: 'Gipskartonplatten 12,5 mm (Typ A / GKB nach DIN EN 520)',
+                    spec: 'Kantenform HRAK (halbrunde abgeflachte Kante), Format 2.000 × 1.250 mm / 2.600 × 600 mm (Einmannplatte) für Wand- & Deckenbeplankung im EG & OG.',
+                    qty: 620,
+                    unit: 'm²',
+                    selected: true
+                },
+                {
+                    id: 'mat-rigips-impr',
+                    category: 'trockenbau',
+                    pos: '1.3',
+                    title: 'Feuchtraum-Gipskartonplatten imprägniert 12,5 mm (Typ H2 / GKBI nach DIN EN 520)',
+                    spec: 'Kern- & Kartonimprägnierung mit verzögerter Wasseraufnahme (<10%) für Hauptbad OG, ELW-Bad und Gäste-WC.',
+                    qty: 100,
+                    unit: 'm²',
+                    selected: true
+                },
+                {
+                    id: 'mat-osb-22-nf',
+                    category: 'trockenbau',
+                    pos: '1.4',
+                    title: 'OSB/3 Verlegeplatten 22 mm Nut & Feder 4-seitig (DIN EN 300)',
+                    spec: 'Format 2.500 × 675 mm, geschliffen/ungeschliffen. Als statische Tragschicht auf der 240mm KVH-Zwischendecke OG (119 m²) und als begehbarer Dachbodenbelag (119 m²).',
+                    qty: 238,
+                    unit: 'm²',
+                    selected: true
+                },
+                {
+                    id: 'mat-spachtel-q3',
+                    category: 'trockenbau',
+                    pos: '1.5',
+                    title: 'Fugenspachtel & Finish-Spachtelmasse Q2/Q3 (z.B. Knauf Uniflott / Rigips Vario)',
+                    spec: 'Hochfester kunstharzvergüteter Spezialgips für Fugenverspachtelung ohne/mit Bewehrungsstreifen + Feinspachtel für 920 m² Wand-/Deckenfläche.',
+                    qty: 450,
+                    unit: 'kg',
+                    selected: true
+                },
+                {
+                    id: 'mat-schrauben-set',
+                    category: 'trockenbau',
+                    pos: '1.6',
+                    title: 'Trockenbau- & Holzbauschrauben Komplett-Set',
+                    spec: '5.000 Stk Schnellbauschrauben mit Feingewinde (3,9 × 35 mm fosfatiert) + 4.000 Stk Vollgewinde-Holzbauschrauben (4,0 × 45 mm TX20 verzinkt).',
+                    qty: 1,
+                    unit: 'Paket',
+                    selected: true
+                },
+                {
+                    id: 'mat-trittschall-30',
+                    category: 'daemmung',
+                    pos: '2.1',
+                    title: 'Trittschalldämmung Mineralwolle / EPS DES-sg 30-2 mm (nach DIN 4109)',
+                    spec: 'Dynamische Steifigkeit s\' ≤ 10 MN/m³, Trittschallverbesserungsmaß ΔLw ≥ 30 dB. Hochwirksame Entkopplung unter 50 mm schwimmendem Nassestrich im OG.',
+                    qty: 110,
+                    unit: 'm²',
+                    selected: true
+                },
+                {
+                    id: 'mat-randstreifen',
+                    category: 'daemmung',
+                    pos: '2.2',
+                    title: 'Randdämmstreifen PE mit Folienlasche 8 × 150 mm',
+                    spec: 'Geschlossenzelliger Polyethylenschaum mit angeschweißter Folienlasche zur schallbrückenfreien Estrichverlegung im OG.',
+                    qty: 120,
+                    unit: 'lfm',
+                    selected: true
+                },
+                {
+                    id: 'mat-tescon-vana',
+                    category: 'daemmung',
+                    pos: '2.3',
+                    title: 'Allround-Luftdichtungsklebeband 60 mm (z.B. pro clima TESCON VANA / Siga Sicrall)',
+                    spec: 'Alterungsbeständiges Acrylat-Klebeband mit Vliesträger nach DIN 4108-7 zur dauerhaften Stoßverklebung der OSB-Dampfbremsebene und Durchdringungen.',
+                    qty: 10,
+                    unit: 'Rollen (30m)',
+                    selected: true
+                },
+                {
+                    id: 'mat-orcon-f',
+                    category: 'daemmung',
+                    pos: '2.4',
+                    title: 'Dauerelastischer Luftdichtungskleber 310 ml Kartuschen (z.B. pro clima ORCON F)',
+                    spec: 'Lösungsmittelfreier Dispersionskleber für kraftschlüssigen Anschluss der OSB/Dampfbremsbahnen an Betonbodenplatte und Giebelwandmauerwerk.',
+                    qty: 12,
+                    unit: 'Kartuschen',
+                    selected: true
+                },
+                {
+                    id: 'mat-schallschutz-elw',
+                    category: 'daemmung',
+                    pos: '2.5',
+                    title: 'Schallschutzentkopplung & Trennwandkitt für ELW-Wohnungstrennwand (53 dB)',
+                    spec: 'Selbstklebendes PE-Dichtungsband 70 mm + Gipsfaser-Schalldämmplatten 12,5 mm (Fermacell) zur Erzielung erhöhten Schallschutzes nach DIN 4109 Beiblatt 2.',
+                    qty: 1,
+                    unit: 'Set',
+                    selected: true
+                },
+                {
+                    id: 'mat-dachpfannen',
+                    category: 'dach',
+                    pos: '3.1',
+                    title: 'Tondachziegel / Dachsteine anthrazit engobiert (z.B. Braas Rubin 11V / Creaton Domino)',
+                    spec: 'Für 155 m² Steildachfläche (ca. 1.800 Flächenziegel) inkl. Formziegel: 25 lfm Firstziegel mit Firstklammern, 32 Stk Ortgangziegel (links/rechts) & 6 Stk Dunstrohr-/Lüfterziegel.',
+                    qty: 155,
+                    unit: 'm²',
+                    selected: true
+                },
+                {
+                    id: 'mat-terrassendach-vsg',
+                    category: 'dach',
+                    pos: '3.2',
+                    title: 'VSG-Sicherheitsglas Eindeckung 10 mm für Terrassenüberdachung (ca. 6,0 × 3,5 m)',
+                    spec: '21 m² Verbundsicherheitsglas (2x 5mm TVG mit 0,76mm PVB-Folie klar) inkl. Aluminium-Auflageprofilen, EPDM-Gummidichtungen, Alu-Klemmdeckeln und Wandanschlussprofil.',
+                    qty: 21,
+                    unit: 'm²',
+                    selected: true
+                },
+                {
+                    id: 'mat-carport-trapez',
+                    category: 'dach',
+                    pos: '3.3',
+                    title: 'Carport-Dacheindeckung Stahltrapezblech T35/207 mit Antikondensvlies (ca. 6,0 × 6,0 m)',
+                    spec: '36 m² verzinktes Stahltrapezblech 0,75 mm (Farbe Anthrazitgrau RAL 7016, 25µm Beschichtung) mit werkseitigem Antitropfvlies auf der Unterseite inkl. Kalotten & Bohrschrauben.',
+                    qty: 36,
+                    unit: 'm²',
+                    selected: true
+                },
+                {
+                    id: 'mat-dachrinnen-set',
+                    category: 'dach',
+                    pos: '3.4',
+                    title: 'Titanzink Dachentwässerung Komplettset (Haus, Carport & Terrassendach)',
+                    spec: 'Halbrunde Rinnen RG 125 (45 lfm) inkl. Rinnenhaltern, 4x Einhangstutzen, 4x Fallrohre DN 100 (ca. 18 lfm), Rohrbögen 72°, Schellen & Standrohrkappen.',
+                    qty: 1,
+                    unit: 'Komplettset',
+                    selected: true
+                },
+                {
+                    id: 'mat-klick-vinyl',
+                    category: 'ausbau',
+                    pos: '4.1',
+                    title: 'Rigid-SPC Klick-Vinylboden Eiche Natur / Modern (Beanspruchungsklasse 23/33)',
+                    spec: 'Gesamtdicke ca. 5,0 - 6,0 mm mit 0,55 mm Nutzschicht und integrierter IXPE-Trittschalldämmung, 100% wasserfest für alle Wohnräume, Flure, Küche & Bäder (210 m²).',
+                    qty: 210,
+                    unit: 'm²',
+                    selected: true
+                },
+                {
+                    id: 'mat-leisten-mdf',
+                    category: 'ausbau',
+                    pos: '4.2',
+                    title: 'Sockelleisten MDF weiß foliert 60 × 15 mm kubisch',
+                    spec: '310 lfm moderne Sockelleisten mit Kabelkanalfräsung inkl. 350 Stk Montage-Clipse und Dübel/Schrauben.',
+                    qty: 310,
+                    unit: 'lfm',
+                    selected: true
+                },
+                {
+                    id: 'mat-haustuer-haupt',
+                    category: 'ausbau',
+                    pos: '4.3',
+                    title: 'Haupteingangstür Aluminium/Holz hochgedämmt (Ud ≤ 0,80 W/m²K)',
+                    spec: 'Baurichtmaß 1.100 × 2.200 mm, DIN links/rechts, Farbe Anthrazit RAL 7016 / Weiß, 5-fach Schwenkriegelschloss, 3D-Bänder, Edelstahl-Stangengriff 1.200 mm, Profilzylinder mit Not-/Gefahrfunktion.',
+                    qty: 1,
+                    unit: 'Stk',
+                    selected: true
+                },
+                {
+                    id: 'mat-haustuer-elw',
+                    category: 'ausbau',
+                    pos: '4.4',
+                    title: 'Zweite Haustür für Einliegerwohnung ELW (Ud ≤ 0,90 W/m²K)',
+                    spec: 'Baurichtmaß 1.000 × 2.150 mm, 3-fach Verriegelung, gedämmtes Türblatt, Profilzylinder inkl. 5 Schlüsseln.',
+                    qty: 1,
+                    unit: 'Stk',
+                    selected: true
+                },
+                {
+                    id: 'mat-tueren-cpl',
+                    category: 'ausbau',
+                    pos: '4.5',
+                    title: 'Innentüren-Komplettset CPL Weißlack (Röhrenspanplatte)',
+                    spec: '14 Stk Türblätter 860 × 1.985 mm (bzw. 735 mm für WCs) inkl. CPL-Umfassungszargen für Wandstärken 120-145 mm, BB-Schloss und Edelstahl-Rosettengarnituren.',
+                    qty: 14,
+                    unit: 'Stk',
+                    selected: true
+                },
+                {
+                    id: 'mat-sanitaer-hauptbad',
+                    category: 'sanitaer',
+                    pos: '5.1',
+                    title: 'Sanitärobjekte Hauptbad OG Komplettpaket',
+                    spec: '1x befliesbare Duschrinne 900 mm (z.B. TECEdrainline / Geberit CleanLine) + 1x Acryl-Badewanne 180×80 cm + 1x Geberit Duofix Sigma 112 cm Vorwand-WC mit Sigma20 + Doppelwaschtisch 120 cm inkl. Armaturen.',
+                    qty: 1,
+                    unit: 'Set',
+                    selected: true
+                },
+                {
+                    id: 'mat-sanitaer-elw',
+                    category: 'sanitaer',
+                    pos: '5.2',
+                    title: 'Sanitärobjekte ELW-Duschbad EG Komplettpaket',
+                    spec: '1x Duschrinne 800 mm + Walk-In Glasduschwand 90×200 cm + 1x Geberit Vorwand-WC Element + Waschtisch 60 cm inkl. Einhebelmischer.',
+                    qty: 1,
+                    unit: 'Set',
+                    selected: true
+                },
+                {
+                    id: 'mat-sanitaer-wc',
+                    category: 'sanitaer',
+                    pos: '5.3',
+                    title: 'Sanitärobjekte Gäste-WC EG Paket',
+                    spec: '1x Kompakt-Vorwandelement Geberit 112 cm mit spülrandlosem Wand-WC + 1x Handwaschbecken 45 cm mit Kalt-/Warm-Armatur.',
+                    qty: 1,
+                    unit: 'Set',
+                    selected: true
+                }
+            ]
+        };
+
+        // Initialize state from LocalStorage or Default
+        let appConfig = JSON.parse(localStorage.getItem('haus_jakob_config_v2')) || DEFAULT_CONFIG;
+
+        // Firebase Setup & Sync
+        const firebaseConfig = {
+            apiKey: "AIzaSyBhvIgmHuwRKBZVs5JBqBHXizvGKeTxJdk",
+            authDomain: "haus-jakob.firebaseapp.com",
+            projectId: "haus-jakob",
+            storageBucket: "haus-jakob.firebasestorage.app",
+            messagingSenderId: "48017255402",
+            appId: "1:48017255402:web:2d3d85aed3d16e8bc4a093"
+        };
+
+        let cloudDocRef = null;
+        let isSaving = false;
+
+        function initFirebase() {
+            try {
+                if (!firebase.apps.length) {
+                    firebase.initializeApp(firebaseConfig);
+                }
+                const db = firebase.firestore();
+                cloudDocRef = db.collection("konfigurator").doc("haus-jakob-config");
+
+                cloudDocRef.onSnapshot((doc) => {
+                    if (doc.exists && !isSaving) {
+                        const cloudData = doc.data();
+                        if (cloudData && cloudData.waende) {
+                            appConfig = cloudData;
+                            localStorage.setItem('haus_jakob_config_v2', JSON.stringify(appConfig));
+                            renderAll();
+                            updateSyncBadge("Cloud Live", "emerald");
+                        }
+                    }
+                }, (error) => {
+                    console.warn("Firestore listener info:", error);
+                    updateSyncBadge("Lokal gespeichert", "slate");
+                });
+            } catch (e) {
+                console.error("Firebase init failed:", e);
+                updateSyncBadge("Lokal gespeichert", "slate");
+            }
+        }
+
+        async function saveConfig() {
+            localStorage.setItem('haus_jakob_config_v2', JSON.stringify(appConfig));
+            renderAll();
+
+            if (cloudDocRef) {
+                isSaving = true;
+                updateSyncBadge("Speichert...", "amber");
+                try {
+                    await cloudDocRef.set(appConfig);
+                    setTimeout(() => {
+                        isSaving = false;
+                        updateSyncBadge("Cloud Live", "emerald");
+                    }, 500);
+                } catch (e) {
+                    isSaving = false;
+                    console.error("Error writing to cloud:", e);
+                    updateSyncBadge("Lokal gespeichert", "slate");
+                }
+            }
+        }
+
+        function updateSyncBadge(text, color) {
+            const badge = document.getElementById('cloud-sync-badge');
+            const statusText = document.getElementById('sync-status-text');
+            if (!badge || !statusText) return;
+
+            statusText.innerText = text;
+            badge.className = `px-3 py-1.5 rounded-xl text-xs font-bold flex items-center gap-1.5 shadow-sm transition-all ${
+                color === 'emerald' ? 'bg-emerald-100 border border-emerald-300 text-emerald-800' :
+                color === 'amber' ? 'bg-amber-100 border border-amber-300 text-amber-800' :
+                'bg-slate-100 border border-slate-300 text-slate-700'
+            }`;
+        }
+
+
+        // ==========================================
+        // 2. TAB SWITCHING
+        // ==========================================
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+
+            const targetSec = document.getElementById('sec-' + tabId);
+            const targetBtn = document.getElementById('tab-btn-' + tabId);
+            if (targetSec) targetSec.classList.remove('hidden');
+            if (targetBtn) targetBtn.classList.add('active');
+
+            lucide.createIcons();
+        }
+
+
+        // ==========================================
+        // 3. RENDER FUNCTIONS
+        // ==========================================
+
+        function renderAll() {
+            renderHaendlerTable();
+            renderWaendeTable();
+            renderFensterTable();
+            renderAusstattungTable();
+            if (window.lucide) lucide.createIcons();
+        }
+
+        // Render Trader Table (Ausschreibungsliste)
+        function renderHaendlerTable() {
+            const tbody = document.getElementById('tbody-haendler');
+            if (!tbody) return;
+
+            const useVerschnitt = document.getElementById('chk-verschnitt')?.checked || false;
+            let selectedCount = 0;
+            let html = '';
+
+            appConfig.haendler_artikel.forEach((item, idx) => {
+                if (item.selected) selectedCount++;
+                const finalQty = useVerschnitt && (item.unit === 'm²' || item.unit === 'kg' || item.unit === 'lfm') 
+                    ? Math.round(item.qty * 1.1) 
+                    : item.qty;
+
+                const catBadgeColor = 
+                    item.category === 'trockenbau' ? 'bg-blue-100 text-blue-800 border-blue-200' :
+                    item.category === 'daemmung' ? 'bg-amber-100 text-amber-800 border-amber-200' :
+                    item.category === 'dach' ? 'bg-orange-100 text-orange-800 border-orange-200' :
+                    item.category === 'ausbau' ? 'bg-purple-100 text-purple-800 border-purple-200' :
+                    'bg-teal-100 text-teal-800 border-teal-200';
+
+                html += `
+                    <tr class="hover:bg-slate-50 transition-colors ${item.selected ? 'bg-white' : 'bg-slate-100/50 opacity-60'}">
+                        <td class="py-3 px-3 text-center checkbox-col no-print">
+                            <input type="checkbox" ${item.selected ? 'checked' : ''} onchange="toggleArticleSelection('${item.id}', this.checked)" class="w-4 h-4 rounded text-emerald-600 focus:ring-emerald-500 cursor-pointer">
+                        </td>
+                        <td class="py-3 px-2 font-mono font-bold text-slate-500 text-center">${item.pos}</td>
+                        <td class="py-3 px-3">
+                            <span class="inline-block px-2 py-0.5 rounded text-[10px] font-extrabold uppercase border mb-1 ${catBadgeColor}">${item.category}</span>
+                            <div class="font-bold text-slate-900 text-xs">${item.title}</div>
+                        </td>
+                        <td class="py-3 px-3 text-slate-600 leading-relaxed text-xs">
+                            ${item.spec}
+                        </td>
+                        <td class="py-3 px-3 text-right font-mono font-extrabold text-sm text-slate-900">
+                            ${finalQty.toLocaleString('de-DE')}
+                        </td>
+                        <td class="py-3 px-2 font-medium text-slate-600">
+                            ${item.unit}
+                        </td>
+                        <td class="py-3 px-3 text-slate-400 font-mono text-[11px] border-l border-slate-200">
+                            <span class="print:inline hidden text-slate-300">_____________________</span>
+                            <span class="print:hidden text-slate-400 italic text-[11px]">(Händlerfeld)</span>
+                        </td>
+                        <td class="py-3 px-3 text-right text-slate-400 font-mono text-[11px]">
+                            <span class="print:inline hidden text-slate-300">________ €</span>
+                            <span class="print:hidden text-slate-400 italic text-[11px]">—</span>
+                        </td>
+                        <td class="py-3 px-3 text-right text-slate-400 font-mono text-[11px]">
+                            <span class="print:inline hidden text-slate-300">________ €</span>
+                            <span class="print:hidden text-slate-400 italic text-[11px]">—</span>
+                        </td>
+                    </tr>
+                `;
+            });
+
+            tbody.innerHTML = html;
+            const countBadge = document.getElementById('selected-count-badge');
+            if (countBadge) countBadge.innerText = selectedCount;
+
+            const printDate = document.getElementById('print-date');
+            if (printDate) printDate.innerText = "Datum: " + new Date().toLocaleDateString('de-DE');
+        }
+
+        function toggleArticleSelection(id, isSelected) {
+            const item = appConfig.haendler_artikel.find(a => a.id === id);
+            if (item) {
+                item.selected = isSelected;
+                saveConfig();
+            }
+        }
+
+        function selectCategory(category) {
+            appConfig.haendler_artikel.forEach(item => {
+                if (category === 'all') item.selected = true;
+                else if (category === 'none') item.selected = false;
+                else item.selected = (item.category === category);
+            });
+            saveConfig();
+        }
+
+        // Export Trader CSV
+        function exportHaendlerCSV() {
+            const useVerschnitt = document.getElementById('chk-verschnitt')?.checked || false;
+            let csv = '\uFEFF'; // UTF-8 BOM
+            csv += 'Pos;Gewerk;Materialbezeichnung;Exakte Spezifikation fuer Angebot;Menge;Einheit;Hersteller / Typ;Einzelpreis Netto;Gesamtpreis Netto\n';
+
+            appConfig.haendler_artikel.filter(a => a.selected).forEach(item => {
+                const finalQty = useVerschnitt && (item.unit === 'm²' || item.unit === 'kg' || item.unit === 'lfm') 
+                    ? Math.round(item.qty * 1.1) 
+                    : item.qty;
+
+                const cleanTitle = `"${item.title.replace(/"/g, '""')}"`;
+                const cleanSpec = `"${item.spec.replace(/"/g, '""')}"`;
+
+                csv += `${item.pos};${item.category.toUpperCase()};${cleanTitle};${cleanSpec};${finalQty};${item.unit};;;;\n`;
+            });
+
+            const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.download = `Haus_Jakob_Baustoffhaendler_Ausschreibung_${new Date().toISOString().slice(0,10)}.csv`;
+            link.click();
+        }
+
+
+        // ==========================================
+        // 4. WAND- & FLÄCHENRECHNER LOGIC
+        // ==========================================
+
+        function renderWaendeTable() {
+            const tbody = document.getElementById('tbody-waende');
+            if (!tbody) return;
+
+            let totalAwBrutto = 0;
+            let totalAwNetto = 0;
+            let totalOsb = 0;
+            let totalRigips = 0;
+
+            let html = '';
+
+            appConfig.waende.forEach((wall, idx) => {
+                const brutto = +(wall.len * wall.height).toFixed(2);
+                const netto = Math.max(0, +(brutto - wall.cutouts).toFixed(2));
+
+                let osb = 0;
+                let rigips = 0;
+
+                if (wall.type.includes('Außenwand')) {
+                    totalAwBrutto += brutto;
+                    totalAwNetto += netto;
+                    // Bauseits: 1 Lage OSB (12mm) über Inst.-Ebene + 1 Lage Rigips (12.5mm)
+                    osb = netto;
+                    rigips = netto;
+                } else if (wall.type.includes('Schallschutzwand ELW')) {
+                    // ELW Trennwand: bauseits 2 Lagen OSB + 2 Lagen Rigips/Fermacell
+                    osb = netto * 2;
+                    rigips = netto * 2;
+                } else {
+                    // Innenwand: bauseits 1 Wandseite OSB + 2 Wandseiten Rigips
+                    osb = netto * 1;
+                    rigips = netto * 2;
+                }
+
+                totalOsb += osb;
+                totalRigips += rigips;
+
+                html += `
+                    <tr class="hover:bg-slate-50 transition-colors">
+                        <td class="py-3 px-3 font-mono font-bold text-slate-500 text-center">${idx + 1}</td>
+                        <td class="py-3 px-3 font-bold text-slate-900">
+                            <input type="text" value="${wall.name}" onchange="updateWall(${idx}, 'name', this.value)" class="w-full bg-transparent border-b border-transparent hover:border-slate-300 focus:border-slate-800 outline-none font-bold text-xs py-0.5">
+                        </td>
+                        <td class="py-3 px-3">
+                            <select onchange="updateWall(${idx}, 'type', this.value)" class="w-full bg-slate-50 border border-slate-200 rounded-lg text-xs py-1 px-2 font-medium">
+                                <option value="Außenwand 374 mm (Fassade + STEICO + 180mm Ständer)" ${wall.type.includes('Außenwand') ? 'selected' : ''}>Außenwand (374 mm)</option>
+                                <option value="Schallschutzwand ELW (53 dB - 2x OSB + 2x Rigips)" ${wall.type.includes('Schallschutzwand') ? 'selected' : ''}>ELW-Schallschutzwand (53 dB)</option>
+                                <option value="Tragende Innenwand (Ständer 120 mm)" ${wall.type.includes('Tragende') ? 'selected' : ''}>Tragende Innenwand (120 mm)</option>
+                                <option value="Innenwand Raumteiler (Ständer 80 mm)" ${wall.type.includes('Raumteiler') ? 'selected' : ''}>Innenwand Raumteiler (80 mm)</option>
+                            </select>
+                        </td>
+                        <td class="py-3 px-2 text-right">
+                            <input type="number" step="0.1" value="${wall.len}" onchange="updateWall(${idx}, 'len', parseFloat(this.value)||0)" class="w-20 text-right bg-slate-50 border border-slate-200 rounded-lg py-1 px-2 font-mono font-bold text-xs">
+                        </td>
+                        <td class="py-3 px-2 text-right">
+                            <input type="number" step="0.05" value="${wall.height}" onchange="updateWall(${idx}, 'height', parseFloat(this.value)||0)" class="w-20 text-right bg-slate-50 border border-slate-200 rounded-lg py-1 px-2 font-mono font-bold text-xs">
+                        </td>
+                        <td class="py-3 px-2 text-right font-mono font-bold text-slate-700">${brutto.toFixed(1)} m²</td>
+                        <td class="py-3 px-2 text-right">
+                            <input type="number" step="0.1" value="${wall.cutouts}" onchange="updateWall(${idx}, 'cutouts', parseFloat(this.value)||0)" class="w-20 text-right bg-slate-50 border border-slate-200 rounded-lg py-1 px-2 font-mono text-red-600 font-bold text-xs">
+                        </td>
+                        <td class="py-3 px-2 text-right font-mono font-extrabold text-blue-900">${netto.toFixed(1)} m²</td>
+                        <td class="py-3 px-2 text-right font-mono font-extrabold text-amber-900">${osb.toFixed(1)} m²</td>
+                        <td class="py-3 px-2 text-right font-mono font-extrabold text-purple-900">${rigips.toFixed(1)} m²</td>
+                        <td class="py-3 px-2 text-center action-col no-print">
+                            <button onclick="deleteWallRow(${idx})" class="p-1.5 hover:bg-red-100 text-slate-400 hover:text-red-700 rounded-lg transition-all" title="Wand löschen">
+                                <i data-lucide="trash-2" class="w-4 h-4"></i>
+                            </button>
+                        </td>
+                    </tr>
+                `;
+            });
+
+            tbody.innerHTML = html;
+
+            document.getElementById('kpi-aw-brutto').innerText = totalAwBrutto.toFixed(1) + ' m²';
+            document.getElementById('kpi-aw-netto').innerText = totalAwNetto.toFixed(1) + ' m²';
+            document.getElementById('kpi-osb-total').innerText = totalOsb.toFixed(1) + ' m²';
+            document.getElementById('kpi-rigips-total').innerText = totalRigips.toFixed(1) + ' m²';
+        }
+
+        function updateWall(idx, field, value) {
+            if (appConfig.waende[idx]) {
+                appConfig.waende[idx][field] = value;
+                saveConfig();
+            }
+        }
+
+        function addNewWallRow() {
+            appConfig.waende.push({
+                id: 'w_' + Date.now(),
+                name: 'Neuer Wandabschnitt',
+                type: 'Innenwand Raumteiler (Ständer 80 mm)',
+                len: 5.0,
+                height: 2.80,
+                cutouts: 0.0
+            });
+            saveConfig();
+        }
+
+        function deleteWallRow(idx) {
+            appConfig.waende.splice(idx, 1);
+            saveConfig();
+        }
+
+        function loadDefaultWalls() {
+            appConfig.waende = JSON.parse(JSON.stringify(DEFAULT_CONFIG.waende));
+            saveConfig();
+        }
+
+
+        // ==========================================
+        // 5. FENSTER & TÜREN LOGIC
+        // ==========================================
+
+        function renderFensterTable() {
+            const tbody = document.getElementById('tbody-fenster');
+            if (!tbody) return;
+
+            let totalCount = 0;
+            let slideCount = 0;
+            let doorCount = 0;
+            let totalGlass = 0;
+
+            let html = '';
+
+            appConfig.fenster.forEach((item, idx) => {
+                totalCount += item.qty;
+                if (item.type.includes('Schiebetür')) slideCount += item.qty;
+                if (item.type.includes('Haustür')) doorCount += item.qty;
+                totalGlass += (item.width * item.height / 10000) * item.qty;
+
+                html += `
+                    <tr class="hover:bg-slate-50 transition-colors">
+                        <td class="py-3 px-3 font-mono font-bold text-slate-500 text-center">${idx + 1}</td>
+                        <td class="py-3 px-3 font-bold text-slate-900">
+                            <input type="text" value="${item.room}" onchange="updateFenster(${idx}, 'room', this.value)" class="w-full bg-transparent border-b border-transparent hover:border-slate-300 focus:border-slate-800 outline-none font-bold text-xs py-0.5">
+                        </td>
+                        <td class="py-3 px-3">
+                            <input type="text" value="${item.type}" onchange="updateFenster(${idx}, 'type', this.value)" class="w-full bg-transparent border-b border-transparent hover:border-slate-300 focus:border-slate-800 outline-none text-xs py-0.5">
+                        </td>
+                        <td class="py-3 px-2 text-right">
+                            <input type="number" value="${item.width}" onchange="updateFenster(${idx}, 'width', parseInt(this.value)||0)" class="w-20 text-right bg-slate-50 border border-slate-200 rounded-lg py-1 px-2 font-mono text-xs">
+                        </td>
+                        <td class="py-3 px-2 text-right">
+                            <input type="number" value="${item.height}" onchange="updateFenster(${idx}, 'height', parseInt(this.value)||0)" class="w-20 text-right bg-slate-50 border border-slate-200 rounded-lg py-1 px-2 font-mono text-xs">
+                        </td>
+                        <td class="py-3 px-2 text-right">
+                            <input type="number" value="${item.qty}" onchange="updateFenster(${idx}, 'qty', parseInt(this.value)||0)" class="w-16 text-right bg-slate-50 border border-slate-200 rounded-lg py-1 px-2 font-mono font-extrabold text-xs">
+                        </td>
+                        <td class="py-3 px-3">
+                            <input type="text" value="${item.sun}" onchange="updateFenster(${idx}, 'sun', this.value)" class="w-full bg-transparent border-b border-transparent hover:border-slate-300 focus:border-slate-800 outline-none text-xs py-0.5">
+                        </td>
+                        <td class="py-3 px-3">
+                            <span class="inline-block px-2 py-0.5 rounded text-[10px] font-bold ${item.supplier.includes('Palmatin') ? 'bg-amber-100 text-amber-800' : 'bg-emerald-100 text-emerald-800'}">${item.supplier}</span>
+                        </td>
+                        <td class="py-3 px-2 text-center action-col no-print">
+                            <button onclick="deleteFensterRow(${idx})" class="p-1.5 hover:bg-red-100 text-slate-400 hover:text-red-700 rounded-lg transition-all" title="Element löschen">
+                                <i data-lucide="trash-2" class="w-4 h-4"></i>
+                            </button>
+                        </td>
+                    </tr>
+                `;
+            });
+
+            tbody.innerHTML = html;
+
+            document.getElementById('kpi-window-count').innerText = totalCount + ' Stk';
+            document.getElementById('kpi-slide-count').innerText = slideCount + ' Stk';
+            document.getElementById('kpi-door-count').innerText = doorCount + ' Stk';
+            document.getElementById('kpi-glass-area').innerText = 'ca. ' + totalGlass.toFixed(1) + ' m²';
+        }
+
+        function updateFenster(idx, field, value) {
+            if (appConfig.fenster[idx]) {
+                appConfig.fenster[idx][field] = value;
+                saveConfig();
+            }
+        }
+
+        function addNewWindowRow() {
+            appConfig.fenster.push({
+                id: 'f_' + Date.now(),
+                room: 'Neuer Raum',
+                type: 'Fenster 2-flügelig Dreh-Kipp',
+                width: 140,
+                height: 130,
+                qty: 1,
+                sun: 'Elektrischer Rollladen',
+                supplier: 'Palmatin Werkssatz'
+            });
+            saveConfig();
+        }
+
+        function deleteFensterRow(idx) {
+            appConfig.fenster.splice(idx, 1);
+            saveConfig();
+        }
+
+
+        // ==========================================
+        // 6. AUSSTATTUNG LOGIC
+        // ==========================================
+
+        function renderAusstattungTable() {
+            const tbody = document.getElementById('tbody-ausstattung');
+            if (!tbody) return;
+
+            let html = '';
+
+            appConfig.ausstattung.forEach((item, idx) => {
+                html += `
+                    <tr class="hover:bg-slate-50 transition-colors">
+                        <td class="py-3 px-3 font-mono font-bold text-slate-500 text-center">${idx + 1}</td>
+                        <td class="py-3 px-3 font-bold text-slate-900">
+                            <input type="text" value="${item.category}" onchange="updateAusstattung(${idx}, 'category', this.value)" class="w-full bg-transparent border-b border-transparent hover:border-slate-300 focus:border-slate-800 outline-none font-bold text-xs py-0.5">
+                        </td>
+                        <td class="py-3 px-3">
+                            <input type="text" value="${item.name}" onchange="updateAusstattung(${idx}, 'name', this.value)" class="w-full bg-transparent border-b border-transparent hover:border-slate-300 focus:border-slate-800 outline-none text-xs py-0.5">
+                        </td>
+                        <td class="py-3 px-2 text-right">
+                            <input type="number" value="${item.qty}" onchange="updateAusstattung(${idx}, 'qty', parseFloat(this.value)||0)" class="w-20 text-right bg-slate-50 border border-slate-200 rounded-lg py-1 px-2 font-mono font-bold text-xs">
+                        </td>
+                        <td class="py-3 px-2">
+                            <input type="text" value="${item.unit}" onchange="updateAusstattung(${idx}, 'unit', this.value)" class="w-16 bg-slate-50 border border-slate-200 rounded-lg py-1 px-2 text-xs">
+                        </td>
+                        <td class="py-3 px-3 text-slate-500">
+                            <input type="text" value="${item.note}" onchange="updateAusstattung(${idx}, 'note', this.value)" class="w-full bg-transparent border-b border-transparent hover:border-slate-300 focus:border-slate-800 outline-none text-xs text-slate-500 py-0.5">
+                        </td>
+                        <td class="py-3 px-2 text-center action-col no-print">
+                            <button onclick="deleteAusstattungRow(${idx})" class="p-1.5 hover:bg-red-100 text-slate-400 hover:text-red-700 rounded-lg transition-all" title="Ausstattung löschen">
+                                <i data-lucide="trash-2" class="w-4 h-4"></i>
+                            </button>
+                        </td>
+                    </tr>
+                `;
+            });
+
+            tbody.innerHTML = html;
+        }
+
+        function updateAusstattung(idx, field, value) {
+            if (appConfig.ausstattung[idx]) {
+                appConfig.ausstattung[idx][field] = value;
+                saveConfig();
+            }
+        }
+
+        function addNewEquipRow() {
+            appConfig.ausstattung.push({
+                id: 'a_' + Date.now(),
+                category: 'Allgemein',
+                name: 'Neuer Ausstattungsgegenstand',
+                qty: 1,
+                unit: 'Stk',
+                note: ''
+            });
+            saveConfig();
+        }
+
+        function deleteAusstattungRow(idx) {
+            appConfig.ausstattung.splice(idx, 1);
+            saveConfig();
+        }
+
+
+        // ==========================================
+        // INITIALIZATION ON LOAD
+        // ==========================================
+        window.addEventListener('DOMContentLoaded', () => {
+            initFirebase();
+            renderAll();
+        });
+    </script>
+</body>
+</html>
