@@ -1049,7 +1049,7 @@
     </script>
 
     <!-- Werkzeug-Checkliste Modal Pop-up -->
-    <div id="tools-modal" class="fixed inset-0 z-[100] hidden items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm transition-all duration-200 no-print">
+    <div id="tools-modal" onclick="if(event.target === this) closeToolsModal()" class="fixed inset-0 z-[100] hidden items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm transition-all duration-200 no-print">
         <div class="bg-white rounded-2xl border border-slate-200 shadow-2xl max-w-xl w-full max-h-[85vh] flex flex-col overflow-hidden animate-in fade-in zoom-in-95 duration-150">
             <!-- Modal Header -->
             <div class="p-5 border-b border-slate-200 flex items-start justify-between bg-slate-50">
@@ -1220,6 +1220,7 @@
         window.addEventListener('keydown', (e) => {
             if (e.key === 'Escape') closeToolsModal();
         });
+    </script>
 
     <!-- Custom Context Menu Overlay -->
     <div id="custom-context-menu" class="hidden fixed z-50 bg-white border border-slate-200 rounded-2xl shadow-2xl py-2 w-64 text-xs font-sans no-print select-none">
