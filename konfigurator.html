@@ -1524,13 +1524,13 @@
                             const posOsb = matData.trockenbau.find(p => p.pos === '7.1' || (p.title || '').toLowerCase().includes('osb/3 wandbeplankung'));
                             if (posOsb && posOsb.qty !== totalOsbRunden) {
                                 posOsb.qty = totalOsbRunden;
-                                posOsb.usage = `Verschraubung bauseits vor Rigips für beide Vollgeschosse (${totalOsbRunden} m² berechnet)`;
+                                if (!posOsb.spec) posOsb.spec = `Verschraubung bauseits vor Rigips für beide Vollgeschosse (${totalOsbRunden} m² berechnet)`;
                                 changed = true;
                             }
                             const posRigips = matData.trockenbau.find(p => p.pos === '7.2' || (p.title || '').toLowerCase().includes('gipskartonplatten'));
                             if (posRigips && posRigips.qty !== totalRigipsGesamt) {
                                 posRigips.qty = totalRigipsGesamt;
-                                posRigips.usage = `Beplankung bauseits auf OSB für Wände & Decken (${totalRigipsGesamt} m² berechnet)`;
+                                if (!posRigips.spec) posRigips.spec = `Beplankung bauseits auf OSB für Wände & Decken (${totalRigipsGesamt} m² berechnet)`;
                                 changed = true;
                             }
                         }
@@ -1540,19 +1540,19 @@
                             const posSpachtel = matData.finish.find(p => p.pos === '8.1' || (p.title || '').toLowerCase().includes('fugenspachtel'));
                             if (posSpachtel && posSpachtel.qty !== totalFinishM2) {
                                 posSpachtel.qty = totalFinishM2;
-                                posSpachtel.usage = `Spachteln der ${totalFinishM2} m² berechneten Wand- & Deckenflächen`;
+                                if (!posSpachtel.spec) posSpachtel.spec = `Spachteln der ${totalFinishM2} m² berechneten Wand- & Deckenflächen`;
                                 changed = true;
                             }
                             const posVlies = matData.finish.find(p => p.pos === '8.2' || (p.title || '').toLowerCase().includes('malervlies'));
                             if (posVlies && posVlies.qty !== totalFinishM2) {
                                 posVlies.qty = totalFinishM2;
-                                posVlies.usage = `Rissüberbrückender Untergrund Wände/Decken (${totalFinishM2} m² berechnet)`;
+                                if (!posVlies.spec) posVlies.spec = `Rissüberbrückender Untergrund Wände/Decken (${totalFinishM2} m² berechnet)`;
                                 changed = true;
                             }
                             const posFarbe = matData.finish.find(p => p.pos === '8.3' || (p.title || '').toLowerCase().includes('silikat'));
                             if (posFarbe && posFarbe.qty !== totalFinishM2) {
                                 posFarbe.qty = totalFinishM2;
-                                posFarbe.usage = `2x Anstrich Wände & Decken (${totalFinishM2} m² berechnet)`;
+                                if (!posFarbe.spec) posFarbe.spec = `2x Anstrich Wände & Decken (${totalFinishM2} m² berechnet)`;
                                 changed = true;
                             }
                         }
@@ -1810,7 +1810,7 @@
                             const posTueren = matData.finish.find(p => p.pos === '8.6' || (p.title || '').toLowerCase().includes('innentüren set'));
                             if (posTueren && posTueren.qty !== totalDoors) {
                                 posTueren.qty = totalDoors;
-                                posTueren.usage = `${totalDoors} Innentüren komplett für 2 Vollgeschosse & ELW (berechnet aus Türenplaner)`;
+                                if (!posTueren.spec) posTueren.spec = `${totalDoors} Innentüren komplett für 2 Vollgeschosse & ELW (berechnet aus Türenplaner)`;
                                 await matDocRef.set(matData);
                                 localStorage.setItem('kfw40_material_data_v28', JSON.stringify(matData));
                                 const timeBadge = document.getElementById('door-sync-time-badge');
