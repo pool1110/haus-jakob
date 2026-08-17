@@ -118,48 +118,95 @@
     <main class="max-w-[1920px] mx-auto p-4 md:p-6 space-y-6">
 
         <!-- ========================================================================= -->
-        <!-- TAB 1: BAUSTOFFHÄNDLER-AUSSCHREIBUNG & PREISANFRAGE (DEFAULT VIEW)        -->
+        <!-- TAB 1: BAUSTOFFHÄNDLER-ANGEBOTSERFASSUNG & PREISVERGLEICH                  -->
         <!-- ========================================================================= -->
         <section id="sec-haendler" class="tab-content space-y-6">
             
             <!-- Top Card: Summary & Action Toolbar -->
-            <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm print-card space-y-4">
+            <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm print-card space-y-5">
                 <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
                     <div>
                         <div class="flex items-center gap-2">
                             <span class="px-2.5 py-1 rounded-lg bg-emerald-700 text-white font-display font-extrabold text-xs tracking-wider shadow-sm">
-                                Ausschreibung / Preisanfrage
+                                Händlerangebot &amp; Preiserfassung
                             </span>
                             <span class="text-xs text-slate-500 font-medium">Projekt Haus Jakob (8,5 × 14,0 m | 2 Vollgeschosse)</span>
                         </div>
-                        <h2 class="font-display font-bold text-2xl text-slate-900 mt-1">Baustoffhändler-Anfrageliste mit exakten Produktspezifikationen</h2>
-                        <p class="text-xs text-slate-500">Wähle gezielt aus, welche Baustoffe und Gewerke in der Angebotsanfrage enthalten sein sollen. Alle Artikel sind mit genauen Maßen, Stärken, Qualitätsnormen und Verwendungszwecken für den Händler aufbereitet.</p>
+                        <h2 class="font-display font-bold text-2xl text-slate-900 mt-1">Baustoffhändler-Preise &amp; Angebote erfassen</h2>
+                        <p class="text-xs text-slate-500">Trage hier die Angebote der Baustoffhändler selbst ein. Ändere Einzelpreise, Hersteller/Marken, Rabatte und Lieferzeiten – die Gesamtsummen werden in Echtzeit berechnet und können direkt in die Materialliste übernommen werden.</p>
                     </div>
 
                     <!-- Actions for Trader Export -->
                     <div class="flex items-center gap-2 flex-wrap shrink-0 no-print">
+                        <button onclick="syncTraderPricesToMaterialPlaner()" class="px-4 py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs rounded-xl flex items-center gap-2 shadow-sm transition-all" title="Preise in Materialliste Phase 1-9 übertragen">
+                            <i data-lucide="arrow-right-left" class="w-4 h-4 text-blue-200"></i>
+                            <span>In Materialliste übernehmen</span>
+                        </button>
                         <button onclick="window.print()" class="px-4 py-2.5 bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs rounded-xl flex items-center gap-2 shadow-sm transition-all">
                             <i data-lucide="printer" class="w-4 h-4 text-emerald-400"></i>
-                            <span>Drucken / PDF Angebot anfordern</span>
+                            <span>Drucken / PDF</span>
                         </button>
                         <button onclick="exportHaendlerCSV()" class="px-4 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs rounded-xl flex items-center gap-2 shadow-sm transition-all">
                             <i data-lucide="download" class="w-4 h-4"></i>
-                            <span>CSV für Händler</span>
+                            <span>CSV Export</span>
                         </button>
                     </div>
                 </div>
 
+                <!-- Dealer Metadata Header Form -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 p-4 bg-slate-50 border border-slate-200 rounded-xl text-xs">
+                    <div>
+                        <label class="block font-bold text-slate-700 mb-1">Baustoffhändler / Lieferant:</label>
+                        <input type="text" id="haendler-name" placeholder="z. B. Raab Karcher / BayWa / Bauking" onchange="updateHaendlerMeta('supplierName', this.value)" class="w-full bg-white border border-slate-300 rounded-lg py-1.5 px-2.5 font-bold text-slate-900 focus:border-emerald-600 outline-none">
+                    </div>
+                    <div>
+                        <label class="block font-bold text-slate-700 mb-1">Angebots-Nr. / Ansprechpartner:</label>
+                        <input type="text" id="haendler-quote" placeholder="z. B. ANG-2026-9041 (Hr. Schmidt)" onchange="updateHaendlerMeta('quoteNumber', this.value)" class="w-full bg-white border border-slate-300 rounded-lg py-1.5 px-2.5 text-slate-900 focus:border-emerald-600 outline-none">
+                    </div>
+                    <div>
+                        <label class="block font-bold text-slate-700 mb-1">Angebotsdatum:</label>
+                        <input type="date" id="haendler-date" onchange="updateHaendlerMeta('quoteDate', this.value)" class="w-full bg-white border border-slate-300 rounded-lg py-1.5 px-2.5 font-mono text-slate-900 focus:border-emerald-600 outline-none">
+                    </div>
+                    <div>
+                        <label class="block font-bold text-slate-700 mb-1">Projekt-Rabatt / Skonto (%):</label>
+                        <div class="flex items-center gap-1.5">
+                            <input type="number" id="haendler-discount" step="0.5" min="0" max="50" placeholder="0" onchange="updateHaendlerMeta('discountPercent', parseFloat(this.value)||0)" class="w-full bg-white border border-slate-300 rounded-lg py-1.5 px-2.5 font-mono font-bold text-emerald-800 focus:border-emerald-600 outline-none text-right">
+                            <span class="font-bold text-slate-600">%</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Offer Financial KPI Cards -->
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-2 border-t border-slate-200">
+                    <div class="p-3.5 bg-slate-50 border border-slate-200 rounded-xl">
+                        <span class="text-[11px] font-bold text-slate-600 uppercase tracking-wider block">Ausgewählte Positionen:</span>
+                        <span id="kpi-haendler-pos" class="font-display font-extrabold text-xl text-slate-900 font-mono">0 Pos.</span>
+                    </div>
+                    <div class="p-3.5 bg-blue-50 border border-blue-200 rounded-xl">
+                        <span class="text-[11px] font-bold text-blue-700 uppercase tracking-wider block">Angebotssumme Netto:</span>
+                        <span id="kpi-haendler-netto" class="font-display font-extrabold text-xl text-blue-950 font-mono">0,00 €</span>
+                    </div>
+                    <div class="p-3.5 bg-amber-50 border border-amber-200 rounded-xl">
+                        <span class="text-[11px] font-bold text-amber-700 uppercase tracking-wider block">19% Mehrwertsteuer:</span>
+                        <span id="kpi-haendler-tax" class="font-display font-extrabold text-xl text-amber-950 font-mono">0,00 €</span>
+                    </div>
+                    <div class="p-3.5 bg-emerald-50 border border-emerald-300 rounded-xl shadow-sm">
+                        <span class="text-[11px] font-bold text-emerald-800 uppercase tracking-wider block">Endbetrag Brutto:</span>
+                        <span id="kpi-haendler-brutto" class="font-display font-extrabold text-xl text-emerald-950 font-mono">0,00 €</span>
+                    </div>
+                </div>
+
                 <!-- Filter & Selection Bar -->
-                <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 pt-4 border-t border-slate-200 no-print">
+                <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 pt-3 border-t border-slate-200 no-print">
                     <div class="flex items-center gap-2 flex-wrap text-xs">
-                        <span class="font-bold text-slate-700 mr-1">Schnellauswahl:</span>
-                        <button onclick="selectCategory('all')" class="px-3 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-800 rounded-lg font-semibold border border-slate-300 transition-all">Alle auswählen</button>
-                        <button onclick="selectCategory('trockenbau')" class="px-3 py-1.5 bg-blue-50 hover:bg-blue-100 text-blue-800 rounded-lg font-semibold border border-blue-200 transition-all">Nur Trockenbau (OSB &amp; Rigips)</button>
-                        <button onclick="selectCategory('daemmung')" class="px-3 py-1.5 bg-amber-50 hover:bg-amber-100 text-amber-800 rounded-lg font-semibold border border-amber-200 transition-all">Nur Dämmung &amp; Klebebänder</button>
-                        <button onclick="selectCategory('dach')" class="px-3 py-1.5 bg-orange-50 hover:bg-orange-100 text-orange-800 rounded-lg font-semibold border border-orange-200 transition-all">Nur Dacheindeckung &amp; Rinnen</button>
-                        <button onclick="selectCategory('ausbau')" class="px-3 py-1.5 bg-purple-50 hover:bg-purple-100 text-purple-800 rounded-lg font-semibold border border-purple-200 transition-all">Nur Fußboden &amp; Türen</button>
-                        <button onclick="selectCategory('sanitaer')" class="px-3 py-1.5 bg-teal-50 hover:bg-teal-100 text-teal-800 rounded-lg font-semibold border border-teal-200 transition-all">Nur Bäder &amp; Sanitär</button>
-                        <button onclick="selectCategory('none')" class="px-3 py-1.5 bg-slate-100 hover:bg-red-50 hover:text-red-700 text-slate-600 rounded-lg font-semibold border border-slate-300 transition-all">Alle abwählen</button>
+                        <span class="font-bold text-slate-700 mr-1">Filter:</span>
+                        <button onclick="selectCategory('all')" class="px-2.5 py-1 bg-slate-100 hover:bg-slate-200 text-slate-800 rounded-lg font-semibold border border-slate-300 transition-all">Alle auswählen</button>
+                        <button onclick="selectCategory('trockenbau')" class="px-2.5 py-1 bg-blue-50 hover:bg-blue-100 text-blue-800 rounded-lg font-semibold border border-blue-200 transition-all">Trockenbau</button>
+                        <button onclick="selectCategory('daemmung')" class="px-2.5 py-1 bg-amber-50 hover:bg-amber-100 text-amber-800 rounded-lg font-semibold border border-amber-200 transition-all">Dämmung</button>
+                        <button onclick="selectCategory('dach')" class="px-2.5 py-1 bg-orange-50 hover:bg-orange-100 text-orange-800 rounded-lg font-semibold border border-orange-200 transition-all">Dach &amp; Rinnen</button>
+                        <button onclick="selectCategory('ausbau')" class="px-2.5 py-1 bg-purple-50 hover:bg-purple-100 text-purple-800 rounded-lg font-semibold border border-purple-200 transition-all">Böden &amp; Türen</button>
+                        <button onclick="selectCategory('sanitaer')" class="px-2.5 py-1 bg-teal-50 hover:bg-teal-100 text-teal-800 rounded-lg font-semibold border border-teal-200 transition-all">Sanitär</button>
+                        <button onclick="selectCategory('none')" class="px-2.5 py-1 bg-slate-100 hover:bg-red-50 hover:text-red-700 text-slate-600 rounded-lg font-semibold border border-slate-300 transition-all">Alle abwählen</button>
                     </div>
 
                     <div class="flex items-center gap-4 text-xs font-bold text-slate-700">
@@ -167,9 +214,10 @@
                             <input id="chk-verschnitt" type="checkbox" onchange="renderHaendlerTable()" class="w-4 h-4 rounded text-emerald-600 focus:ring-emerald-500">
                             <span>+10% Verschnittpuffer einrechnen</span>
                         </label>
-                        <div class="px-3 py-1.5 bg-slate-100 rounded-lg border border-slate-200">
-                            <span id="selected-count-badge" class="text-emerald-700 font-extrabold">0</span> Positionen ausgewählt
-                        </div>
+                        <button onclick="addNewHaendlerRow()" class="px-3 py-1.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-lg flex items-center gap-1.5 shadow-sm transition-all">
+                            <i data-lucide="plus-circle" class="w-3.5 h-3.5"></i>
+                            <span>Artikel hinzufügen</span>
+                        </button>
                     </div>
                 </div>
             </div>
@@ -178,15 +226,14 @@
             <div class="hidden print:block bg-white p-4 border-b-2 border-slate-900">
                 <div class="flex justify-between items-start">
                     <div>
-                        <h1 class="text-xl font-bold font-display uppercase tracking-wide">MATERIAL-PREISANFRAGE &amp; AUSSCHREIBUNG</h1>
+                        <h1 class="text-xl font-bold font-display uppercase tracking-wide">BAUSTOFFHÄNDLER-ANGEBOT &amp; PREISÜBERSICHT</h1>
                         <p class="text-xs text-slate-600 mt-1"><strong>Bauvorhaben:</strong> Neubau Einfamilienhaus KfW-40 mit Einliegerwohnung (Haus Jakob)</p>
-                        <p class="text-xs text-slate-600"><strong>Gebäudeabmessungen:</strong> 8,50 m × 14,00 m (2 Vollgeschosse, Carport &amp; Terrassenüberdachung)</p>
+                        <p class="text-xs text-slate-600"><strong>Lieferant / Händler:</strong> <span id="print-haendler-name" class="font-bold">Raab Karcher</span> | Angebot-Nr.: <span id="print-haendler-quote">ANG-2026</span></p>
                         <p class="text-xs text-slate-600"><strong>Lieferort:</strong> Baustelle Haus Jakob | Anlieferung frei Baustelle mit Kran-LKW erbeten</p>
                     </div>
                     <div class="text-right text-xs">
-                        <p class="font-bold">Bauherren-Anfrage</p>
+                        <p class="font-bold">Bauherren-Kalkulation</p>
                         <p id="print-date">Datum: </p>
-                        <p class="mt-2 text-slate-500">Bitte um Angabe von Einzelpreisen, Staffelpreisen &amp; Lieferzeiten</p>
                     </div>
                 </div>
             </div>
@@ -198,19 +245,37 @@
                         <thead>
                             <tr class="border-b border-slate-200 text-slate-700 uppercase tracking-wider text-[11px] bg-slate-100">
                                 <th class="py-3 px-3 w-12 text-center checkbox-col no-print">Auswahl</th>
-                                <th class="py-3 px-2 w-14">Pos.</th>
-                                <th class="py-3 px-3 w-72">Materialbezeichnung &amp; Normung</th>
-                                <th class="py-3 px-3">Exakte Spezifikation &amp; Qualitätskriterien (für Angebot)</th>
-                                <th class="py-3 px-3 text-right w-24">Bedarfsmenge</th>
-                                <th class="py-3 px-2 text-left w-20">Einheit</th>
-                                <th class="py-3 px-3 w-48 text-slate-500">Angebotener Hersteller / Typ (vom Händler auszufüllen)</th>
-                                <th class="py-3 px-3 text-right w-32 text-slate-500">Einzelpreis (€)</th>
-                                <th class="py-3 px-3 text-right w-32 text-slate-500">Gesamtpreis (€)</th>
+                                <th class="py-3 px-2 w-12 text-center">Pos.</th>
+                                <th class="py-3 px-3 w-72">Material &amp; Spezifikation</th>
+                                <th class="py-3 px-2 text-right w-24">Menge</th>
+                                <th class="py-3 px-2 text-left w-16">Einheit</th>
+                                <th class="py-3 px-3 w-44">Angebotener Hersteller / Marke</th>
+                                <th class="py-3 px-2 text-right w-28 font-bold text-emerald-900">Einzelpreis (€)</th>
+                                <th class="py-3 px-2 text-right w-28 font-bold text-blue-900">Gesamtpreis (€)</th>
+                                <th class="py-3 px-3 w-48 text-slate-500">Lieferzeit / Händler-Notiz</th>
+                                <th class="py-3 px-2 text-center w-12 action-col no-print">Aktion</th>
                             </tr>
                         </thead>
                         <tbody id="tbody-haendler" class="divide-y divide-slate-200 text-slate-700">
-                            <!-- Injected dynamically with rich details -->
+                            <!-- Injected dynamically with rich editable inputs -->
                         </tbody>
+                        <tfoot>
+                            <tr class="bg-slate-50 font-bold border-t-2 border-slate-300 text-slate-900 text-xs">
+                                <td colspan="7" class="py-3 px-3 text-right">Summe Netto (ausgewählte Positionen):</td>
+                                <td id="foot-haendler-netto" class="py-3 px-2 text-right font-mono font-extrabold text-blue-900">0,00 €</td>
+                                <td colspan="2"></td>
+                            </tr>
+                            <tr class="bg-slate-50 font-bold text-slate-600 text-xs">
+                                <td colspan="7" class="py-2 px-3 text-right">Zzgl. 19% MwSt.:</td>
+                                <td id="foot-haendler-tax" class="py-2 px-2 text-right font-mono text-amber-900">0,00 €</td>
+                                <td colspan="2"></td>
+                            </tr>
+                            <tr class="bg-emerald-50/80 font-bold text-emerald-950 text-xs border-t border-emerald-200">
+                                <td colspan="7" class="py-3 px-3 text-right text-sm">Gesamtbetrag Brutto inkl. MwSt.:</td>
+                                <td id="foot-haendler-brutto" class="py-3 px-2 text-right font-mono font-extrabold text-sm text-emerald-900">0,00 €</td>
+                                <td colspan="2"></td>
+                            </tr>
+                        </tfoot>
                     </table>
                 </div>
             </div>
@@ -602,6 +667,15 @@
                 { id: 'it14', room: 'Abstellraum OG', width: 73.5, height: 198.5, wallThick: 10.0, din: 'DIN Links', type: 'CPL Weißlack Röhrenspan', lock: 'Buntbart (BB)', qty: 1 }
             ],
 
+            haendler_meta: {
+                supplierName: 'Raab Karcher Baustoffe GmbH',
+                quoteNumber: 'ANG-2026-9481',
+                contactPerson: 'Hr. Schmidt (Verkauf Baustoffe)',
+                quoteDate: new Date().toISOString().slice(0, 10),
+                discountPercent: 0,
+                deliveryTerms: 'Frei Baustelle mit Kranentladung'
+            },
+
             // Rich Material Definitions for Traders (Pre-populated with trade standards & specs)
             haendler_artikel: [
                 {
@@ -612,6 +686,9 @@
                     spec: 'Format 2.500 × 1.250 mm (stumpfe Kante) zur bauseitigen 2. Wandbeplankung über der Installationsebene (Außenwände) und 2. Beplankungsseite aller Innenwände.',
                     qty: 480,
                     unit: 'm²',
+                    brand: 'EGGER / Kronospan',
+                    price: 6.80,
+                    note: 'Frei Baustelle, palettenweise gebündelt',
                     selected: true
                 },
                 {
@@ -622,6 +699,9 @@
                     spec: 'Kantenform HRAK (halbrunde abgeflachte Kante), Format 2.000 × 1.250 mm / 2.600 × 600 mm (Einmannplatte) für Wand- & Deckenbeplankung im EG & OG.',
                     qty: 620,
                     unit: 'm²',
+                    brand: 'Knauf GKB / Rigips RB',
+                    price: 4.50,
+                    note: 'Kranentladung auf Geschossdecken erbeten',
                     selected: true
                 },
                 {
@@ -632,6 +712,9 @@
                     spec: 'Kern- & Kartonimprägnierung mit verzögerter Wasseraufnahme (<10%) für Hauptbad OG, ELW-Bad und Gäste-WC.',
                     qty: 100,
                     unit: 'm²',
+                    brand: 'Knauf GKBI / Rigips RBI',
+                    price: 7.20,
+                    note: 'Grüne Feuchtraum-Platten',
                     selected: true
                 },
                 {
@@ -642,6 +725,9 @@
                     spec: 'Format 2.500 × 675 mm, geschliffen/ungeschliffen. Als statische Tragschicht auf der 240mm KVH-Zwischendecke OG (119 m²) und als begehbarer Dachbodenbelag (119 m²).',
                     qty: 238,
                     unit: 'm²',
+                    brand: 'EGGER OSB 4 Top',
+                    price: 13.50,
+                    note: 'Trocken gelagert, Nut-Feder passgenau',
                     selected: true
                 },
                 {
@@ -652,6 +738,9 @@
                     spec: 'Hochfester kunstharzvergüteter Spezialgips für Fugenverspachtelung ohne/mit Bewehrungsstreifen + Feinspachtel für 920 m² Wand-/Deckenfläche.',
                     qty: 450,
                     unit: 'kg',
+                    brand: 'Knauf Uniflott (18x 25kg Säcke)',
+                    price: 1.40,
+                    note: 'Inkl. Glasfaser-Fugendeckstreifen',
                     selected: true
                 },
                 {
@@ -662,6 +751,9 @@
                     spec: '5.000 Stk Schnellbauschrauben mit Feingewinde (3,9 × 35 mm fosfatiert) + 4.000 Stk Vollgewinde-Holzbauschrauben (4,0 × 45 mm TX20 verzinkt).',
                     qty: 1,
                     unit: 'Paket',
+                    brand: 'Spax / Fischer Set',
+                    price: 180.00,
+                    note: 'Inkl. 5x passende Torx-Bits',
                     selected: true
                 },
                 {
@@ -672,6 +764,9 @@
                     spec: 'Dynamische Steifigkeit s\' ≤ 10 MN/m³, Trittschallverbesserungsmaß ΔLw ≥ 30 dB. Hochwirksame Entkopplung unter 50 mm schwimmendem Nassestrich im OG.',
                     qty: 110,
                     unit: 'm²',
+                    brand: 'ISOVER Akustic EP 3',
+                    price: 7.80,
+                    note: '110 m² für Obergeschoss',
                     selected: true
                 },
                 {
@@ -682,6 +777,9 @@
                     spec: 'Geschlossenzelliger Polyethylenschaum mit angeschweißter Folienlasche zur schallbrückenfreien Estrichverlegung im OG.',
                     qty: 120,
                     unit: 'lfm',
+                    brand: 'Schlüter / Knauf Dichtband',
+                    price: 1.00,
+                    note: '5 Rollen à 25 m',
                     selected: true
                 },
                 {
@@ -692,6 +790,9 @@
                     spec: 'Alterungsbeständiges Acrylat-Klebeband mit Vliesträger nach DIN 4108-7 zur dauerhaften Stoßverklebung der OSB-Dampfbremsebene und Durchdringungen.',
                     qty: 10,
                     unit: 'Rollen (30m)',
+                    brand: 'pro clima TESCON VANA',
+                    price: 24.50,
+                    note: '10 Rollen à 30m',
                     selected: true
                 },
                 {
@@ -702,6 +803,9 @@
                     spec: 'Lösungsmittelfreier Dispersionskleber für kraftschlüssigen Anschluss der OSB/Dampfbremsbahnen an Betonbodenplatte und Giebelwandmauerwerk.',
                     qty: 12,
                     unit: 'Kartuschen',
+                    brand: 'pro clima ORCON F',
+                    price: 8.50,
+                    note: '1 Karton à 12 Kartuschen',
                     selected: true
                 },
                 {
@@ -712,6 +816,9 @@
                     spec: 'Selbstklebendes PE-Dichtungsband 70 mm + Gipsfaser-Schalldämmplatten 12,5 mm (Fermacell) zur Erzielung erhöhten Schallschutzes nach DIN 4109 Beiblatt 2.',
                     qty: 1,
                     unit: 'Set',
+                    brand: 'Fermacell Akustik-Paket',
+                    price: 1250.00,
+                    note: 'Komplettset Trennwand',
                     selected: true
                 },
                 {
@@ -722,6 +829,9 @@
                     spec: 'Für 155 m² Steildachfläche (ca. 1.800 Flächenziegel) inkl. Formziegel: 25 lfm Firstziegel mit Firstklammern, 32 Stk Ortgangziegel (links/rechts) & 6 Stk Dunstrohr-/Lüfterziegel.',
                     qty: 155,
                     unit: 'm²',
+                    brand: 'Braas Rubin 11V Tiefschwarz',
+                    price: 24.50,
+                    note: 'Inkl. First-, Ortgang- & Lüfterziegeln',
                     selected: true
                 },
                 {
@@ -732,6 +842,9 @@
                     spec: '21 m² Verbundsicherheitsglas (2x 5mm TVG mit 0,76mm PVB-Folie klar) inkl. Aluminium-Auflageprofilen, EPDM-Gummidichtungen, Alu-Klemmdeckeln und Wandanschlussprofil.',
                     qty: 21,
                     unit: 'm²',
+                    brand: 'VSG 10mm TVG + Alu-Profilset',
+                    price: 65.00,
+                    note: 'Maßgefertigt für 6,0 x 3,5 m Dach',
                     selected: true
                 },
                 {
@@ -742,6 +855,9 @@
                     spec: '36 m² verzinktes Stahltrapezblech 0,75 mm (Farbe Anthrazitgrau RAL 7016, 25µm Beschichtung) mit werkseitigem Antitropfvlies auf der Unterseite inkl. Kalotten & Bohrschrauben.',
                     qty: 36,
                     unit: 'm²',
+                    brand: 'Münker T35.1 Vlies 0,75mm',
+                    price: 32.00,
+                    note: 'Länge 6,00 m am Stück geliefert',
                     selected: true
                 },
                 {
@@ -752,6 +868,9 @@
                     spec: 'Halbrunde Rinnen RG 125 (45 lfm) inkl. Rinnenhaltern, 4x Einhangstutzen, 4x Fallrohre DN 100 (ca. 18 lfm), Rohrbögen 72°, Schellen & Standrohrkappen.',
                     qty: 1,
                     unit: 'Komplettset',
+                    brand: 'Rheinzink prePATINA walzblank',
+                    price: 1950.00,
+                    note: 'Komplettset für Haus, Carport, Terrasse',
                     selected: true
                 },
                 {
@@ -762,6 +881,9 @@
                     spec: 'Gesamtdicke ca. 5,0 - 6,0 mm mit 0,55 mm Nutzschicht und integrierter IXPE-Trittschalldämmung, 100% wasserfest für alle Wohnräume, Flure, Küche & Bäder (210 m²).',
                     qty: 210,
                     unit: 'm²',
+                    brand: 'HARO Disano / Meister Rigid',
+                    price: 32.00,
+                    note: '210 m² vollflächig EG & OG',
                     selected: true
                 },
                 {
@@ -772,6 +894,9 @@
                     spec: '310 lfm moderne Sockelleisten mit Kabelkanalfräsung inkl. 350 Stk Montage-Clipse und Dübel/Schrauben.',
                     qty: 310,
                     unit: 'lfm',
+                    brand: 'Küberit Sockelleiste 60mm',
+                    price: 4.50,
+                    note: 'Inkl. Montage-Clips & Eckstücken',
                     selected: true
                 },
                 {
@@ -782,6 +907,9 @@
                     spec: 'Baurichtmaß 1.100 × 2.200 mm, DIN links/rechts, Farbe Anthrazit RAL 7016 / Weiß, 5-fach Schwenkriegelschloss, 3D-Bänder, Edelstahl-Stangengriff 1.200 mm, Profilzylinder mit Not-/Gefahrfunktion.',
                     qty: 1,
                     unit: 'Stk',
+                    brand: 'Hörmann ThermoSafe / Schüco',
+                    price: 3200.00,
+                    note: 'RC2 Sicherheitsausstattung',
                     selected: true
                 },
                 {
@@ -792,6 +920,9 @@
                     spec: 'Baurichtmaß 1.000 × 2.150 mm, 3-fach Verriegelung, gedämmtes Türblatt, Profilzylinder inkl. 5 Schlüsseln.',
                     qty: 1,
                     unit: 'Stk',
+                    brand: 'Hörmann Thermo65',
+                    price: 2200.00,
+                    note: 'Gleichschließend bestellbar',
                     selected: true
                 },
                 {
@@ -802,6 +933,9 @@
                     spec: '14 Stk Türblätter 860 × 1.985 mm (bzw. 735 mm für WCs) inkl. CPL-Umfassungszargen für Wandstärken 120-145 mm, BB-Schloss und Edelstahl-Rosettengarnituren.',
                     qty: 14,
                     unit: 'Stk',
+                    brand: 'Prüm / Huga CPL Weißlack',
+                    price: 295.00,
+                    note: '14 Türen inkl. Zargen & Beschlägen',
                     selected: true
                 },
                 {
@@ -812,6 +946,9 @@
                     spec: '1x befliesbare Duschrinne 900 mm (z.B. TECEdrainline / Geberit CleanLine) + 1x Acryl-Badewanne 180×80 cm + 1x Geberit Duofix Sigma 112 cm Vorwand-WC mit Sigma20 + Doppelwaschtisch 120 cm inkl. Armaturen.',
                     qty: 1,
                     unit: 'Set',
+                    brand: 'Geberit Sigma + TECE + Hansgrohe',
+                    price: 5200.00,
+                    note: 'Hauptbad OG Komplettausstattung',
                     selected: true
                 },
                 {
@@ -822,6 +959,9 @@
                     spec: '1x Duschrinne 800 mm + Walk-In Glasduschwand 90×200 cm + 1x Geberit Vorwand-WC Element + Waschtisch 60 cm inkl. Einhebelmischer.',
                     qty: 1,
                     unit: 'Set',
+                    brand: 'Geberit Duofix + Grohe',
+                    price: 2600.00,
+                    note: 'Duschbad Einliegerwohnung',
                     selected: true
                 },
                 {
@@ -832,9 +972,13 @@
                     spec: '1x Kompakt-Vorwandelement Geberit 112 cm mit spülrandlosem Wand-WC + 1x Handwaschbecken 45 cm mit Kalt-/Warm-Armatur.',
                     qty: 1,
                     unit: 'Set',
+                    brand: 'Geberit Duofix Kompakt',
+                    price: 1100.00,
+                    note: 'Gäste-WC Erdgeschoss',
                     selected: true
                 }
             ]
+        };
         };
 
         // Initialize state from LocalStorage or Default
@@ -977,20 +1121,47 @@
             if (window.lucide) lucide.createIcons();
         }
 
-        // Render Trader Table (Ausschreibungsliste)
+        // Render Trader Table (Ausschreibungsliste & Preiserfassung)
         function renderHaendlerTable() {
             const tbody = document.getElementById('tbody-haendler');
             if (!tbody) return;
 
+            if (!appConfig.haendler_meta) {
+                appConfig.haendler_meta = {
+                    supplierName: 'Raab Karcher Baustoffe GmbH',
+                    quoteNumber: 'ANG-2026-9481',
+                    quoteDate: new Date().toISOString().slice(0, 10),
+                    discountPercent: 0
+                };
+            }
+
+            // Sync Header Inputs with Meta
+            const nameInp = document.getElementById('haendler-name');
+            if (nameInp && document.activeElement !== nameInp) nameInp.value = appConfig.haendler_meta.supplierName || '';
+            const quoteInp = document.getElementById('haendler-quote');
+            if (quoteInp && document.activeElement !== quoteInp) quoteInp.value = appConfig.haendler_meta.quoteNumber || '';
+            const dateInp = document.getElementById('haendler-date');
+            if (dateInp && document.activeElement !== dateInp) dateInp.value = appConfig.haendler_meta.quoteDate || '';
+            const discInp = document.getElementById('haendler-discount');
+            if (discInp && document.activeElement !== discInp) discInp.value = appConfig.haendler_meta.discountPercent || 0;
+
             const useVerschnitt = document.getElementById('chk-verschnitt')?.checked || false;
             let selectedCount = 0;
+            let sumNetto = 0;
             let html = '';
 
             appConfig.haendler_artikel.forEach((item, idx) => {
-                if (item.selected) selectedCount++;
                 const finalQty = useVerschnitt && (item.unit === 'm²' || item.unit === 'kg' || item.unit === 'lfm') 
                     ? Math.round(item.qty * 1.1) 
                     : item.qty;
+
+                const price = typeof item.price === 'number' ? item.price : 0;
+                const lineTotal = finalQty * price;
+
+                if (item.selected) {
+                    selectedCount++;
+                    sumNetto += lineTotal;
+                }
 
                 const catBadgeColor = 
                     item.category === 'trockenbau' ? 'bg-blue-100 text-blue-800 border-blue-200' :
@@ -1000,46 +1171,97 @@
                     'bg-teal-100 text-teal-800 border-teal-200';
 
                 html += `
-                    <tr class="hover:bg-slate-50 transition-colors ${item.selected ? 'bg-white' : 'bg-slate-100/50 opacity-60'}">
-                        <td class="py-3 px-3 text-center checkbox-col no-print">
-                            <input type="checkbox" ${item.selected ? 'checked' : ''} onchange="toggleArticleSelection('${item.id}', this.checked)" class="w-4 h-4 rounded text-emerald-600 focus:ring-emerald-500 cursor-pointer">
+                    <tr class="hover:bg-slate-50 transition-colors ${item.selected ? 'bg-white' : 'bg-slate-100/60 opacity-60'}">
+                        <td class="py-2.5 px-3 text-center checkbox-col no-print">
+                            <input type="checkbox" ${item.selected ? 'checked' : ''} onchange="toggleArticleSelection('${item.id}', this.checked)" class="w-4 h-4 rounded text-emerald-600 focus:ring-emerald-500 cursor-pointer" title="In Händlerangebot berücksichtigen">
                         </td>
-                        <td class="py-3 px-2 font-mono font-bold text-slate-500 text-center">${item.pos}</td>
-                        <td class="py-3 px-3">
-                            <span class="inline-block px-2 py-0.5 rounded text-[10px] font-extrabold uppercase border mb-1 ${catBadgeColor}">${item.category}</span>
-                            <div class="font-bold text-slate-900 text-xs">${item.title}</div>
+                        <td class="py-2.5 px-2 font-mono font-bold text-slate-500 text-center text-xs">${item.pos || idx + 1}</td>
+                        <td class="py-2.5 px-3 min-w-[280px]">
+                            <div class="space-y-1">
+                                <div class="flex items-center gap-1.5">
+                                    <span class="inline-block px-1.5 py-0.5 rounded text-[9px] font-extrabold uppercase border ${catBadgeColor}">${item.category}</span>
+                                    <input type="text" value="${item.title || ''}" onchange="updateHaendlerItem(${idx}, 'title', this.value)" class="w-full bg-transparent border-b border-transparent hover:border-slate-300 focus:border-slate-800 outline-none font-bold text-slate-900 text-xs py-0.5">
+                                </div>
+                                <div class="flex items-center gap-1 text-[11px] text-slate-500">
+                                    <i data-lucide="tag" class="w-3 h-3 text-slate-400 shrink-0"></i>
+                                    <input type="text" value="${item.spec || ''}" onchange="updateHaendlerItem(${idx}, 'spec', this.value)" placeholder="Spezifikation / Normen / Stärke..." class="w-full bg-slate-50/70 hover:bg-slate-100 focus:bg-white border-b border-dashed border-slate-300 focus:border-blue-500 outline-none text-slate-600 font-mono text-[11px] py-0.5 px-1 rounded-sm">
+                                </div>
+                            </div>
                         </td>
-                        <td class="py-3 px-3 text-slate-600 leading-relaxed text-xs">
-                            ${item.spec}
+                        <td class="py-2.5 px-2 text-right">
+                            <input type="number" step="any" value="${item.qty}" onchange="updateHaendlerItem(${idx}, 'qty', parseFloat(this.value)||0)" class="w-20 text-right bg-slate-50 border border-slate-200 rounded-lg py-1 px-2 font-mono font-extrabold text-xs">
                         </td>
-                        <td class="py-3 px-3 text-right font-mono font-extrabold text-sm text-slate-900">
-                            ${finalQty.toLocaleString('de-DE')}
+                        <td class="py-2.5 px-2 font-medium text-slate-600">
+                            <input type="text" value="${item.unit || ''}" onchange="updateHaendlerItem(${idx}, 'unit', this.value)" class="w-16 bg-slate-50 border border-slate-200 rounded-lg py-1 px-1.5 text-xs">
                         </td>
-                        <td class="py-3 px-2 font-medium text-slate-600">
-                            ${item.unit}
+                        <td class="py-2.5 px-3">
+                            <input type="text" value="${item.brand || ''}" placeholder="z. B. Knauf, Braas, pro clima..." onchange="updateHaendlerItem(${idx}, 'brand', this.value)" class="w-full bg-white border border-slate-300 hover:border-slate-400 focus:border-emerald-600 rounded-lg py-1 px-2 text-xs font-semibold text-slate-800 outline-none">
                         </td>
-                        <td class="py-3 px-3 text-slate-400 font-mono text-[11px] border-l border-slate-200">
-                            <span class="print:inline hidden text-slate-300">_____________________</span>
-                            <span class="print:hidden text-slate-400 italic text-[11px]">(Händlerfeld)</span>
+                        <td class="py-2.5 px-2 text-right">
+                            <input type="number" step="0.01" min="0" value="${price}" onchange="updateHaendlerItem(${idx}, 'price', parseFloat(this.value)||0)" class="w-24 text-right bg-emerald-50/60 border border-emerald-300 hover:border-emerald-500 focus:bg-white focus:border-emerald-600 rounded-lg py-1 px-2 font-mono font-bold text-emerald-900 text-xs outline-none">
                         </td>
-                        <td class="py-3 px-3 text-right text-slate-400 font-mono text-[11px]">
-                            <span class="print:inline hidden text-slate-300">________ €</span>
-                            <span class="print:hidden text-slate-400 italic text-[11px]">—</span>
+                        <td class="py-2.5 px-2 text-right font-mono font-extrabold text-xs text-blue-900">
+                            ${lineTotal.toLocaleString('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} €
                         </td>
-                        <td class="py-3 px-3 text-right text-slate-400 font-mono text-[11px]">
-                            <span class="print:inline hidden text-slate-300">________ €</span>
-                            <span class="print:hidden text-slate-400 italic text-[11px]">—</span>
+                        <td class="py-2.5 px-3">
+                            <input type="text" value="${item.note || ''}" placeholder="z. B. ab Lager, 3 Tage Lieferzeit" onchange="updateHaendlerItem(${idx}, 'note', this.value)" class="w-full bg-slate-50/70 border border-slate-200 focus:bg-white focus:border-blue-500 rounded-lg py-1 px-2 text-xs text-slate-600 outline-none">
+                        </td>
+                        <td class="py-2.5 px-2 text-center action-col no-print">
+                            <button onclick="deleteHaendlerRow(${idx})" class="p-1.5 hover:bg-red-100 text-slate-400 hover:text-red-700 rounded-lg transition-all" title="Artikel löschen">
+                                <i data-lucide="trash-2" class="w-4 h-4"></i>
+                            </button>
                         </td>
                     </tr>
                 `;
             });
 
             tbody.innerHTML = html;
-            const countBadge = document.getElementById('selected-count-badge');
-            if (countBadge) countBadge.innerText = selectedCount;
 
+            // Compute financial summaries with discount & tax
+            const discountPercent = parseFloat(appConfig.haendler_meta?.discountPercent) || 0;
+            const discountAmount = sumNetto * (discountPercent / 100);
+            const finalNetto = sumNetto - discountAmount;
+            const tax = finalNetto * 0.19;
+            const brutto = finalNetto + tax;
+
+            // Update KPI Cards
+            const kpiPos = document.getElementById('kpi-haendler-pos');
+            if (kpiPos) kpiPos.innerText = `${selectedCount} Pos.`;
+            const kpiNetto = document.getElementById('kpi-haendler-netto');
+            if (kpiNetto) kpiNetto.innerText = finalNetto.toLocaleString('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' €';
+            const kpiTax = document.getElementById('kpi-haendler-tax');
+            if (kpiTax) kpiTax.innerText = tax.toLocaleString('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' €';
+            const kpiBrutto = document.getElementById('kpi-haendler-brutto');
+            if (kpiBrutto) kpiBrutto.innerText = brutto.toLocaleString('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' €';
+
+            // Update Table Footers
+            const footNetto = document.getElementById('foot-haendler-netto');
+            if (footNetto) footNetto.innerText = finalNetto.toLocaleString('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' €';
+            const footTax = document.getElementById('foot-haendler-tax');
+            if (footTax) footTax.innerText = tax.toLocaleString('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' €';
+            const footBrutto = document.getElementById('foot-haendler-brutto');
+            if (footBrutto) footBrutto.innerText = brutto.toLocaleString('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' €';
+
+            // Update Print Elements
+            const printSupplier = document.getElementById('print-haendler-name');
+            if (printSupplier) printSupplier.innerText = appConfig.haendler_meta?.supplierName || 'Raab Karcher';
+            const printQuote = document.getElementById('print-haendler-quote');
+            if (printQuote) printQuote.innerText = appConfig.haendler_meta?.quoteNumber || '-';
             const printDate = document.getElementById('print-date');
-            if (printDate) printDate.innerText = "Datum: " + new Date().toLocaleDateString('de-DE');
+            if (printDate) printDate.innerText = "Datum: " + (appConfig.haendler_meta?.quoteDate || new Date().toLocaleDateString('de-DE'));
+        }
+
+        function updateHaendlerItem(idx, field, value) {
+            if (appConfig.haendler_artikel && appConfig.haendler_artikel[idx]) {
+                appConfig.haendler_artikel[idx][field] = value;
+                saveConfig();
+            }
+        }
+
+        function updateHaendlerMeta(field, value) {
+            if (!appConfig.haendler_meta) appConfig.haendler_meta = {};
+            appConfig.haendler_meta[field] = value;
+            saveConfig();
         }
 
         function toggleArticleSelection(id, isSelected) {
@@ -1059,27 +1281,103 @@
             saveConfig();
         }
 
-        // Export Trader CSV
+        function addNewHaendlerRow() {
+            if (!appConfig.haendler_artikel) appConfig.haendler_artikel = [];
+            const newPos = (appConfig.haendler_artikel.length + 1) + '.0';
+            appConfig.haendler_artikel.push({
+                id: 'mat_' + Date.now(),
+                category: 'trockenbau',
+                pos: newPos,
+                title: 'Neuer Baustoff-Artikel',
+                spec: 'Exakte Spezifikation, Stärke, Normen...',
+                qty: 100,
+                unit: 'm²',
+                brand: '',
+                price: 0.00,
+                note: '',
+                selected: true
+            });
+            saveConfig();
+        }
+
+        function deleteHaendlerRow(idx) {
+            if (appConfig.haendler_artikel) {
+                appConfig.haendler_artikel.splice(idx, 1);
+                saveConfig();
+            }
+        }
+
+        // Synchronize Trader Prices directly back to Material Planer (Phase 1-9)
+        async function syncTraderPricesToMaterialPlaner() {
+            try {
+                if (!firebase.apps.length) {
+                    alert("Keine Firebase-Verbindung vorhanden.");
+                    return;
+                }
+                const db = firebase.firestore();
+                const matDocRef = db.collection("materialien").doc("haus-jakob-data");
+                const snapshot = await matDocRef.get();
+                if (!snapshot.exists) {
+                    alert("Materialdaten nicht gefunden.");
+                    return;
+                }
+
+                const matData = snapshot.data();
+                let matchedCount = 0;
+
+                // Match by ID or Title
+                Object.keys(matData).forEach(cat => {
+                    if (Array.isArray(matData[cat])) {
+                        matData[cat].forEach(matItem => {
+                            const match = appConfig.haendler_artikel.find(art => 
+                                (art.title && matItem.title && art.title.toLowerCase().includes(matItem.title.slice(0, 15).toLowerCase())) ||
+                                (matItem.title && art.title && matItem.title.toLowerCase().includes(art.title.slice(0, 15).toLowerCase()))
+                            );
+                            if (match && typeof match.price === 'number' && match.price > 0) {
+                                matItem.price = match.price;
+                                if (match.spec && !matItem.spec) matItem.spec = match.spec;
+                                matchedCount++;
+                            }
+                        });
+                    }
+                });
+
+                await matDocRef.set(matData);
+                localStorage.setItem('kfw40_material_data_v28', JSON.stringify(matData));
+                alert(`✅ Erfolgreich: ${matchedCount} Händlerpreise wurden in die Materialliste übernommen und synchronisiert!`);
+            } catch (e) {
+                console.error("Sync trader prices error:", e);
+                alert("Fehler beim Übertragen der Händlerpreise: " + e.message);
+            }
+        }
+
+        // Export Trader CSV with entered prices & sums
         function exportHaendlerCSV() {
             const useVerschnitt = document.getElementById('chk-verschnitt')?.checked || false;
             let csv = '\uFEFF'; // UTF-8 BOM
-            csv += 'Pos;Gewerk;Materialbezeichnung;Exakte Spezifikation fuer Angebot;Menge;Einheit;Hersteller / Typ;Einzelpreis Netto;Gesamtpreis Netto\n';
+            csv += 'Pos;Gewerk;Materialbezeichnung;Exakte Spezifikation;Menge;Einheit;Hersteller / Marke;Einzelpreis EUR;Gesamtbetrag EUR;Lieferzeit / Notiz\n';
 
             appConfig.haendler_artikel.filter(a => a.selected).forEach(item => {
                 const finalQty = useVerschnitt && (item.unit === 'm²' || item.unit === 'kg' || item.unit === 'lfm') 
                     ? Math.round(item.qty * 1.1) 
                     : item.qty;
 
-                const cleanTitle = `"${item.title.replace(/"/g, '""')}"`;
-                const cleanSpec = `"${item.spec.replace(/"/g, '""')}"`;
+                const price = typeof item.price === 'number' ? item.price : 0;
+                const lineTotal = finalQty * price;
 
-                csv += `${item.pos};${item.category.toUpperCase()};${cleanTitle};${cleanSpec};${finalQty};${item.unit};;;;\n`;
+                const cleanTitle = `"${(item.title || '').replace(/"/g, '""')}"`;
+                const cleanSpec = `"${(item.spec || '').replace(/"/g, '""')}"`;
+                const cleanBrand = `"${(item.brand || '').replace(/"/g, '""')}"`;
+                const cleanNote = `"${(item.note || '').replace(/"/g, '""')}"`;
+
+                csv += `${item.pos};${(item.category || '').toUpperCase()};${cleanTitle};${cleanSpec};${finalQty};${item.unit};${cleanBrand};${price.toFixed(2)};${lineTotal.toFixed(2)};${cleanNote}\n`;
             });
 
             const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
             const link = document.createElement('a');
             link.href = URL.createObjectURL(blob);
-            link.download = `Haus_Jakob_Baustoffhaendler_Ausschreibung_${new Date().toISOString().slice(0,10)}.csv`;
+            const supplierClean = (appConfig.haendler_meta?.supplierName || 'Haendler').replace(/[^a-zA-Z0-9]/g, '_');
+            link.download = `Haus_Jakob_Angebot_${supplierClean}_${new Date().toISOString().slice(0,10)}.csv`;
             link.click();
         }
 
