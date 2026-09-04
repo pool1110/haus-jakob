@@ -46,17 +46,17 @@
 
     <!-- Title -->
     <text x="500" y="45" font-size="22" font-weight="bold" text-anchor="middle" fill="#F8FAFC">KfW-40 Holzhaus mit Thermobodenplatte (Von unten nach oben)</text>
-    <text x="500" y="70" font-size="14" text-anchor="middle" fill="#38BDF8">Aufbau: 200 mm XPS + 200 mm Stahlbetonsohle &amp; 220 mm Wandständer</text>
+    <text x="500" y="70" font-size="14" text-anchor="middle" fill="#38BDF8">Aufbau: 180 mm XPS + 200 mm Stahlbetonsohle &amp; 180 mm Wandständer</text>
 
     <!-- 1. THERMOBODENPLATTE (VON UNTEN NACH OBEN) -->
     <!-- A) Schottertragschicht ganz unten -->
     <rect x="150" y="700" width="700" height="100" fill="url(#pattern-gravel-file)" stroke="#334155" stroke-width="2"/>
     <text x="500" y="755" fill="#CBD5E1" font-size="14" font-weight="bold" text-anchor="middle">1. Schottertragschicht (300 mm, ausgehoben &amp; verdichtet)</text>
 
-    <!-- B) XPS Dämmung 140 mm Unter-Platte -->
+    <!-- B) XPS Dämmung 180 mm Unter-Platte -->
     <rect x="220" y="630" width="630" height="70" fill="url(#pattern-eps-file)" stroke="#94A3B8" stroke-width="2"/>
     <rect x="770" y="450" width="80" height="250" fill="url(#pattern-eps-file)" stroke="#94A3B8" stroke-width="2"/>
-    <text x="500" y="670" fill="#334155" font-size="13" font-weight="bold" text-anchor="middle">2. Passivhaus-XPS-Dämmung (200 mm Unter-Platte &amp; L-Randschale)</text>
+    <text x="500" y="670" fill="#334155" font-size="13" font-weight="bold" text-anchor="middle">2. Passivhaus-XPS-Dämmung (180 mm Unter-Platte &amp; L-Randschale)</text>
 
     <!-- C) Stahlbetonsohle 200 mm -->
     <rect x="220" y="530" width="550" height="100" fill="url(#pattern-concrete-file)" stroke="#475569" stroke-width="2"/>
@@ -84,9 +84,9 @@
     <!-- Legend Footer -->
     <g transform="translate(220, 810)">
         <rect width="18" height="18" fill="#EAB308"/>
-        <text x="26" y="14" fill="#EAB308" font-size="12" font-weight="bold">Holztragwerk (220 mm)</text>
+        <text x="26" y="14" fill="#EAB308" font-size="12" font-weight="bold">Holztragwerk (180 mm)</text>
 
         <rect x="220" width="18" height="18" fill="#64748B"/>
-        <text x="246" y="14" fill="#CBD5E1" font-size="12" font-weight="bold">Thermobodenplatte (200 mm XPS + 200 mm Beton)</text>
+        <text x="246" y="14" fill="#CBD5E1" font-size="12" font-weight="bold">Thermobodenplatte (180 mm XPS + 200 mm Beton)</text>
     </g>
 </svg>
