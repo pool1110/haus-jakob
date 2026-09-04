@@ -1,119 +1,371 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 660" width="100%" height="100%" preserveAspectRatio="xMidYMid meet" style="background: #FAFAFA; font-family: 'Inter', system-ui, sans-serif; display: block; margin: 0; padding: 0;">
-  
-  <!-- Header -->
-  <text x="50" y="45" font-size="20" font-weight="700" fill="#0F172A">4. Holzbalkendecke / Zwischendecke EG-OG (ca. 417 mm mit 50 mm Nassestrich auf FBH &amp; Trittschall)</text>
-  <text x="50" y="68" font-size="13" font-weight="500" fill="#64748B">Maximaler Trittschallschutz (Ln,w &lt; 38 dB) | Schwimmender 5 cm Estrich | Vertikaler Schnitt</text>
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>5. Zwischendecke EG-OG (417 mm) | Haus Jakob KfW-40</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@600;700;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ["Inter", "system-ui", "sans-serif"],
+                        display: ["Outfit", "sans-serif"],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .layer-highlight {
+            transition: all 0.2s ease-in-out;
+        }
+        .layer-hovered {
+            filter: drop-shadow(0 0 6px rgba(37, 99, 235, 0.6));
+            stroke: #2563eb !important;
+            stroke-width: 2.5px !important;
+        }
+    </style>
+</head>
+<body class="bg-[#FAFAFA] text-slate-900 font-sans antialiased p-4 md:p-6 lg:p-8 min-h-screen">
+    <div class="max-w-7xl mx-auto space-y-6">
 
-  <line x1="50" y1="85" x2="950" y2="85" stroke="#E2E8F0" stroke-width="1"/>
+        <!-- Top Header & Badges -->
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-4 border-b border-slate-200">
+            <div>
+                <div class="flex items-center gap-2 text-xs font-semibold text-slate-500 uppercase tracking-wider mb-1">
+                    <span>Haus Jakob</span>
+                    <span>/</span>
+                    <span>Schnittmodelle</span>
+                    <span>/</span>
+                    <span class="text-blue-600 font-bold">5. Zwischendecke</span>
+                </div>
+                <h1 class="text-2xl md:text-3xl font-display font-extrabold text-slate-900 flex items-center gap-3">
+                    5. Zwischendecke EG-OG (417 mm)
+                </h1>
+                <p class="text-sm text-slate-600 mt-1">
+                    Schalloptimierte Holzbalkendecke mit 50 mm schwimmendem Nassestrich auf Fußbodenheizung &amp; 30 mm Trittschalldämmung.
+                </p>
+            </div>
 
-  <!-- Level Indicators Side -->
-  <text x="50" y="115" font-size="12" font-weight="700" fill="#2563EB">▲ OBERGESCHOSS (Wohnbereich OG)</text>
-  <text x="50" y="565" font-size="12" font-weight="700" fill="#16A34A">▼ ERDGESCHOSS (Decke EG)</text>
+            <!-- Badges & Fast Actions -->
+            <div class="flex flex-wrap items-center gap-2">
+                <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold bg-emerald-50 text-emerald-700 border border-emerald-200">
+                    <i data-lucide="volume-x" class="w-3.5 h-3.5 mr-1.5 text-emerald-600"></i>
+                    Trittschall Ln,w &lt; 38 dB (Flüsterleise)
+                </span>
+                <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold bg-blue-50 text-blue-700 border border-blue-200">
+                    <i data-lucide="layers" class="w-3.5 h-3.5 mr-1.5 text-blue-600"></i>
+                    417 mm Gesamthöhe
+                </span>
+                <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold bg-amber-50 text-amber-800 border border-amber-200">
+                    <i data-lucide="weight" class="w-3.5 h-3.5 mr-1.5 text-amber-700"></i>
+                    ca. 110 kg/m² Estrichmasse
+                </span>
+                <a href="materialien.html" class="inline-flex items-center px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-900 hover:bg-slate-800 text-white shadow-sm transition-all ml-auto md:ml-2">
+                    <i data-lucide="calculator" class="w-3.5 h-3.5 mr-1.5"></i>
+                    Materialplaner
+                </a>
+            </div>
+        </div>
 
-  <!-- VERTICAL 2D VECTOR CUTAWAY LAYERS (BOTTOM TO TOP) -->
+        <!-- 2-Column Split: Vector Cutaway (Left) & shadcn Cards (Right) -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
 
-  <!-- 1. Gipsfaser / Rigips 15 mm (Decke EG) -->
-  <g id="layer-rigips">
-    <rect x="140" y="525" width="400" height="18" fill="#94A3B8" stroke="#475569" stroke-width="1"/>
-    <text x="340" y="538" fill="#FFFFFF" font-size="10" font-weight="700" text-anchor="middle">1. Gipsfaser / Rigips Decke EG (15 mm abgehängt)</text>
-  </g>
+            <!-- LEFT: Crisp Architectural Vector Drawing Card -->
+            <div class="lg:col-span-5 bg-white rounded-2xl border border-slate-200 shadow-sm p-6 flex flex-col items-center justify-center relative overflow-hidden">
+                <div class="w-full flex items-center justify-between mb-4">
+                    <span class="text-xs font-bold uppercase tracking-wider text-slate-500">Technisches Schnittmodell</span>
+                    <span class="text-xs text-slate-400 font-mono">Vertikalschnitt EG/OG</span>
+                </div>
 
-  <!-- 2. Konterlattung / Entkopplung 50 mm -->
-  <g id="layer-lattung">
-    <rect x="140" y="480" width="400" height="45" fill="#F1F5F9" stroke="#CBD5E1" stroke-dasharray="3,3"/>
-    <rect x="180" y="480" width="35" height="45" fill="#FEF3C7" stroke="#D97706"/>
-    <rect x="320" y="480" width="35" height="45" fill="#FEF3C7" stroke="#D97706"/>
-    <rect x="460" y="480" width="35" height="45" fill="#FEF3C7" stroke="#D97706"/>
-    <text x="340" y="507" fill="#B45309" font-size="11" font-weight="700" text-anchor="middle">2. Konterlattung / Installationsebene (50 mm)</text>
-  </g>
+                <div class="w-full max-w-[440px] mx-auto">
+                    <svg id="svg-zwischendecke" xmlns="http://www.w3.org/2000/svg" viewBox="50 90 460 520" width="100%" class="w-full h-auto drop-shadow-sm select-none">
+                        <!-- Level Indicators -->
+                        <text x="60" y="112" font-size="11" font-weight="800" fill="#2563EB">▲ OBERGESCHOSS (Wohnbereich OG)</text>
+                        <text x="60" y="585" font-size="11" font-weight="800" fill="#16A34A">▼ ERDGESCHOSS (Decke EG)</text>
 
-  <!-- 3. Deckenbalken 240 mm + Zellulose/Hohlraumdämmung -->
-  <g id="layer-balken">
-    <rect x="140" y="280" width="400" height="200" fill="#E2E8F0" opacity="0.6" stroke="#94A3B8"/>
-    <rect x="140" y="280" width="65" height="200" fill="#F59E0B" stroke="#D97706"/>
-    <rect x="307" y="280" width="65" height="200" fill="#F59E0B" stroke="#D97706"/>
-    <rect x="475" y="280" width="65" height="200" fill="#F59E0B" stroke="#D97706"/>
-    <text x="250" y="375" fill="#B45309" font-size="12" font-weight="700" text-anchor="middle">3. KVH Deckenbalken (240 mm)</text>
-    <text x="250" y="395" fill="#2563EB" font-size="11" font-weight="600" text-anchor="middle">+ Hohlraum-Schalldämmung</text>
-  </g>
+                        <!-- Schicht 7: Fertigfußboden (17mm) -->
+                        <g id="svg-layer-7" class="layer-highlight cursor-pointer">
+                            <rect x="140" y="130" width="340" height="18" fill="#B45309" stroke="#78350F" stroke-width="1.5" rx="1"/>
+                            <text x="310" y="143" fill="#FFFFFF" font-size="10" font-weight="700" text-anchor="middle">7. Fertigfußboden (17 mm Parkett / Vinyl)</text>
+                        </g>
 
-  <!-- 4. 22 mm OSB/3 Nut-und-Feder Tragschicht -->
-  <g id="layer-osb">
-    <rect x="140" y="250" width="400" height="30" fill="#D97706" stroke="#92400E" stroke-width="1.5"/>
-    <text x="340" y="270" fill="#FFFFFF" font-size="11" font-weight="700" text-anchor="middle">4. OSB/3 Nut-und-Feder Tragschicht (22 mm verleimt)</text>
-  </g>
+                        <!-- Schicht 6: Nassestrich 50 mm mit FBH -->
+                        <g id="svg-layer-6" class="layer-highlight cursor-pointer">
+                            <rect x="140" y="148" width="340" height="50" fill="#CBD5E1" stroke="#475569" stroke-width="1.5"/>
+                            <circle cx="180" cy="173" r="7" fill="#EF4444" stroke="#991B1B" stroke-width="1.5"/>
+                            <circle cx="245" cy="173" r="7" fill="#EF4444" stroke="#991B1B" stroke-width="1.5"/>
+                            <circle cx="310" cy="173" r="7" fill="#EF4444" stroke="#991B1B" stroke-width="1.5"/>
+                            <circle cx="375" cy="173" r="7" fill="#EF4444" stroke="#991B1B" stroke-width="1.5"/>
+                            <circle cx="440" cy="173" r="7" fill="#EF4444" stroke="#991B1B" stroke-width="1.5"/>
+                            <text x="310" y="193" fill="#1E293B" font-size="10" font-weight="700" text-anchor="middle">6. Schwimmender Nassestrich (50 mm) + FBH</text>
+                        </g>
 
-  <!-- 5. 30 mm Trittschalldämmung (Mineralwolle/Holzfaser STEICOsound) -->
-  <g id="layer-trittschall">
-    <rect x="140" y="215" width="400" height="35" fill="#FEF08A" stroke="#CA8A04" stroke-width="1.5"/>
-    <text x="340" y="237" fill="#854D0E" font-size="11" font-weight="700" text-anchor="middle">5. Trittschalldämmung (30 mm hochdämpfend s' ≤ 15 MN/m³)</text>
-  </g>
+                        <!-- Schicht 5: Trittschalldämmung 30 mm -->
+                        <g id="svg-layer-5" class="layer-highlight cursor-pointer">
+                            <rect x="140" y="198" width="340" height="32" fill="#FEF08A" stroke="#CA8A04" stroke-width="1.5"/>
+                            <text x="310" y="219" fill="#854D0E" font-size="10" font-weight="700" text-anchor="middle">5. Trittschalldämmung (30 mm hochdämpfend)</text>
+                        </g>
 
-  <!-- 6. 50 mm Schwimmender Nassestrich mit PEX FBH -->
-  <g id="layer-estrich">
-    <rect x="140" y="160" width="400" height="55" fill="#CBD5E1" stroke="#475569" stroke-width="1.5"/>
-    <!-- FBH Pipes in Estrich -->
-    <circle cx="180" cy="188" r="8" fill="#EF4444" stroke="#991B1B" stroke-width="1.5"/>
-    <circle cx="260" cy="188" r="8" fill="#EF4444" stroke="#991B1B" stroke-width="1.5"/>
-    <circle cx="340" cy="188" r="8" fill="#EF4444" stroke="#991B1B" stroke-width="1.5"/>
-    <circle cx="420" cy="188" r="8" fill="#EF4444" stroke="#991B1B" stroke-width="1.5"/>
-    <circle cx="500" cy="188" r="8" fill="#EF4444" stroke="#991B1B" stroke-width="1.5"/>
-    <!-- Randdämmstreifen links/rechts -->
-    <rect x="135" y="160" width="5" height="55" fill="#EF4444"/>
-    <rect x="540" y="160" width="5" height="55" fill="#EF4444"/>
-    <text x="340" y="177" fill="#0F172A" font-size="11" font-weight="700" text-anchor="middle">6. Schwimmender Nassestrich (50 mm) + FBH</text>
-  </g>
+                        <!-- Schicht 4: OSB/3 Tragschicht 22 mm -->
+                        <g id="svg-layer-4" class="layer-highlight cursor-pointer">
+                            <rect x="140" y="230" width="340" height="25" fill="#D97706" stroke="#92400E" stroke-width="1.5"/>
+                            <text x="310" y="247" fill="#FFFFFF" font-size="10" font-weight="700" text-anchor="middle">4. OSB/3 Tragschicht (22 mm Nut &amp; Feder verleimt)</text>
+                        </g>
 
-  <!-- 7. Oberbelag OG (17 mm Parkett / Vinyl) -->
-  <g id="layer-parkett">
-    <rect x="140" y="135" width="400" height="25" fill="#B8860B" stroke="#78350F" stroke-width="1"/>
-    <text x="340" y="152" fill="#FFFFFF" font-size="11" font-weight="700" text-anchor="middle">7. Fertigfußboden OG (17 mm Parkett / Vinyl)</text>
-  </g>
+                        <!-- Schicht 3: Deckenbalken 240 mm + Zellulose -->
+                        <g id="svg-layer-3" class="layer-highlight cursor-pointer">
+                            <rect x="140" y="255" width="340" height="190" fill="#E2E8F0" opacity="0.6" stroke="#94A3B8"/>
+                            <rect x="140" y="255" width="55" height="190" fill="#F59E0B" stroke="#D97706"/>
+                            <rect x="282" y="255" width="55" height="190" fill="#F59E0B" stroke="#D97706"/>
+                            <rect x="425" y="255" width="55" height="190" fill="#F59E0B" stroke="#D97706"/>
 
-  <!-- Right: Clean Summary Table (Clean Schichtaufbau List) -->
-  <g transform="translate(560, 110)" font-size="12">
-    <rect x="0" y="0" width="390" height="510" rx="12" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1"/>
-    
-    <text x="20" y="30" font-size="14" font-weight="700" fill="#0F172A">Schichtaufbau &amp; Dimensionierung (417 mm)</text>
-    <text x="20" y="48" font-size="11" font-weight="500" fill="#64748B">Von oben (Wohnen OG) nach unten (Decke EG):</text>
+                            <rect x="205" y="325" width="210" height="50" rx="8" fill="#FFFFFF" fill-opacity="0.95" stroke="#E2E8F0" stroke-width="1"/>
+                            <text x="310" y="347" font-size="11" font-weight="700" fill="#B45309" text-anchor="middle">3. KVH Deckenbalken 240 mm</text>
+                            <text x="310" y="364" font-size="9.5" font-weight="600" fill="#2563EB" text-anchor="middle">+ Hohlraum-Schalldämmung</text>
+                        </g>
 
-    <!-- Table Rows -->
-    <g transform="translate(20, 75)" font-size="11">
-      <!-- Row 7 -->
-      <text x="0" y="0" font-weight="700" fill="#78350F">7. Fertigfußboden OG (17 mm Parkett / Vinyl bauseits)</text>
-      <line x1="0" y1="12" x2="350" y2="12" stroke="#F1F5F9"/>
+                        <!-- Schicht 2: Konterlattung 50 mm -->
+                        <g id="svg-layer-2" class="layer-highlight cursor-pointer">
+                            <rect x="140" y="445" width="340" height="40" fill="#F1F5F9" stroke="#CBD5E1" stroke-dasharray="3,3"/>
+                            <rect x="175" y="445" width="30" height="40" fill="#FEF3C7" stroke="#D97706"/>
+                            <rect x="295" y="445" width="30" height="40" fill="#FEF3C7" stroke="#D97706"/>
+                            <rect x="415" y="445" width="30" height="40" fill="#FEF3C7" stroke="#D97706"/>
+                            <text x="310" y="470" fill="#B45309" font-size="10" font-weight="700" text-anchor="middle">2. Konterlattung / Installationsebene (50 mm)</text>
+                        </g>
 
-      <!-- Row 6 -->
-      <text x="0" y="35" font-weight="700" fill="#0F172A">6. Schwimmender Nassestrich (50 mm) + FBH (bauseits in DE)</text>
-      <line x1="0" y1="47" x2="350" y2="47" stroke="#F1F5F9"/>
+                        <!-- Schicht 1: Rigips Decke EG 15 mm -->
+                        <g id="svg-layer-1" class="layer-highlight cursor-pointer">
+                            <rect x="140" y="485" width="340" height="16" fill="#94A3B8" stroke="#475569" stroke-width="1"/>
+                            <text x="310" y="497" fill="#FFFFFF" font-size="10" font-weight="700" text-anchor="middle">1. Rigips / Gipsfaser Decke EG (15 mm abgehängt)</text>
+                        </g>
 
-      <!-- Row 5 -->
-      <text x="0" y="70" font-weight="700" fill="#D97706">5. Trittschalldämmung (30 mm bauseits in DE)</text>
-      <line x1="0" y1="82" x2="350" y2="82" stroke="#F1F5F9"/>
+                        <!-- Massketten (Rechts) -->
+                        <g transform="translate(490, 0)" font-size="9" font-family="'Inter', sans-serif">
+                            <line x1="0" y1="130" x2="0" y2="501" stroke="#2563EB" stroke-width="1.5"/>
+                            <line x1="-4" y1="130" x2="4" y2="130" stroke="#2563EB" stroke-width="1.5"/>
+                            <line x1="-4" y1="501" x2="4" y2="501" stroke="#2563EB" stroke-width="1.5"/>
+                            <text x="14" y="320" font-size="11" font-weight="800" fill="#2563EB" transform="rotate(90, 14, 320)" text-anchor="middle">Gesamt: 417 mm</text>
+                        </g>
+                    </svg>
+                </div>
 
-      <!-- Row 4 -->
-      <text x="0" y="96" font-weight="700" fill="#D97706">4. OSB/3 Nut-und-Feder 22 mm Tragschicht (bauseits in DE)</text>
-      <line x1="0" y1="108" x2="350" y2="108" stroke="#F1F5F9"/>
+                <div class="mt-4 text-center text-xs text-slate-500 flex items-center gap-2">
+                    <i data-lucide="info" class="w-3.5 h-3.5 text-blue-500"></i>
+                    Tipp: Schichten in der Tabelle berühren zum Hervorheben im Schnitt.
+                </div>
+            </div>
 
-      <!-- Row 3 -->
-      <text x="0" y="122" font-weight="700" fill="#16A34A">3. KVH Deckenbalken 240 mm (Palmatin ab Werk)</text>
-      <line x1="0" y1="134" x2="350" y2="134" stroke="#F1F5F9"/>
+            <!-- RIGHT: Modern shadcn Cards for Layers & Physics -->
+            <div class="lg:col-span-7 space-y-6">
 
-      <!-- Row 2 -->
-      <text x="0" y="148" font-weight="700" fill="#B45309">2. Konterlattung / Inst.-Ebene 50 mm (bauseits)</text>
-      <line x1="0" y1="160" x2="350" y2="160" stroke="#F1F5F9"/>
+                <!-- Layer Breakdown Card (shadcn Table) -->
+                <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
+                    <div class="px-6 py-4 border-b border-slate-100 flex items-center justify-between">
+                        <div>
+                            <h2 class="text-base font-bold text-slate-900">Schichtaufbau (417 mm Gesamtstärke)</h2>
+                            <p class="text-xs text-slate-500">Von oben (Wohnen OG) nach unten (Decke EG)</p>
+                        </div>
+                        <span class="text-xs font-mono font-semibold px-2.5 py-1 bg-slate-100 rounded-md text-slate-700">7 Schichten</span>
+                    </div>
 
-      <!-- Row 1 -->
-      <text x="0" y="174" font-weight="700" fill="#334155">1. Rigips Decke EG 12,5 mm (bauseits in DE)</text>
-    </g>
+                    <div class="divide-y divide-slate-100 text-xs">
+                        <!-- Schicht 7 -->
+                        <div id="row-layer-7" class="layer-row px-6 py-2.5 hover:bg-slate-50 transition-colors flex items-center justify-between gap-4 cursor-pointer">
+                            <div class="flex items-center gap-3">
+                                <span class="w-5 h-5 rounded-full bg-amber-800 text-white text-[11px] font-bold flex items-center justify-center shrink-0">7</span>
+                                <div>
+                                    <div class="font-bold text-slate-900">Fertigfußboden (17 mm Parkett / Designbelag)</div>
+                                    <div class="text-slate-500 text-[11px]">Wohnfertiger Bodenbelag im Obergeschoss</div>
+                                </div>
+                            </div>
+                            <div class="text-right shrink-0">
+                                <span class="font-bold text-slate-900">17 mm</span>
+                                <div class="text-[10px] text-slate-400">Bauseits DE</div>
+                            </div>
+                        </div>
 
-    <!-- Key Performance Box -->
-    <rect x="20" y="335" width="350" height="155" rx="8" fill="#F8FAFC" stroke="#E2E8F0"/>
-    <text x="35" y="358" font-size="12" font-weight="700" fill="#0F172A">Lieferumfang &amp; Trittschallpegel (417 mm):</text>
-    <text x="35" y="378" font-size="11" font-weight="700" fill="#16A34A">• Palmatin Werkssatz: Schicht 3 (240mm KVH Balkenlage ab Werk)</text>
-    <text x="35" y="398" font-size="11" font-weight="700" fill="#D97706">• Bauseitiger Zukauf DE: 22mm OSB + 30mm Trittschall + 50mm Estrich</text>
-    <text x="35" y="418" font-size="11" fill="#16A34A">• Trittschallpegel: Ln,w &lt; 38 dB (Exzellent leise &amp; massiv!)</text>
-    <text x="35" y="438" font-size="11" fill="#475569">• Masse: ca. 110 kg/m² Estrich verhindert Schwingungen</text>
-  </g>
+                        <!-- Schicht 6 -->
+                        <div id="row-layer-6" class="layer-row px-6 py-2.5 hover:bg-slate-50 transition-colors flex items-center justify-between gap-4 cursor-pointer">
+                            <div class="flex items-center gap-3">
+                                <span class="w-5 h-5 rounded-full bg-slate-600 text-white text-[11px] font-bold flex items-center justify-center shrink-0">6</span>
+                                <div>
+                                    <div class="font-bold text-blue-700">Schwimmender Zementestrich (50 mm) + FBH</div>
+                                    <div class="text-slate-500 text-[11px]">Enorme Masse (~110 kg/m²) gegen Trittschall &amp; gleichmäßige Wärmeverteilung</div>
+                                </div>
+                            </div>
+                            <div class="text-right shrink-0">
+                                <span class="font-bold text-slate-900">50 mm</span>
+                                <div class="text-[10px] text-slate-400">Bauseits DE</div>
+                            </div>
+                        </div>
 
-</svg>
+                        <!-- Schicht 5 -->
+                        <div id="row-layer-5" class="layer-row px-6 py-2.5 hover:bg-slate-50 transition-colors flex items-center justify-between gap-4 cursor-pointer">
+                            <div class="flex items-center gap-3">
+                                <span class="w-5 h-5 rounded-full bg-yellow-500 text-white text-[11px] font-bold flex items-center justify-center shrink-0">5</span>
+                                <div>
+                                    <div class="font-bold text-slate-900">Trittschalldämmung (30 mm mineralisch / Holzfaser)</div>
+                                    <div class="text-slate-500 text-[11px]">Hochwirksame dynamische Steifigkeit s&#39; &le; 15 MN/m³ zur Körperschallentkopplung</div>
+                                </div>
+                            </div>
+                            <div class="text-right shrink-0">
+                                <span class="font-bold text-slate-900">30 mm</span>
+                                <div class="text-[10px] text-slate-400">Bauseits DE</div>
+                            </div>
+                        </div>
+
+                        <!-- Schicht 4 -->
+                        <div id="row-layer-4" class="layer-row px-6 py-2.5 hover:bg-slate-50 transition-colors flex items-center justify-between gap-4 cursor-pointer">
+                            <div class="flex items-center gap-3">
+                                <span class="w-5 h-5 rounded-full bg-amber-600 text-white text-[11px] font-bold flex items-center justify-center shrink-0">4</span>
+                                <div>
+                                    <div class="font-bold text-slate-900">22 mm OSB/3 Nut-und-Feder Tragschicht (verleimt)</div>
+                                    <div class="text-slate-500 text-[11px]">Biegesteife lastverteilende Ebene direkt auf den Balken verschraubt</div>
+                                </div>
+                            </div>
+                            <div class="text-right shrink-0">
+                                <span class="font-bold text-slate-900">22 mm</span>
+                                <div class="text-[10px] text-slate-400">Bauseits DE</div>
+                            </div>
+                        </div>
+
+                        <!-- Schicht 3 -->
+                        <div id="row-layer-3" class="layer-row px-6 py-2.5 hover:bg-slate-50 transition-colors flex items-center justify-between gap-4 cursor-pointer bg-amber-50/30">
+                            <div class="flex items-center gap-3">
+                                <span class="w-5 h-5 rounded-full bg-amber-500 text-white text-[11px] font-bold flex items-center justify-center shrink-0">3</span>
+                                <div>
+                                    <div class="font-bold text-slate-900 flex items-center gap-1.5">
+                                        <span>240 mm KVH Deckenbalken + Schalldämmung</span>
+                                        <span class="px-1.5 py-0.5 rounded text-[9px] font-bold bg-amber-100 text-amber-800">Palmatin Werk</span>
+                                    </div>
+                                    <div class="text-slate-500 text-[11px]">C24 Deckenbalken ab Werk + Hohlraum-Schalldämpfung gegen Dröhneffekte</div>
+                                </div>
+                            </div>
+                            <div class="text-right shrink-0">
+                                <span class="font-bold text-slate-900">240 mm</span>
+                                <div class="text-[10px] text-amber-800 font-semibold">Werkssatz</div>
+                            </div>
+                        </div>
+
+                        <!-- Schicht 2 -->
+                        <div id="row-layer-2" class="layer-row px-6 py-2.5 hover:bg-slate-50 transition-colors flex items-center justify-between gap-4 cursor-pointer">
+                            <div class="flex items-center gap-3">
+                                <span class="w-5 h-5 rounded-full bg-slate-400 text-white text-[11px] font-bold flex items-center justify-center shrink-0">2</span>
+                                <div>
+                                    <div class="font-bold text-slate-900">50 mm Konterlattung / Installationsebene</div>
+                                    <div class="text-slate-500 text-[11px]">Akustisch federnd abgehängt; Raum für Kabel, Lüftung &amp; Einbauspots</div>
+                                </div>
+                            </div>
+                            <div class="text-right shrink-0">
+                                <span class="font-bold text-slate-900">50 mm</span>
+                                <div class="text-[10px] text-slate-400">Bauseits DE</div>
+                            </div>
+                        </div>
+
+                        <!-- Schicht 1 -->
+                        <div id="row-layer-1" class="layer-row px-6 py-2.5 hover:bg-slate-50 transition-colors flex items-center justify-between gap-4 cursor-pointer">
+                            <div class="flex items-center gap-3">
+                                <span class="w-5 h-5 rounded-full bg-slate-600 text-white text-[11px] font-bold flex items-center justify-center shrink-0">1</span>
+                                <div>
+                                    <div class="font-bold text-slate-900">15 mm Gipsfaser / Rigips (Decke EG)</div>
+                                    <div class="text-slate-500 text-[11px]">Schwere Beplankung für F30-B Brandschutz &amp; glatte Wohnraumdecke</div>
+                                </div>
+                            </div>
+                            <div class="text-right shrink-0">
+                                <span class="font-bold text-slate-900">15 mm</span>
+                                <div class="text-[10px] text-slate-400">Bauseits DE</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Key Benefits & Practical Advantages (shadcn Card) -->
+                <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 space-y-4">
+                    <h3 class="text-sm font-bold uppercase tracking-wider text-slate-900 flex items-center gap-2">
+                        <i data-lucide="shield-check" class="w-4 h-4 text-emerald-600"></i>
+                        Warum dieser Deckenaufbau exzellent leise ist
+                    </h3>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
+                        <div class="p-3.5 rounded-xl bg-slate-50 border border-slate-100 space-y-1">
+                            <div class="font-bold text-slate-900 flex items-center gap-1.5">
+                                <i data-lucide="volume-x" class="w-3.5 h-3.5 text-blue-600"></i>
+                                Kein Hohlraum-Dröhnen (Ln,w &lt; 38 dB)
+                            </div>
+                            <p class="text-slate-600">
+                                Der schwere 5 cm Nassestrich bringt das nötige Eigengewicht, um tiefe Trittschallfrequenzen (Trampelgeräusche) effektiv zu schlucken.
+                            </p>
+                        </div>
+
+                        <div class="p-3.5 rounded-xl bg-slate-50 border border-slate-100 space-y-1">
+                            <div class="font-bold text-slate-900 flex items-center gap-1.5">
+                                <i data-lucide="thermometer" class="w-3.5 h-3.5 text-emerald-600"></i>
+                                Fußbodenheizung auch im OG
+                            </div>
+                            <p class="text-slate-600">
+                                Ermöglicht eine angenehm homogene Strahlungswärme und niedrige Vorlauftemperaturen für die Wärmepumpe im gesamten Haus.
+                            </p>
+                        </div>
+
+                        <div class="p-3.5 rounded-xl bg-slate-50 border border-slate-100 space-y-1">
+                            <div class="font-bold text-slate-900 flex items-center gap-1.5">
+                                <i data-lucide="shield" class="w-3.5 h-3.5 text-amber-600"></i>
+                                F30 Brandschutz zwischen Geschossen
+                            </div>
+                            <p class="text-slate-600">
+                                Die 15 mm Gipsfaserplatte und massive 240 mm Balkenlage garantieren eine Feuerwiderstandsdauer von über 30 Minuten.
+                            </p>
+                        </div>
+
+                        <div class="p-3.5 rounded-xl bg-slate-50 border border-slate-100 space-y-1">
+                            <div class="font-bold text-slate-900 flex items-center gap-1.5">
+                                <i data-lucide="wrench" class="w-3.5 h-3.5 text-purple-600"></i>
+                                50 mm Raum für Decken-Einbauten
+                            </div>
+                            <p class="text-slate-600">
+                                In der abgehängten Konterlattung laufen Lüftungsrohre, LED-Einbauspots und Elektroleitungen, ohne tragende Balken anbohren zu müssen.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        lucide.createIcons();
+
+        // Interactive Layer Highlighting between Table and SVG
+        const layers = [1, 2, 3, 4, 5, 6, 7];
+        layers.forEach(num => {
+            const row = document.getElementById("row-layer-" + num);
+            const svgLayer = document.getElementById("svg-layer-" + num);
+
+            if (row && svgLayer) {
+                row.addEventListener("mouseenter", () => {
+                    svgLayer.classList.add("layer-hovered");
+                });
+                row.addEventListener("mouseleave", () => {
+                    svgLayer.classList.remove("layer-hovered");
+                });
+
+                svgLayer.addEventListener("mouseenter", () => {
+                    row.classList.add("bg-blue-50/60");
+                });
+                svgLayer.addEventListener("mouseleave", () => {
+                    row.classList.remove("bg-blue-50/60");
+                });
+            }
+        });
+    </script>
+</body>
+</html>

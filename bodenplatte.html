@@ -3,253 +3,394 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Thermobodenplatte mit 70/30 Wandüberstand | Haus Jakob</title>
+    <title>1. Thermobodenplatte (400 mm) | Haus Jakob KfW-40</title>
+    <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@600;700;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ["Inter", "system-ui", "sans-serif"],
+                        display: ["Outfit", "sans-serif"],
+                    }
+                }
+            }
+        }
+    </script>
     <style>
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { background: #FAFAFA; font-family: 'Inter', system-ui, sans-serif; color: #0F172A; overflow-x: hidden; }
-        svg { display: block; width: 100%; height: auto; max-height: 100vh; }
+        .layer-highlight {
+            transition: all 0.2s ease-in-out;
+        }
+        .layer-hovered {
+            filter: drop-shadow(0 0 6px rgba(37, 99, 235, 0.6));
+            stroke: #2563eb !important;
+            stroke-width: 2.5px !important;
+        }
     </style>
 </head>
-<body>
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 660" width="100%" preserveAspectRatio="xMidYMid meet">
-  <defs>
-    <!-- Patterns -->
-    <pattern id="pat-schotter" width="20" height="20" patternUnits="userSpaceOnUse">
-      <rect width="20" height="20" fill="#F1F5F9"/>
-      <circle cx="5" cy="5" r="2.5" fill="#94A3B8"/>
-      <circle cx="15" cy="8" r="3" fill="#CBD5E1"/>
-      <circle cx="8" cy="15" r="2" fill="#94A3B8"/>
-      <circle cx="17" cy="16" r="2.5" fill="#64748B"/>
-    </pattern>
+<body class="bg-[#FAFAFA] text-slate-900 font-sans antialiased p-4 md:p-6 lg:p-8 min-h-screen">
+    <div class="max-w-7xl mx-auto space-y-6">
 
-    <pattern id="pat-xps" width="16" height="16" patternUnits="userSpaceOnUse">
-      <rect width="16" height="16" fill="#FEF08A"/>
-      <line x1="0" y1="16" x2="16" y2="0" stroke="#EAB308" stroke-width="0.8" opacity="0.6"/>
-    </pattern>
+        <!-- Top Header & Badges -->
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-4 border-b border-slate-200">
+            <div>
+                <div class="flex items-center gap-2 text-xs font-semibold text-slate-500 uppercase tracking-wider mb-1">
+                    <span>Haus Jakob</span>
+                    <span>/</span>
+                    <span>Schnittmodelle</span>
+                    <span>/</span>
+                    <span class="text-blue-600 font-bold">1. Thermobodenplatte</span>
+                </div>
+                <h1 class="text-2xl md:text-3xl font-display font-extrabold text-slate-900 flex items-center gap-3">
+                    1. Thermobodenplatte (400 mm)
+                </h1>
+                <p class="text-sm text-slate-600 mt-1">
+                    Passivhaus-Sohlplatte mit 70/30 Wandüberstand, 150 mm Sockeldämmung &amp; integrierter PEX-Fußbodenheizung.
+                </p>
+            </div>
 
-    <pattern id="pat-beton" width="24" height="24" patternUnits="userSpaceOnUse">
-      <rect width="24" height="24" fill="#E2E8F0"/>
-      <polygon points="4,4 8,10 2,8" fill="#94A3B8"/>
-      <polygon points="16,14 20,20 14,18" fill="#94A3B8"/>
-      <circle cx="18" cy="6" r="1.2" fill="#64748B"/>
-      <circle cx="6" cy="18" r="1" fill="#64748B"/>
-    </pattern>
+            <!-- Badges & Fast Actions -->
+            <div class="flex flex-wrap items-center gap-2">
+                <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold bg-blue-50 text-blue-700 border border-blue-200">
+                    <i data-lucide="flame" class="w-3.5 h-3.5 mr-1.5 text-blue-600"></i>
+                    U-Wert ≈ 0,140 W/m²K
+                </span>
+                <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold bg-emerald-50 text-emerald-700 border border-emerald-200">
+                    <i data-lucide="shield-check" class="w-3.5 h-3.5 mr-1.5 text-emerald-600"></i>
+                    Wärmebrückenfrei
+                </span>
+                <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold bg-amber-50 text-amber-800 border border-amber-200">
+                    <i data-lucide="anchor" class="w-3.5 h-3.5 mr-1.5 text-amber-700"></i>
+                    70% Schwelle auf WU-Beton
+                </span>
+                <a href="materialien.html" class="inline-flex items-center px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-900 hover:bg-slate-800 text-white shadow-sm transition-all ml-auto md:ml-2">
+                    <i data-lucide="calculator" class="w-3.5 h-3.5 mr-1.5"></i>
+                    Materialplaner
+                </a>
+            </div>
+        </div>
 
-    <pattern id="pat-holz" width="20" height="20" patternUnits="userSpaceOnUse">
-      <rect width="20" height="20" fill="#FDE68A"/>
-      <line x1="0" y1="5" x2="20" y2="5" stroke="#D97706" stroke-width="0.8" opacity="0.7"/>
-      <line x1="0" y1="15" x2="20" y2="15" stroke="#D97706" stroke-width="0.8" opacity="0.7"/>
-    </pattern>
+        <!-- 2-Column Split: Vector Cutaway (Left) & shadcn Cards (Right) -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
 
-    <pattern id="pat-steico" width="12" height="12" patternUnits="userSpaceOnUse">
-      <rect width="12" height="12" fill="#FEF9C3"/>
-      <circle cx="6" cy="6" r="1.5" fill="#CA8A04" opacity="0.4"/>
-    </pattern>
-  </defs>
+            <!-- LEFT: Crisp Architectural Vector Drawing Card -->
+            <div class="lg:col-span-6 bg-white rounded-2xl border border-slate-200 shadow-sm p-6 flex flex-col items-center justify-center relative overflow-hidden">
+                <div class="w-full flex items-center justify-between mb-4">
+                    <span class="text-xs font-bold uppercase tracking-wider text-slate-500">Technisches Schnittmodell</span>
+                    <span class="text-xs text-slate-400 font-mono">Fundament- &amp; Sockeldetail</span>
+                </div>
 
-  <!-- Header Section -->
-  <g transform="translate(40, 36)">
-    <text x="0" y="0" font-family="'Outfit', sans-serif" font-size="20" font-weight="800" fill="#0F172A">1. Thermobodenplatte mit 70/30 Wandüberstand &amp; 150 mm Sockeldämmung</text>
-    <text x="0" y="22" font-size="12" font-weight="500" fill="#64748B">Optimiertes Passivhaus-Detail: 70% Schwelle auf Beton (verankert) + 30% auf druckfestem XPS + 150 mm durchgehende Sockeldämmung</text>
-  </g>
+                <div class="w-full max-w-[500px] mx-auto">
+                    <svg id="svg-bodenplatte" xmlns="http://www.w3.org/2000/svg" viewBox="15 70 510 530" width="100%" class="w-full h-auto drop-shadow-sm select-none">
+                        <defs>
+                            <pattern id="pat-schotter" width="20" height="20" patternUnits="userSpaceOnUse">
+                                <rect width="20" height="20" fill="#F1F5F9"/>
+                                <circle cx="5" cy="5" r="2.5" fill="#94A3B8"/>
+                                <circle cx="15" cy="8" r="3" fill="#CBD5E1"/>
+                                <circle cx="8" cy="15" r="2" fill="#94A3B8"/>
+                                <circle cx="17" cy="16" r="2.5" fill="#64748B"/>
+                            </pattern>
+                            <pattern id="pat-xps" width="16" height="16" patternUnits="userSpaceOnUse">
+                                <rect width="16" height="16" fill="#FEF08A"/>
+                                <line x1="0" y1="16" x2="16" y2="0" stroke="#EAB308" stroke-width="0.8" opacity="0.6"/>
+                            </pattern>
+                            <pattern id="pat-beton" width="24" height="24" patternUnits="userSpaceOnUse">
+                                <rect width="24" height="24" fill="#E2E8F0"/>
+                                <polygon points="4,4 8,10 2,8" fill="#94A3B8"/>
+                                <polygon points="16,14 20,20 14,18" fill="#94A3B8"/>
+                                <circle cx="18" cy="6" r="1.2" fill="#64748B"/>
+                                <circle cx="6" cy="18" r="1" fill="#64748B"/>
+                            </pattern>
+                            <pattern id="pat-holz" width="20" height="20" patternUnits="userSpaceOnUse">
+                                <rect width="20" height="20" fill="#FDE68A"/>
+                                <line x1="0" y1="5" x2="20" y2="5" stroke="#D97706" stroke-width="0.8" opacity="0.7"/>
+                                <line x1="0" y1="15" x2="20" y2="15" stroke="#D97706" stroke-width="0.8" opacity="0.7"/>
+                            </pattern>
+                            <pattern id="pat-steico" width="12" height="12" patternUnits="userSpaceOnUse">
+                                <rect width="12" height="12" fill="#FEF9C3"/>
+                                <circle cx="6" cy="6" r="1.5" fill="#CA8A04" opacity="0.4"/>
+                            </pattern>
+                        </defs>
 
-  <line x1="40" y1="72" x2="960" y2="72" stroke="#E2E8F0" stroke-width="1"/>
+                        <!-- Ground Level GOK -->
+                        <line x1="20" y1="480" x2="110" y2="480" stroke="#8B5A2B" stroke-width="2" stroke-dasharray="4,3"/>
+                        <rect x="20" y="455" width="75" height="20" rx="4" fill="#FEF3C7" stroke="#D97706" stroke-width="1"/>
+                        <text x="57" y="469" font-size="10" font-weight="700" fill="#92400E" text-anchor="middle">GOK (&plusmn;0.00)</text>
 
-  <!-- ================= LEFT DIAGRAM (X: 30 to 520, Y: 85 to 610) ================= -->
+                        <!-- 1. Schottertragschicht -->
+                        <g id="svg-layer-1" class="layer-highlight cursor-pointer">
+                            <rect x="110" y="480" width="415" height="90" fill="url(#pat-schotter)" stroke="#94A3B8" stroke-width="1.5" rx="2"/>
+                            <text x="315" y="530" fill="#475569" font-size="11.5" font-weight="700" text-anchor="middle">1. Schottertragschicht (300 mm, kapillarbrechend)</text>
+                        </g>
 
-  <!-- Ground Level GOK -->
-  <line x1="20" y1="480" x2="110" y2="480" stroke="#8B5A2B" stroke-width="2" stroke-dasharray="4,3"/>
-  <rect x="20" y="455" width="75" height="20" rx="4" fill="#FEF3C7" stroke="#D97706" stroke-width="1"/>
-  <text x="57" y="469" font-size="10" font-weight="700" fill="#92400E" text-anchor="middle">GOK (±0.00)</text>
+                        <!-- 2. XPS Dämmung (200 mm horizontal + 150 mm Sockelschalung) -->
+                        <g id="svg-layer-2" class="layer-highlight cursor-pointer">
+                            <rect x="110" y="410" width="280" height="70" fill="url(#pat-xps)" stroke="#CA8A04" stroke-width="1.5"/>
+                            <rect x="390" y="270" width="65" height="210" fill="url(#pat-xps)" stroke="#CA8A04" stroke-width="1.5"/>
+                            <line x1="455" y1="275" x2="455" y2="480" stroke="#78350F" stroke-width="2.5"/>
+                            
+                            <text x="250" y="450" fill="#854D0E" font-size="11.5" font-weight="700" text-anchor="middle">2. Passivhaus-XPS Dämmung (200 mm)</text>
+                            <text x="422" y="375" fill="#854D0E" font-size="9" font-weight="800" text-anchor="middle" transform="rotate(-90 422 375)">150 mm Sockeldämmung</text>
+                        </g>
 
-  <!-- 1. Schottertragschicht (300 mm) -->
-  <g id="layer-schotter">
-    <rect x="110" y="480" width="425" height="90" fill="url(#pat-schotter)" stroke="#94A3B8" stroke-width="1.5" rx="2"/>
-    <text x="320" y="530" fill="#475569" font-size="12" font-weight="700" text-anchor="middle">1. Schottertragschicht (300 mm, 0-45 mm Korn)</text>
-  </g>
+                        <!-- 3. Stahlbetonsohle 200 mm -->
+                        <g id="svg-layer-3" class="layer-highlight cursor-pointer">
+                            <rect x="110" y="270" width="280" height="140" fill="url(#pat-beton)" stroke="#475569" stroke-width="1.5"/>
+                            <line x1="125" y1="380" x2="375" y2="380" stroke="#334155" stroke-width="2.5"/>
+                            <line x1="125" y1="310" x2="375" y2="310" stroke="#334155" stroke-width="2.5"/>
+                            <line x1="160" y1="310" x2="160" y2="380" stroke="#64748B" stroke-width="1.5" stroke-dasharray="2,2"/>
+                            <line x1="260" y1="310" x2="260" y2="380" stroke="#64748B" stroke-width="1.5" stroke-dasharray="2,2"/>
+                            <text x="250" y="350" fill="#0F172A" font-size="12" font-weight="800" text-anchor="middle">3. Stahlbetonsohle (200 mm C25/30 WU)</text>
+                        </g>
 
-  <!-- 2. Passivhaus-XPS Dämmung 200 mm & 150 mm durchgehende Sockel-Randschale -->
-  <g id="layer-xps">
-    <!-- Unter-Platte (200 mm unter Betonplatte) -->
-    <rect x="110" y="410" width="280" height="70" fill="url(#pat-xps)" stroke="#CA8A04" stroke-width="1.5"/>
-    
-    <!-- Durchgehende 150 mm breite XPS-Randschale (Sockel & Gründung) -->
-    <rect x="390" y="270" width="65" height="210" fill="url(#pat-xps)" stroke="#CA8A04" stroke-width="1.5"/>
-    
-    <!-- Sockelputz Außenseite -->
-    <line x1="455" y1="275" x2="455" y2="480" stroke="#78350F" stroke-width="2.5"/>
-    
-    <text x="250" y="450" fill="#854D0E" font-size="12" font-weight="700" text-anchor="middle">2. Passivhaus-XPS Dämmung (200 mm)</text>
-    <text x="422" y="375" fill="#854D0E" font-size="9" font-weight="800" text-anchor="middle" transform="rotate(-90 422 375)">Optimierte 150 mm Sockeldämmung</text>
-  </g>
+                        <!-- 4. PEX Fußbodenheizung -->
+                        <g id="svg-layer-4" class="layer-highlight cursor-pointer">
+                            <circle cx="150" cy="310" r="7" fill="#EF4444" stroke="#991B1B" stroke-width="1.5"/>
+                            <circle cx="200" cy="310" r="7" fill="#EF4444" stroke="#991B1B" stroke-width="1.5"/>
+                            <circle cx="250" cy="310" r="7" fill="#EF4444" stroke="#991B1B" stroke-width="1.5"/>
+                            <circle cx="300" cy="310" r="7" fill="#EF4444" stroke="#991B1B" stroke-width="1.5"/>
+                            <circle cx="350" cy="310" r="7" fill="#EF4444" stroke="#991B1B" stroke-width="1.5"/>
+                            <text x="250" y="298" fill="#DC2626" font-size="9.5" font-weight="700" text-anchor="middle">4. Integrierte PEX-Heizrohre (FBH)</text>
+                        </g>
 
-  <!-- 3. Stahlbetonsohle (200 mm Betonkern C25/30) -->
-  <g id="layer-beton">
-    <!-- Betonsohle x=110 bis x=390 (Breite 280px = Betonkern) -->
-    <rect x="110" y="270" width="280" height="140" fill="url(#pat-beton)" stroke="#475569" stroke-width="1.5"/>
-    
-    <!-- Bewehrungsgitter -->
-    <line x1="125" y1="380" x2="375" y2="380" stroke="#334155" stroke-width="2.5"/>
-    <line x1="125" y1="310" x2="375" y2="310" stroke="#334155" stroke-width="2.5"/>
-    <!-- Bügel / Abstandshalter -->
-    <line x1="160" y1="310" x2="160" y2="380" stroke="#64748B" stroke-width="1.5" stroke-dasharray="2,2"/>
-    <line x1="260" y1="310" x2="260" y2="380" stroke="#64748B" stroke-width="1.5" stroke-dasharray="2,2"/>
-    
-    <text x="250" y="350" fill="#0F172A" font-size="13" font-weight="800" text-anchor="middle">3. Stahlbetonsohle (200 mm C25/30)</text>
-  </g>
+                        <!-- 5. Dampfsperre & Oberbelag -->
+                        <g id="svg-layer-5" class="layer-highlight cursor-pointer">
+                            <line x1="110" y1="270" x2="420" y2="270" stroke="#2563EB" stroke-width="3.5" stroke-dasharray="6,3"/>
+                            <rect x="110" y="255" width="90" height="15" fill="#CBD5E1" stroke="#475569" stroke-width="1"/>
+                            <text x="155" y="266" fill="#1E293B" font-size="8.5" font-weight="700" text-anchor="middle">Oberbelag / Fliese</text>
+                        </g>
 
-  <!-- 4. Integrierte PEX Fußbodenheizung -->
-  <g id="layer-fbh">
-    <circle cx="150" cy="310" r="7" fill="#EF4444" stroke="#991B1B" stroke-width="1.5"/>
-    <circle cx="200" cy="310" r="7" fill="#EF4444" stroke="#991B1B" stroke-width="1.5"/>
-    <circle cx="250" cy="310" r="7" fill="#EF4444" stroke="#991B1B" stroke-width="1.5"/>
-    <circle cx="300" cy="310" r="7" fill="#EF4444" stroke="#991B1B" stroke-width="1.5"/>
-    <circle cx="350" cy="310" r="7" fill="#EF4444" stroke="#991B1B" stroke-width="1.5"/>
-    <text x="250" y="298" fill="#DC2626" font-size="10" font-weight="700" text-anchor="middle">4. Integrierte PEX-Heizrohre (FBH)</text>
-  </g>
+                        <!-- 6. Schwelle 70/30 Auflager & Außenwandanschluss -->
+                        <g id="svg-layer-6" class="layer-highlight cursor-pointer">
+                            <rect x="200" y="230" width="220" height="40" fill="url(#pat-holz)" stroke="#D97706" stroke-width="2"/>
+                            
+                            <!-- M12 Ankerbolzen im 70% Betonbereich -->
+                            <line x1="330" y1="215" x2="330" y2="305" stroke="#0F172A" stroke-width="3"/>
+                            <circle cx="330" cy="215" r="4" fill="#64748B"/>
+                            <text x="330" y="208" font-size="8" font-weight="800" fill="#0F172A" text-anchor="middle">M12 Bolzen</text>
 
-  <!-- 5. Bitumen-Dampfsperre Katja BA -->
-  <g id="layer-dampfsperre">
-    <line x1="110" y1="270" x2="420" y2="270" stroke="#2563EB" stroke-width="3.5" stroke-dasharray="6,3"/>
-  </g>
+                            <text x="300" y="254" fill="#78350F" font-size="10" font-weight="800" text-anchor="middle">Schwelle (70/30 Auflage)</text>
 
-  <!-- 6. Oberbelag / Glattschliff -->
-  <g id="layer-oberbelag">
-    <rect x="110" y="255" width="90" height="15" fill="#CBD5E1" stroke="#475569" stroke-width="1"/>
-    <text x="155" y="266" fill="#1E293B" font-size="9" font-weight="700" text-anchor="middle">6. Oberbelag</text>
-  </g>
+                            <!-- Wandständer KVH -->
+                            <rect x="200" y="90" width="30" height="140" fill="#F59E0B" stroke="#B45309" stroke-width="1.5"/>
+                            <rect x="390" y="90" width="30" height="140" fill="#F59E0B" stroke="#B45309" stroke-width="1.5"/>
+                            <rect x="230" y="90" width="160" height="140" fill="#FEF3C7" stroke="#F59E0B" stroke-width="1.5" stroke-dasharray="4,3"/>
+                            <text x="310" y="150" fill="#92400E" font-size="10.5" font-weight="700" text-anchor="middle">KVH Wandständer</text>
+                            <text x="310" y="166" fill="#B45309" font-size="9" font-weight="600" text-anchor="middle">(220 mm Gefach)</text>
 
-  <!-- 7. Schwelle & Wandständer in 70/30 Auflager-Position -->
-  <g id="layer-holz-wand">
-    <rect x="200" y="230" width="220" height="40" fill="url(#pat-holz)" stroke="#D97706" stroke-width="2"/>
-    
-    <!-- Ankerbolzen im Betonbereich (70% Zone) -->
-    <line x1="330" y1="215" x2="330" y2="305" stroke="#0F172A" stroke-width="3"/>
-    <circle cx="330" cy="215" r="4" fill="#64748B"/>
-    <text x="330" y="208" font-size="8" font-weight="800" fill="#0F172A" text-anchor="middle">M12 Anker</text>
+                            <!-- Fassade & Tropfblech -->
+                            <rect x="420" y="90" width="20" height="165" fill="url(#pat-steico)" stroke="#CA8A04" stroke-width="1"/>
+                            <rect x="440" y="90" width="18" height="165" fill="#F1F5F9" stroke="#94A3B8" stroke-dasharray="3,3"/>
+                            <rect x="458" y="90" width="10" height="165" fill="#475569" stroke="#0F172A" stroke-width="1"/>
+                            <path d="M 415 260 L 470 260 L 470 270 L 466 270 L 466 264 L 415 264 Z" fill="#0284C7" stroke="#0369A1" stroke-width="1"/>
+                        </g>
 
-    <text x="310" y="254" fill="#78350F" font-size="11" font-weight="800" text-anchor="middle">7. Holzschwelle (70/30)</text>
+                        <!-- 70/30 Bemaßungsanzeige -->
+                        <g transform="translate(200, 275)">
+                            <line x1="0" y1="0" x2="190" y2="0" stroke="#D97706" stroke-width="2"/>
+                            <line x1="190" y1="0" x2="220" y2="0" stroke="#CA8A04" stroke-width="2"/>
+                            <text x="95" y="14" font-size="9" font-weight="800" fill="#D97706" text-anchor="middle">70% auf Beton</text>
+                            <text x="205" y="14" font-size="8" font-weight="800" fill="#CA8A04" text-anchor="middle">30% XPS</text>
+                        </g>
+                    </svg>
+                </div>
 
-    <!-- Wandständer KVH (220 mm Gefach) -->
-    <rect x="200" y="90" width="30" height="140" fill="#F59E0B" stroke="#B45309" stroke-width="1.5"/>
-    <rect x="390" y="90" width="30" height="140" fill="#F59E0B" stroke="#B45309" stroke-width="1.5"/>
-    <rect x="230" y="90" width="160" height="140" fill="#FEF3C7" stroke="#F59E0B" stroke-width="1.5" stroke-dasharray="4,3"/>
-    
-    <text x="310" y="150" fill="#92400E" font-size="11" font-weight="700" text-anchor="middle">KVH Wandständer</text>
-    <text x="310" y="166" fill="#B45309" font-size="10" font-weight="600" text-anchor="middle">(220 mm Gefach)</text>
+                <div class="mt-4 text-center text-xs text-slate-500 flex items-center gap-2">
+                    <i data-lucide="info" class="w-3.5 h-3.5 text-blue-500"></i>
+                    Tipp: Schichten in der Tabelle berühren zum Hervorheben im Schnitt.
+                </div>
+            </div>
 
-    <!-- Fassadenaufbau Außen (73 mm) -->
-    <rect x="420" y="90" width="20" height="165" fill="url(#pat-steico)" stroke="#CA8A04" stroke-width="1"/>
-    
-    <rect x="440" y="90" width="18" height="165" fill="#F1F5F9" stroke="#94A3B8" stroke-dasharray="3,3"/>
-    <rect x="440" y="110" width="18" height="30" fill="#DBEAFE" stroke="#2563EB"/>
-    <rect x="440" y="190" width="18" height="30" fill="#DBEAFE" stroke="#2563EB"/>
-    
-    <rect x="458" y="90" width="10" height="165" fill="#475569" stroke="#0F172A" stroke-width="1"/>
+            <!-- RIGHT: Modern shadcn Cards for Layers & Physics -->
+            <div class="lg:col-span-6 space-y-6">
 
-    <!-- Sockel-Tropfblech Z-Profil -->
-    <path d="M 415 260 L 470 260 L 470 270 L 466 270 L 466 264 L 415 264 Z" fill="#0284C7" stroke="#0369A1" stroke-width="1"/>
-  </g>
+                <!-- Layer Breakdown Card (shadcn Table) -->
+                <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
+                    <div class="px-6 py-4 border-b border-slate-100 flex items-center justify-between">
+                        <div>
+                            <h2 class="text-base font-bold text-slate-900">Komponenten &amp; Schichtaufbau</h2>
+                            <p class="text-xs text-slate-500">Passivhaus-Fundamentdetails mit 70/30 Schwellenüberstand</p>
+                        </div>
+                        <span class="text-xs font-mono font-semibold px-2.5 py-1 bg-slate-100 rounded-md text-slate-700">6 Elemente</span>
+                    </div>
 
-  <!-- 70/30 Dimensioning Bracket Callout -->
-  <g transform="translate(200, 275)">
-    <line x1="0" y1="0" x2="190" y2="0" stroke="#D97706" stroke-width="2"/>
-    <line x1="190" y1="0" x2="220" y2="0" stroke="#CA8A04" stroke-width="2"/>
-    <text x="95" y="14" font-size="9" font-weight="800" fill="#B45309" text-anchor="middle">70% (154 mm) Beton</text>
-    <text x="205" y="14" font-size="9" font-weight="800" fill="#854D0E" text-anchor="middle">30% XPS</text>
-  </g>
+                    <div class="divide-y divide-slate-100 text-xs">
+                        <!-- Schicht 6 -->
+                        <div id="row-layer-6" class="layer-row px-6 py-2.5 hover:bg-slate-50 transition-colors flex items-center justify-between gap-4 cursor-pointer">
+                            <div class="flex items-center gap-3">
+                                <span class="w-5 h-5 rounded-full bg-amber-700 text-white text-[11px] font-bold flex items-center justify-center shrink-0">6</span>
+                                <div>
+                                    <div class="font-bold text-slate-900">70/30 Schwellenauflager + Wandständer</div>
+                                    <div class="text-slate-500 text-[11px]">70% auf massivem Beton verankert (M12), 30% auf XPS auskragend</div>
+                                </div>
+                            </div>
+                            <div class="text-right shrink-0">
+                                <span class="font-bold text-slate-900">Schwelle</span>
+                                <div class="text-[10px] text-amber-800 font-semibold">Palmatin Werk</div>
+                            </div>
+                        </div>
 
-  <!-- Visual Highlight Callout for Sockelrücksprung Tropfkante -->
-  <g transform="translate(475, 230)">
-    <path d="M 0 35 L 0 55 M -4 50 L 0 58 L 4 50" stroke="#DC2626" stroke-width="2" fill="none"/>
-    <circle cx="0" cy="65" r="2.5" fill="#0284C7"/>
+                        <!-- Schicht 5 -->
+                        <div id="row-layer-5" class="layer-row px-6 py-2.5 hover:bg-slate-50 transition-colors flex items-center justify-between gap-4 cursor-pointer">
+                            <div class="flex items-center gap-3">
+                                <span class="w-5 h-5 rounded-full bg-blue-600 text-white text-[11px] font-bold flex items-center justify-center shrink-0">5</span>
+                                <div>
+                                    <div class="font-bold text-blue-700">Bitumen-Schweißbahn (z. B. Katja Sprint)</div>
+                                    <div class="text-slate-500 text-[11px]">Gegen aufsteigende Restfeuchte &amp; Radon-Dichtigkeit</div>
+                                </div>
+                            </div>
+                            <div class="text-right shrink-0">
+                                <span class="font-bold text-slate-900">Dampfsperre</span>
+                                <div class="text-[10px] text-slate-400">Bauseits DE</div>
+                            </div>
+                        </div>
 
-    <rect x="15" y="15" width="135" height="50" rx="6" fill="#EFF6FF" stroke="#0284C7" stroke-width="1.5"/>
-    <text x="23" y="32" font-size="10" font-weight="800" fill="#0369A1">Perfekte Tropfkante</text>
-    <text x="23" y="46" font-size="9" font-weight="600" fill="#0284C7">Fassade kragt 13 mm über</text>
-    <text x="23" y="58" font-size="9" font-weight="600" fill="#0284C7">150 mm XPS-Sockel aus</text>
-  </g>
+                        <!-- Schicht 4 -->
+                        <div id="row-layer-4" class="layer-row px-6 py-2.5 hover:bg-slate-50 transition-colors flex items-center justify-between gap-4 cursor-pointer">
+                            <div class="flex items-center gap-3">
+                                <span class="w-5 h-5 rounded-full bg-red-600 text-white text-[11px] font-bold flex items-center justify-center shrink-0">4</span>
+                                <div>
+                                    <div class="font-bold text-slate-900">Integrierte PEX-Fußbodenheizungsrohre</div>
+                                    <div class="text-slate-500 text-[11px]">Direkt in der Betonkernaktivierung für hohe thermische Behaglichkeit</div>
+                                </div>
+                            </div>
+                            <div class="text-right shrink-0">
+                                <span class="font-bold text-slate-900">17 mm PEX</span>
+                                <div class="text-[10px] text-slate-400">Bauseits DE</div>
+                            </div>
+                        </div>
 
-  <!-- Pointer Line for Dampfsperre -->
-  <rect x="15" y="260" width="85" height="20" rx="4" fill="#EFF6FF" stroke="#3B82F6" stroke-width="1"/>
-  <text x="57" y="274" font-size="9" font-weight="700" fill="#1D4ED8" text-anchor="middle">5. Dampfsperre</text>
+                        <!-- Schicht 3 -->
+                        <div id="row-layer-3" class="layer-row px-6 py-2.5 hover:bg-slate-50 transition-colors flex items-center justify-between gap-4 cursor-pointer">
+                            <div class="flex items-center gap-3">
+                                <span class="w-5 h-5 rounded-full bg-slate-700 text-white text-[11px] font-bold flex items-center justify-center shrink-0">3</span>
+                                <div>
+                                    <div class="font-bold text-slate-900">Stahlbetonsohle (200 mm C25/30 WU)</div>
+                                    <div class="text-slate-500 text-[11px]">Wasserundurchlässiger Beton, doppelt bewehrt mit Q335A Matten</div>
+                                </div>
+                            </div>
+                            <div class="text-right shrink-0">
+                                <span class="font-bold text-slate-900">200 mm</span>
+                                <div class="text-[10px] text-slate-400">Bauseits DE</div>
+                            </div>
+                        </div>
 
+                        <!-- Schicht 2 -->
+                        <div id="row-layer-2" class="layer-row px-6 py-2.5 hover:bg-slate-50 transition-colors flex items-center justify-between gap-4 cursor-pointer">
+                            <div class="flex items-center gap-3">
+                                <span class="w-5 h-5 rounded-full bg-yellow-500 text-white text-[11px] font-bold flex items-center justify-center shrink-0">2</span>
+                                <div>
+                                    <div class="font-bold text-slate-900">Passivhaus-XPS Dämmung (200 mm + 150 mm Sockel)</div>
+                                    <div class="text-slate-500 text-[11px]">Druckfeste Perimeterdämmung CS 300 kPa, lückenlose Thermohülle</div>
+                                </div>
+                            </div>
+                            <div class="text-right shrink-0">
+                                <span class="font-bold text-slate-900">200 mm</span>
+                                <div class="text-[10px] text-slate-400">Bauseits DE</div>
+                            </div>
+                        </div>
 
-  <!-- ================= RIGHT SUMMARY CARD (X: 560 to 960, Y: 90 to 590) ================= -->
-  <g transform="translate(560, 90)">
-    <rect x="0" y="0" width="400" height="510" rx="16" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1.5"/>
+                        <!-- Schicht 1 -->
+                        <div id="row-layer-1" class="layer-row px-6 py-2.5 hover:bg-slate-50 transition-colors flex items-center justify-between gap-4 cursor-pointer">
+                            <div class="flex items-center gap-3">
+                                <span class="w-5 h-5 rounded-full bg-slate-400 text-white text-[11px] font-bold flex items-center justify-center shrink-0">1</span>
+                                <div>
+                                    <div class="font-bold text-slate-900">Schottertragschicht (300 mm, 0-45 mm Korn)</div>
+                                    <div class="text-slate-500 text-[11px]">Kapillarbrechend, verdichtet Ev2 &ge; 100 MN/m²</div>
+                                </div>
+                            </div>
+                            <div class="text-right shrink-0">
+                                <span class="font-bold text-slate-900">300 mm</span>
+                                <div class="text-[10px] text-slate-400">Bauseits DE</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-    <!-- Card Header -->
-    <rect x="0" y="0" width="400" height="55" rx="16" fill="#F8FAFC"/>
-    <path d="M 0 40 L 400 40 L 400 55 L 0 55 Z" fill="#F8FAFC"/>
-    <text x="24" y="34" font-family="'Outfit', sans-serif" font-size="15" font-weight="800" fill="#0F172A">70/30 Passivhaus-Schwellenauflager</text>
-    <text x="376" y="34" font-size="11" font-weight="700" fill="#64748B" text-anchor="end">Dämm-Optimiert</text>
-    <line x1="0" y1="55" x2="400" y2="55" stroke="#E2E8F0" stroke-width="1"/>
+                <!-- Key Benefits & Practical Advantages (shadcn Card) -->
+                <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 space-y-4">
+                    <h3 class="text-sm font-bold uppercase tracking-wider text-slate-900 flex items-center gap-2">
+                        <i data-lucide="shield-check" class="w-4 h-4 text-emerald-600"></i>
+                        Vorteile des 70/30 Schwellenaufstands
+                    </h3>
 
-    <!-- Table Content (Clean Schichtaufbau List) -->
-    <g transform="translate(24, 75)" font-size="11">
-      
-      <!-- Row 7 -->
-      <g transform="translate(0, 0)">
-        <text x="0" y="12" font-weight="700" fill="#92400E">7. Schwelle (70% Beton / 30% XPS - 220 mm KVH)</text>
-        <line x1="0" y1="26" x2="350" y2="26" stroke="#F1F5F9"/>
-      </g>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
+                        <div class="p-3.5 rounded-xl bg-slate-50 border border-slate-100 space-y-1">
+                            <div class="font-bold text-slate-900 flex items-center gap-1.5">
+                                <i data-lucide="anchor" class="w-3.5 h-3.5 text-blue-600"></i>
+                                Sichere Bolzenverankerung
+                            </div>
+                            <p class="text-slate-600">
+                                Die M12 Schwerlastanker greifen tief in den massiven Betonkern der Sohle (70% Zone). Hohe statische Windsogsicherheit.
+                            </p>
+                        </div>
 
-      <!-- Row 6 -->
-      <g transform="translate(0, 38)">
-        <text x="0" y="12" font-weight="700" fill="#334155">6. Oberbelag / Glattschliff (15 mm)</text>
-        <line x1="0" y1="26" x2="350" y2="26" stroke="#F1F5F9"/>
-      </g>
+                        <div class="p-3.5 rounded-xl bg-slate-50 border border-slate-100 space-y-1">
+                            <div class="font-bold text-slate-900 flex items-center gap-1.5">
+                                <i data-lucide="thermometer-snowflake" class="w-3.5 h-3.5 text-emerald-600"></i>
+                                Null Wärmebrücke am Sockel
+                            </div>
+                            <p class="text-slate-600">
+                                Die 150 mm vertikale Sockeldämmung schließt nahtlos an die 60 mm Fassadendämmung an. Der Fußboden bleibt im Winter mollig warm.
+                            </p>
+                        </div>
 
-      <!-- Row 5 -->
-      <g transform="translate(0, 76)">
-        <text x="0" y="12" font-weight="700" fill="#1D4ED8">5. Bitumen-Dampfsperre Katja BA</text>
-        <line x1="0" y1="26" x2="350" y2="26" stroke="#F1F5F9"/>
-      </g>
+                        <div class="p-3.5 rounded-xl bg-slate-50 border border-slate-100 space-y-1">
+                            <div class="font-bold text-slate-900 flex items-center gap-1.5">
+                                <i data-lucide="droplet" class="w-3.5 h-3.5 text-amber-600"></i>
+                                Z-Tropfblech gegen Schlagregen
+                            </div>
+                            <p class="text-slate-600">
+                                Ein eloxiertes Aluminium-Tropfblech leitet herablaufendes Fassadenwasser mit Gefälle sicher vor den Sockel ab.
+                            </p>
+                        </div>
 
-      <!-- Row 4 -->
-      <g transform="translate(0, 114)">
-        <text x="0" y="12" font-weight="700" fill="#B91C1C">4. Integrierte PEX-Heizrohre (FBH 17x2.0)</text>
-        <line x1="0" y1="26" x2="350" y2="26" stroke="#F1F5F9"/>
-      </g>
+                        <div class="p-3.5 rounded-xl bg-slate-50 border border-slate-100 space-y-1">
+                            <div class="font-bold text-slate-900 flex items-center gap-1.5">
+                                <i data-lucide="zap" class="w-3.5 h-3.5 text-purple-600"></i>
+                                Thermische Speichermasse
+                            </div>
+                            <p class="text-slate-600">
+                                Der 200 mm Betonkern wirkt als gigantischer Wärmespeicher, der PV-Strom tagsüber aufnimmt und nachts sanft an den Wohnraum abgibt.
+                            </p>
+                        </div>
+                    </div>
+                </div>
 
-      <!-- Row 3 -->
-      <g transform="translate(0, 152)">
-        <text x="0" y="12" font-weight="700" fill="#0F172A">3. Stahlbetonsohle 200 mm (C25/30 Kern)</text>
-        <line x1="0" y1="26" x2="350" y2="26" stroke="#F1F5F9"/>
-      </g>
+            </div>
+        </div>
 
-      <!-- Row 2 -->
-      <g transform="translate(0, 190)">
-        <text x="0" y="12" font-weight="700" fill="#854D0E">2. Passivhaus XPS 200 mm (Sockel 150 mm)</text>
-        <line x1="0" y1="26" x2="350" y2="26" stroke="#F1F5F9"/>
-      </g>
+    </div>
 
-      <!-- Row 1 -->
-      <g transform="translate(0, 228)">
-        <text x="0" y="12" font-weight="700" fill="#475569">1. Schottertragschicht 300 mm (0-45 mm Korn)</text>
-      </g>
+    <script>
+        lucide.createIcons();
 
-    </g>
+        // Interactive Layer Highlighting between Table and SVG
+        const layers = [1, 2, 3, 4, 5, 6];
+        layers.forEach(num => {
+            const row = document.getElementById("row-layer-" + num);
+            const svgLayer = document.getElementById("svg-layer-" + num);
 
-    <!-- Technical Specs Box at Bottom of Card -->
-    <g transform="translate(20, 355)">
-      <rect x="0" y="0" width="360" height="135" rx="12" fill="#F8FAFC" stroke="#E2E8F0" stroke-width="1"/>
-      <text x="16" y="24" font-size="12" font-weight="800" fill="#0F172A">Vorteile der 70/30 Dämm-Konstruktion:</text>
+            if (row && svgLayer) {
+                row.addEventListener("mouseenter", () => {
+                    svgLayer.classList.add("layer-hovered");
+                });
+                row.addEventListener("mouseleave", () => {
+                    svgLayer.classList.remove("layer-hovered");
+                });
 
-      <g transform="translate(16, 44)" font-size="11" font-weight="500" fill="#334155">
-        <text x="0" y="0">• <tspan font-weight="700" fill="#0369A1">Maximale Sockeldämmung:</tspan> Satt <tspan font-weight="700" fill="#D97706">150 mm XPS</tspan> am Sockel</text>
-        <text x="0" y="20">• <tspan font-weight="700" fill="#0F172A">100% Statisch Sicher:</tspan> 70% (154 mm) voll im Beton verankert</text>
-        <text x="0" y="40">• <tspan font-weight="700" fill="#0F172A">Wärmebrückenfrei:</tspan> Sockel U-Wert sinkt auf hervorragende 0,14</text>
-        <text x="0" y="60">• <tspan font-weight="700" fill="#0F172A">Saubere Tropfkante:</tspan> 73 mm Fassade kragt 13 mm aus</text>
-      </g>
-    </g>
-
-  </g>
-
-</svg>
+                svgLayer.addEventListener("mouseenter", () => {
+                    row.classList.add("bg-blue-50/60");
+                });
+                svgLayer.addEventListener("mouseleave", () => {
+                    row.classList.remove("bg-blue-50/60");
+                });
+            }
+        });
+    </script>
 </body>
 </html>

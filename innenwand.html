@@ -3,207 +3,386 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Innenwandaufbau mit 80 mm Ständer & Doppelbeplankung (129 mm) | Haus Jakob</title>
+    <title>3. Innenwand (129 mm) | Haus Jakob KfW-40</title>
+    <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@600;700;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ["Inter", "system-ui", "sans-serif"],
+                        display: ["Outfit", "sans-serif"],
+                    }
+                }
+            }
+        }
+    </script>
     <style>
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { background: #FAFAFA; font-family: 'Inter', system-ui, sans-serif; color: #0F172A; overflow-x: hidden; }
-        svg { display: block; width: 100%; height: 100%; max-height: 100vh; }
+        .layer-highlight {
+            transition: all 0.2s ease-in-out;
+        }
+        .layer-hovered {
+            filter: drop-shadow(0 0 6px rgba(37, 99, 235, 0.6));
+            stroke: #2563eb !important;
+            stroke-width: 2.5px !important;
+        }
     </style>
 </head>
-<body>
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 660" width="100%" height="100%" preserveAspectRatio="xMidYMid meet" style="background: #FAFAFA; font-family: 'Inter', system-ui, sans-serif; display: block; margin: 0; padding: 0;">
-  
-  <defs>
-    <!-- Pattern für Steinwolle-Dämmung -->
-    <pattern id="pat-steinwolle" width="24" height="24" patternUnits="userSpaceOnUse">
-      <rect width="24" height="24" fill="#FEF3C7"/>
-      <path d="M 0,6 Q 6,0 12,6 T 24,6" fill="none" stroke="#D97706" stroke-width="1.2" opacity="0.6"/>
-      <path d="M 0,18 Q 6,12 12,18 T 24,18" fill="none" stroke="#D97706" stroke-width="1.2" opacity="0.6"/>
-    </pattern>
+<body class="bg-[#FAFAFA] text-slate-900 font-sans antialiased p-4 md:p-6 lg:p-8 min-h-screen">
+    <div class="max-w-7xl mx-auto space-y-6">
 
-    <!-- Pattern für OSB-Platten -->
-    <pattern id="pat-osb" width="20" height="20" patternUnits="userSpaceOnUse">
-      <rect width="20" height="20" fill="#FDE68A"/>
-      <line x1="2" y1="5" x2="10" y2="5" stroke="#B45309" stroke-width="1.5" opacity="0.7"/>
-      <line x1="12" y1="15" x2="18" y2="15" stroke="#B45309" stroke-width="1.5" opacity="0.7"/>
-      <line x1="5" y1="12" x2="15" y2="12" stroke="#92400E" stroke-width="1.2" opacity="0.6"/>
-    </pattern>
+        <!-- Top Header & Badges -->
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-4 border-b border-slate-200">
+            <div>
+                <div class="flex items-center gap-2 text-xs font-semibold text-slate-500 uppercase tracking-wider mb-1">
+                    <span>Haus Jakob</span>
+                    <span>/</span>
+                    <span>Schnittmodelle</span>
+                    <span>/</span>
+                    <span class="text-blue-600 font-bold">3. Innenwand</span>
+                </div>
+                <h1 class="text-2xl md:text-3xl font-display font-extrabold text-slate-900 flex items-center gap-3">
+                    3. Innenwand (129 mm)
+                </h1>
+                <p class="text-sm text-slate-600 mt-1">
+                    Optimierte 80 mm KVH-Ständerwand mit beidseitiger Doppelbeplankung (OSB + Rigips) für Spitzen-Schallschutz.
+                </p>
+            </div>
 
-    <!-- Pattern für Gipskarton -->
-    <pattern id="pat-gipskarton" width="16" height="16" patternUnits="userSpaceOnUse">
-      <rect width="16" height="16" fill="#E2E8F0"/>
-      <circle cx="8" cy="8" r="1" fill="#94A3B8"/>
-      <circle cx="3" cy="3" r="0.8" fill="#64748B" opacity="0.5"/>
-      <circle cx="13" cy="13" r="0.8" fill="#64748B" opacity="0.5"/>
-    </pattern>
-  </defs>
+            <!-- Badges & Fast Actions -->
+            <div class="flex flex-wrap items-center gap-2">
+                <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold bg-blue-50 text-blue-700 border border-blue-200">
+                    <i data-lucide="volume-2" class="w-3.5 h-3.5 mr-1.5 text-blue-600"></i>
+                    Rw ≈ 52 dB (Klasse IV)
+                </span>
+                <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold bg-emerald-50 text-emerald-700 border border-emerald-200">
+                    <i data-lucide="door-closed" class="w-3.5 h-3.5 mr-1.5 text-emerald-600"></i>
+                    Standard-Zarge 130 mm
+                </span>
+                <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold bg-amber-50 text-amber-800 border border-amber-200">
+                    <i data-lucide="shield-check" class="w-3.5 h-3.5 mr-1.5 text-amber-700"></i>
+                    F30-B Brandschutz
+                </span>
+                <a href="konfigurator.html" class="inline-flex items-center px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-900 hover:bg-slate-800 text-white shadow-sm transition-all ml-auto md:ml-2">
+                    <i data-lucide="calculator" class="w-3.5 h-3.5 mr-1.5"></i>
+                    Zum Rechner
+                </a>
+            </div>
+        </div>
 
-  <!-- ==================== HEADER (KOMPAKT & EDEL) ==================== -->
-  <g transform="translate(45, 26)">
-    <text x="0" y="20" font-family="'Outfit', sans-serif" font-size="22" font-weight="800" fill="#0F172A">3. Innenwand (129 mm)</text>
-    <text x="0" y="44" font-size="12" font-weight="500" fill="#64748B">Schallschutz Rw ≈ 52 dB  •  Standard-Türzarge 130 mm  •  Schwere Lasten bis 50 kg/Schraube</text>
-  </g>
+        <!-- 2-Column Split: Vector Cutaway (Left) & shadcn Cards (Right) -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
 
-  <!-- Button zur Außenwand (oben rechts, frei platziert) -->
-  <a href="wand.html" target="_self" style="cursor: pointer;">
-    <g transform="translate(775, 26)">
-      <rect x="0" y="0" width="180" height="38" rx="10" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.5"/>
-      <text x="90" y="24" font-size="11" font-weight="700" fill="#2563EB" text-anchor="middle">➔ Zur Außenwand (374 mm)</text>
-    </g>
-  </a>
+            <!-- LEFT: Crisp Architectural Vector Drawing Card -->
+            <div class="lg:col-span-5 bg-white rounded-2xl border border-slate-200 shadow-sm p-6 flex flex-col items-center justify-center relative overflow-hidden">
+                <div class="w-full flex items-center justify-between mb-4">
+                    <span class="text-xs font-bold uppercase tracking-wider text-slate-500">Technisches Schnittmodell</span>
+                    <span class="text-xs text-slate-400 font-mono">Maßstab 1:1 Schnitt</span>
+                </div>
 
-  <line x1="45" y1="88" x2="955" y2="88" stroke="#E2E8F0" stroke-width="1"/>
+                <div class="w-full max-w-[380px] mx-auto">
+                    <svg id="svg-innenwand" xmlns="http://www.w3.org/2000/svg" viewBox="50 70 300 480" width="100%" class="w-full h-auto drop-shadow-sm select-none">
+                        <defs>
+                            <pattern id="pat-steinwolle" width="24" height="24" patternUnits="userSpaceOnUse">
+                                <rect width="24" height="24" fill="#FEF3C7"/>
+                                <path d="M 0,6 Q 6,0 12,6 T 24,6" fill="none" stroke="#D97706" stroke-width="1.2" opacity="0.6"/>
+                                <path d="M 0,18 Q 6,12 12,18 T 24,18" fill="none" stroke="#D97706" stroke-width="1.2" opacity="0.6"/>
+                            </pattern>
+                            <pattern id="pat-osb" width="20" height="20" patternUnits="userSpaceOnUse">
+                                <rect width="20" height="20" fill="#FDE68A"/>
+                                <line x1="2" y1="5" x2="10" y2="5" stroke="#B45309" stroke-width="1.5" opacity="0.7"/>
+                                <line x1="12" y1="15" x2="18" y2="15" stroke="#B45309" stroke-width="1.5" opacity="0.7"/>
+                                <line x1="5" y1="12" x2="15" y2="12" stroke="#92400E" stroke-width="1.2" opacity="0.6"/>
+                            </pattern>
+                            <pattern id="pat-gipskarton" width="16" height="16" patternUnits="userSpaceOnUse">
+                                <rect width="16" height="16" fill="#E2E8F0"/>
+                                <circle cx="8" cy="8" r="1" fill="#94A3B8"/>
+                                <circle cx="3" cy="3" r="0.8" fill="#64748B" opacity="0.5"/>
+                                <circle cx="13" cy="13" r="0.8" fill="#64748B" opacity="0.5"/>
+                            </pattern>
+                        </defs>
 
-  <!-- Raumbezeichnungen mit klarer Trennung & Pfeilen (keine Überlappung) -->
-  <g transform="translate(70, 104)">
-    <text x="0" y="0" font-size="11" font-weight="800" fill="#2563EB">◄ RAUM A</text>
-    <text x="0" y="13" font-size="9.5" font-weight="600" fill="#64748B">Flur / Wohnen</text>
-  </g>
+                        <!-- Room Indicators -->
+                        <g transform="translate(70, 85)">
+                            <text x="0" y="0" font-size="11" font-weight="800" fill="#2563EB">◄ RAUM A</text>
+                            <text x="0" y="13" font-size="9" font-weight="600" fill="#64748B">Flur / Wohnen</text>
+                        </g>
 
-  <g transform="translate(324, 104)">
-    <text x="0" y="0" font-size="11" font-weight="800" text-anchor="end" fill="#16A34A">RAUM B ►</text>
-    <text x="0" y="13" font-size="9.5" font-weight="600" text-anchor="end" fill="#64748B">Zimmer / Bad</text>
-  </g>
+                        <g transform="translate(324, 85)">
+                            <text x="0" y="0" font-size="11" font-weight="800" text-anchor="end" fill="#16A34A">RAUM B ►</text>
+                            <text x="0" y="13" font-size="9" font-weight="600" text-anchor="end" fill="#64748B">Zimmer / Bad</text>
+                        </g>
 
-  <!-- ==================== 2D VECTOR CUTAWAY LAYERS (LINKS NACH RECHTS) ==================== -->
-  
-  <!-- 1. Gips-Karton-Platte 12,5 mm (Raum A) -->
-  <rect x="70" y="128" width="22" height="340" fill="url(#pat-gipskarton)" stroke="#64748B" stroke-width="1.5" rx="1"/>
-  <text x="81" y="492" font-size="11" font-weight="700" text-anchor="middle" fill="#0F172A">1</text>
+                        <!-- Schicht 1: GKB 12.5 mm -->
+                        <g id="svg-layer-1" class="layer-highlight cursor-pointer">
+                            <rect x="70" y="105" width="22" height="340" fill="url(#pat-gipskarton)" stroke="#64748B" stroke-width="1.5" rx="1"/>
+                            <circle cx="81" cy="465" r="9" fill="#0F172A"/>
+                            <text x="81" y="468.5" font-size="10" font-weight="700" text-anchor="middle" fill="#FFFFFF">1</text>
+                        </g>
 
-  <!-- 2. OSB/3-Platte 12 mm (Raum A) -->
-  <rect x="92" y="128" width="22" height="340" fill="url(#pat-osb)" stroke="#B45309" stroke-width="1.5" rx="1"/>
-  <text x="103" y="492" font-size="11" font-weight="700" text-anchor="middle" fill="#0F172A">2</text>
+                        <!-- Schicht 2: OSB 12 mm -->
+                        <g id="svg-layer-2" class="layer-highlight cursor-pointer">
+                            <rect x="92" y="105" width="22" height="340" fill="url(#pat-osb)" stroke="#B45309" stroke-width="1.5" rx="1"/>
+                            <circle cx="103" cy="465" r="9" fill="#0F172A"/>
+                            <text x="103" y="468.5" font-size="10" font-weight="700" text-anchor="middle" fill="#FFFFFF">2</text>
+                        </g>
 
-  <!-- 3. KVH Ständerwerk 80 mm + Steinwolle 80 mm -->
-  <g id="layer-staender-steinwolle">
-    <!-- Vollflächiges Gefach mit 80 mm Steinwolle gefüllt -->
-    <rect x="114" y="128" width="166" height="340" fill="url(#pat-steinwolle)" stroke="#D97706" stroke-width="1.5"/>
-    
-    <!-- Oberer Holzständer KVH (80 mm Tiefe x 60 mm Breite) -->
-    <rect x="114" y="128" width="166" height="45" fill="#F59E0B" stroke="#B45309" stroke-width="1.5"/>
-    <line x1="114" y1="128" x2="280" y2="173" stroke="#B45309" stroke-width="1" stroke-dasharray="2,2"/>
-    <line x1="114" y1="173" x2="280" y2="128" stroke="#B45309" stroke-width="1" stroke-dasharray="2,2"/>
+                        <!-- Schicht 3: KVH Ständer 80 mm + Steinwolle -->
+                        <g id="svg-layer-3" class="layer-highlight cursor-pointer">
+                            <rect x="114" y="105" width="166" height="340" fill="url(#pat-steinwolle)" stroke="#D97706" stroke-width="1.5"/>
+                            
+                            <!-- Ständer oben -->
+                            <rect x="114" y="105" width="166" height="42" fill="#F59E0B" stroke="#B45309" stroke-width="1.5"/>
+                            <line x1="114" y1="105" x2="280" y2="147" stroke="#B45309" stroke-width="1" stroke-dasharray="2,2"/>
+                            <line x1="114" y1="147" x2="280" y2="105" stroke="#B45309" stroke-width="1" stroke-dasharray="2,2"/>
+                            <text x="197" y="130" font-size="9.5" font-weight="700" fill="#FFFFFF" text-anchor="middle">KVH Ständer 80 mm</text>
 
-    <!-- Unterer Holzständer KVH -->
-    <rect x="114" y="423" width="166" height="45" fill="#F59E0B" stroke="#B45309" stroke-width="1.5"/>
-    <line x1="114" y1="423" x2="280" y2="468" stroke="#B45309" stroke-width="1" stroke-dasharray="2,2"/>
-    <line x1="114" y1="468" x2="280" y2="423" stroke="#B45309" stroke-width="1" stroke-dasharray="2,2"/>
+                            <!-- Ständer unten -->
+                            <rect x="114" y="403" width="166" height="42" fill="#F59E0B" stroke="#B45309" stroke-width="1.5"/>
+                            <line x1="114" y1="403" x2="280" y2="445" stroke="#B45309" stroke-width="1" stroke-dasharray="2,2"/>
+                            <line x1="114" y1="445" x2="280" y2="403" stroke="#B45309" stroke-width="1" stroke-dasharray="2,2"/>
+                            <text x="197" y="428" font-size="9.5" font-weight="700" fill="#FFFFFF" text-anchor="middle">Palmatin Werkssatz</text>
 
-    <!-- Zentrierte Beschriftung im Gefach -->
-    <rect x="122" y="268" width="150" height="55" rx="8" fill="#FFFFFF" fill-opacity="0.95" stroke="#E2E8F0" stroke-width="1"/>
-    <text x="197" y="291" font-size="12" font-weight="700" fill="#B45309" text-anchor="middle">80 mm Steinwolle</text>
-    <text x="197" y="310" font-size="10" font-weight="600" fill="#475569" text-anchor="middle">(Akustikfilz WLG 035)</text>
+                            <!-- Mittenlabel Dämmung -->
+                            <rect x="126" y="245" width="142" height="50" rx="8" fill="#FFFFFF" fill-opacity="0.95" stroke="#E2E8F0" stroke-width="1"/>
+                            <text x="197" y="267" font-size="11" font-weight="700" fill="#B45309" text-anchor="middle">80 mm Steinwolle</text>
+                            <text x="197" y="284" font-size="9" font-weight="600" fill="#64748B" text-anchor="middle">Akustikfilz WLG 035</text>
 
-    <!-- Ständerholz-Label -->
-    <text x="197" y="155" font-size="10" font-weight="700" fill="#FFFFFF" text-anchor="middle">KVH Ständer 80 mm</text>
-    <text x="197" y="450" font-size="10" font-weight="700" fill="#FFFFFF" text-anchor="middle">Palmatin Werkssatz</text>
-    <text x="197" y="492" font-size="11" font-weight="700" text-anchor="middle" fill="#0F172A">3</text>
-  </g>
+                            <circle cx="197" cy="465" r="9" fill="#0F172A"/>
+                            <text x="197" y="468.5" font-size="10" font-weight="700" text-anchor="middle" fill="#FFFFFF">3</text>
+                        </g>
 
-  <!-- 4. OSB/3-Platte 12 mm (Raum B) -->
-  <rect x="280" y="128" width="22" height="340" fill="url(#pat-osb)" stroke="#B45309" stroke-width="1.5" rx="1"/>
-  <text x="291" y="492" font-size="11" font-weight="700" text-anchor="middle" fill="#0F172A">4</text>
+                        <!-- Schicht 4: OSB 12 mm -->
+                        <g id="svg-layer-4" class="layer-highlight cursor-pointer">
+                            <rect x="280" y="105" width="22" height="340" fill="url(#pat-osb)" stroke="#B45309" stroke-width="1.5" rx="1"/>
+                            <circle cx="291" cy="465" r="9" fill="#0F172A"/>
+                            <text x="291" y="468.5" font-size="10" font-weight="700" text-anchor="middle" fill="#FFFFFF">4</text>
+                        </g>
 
-  <!-- 5. Gips-Karton-Platte 12,5 mm (Raum B) -->
-  <rect x="302" y="128" width="22" height="340" fill="url(#pat-gipskarton)" stroke="#64748B" stroke-width="1.5" rx="1"/>
-  <text x="313" y="492" font-size="11" font-weight="700" text-anchor="middle" fill="#0F172A">5</text>
+                        <!-- Schicht 5: GKB 12.5 mm -->
+                        <g id="svg-layer-5" class="layer-highlight cursor-pointer">
+                            <rect x="302" y="105" width="22" height="340" fill="url(#pat-gipskarton)" stroke="#64748B" stroke-width="1.5" rx="1"/>
+                            <circle cx="313" cy="465" r="9" fill="#0F172A"/>
+                            <text x="313" y="468.5" font-size="10" font-weight="700" text-anchor="middle" fill="#FFFFFF">5</text>
+                        </g>
 
-  <!-- ==================== MASSKETTEN (UNTEN) ==================== -->
-  <g transform="translate(0, 520)" font-size="10" font-family="'Inter', sans-serif">
-    <!-- Maß 12,5 mm GKB -->
-    <line x1="70" y1="0" x2="92" y2="0" stroke="#64748B" stroke-width="1.5"/>
-    <line x1="70" y1="-5" x2="70" y2="5" stroke="#64748B" stroke-width="1.5"/>
-    <line x1="92" y1="-5" x2="92" y2="5" stroke="#64748B" stroke-width="1.5"/>
-    <text x="81" y="14" text-anchor="middle" font-weight="700" fill="#64748B">12,5</text>
+                        <!-- Massketten -->
+                        <g transform="translate(0, 485)" font-size="9" font-family="'Inter', sans-serif">
+                            <line x1="70" y1="0" x2="92" y2="0" stroke="#64748B" stroke-width="1.5"/>
+                            <line x1="70" y1="-4" x2="70" y2="4" stroke="#64748B" stroke-width="1.5"/>
+                            <line x1="92" y1="-4" x2="92" y2="4" stroke="#64748B" stroke-width="1.5"/>
+                            <text x="81" y="12" text-anchor="middle" font-weight="700" fill="#64748B">12,5</text>
 
-    <!-- Maß 12 mm OSB -->
-    <line x1="92" y1="0" x2="114" y2="0" stroke="#D97706" stroke-width="1.5"/>
-    <line x1="114" y1="-5" x2="114" y2="5" stroke="#D97706" stroke-width="1.5"/>
-    <text x="103" y="14" text-anchor="middle" font-weight="700" fill="#D97706">12</text>
+                            <line x1="92" y1="0" x2="114" y2="0" stroke="#D97706" stroke-width="1.5"/>
+                            <line x1="114" y1="-4" x2="114" y2="4" stroke="#D97706" stroke-width="1.5"/>
+                            <text x="103" y="12" text-anchor="middle" font-weight="700" fill="#D97706">12</text>
 
-    <!-- Maß 80 mm Steinwolle / Ständer -->
-    <line x1="114" y1="0" x2="280" y2="0" stroke="#0F172A" stroke-width="2"/>
-    <line x1="280" y1="-5" x2="280" y2="5" stroke="#0F172A" stroke-width="1.5"/>
-    <text x="197" y="15" text-anchor="middle" font-size="11" font-weight="800" fill="#0F172A">80 mm Ständer / Steinwolle</text>
+                            <line x1="114" y1="0" x2="280" y2="0" stroke="#0F172A" stroke-width="1.5"/>
+                            <line x1="280" y1="-4" x2="280" y2="4" stroke="#0F172A" stroke-width="1.5"/>
+                            <text x="197" y="12" text-anchor="middle" font-weight="800" fill="#0F172A">80 mm Ständer</text>
 
-    <!-- Maß 12 mm OSB -->
-    <line x1="280" y1="0" x2="302" y2="0" stroke="#D97706" stroke-width="1.5"/>
-    <line x1="302" y1="-5" x2="302" y2="5" stroke="#D97706" stroke-width="1.5"/>
-    <text x="291" y="14" text-anchor="middle" font-weight="700" fill="#D97706">12</text>
+                            <line x1="280" y1="0" x2="302" y2="0" stroke="#D97706" stroke-width="1.5"/>
+                            <line x1="302" y1="-4" x2="302" y2="4" stroke="#D97706" stroke-width="1.5"/>
+                            <text x="291" y="12" text-anchor="middle" font-weight="700" fill="#D97706">12</text>
 
-    <!-- Maß 12,5 mm GKB -->
-    <line x1="302" y1="0" x2="324" y2="0" stroke="#64748B" stroke-width="1.5"/>
-    <line x1="324" y1="-5" x2="324" y2="5" stroke="#64748B" stroke-width="1.5"/>
-    <text x="313" y="14" text-anchor="middle" font-weight="700" fill="#64748B">12,5</text>
+                            <line x1="302" y1="0" x2="324" y2="0" stroke="#64748B" stroke-width="1.5"/>
+                            <line x1="324" y1="-4" x2="324" y2="4" stroke="#64748B" stroke-width="1.5"/>
+                            <text x="313" y="12" text-anchor="middle" font-weight="700" fill="#64748B">12,5</text>
 
-    <!-- Gesamtwandstärke Klammer -->
-    <line x1="70" y1="32" x2="324" y2="32" stroke="#2563EB" stroke-width="2"/>
-    <polyline points="65,32 75,28 75,36" fill="#2563EB"/>
-    <polyline points="329,32 319,28 319,36" fill="#2563EB"/>
-    <rect x="147" y="22" width="100" height="20" rx="4" fill="#2563EB"/>
-    <text x="197" y="36" text-anchor="middle" font-size="11" font-weight="800" fill="#FFFFFF">Gesamt: 129 mm</text>
-  </g>
+                            <!-- Gesamtstärke Badge -->
+                            <line x1="70" y1="26" x2="324" y2="26" stroke="#2563EB" stroke-width="1.5"/>
+                            <polyline points="66,26 73,23 73,29" fill="#2563EB"/>
+                            <polyline points="328,26 321,23 321,29" fill="#2563EB"/>
+                            <rect x="147" y="17" width="100" height="18" rx="4" fill="#2563EB"/>
+                            <text x="197" y="30" text-anchor="middle" font-size="9.5" font-weight="800" fill="#FFFFFF">Gesamt: 129 mm</text>
+                        </g>
+                    </svg>
+                </div>
 
-  <!-- ==================== RECHTS: STRUKTURIERTE TABELLE & HIGHLIGHTS ==================== -->
-  <g transform="translate(380, 105)" font-size="12">
-    <rect x="0" y="0" width="575" height="535" rx="12" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1"/>
-    
-    <text x="25" y="28" font-size="14" font-weight="800" fill="#0F172A">Schichtaufbau &amp; Dimensionierung (129 mm – ca. 13 cm)</text>
-    <text x="25" y="46" font-size="11" font-weight="500" fill="#64748B">Der optimale Kompromiss aus maximalem Schallschutz, schlanker Bauweise &amp; Standard-Türzargen:</text>
+                <div class="mt-4 text-center text-xs text-slate-500 flex items-center gap-2">
+                    <i data-lucide="info" class="w-3.5 h-3.5 text-blue-500"></i>
+                    Tipp: Schichten in der Tabelle berühren zum Hervorheben im Schnitt.
+                </div>
+            </div>
 
-    <!-- Table Rows -->
-    <g transform="translate(25, 68)" font-size="11">
-      <!-- Schicht 1 -->
-      <text x="0" y="0" font-weight="700" fill="#475569">1. Gips-Karton-Platte 12,5 mm (Typ A / GKB)</text>
-      <text x="0" y="14" font-size="10" fill="#64748B">Glatte Oberfläche für Malervlies/Farbe, Q2/Q3 Spachtelung, Brandschutzklasse A2</text>
-      <line x1="0" y1="22" x2="525" y2="22" stroke="#F1F5F9"/>
+            <!-- RIGHT: Modern shadcn Cards for Layers & Physics -->
+            <div class="lg:col-span-7 space-y-6">
 
-      <!-- Schicht 2 -->
-      <text x="0" y="38" font-weight="700" fill="#D97706">2. OSB/3-Platte 12 mm (Nut &amp; Feder / Stumpf)</text>
-      <text x="0" y="52" font-size="10" fill="#64748B">Statische Wandscheibenaussteifung, fester Schraubgrund für Konsollasten ohne Dübel</text>
-      <line x1="0" y1="60" x2="525" y2="60" stroke="#F1F5F9"/>
+                <!-- Layer Breakdown Card (shadcn Table) -->
+                <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
+                    <div class="px-6 py-4 border-b border-slate-100 flex items-center justify-between">
+                        <div>
+                            <h2 class="text-base font-bold text-slate-900">Schichtaufbau (129 mm Gesamtstärke)</h2>
+                            <p class="text-xs text-slate-500">Von Raum A (Flur/Wohnen) nach Raum B (Zimmer/Bad)</p>
+                        </div>
+                        <span class="text-xs font-mono font-semibold px-2.5 py-1 bg-slate-100 rounded-md text-slate-700">5 Schichten</span>
+                    </div>
 
-      <!-- Schicht 3 -->
-      <text x="0" y="76" font-weight="700" fill="#B45309">3. KVH Ständer 80 mm + 80 mm Steinwolle</text>
-      <text x="0" y="90" font-size="10" fill="#64748B">Konstruktionsvollholz C24 (e = 62,5 cm) + Rockwool/Isover Akustikdämmung WLG 035</text>
-      <line x1="0" y1="98" x2="525" y2="98" stroke="#F1F5F9"/>
+                    <div class="divide-y divide-slate-100">
+                        <!-- Schicht 1 -->
+                        <div id="row-layer-1" class="layer-row px-6 py-3 hover:bg-slate-50 transition-colors flex items-center justify-between gap-4 cursor-pointer">
+                            <div class="flex items-center gap-3">
+                                <span class="w-6 h-6 rounded-full bg-slate-800 text-white text-xs font-bold flex items-center justify-center shrink-0">1</span>
+                                <div>
+                                    <div class="text-sm font-bold text-slate-900">Gips-Karton-Platte Typ A (GKB)</div>
+                                    <div class="text-xs text-slate-500">Glatte Oberfläche für Malervlies/Farbe, Q2/Q3, Brandschutz A2</div>
+                                </div>
+                            </div>
+                            <div class="text-right shrink-0">
+                                <span class="text-sm font-bold text-slate-900">12,5 mm</span>
+                                <div class="text-[10px] text-slate-400">Bauseits DE</div>
+                            </div>
+                        </div>
 
-      <!-- Schicht 4 -->
-      <text x="0" y="114" font-weight="700" fill="#D97706">4. OSB/3-Platte 12 mm (Raum B)</text>
-      <text x="0" y="128" font-size="10" fill="#64748B">Zweite Wandscheibe für symmetrische Masse &amp; Resonanzdämpfung</text>
-      <line x1="0" y1="136" x2="525" y2="136" stroke="#F1F5F9"/>
+                        <!-- Schicht 2 -->
+                        <div id="row-layer-2" class="layer-row px-6 py-3 hover:bg-slate-50 transition-colors flex items-center justify-between gap-4 cursor-pointer">
+                            <div class="flex items-center gap-3">
+                                <span class="w-6 h-6 rounded-full bg-amber-700 text-white text-xs font-bold flex items-center justify-center shrink-0">2</span>
+                                <div>
+                                    <div class="text-sm font-bold text-slate-900">OSB/3-Platte (Nut &amp; Feder / Stumpf)</div>
+                                    <div class="text-xs text-slate-500">Wandscheibenaussteifung, massiver Schraubgrund ohne Dübel</div>
+                                </div>
+                            </div>
+                            <div class="text-right shrink-0">
+                                <span class="text-sm font-bold text-slate-900">12,0 mm</span>
+                                <div class="text-[10px] text-slate-400">Bauseits DE</div>
+                            </div>
+                        </div>
 
-      <!-- Schicht 5 -->
-      <text x="0" y="152" font-weight="700" fill="#475569">5. Gips-Karton-Platte 12,5 mm (Typ A / GKBI im Bad)</text>
-      <text x="0" y="166" font-size="10" fill="#64748B">In Feuchträumen (Bäder/WCs) grüne imprägnierte GKBI-Feuchtraumplatte</text>
-    </g>
+                        <!-- Schicht 3 -->
+                        <div id="row-layer-3" class="layer-row px-6 py-3 hover:bg-slate-50 transition-colors flex items-center justify-between gap-4 cursor-pointer bg-amber-50/30">
+                            <div class="flex items-center gap-3">
+                                <span class="w-6 h-6 rounded-full bg-amber-500 text-white text-xs font-bold flex items-center justify-center shrink-0">3</span>
+                                <div>
+                                    <div class="text-sm font-bold text-amber-950 flex items-center gap-1.5">
+                                        <span>KVH Ständer 80 mm + 80 mm Steinwolle</span>
+                                        <span class="px-1.5 py-0.5 rounded text-[10px] font-bold bg-amber-100 text-amber-800">Palmatin Werk</span>
+                                    </div>
+                                    <div class="text-xs text-amber-800/80">C24 Holz (e = 62,5 cm) + Akustik-Steinwolle WLG 035 vollflächig</div>
+                                </div>
+                            </div>
+                            <div class="text-right shrink-0">
+                                <span class="text-sm font-bold text-amber-950">80,0 mm</span>
+                                <div class="text-[10px] text-amber-800 font-semibold">Werkssatz</div>
+                            </div>
+                        </div>
 
-    <!-- Key Performance Box -->
-    <rect x="25" y="270" width="525" height="245" rx="8" fill="#F8FAFC" stroke="#E2E8F0"/>
-    <text x="40" y="295" font-size="12" font-weight="800" fill="#0F172A">Bauphysikalische &amp; praktische Vorteile der 129 mm Wand:</text>
-    
-    <g transform="translate(40, 315)" font-size="11">
-      <text x="0" y="0" font-weight="700" fill="#16A34A">✔ Hoher Schallschutz: Rw ≈ 51 - 53 dB (Sehr gut für Wohnen &amp; Schlafen)</text>
-      <text x="0" y="16" font-size="10" fill="#475569">Biegeweiche GKB + biegesteife OSB brechen Resonanzen. Normale Gespräche sind unhörbar.</text>
+                        <!-- Schicht 4 -->
+                        <div id="row-layer-4" class="layer-row px-6 py-3 hover:bg-slate-50 transition-colors flex items-center justify-between gap-4 cursor-pointer">
+                            <div class="flex items-center gap-3">
+                                <span class="w-6 h-6 rounded-full bg-amber-700 text-white text-xs font-bold flex items-center justify-center shrink-0">4</span>
+                                <div>
+                                    <div class="text-sm font-bold text-slate-900">OSB/3-Platte (Raum B)</div>
+                                    <div class="text-xs text-slate-500">Zweite Beplankungsebene für Resonanzbrechung &amp; Stabilität</div>
+                                </div>
+                            </div>
+                            <div class="text-right shrink-0">
+                                <span class="text-sm font-bold text-slate-900">12,0 mm</span>
+                                <div class="text-[10px] text-slate-400">Bauseits DE</div>
+                            </div>
+                        </div>
 
-      <text x="0" y="38" font-weight="700" fill="#2563EB">✔ Passgenau für Standard-Türzargen (130 mm Maulweite)</text>
-      <text x="0" y="54" font-size="10" fill="#475569">Mit 129 mm passt jede Standard-Umfassungszarge (125-135 mm Verstellbereich) ohne teure Sonderanfertigung.</text>
+                        <!-- Schicht 5 -->
+                        <div id="row-layer-5" class="layer-row px-6 py-3 hover:bg-slate-50 transition-colors flex items-center justify-between gap-4 cursor-pointer">
+                            <div class="flex items-center gap-3">
+                                <span class="w-6 h-6 rounded-full bg-slate-800 text-white text-xs font-bold flex items-center justify-center shrink-0">5</span>
+                                <div>
+                                    <div class="text-sm font-bold text-slate-900">Gips-Karton-Platte Typ A / GKBI</div>
+                                    <div class="text-xs text-slate-500">Im Badbereich als grüne imprägnierte GKBI Feuchtraumplatte</div>
+                                </div>
+                            </div>
+                            <div class="text-right shrink-0">
+                                <span class="text-sm font-bold text-slate-900">12,5 mm</span>
+                                <div class="text-[10px] text-slate-400">Bauseits DE</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-      <text x="0" y="76" font-weight="700" fill="#B45309">✔ 4 cm Raumgewinn gegenüber 120er Wand (~ 1,2 m² mehr Wohnfläche!)</text>
-      <text x="0" y="92" font-size="10" fill="#475569">Bei ca. 30 lfm Trennwänden im Haus gewinnen Sie spürbare Netto-Wohnfläche für Zimmer und Schränke.</text>
+                <!-- Key Benefits & Practical Advantages (shadcn Card) -->
+                <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 space-y-4">
+                    <h3 class="text-sm font-bold uppercase tracking-wider text-slate-900 flex items-center gap-2">
+                        <i data-lucide="check-circle" class="w-4 h-4 text-emerald-600"></i>
+                        Praxis-Vorteile der 129 mm Innenwand
+                    </h3>
 
-      <text x="0" y="114" font-weight="700" fill="#0F172A">✔ Ausreichend Bauraum für Installationen (80 mm Gefach)</text>
-      <text x="0" y="130" font-size="10" fill="#475569">Tiefe Elektro-Schalterdosen (65 mm), Wasserleitungen und DN 50 Abwasserrohre passen problemlos hinein.</text>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
+                        <div class="p-3.5 rounded-xl bg-slate-50 border border-slate-100 space-y-1">
+                            <div class="font-bold text-slate-900 flex items-center gap-1.5">
+                                <i data-lucide="volume-x" class="w-3.5 h-3.5 text-blue-600"></i>
+                                Exzellenter Schallschutz (Rw ≈ 52 dB)
+                            </div>
+                            <p class="text-slate-600">
+                                Das 2-schalige Feder-Masse-System aus biegeweicher GKB und biegesteifer OSB bricht Schallresonanzen optimal. Normale Zimmergespräche sind unhörbar.
+                            </p>
+                        </div>
 
-      <text x="0" y="152" font-weight="700" fill="#D97706">✔ Volle Schraubfestigkeit ohne Hohlraumdübel</text>
-      <text x="0" y="168" font-size="10" fill="#475569">Hängeschränke, Fernseher, Spiegel und Regale direkt mit Spax-Holzschrauben festdrehen (bis 50 kg/Schraube).</text>
-    </g>
-  </g>
+                        <div class="p-3.5 rounded-xl bg-slate-50 border border-slate-100 space-y-1">
+                            <div class="font-bold text-slate-900 flex items-center gap-1.5">
+                                <i data-lucide="door-open" class="w-3.5 h-3.5 text-emerald-600"></i>
+                                Perfekt für Standard-Zargen (130 mm)
+                            </div>
+                            <p class="text-slate-600">
+                                Mit 129 mm Fertigmaß passt jede handelsübliche Standard-Türzarge (Verstellbereich 125–135 mm) passgenau ohne teure Sonderanfertigung.
+                            </p>
+                        </div>
 
-</svg>
+                        <div class="p-3.5 rounded-xl bg-slate-50 border border-slate-100 space-y-1">
+                            <div class="font-bold text-slate-900 flex items-center gap-1.5">
+                                <i data-lucide="maximize" class="w-3.5 h-3.5 text-amber-600"></i>
+                                ~1,2 m² mehr Wohnfläche
+                            </div>
+                            <p class="text-slate-600">
+                                4 cm schlanker als eine 120er Wand. Bei ca. 30 lfm Trennwänden gewinnen Sie wertvollen Stellplatz für Schränke und Bewegungsfreiheit.
+                            </p>
+                        </div>
+
+                        <div class="p-3.5 rounded-xl bg-slate-50 border border-slate-100 space-y-1">
+                            <div class="font-bold text-slate-900 flex items-center gap-1.5">
+                                <i data-lucide="wrench" class="w-3.5 h-3.5 text-purple-600"></i>
+                                Spax-Schraubfest bis 50 kg
+                            </div>
+                            <p class="text-slate-600">
+                                Keine Hohlraumdübel nötig! Hängeschränke, Spiegel und Großbild-Fernseher können direkt mit Holzschrauben in die OSB-Schicht verschraubt werden.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        lucide.createIcons();
+
+        // Interactive Layer Highlighting between Table and SVG
+        const layers = [1, 2, 3, 4, 5];
+        layers.forEach(num => {
+            const row = document.getElementById("row-layer-" + num);
+            const svgLayer = document.getElementById("svg-layer-" + num);
+
+            if (row && svgLayer) {
+                row.addEventListener("mouseenter", () => {
+                    svgLayer.classList.add("layer-hovered");
+                });
+                row.addEventListener("mouseleave", () => {
+                    svgLayer.classList.remove("layer-hovered");
+                });
+
+                svgLayer.addEventListener("mouseenter", () => {
+                    row.classList.add("bg-blue-50/60");
+                });
+                svgLayer.addEventListener("mouseleave", () => {
+                    row.classList.remove("bg-blue-50/60");
+                });
+            }
+        });
+    </script>
 </body>
 </html>

@@ -1,80 +1,341 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 650" width="100%" height="100%" preserveAspectRatio="xMidYMid meet" style="background: #FAFAFA; font-family: 'Inter', system-ui, sans-serif; display: block; margin: 0; padding: 0;">
-  
-  <!-- Header -->
-  <text x="50" y="45" font-size="20" font-weight="700" fill="#0F172A">3. Dachaufbau KfW-40 (392 mm Sparrendach unbeheizt mit 60 mm STEICO &amp; 12 mm OSB)</text>
-  <text x="50" y="68" font-size="13" font-weight="500" fill="#64748B">U-Wert ≈ 0,12 W/m²K | Phasenverschiebung > 15 Std. | Horizontaler Schnitt (Außen bis Innen)</text>
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>4. Dachaufbau (392 mm) | Haus Jakob KfW-40</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@600;700;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ["Inter", "system-ui", "sans-serif"],
+                        display: ["Outfit", "sans-serif"],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .layer-highlight {
+            transition: all 0.2s ease-in-out;
+        }
+        .layer-hovered {
+            filter: drop-shadow(0 0 6px rgba(37, 99, 235, 0.6));
+            stroke: #2563eb !important;
+            stroke-width: 2.5px !important;
+        }
+    </style>
+</head>
+<body class="bg-[#FAFAFA] text-slate-900 font-sans antialiased p-4 md:p-6 lg:p-8 min-h-screen">
+    <div class="max-w-7xl mx-auto space-y-6">
 
-  <line x1="50" y1="85" x2="950" y2="85" stroke="#E2E8F0" stroke-width="1"/>
+        <!-- Top Header & Badges -->
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-4 border-b border-slate-200">
+            <div>
+                <div class="flex items-center gap-2 text-xs font-semibold text-slate-500 uppercase tracking-wider mb-1">
+                    <span>Haus Jakob</span>
+                    <span>/</span>
+                    <span>Schnittmodelle</span>
+                    <span>/</span>
+                    <span class="text-blue-600 font-bold">4. Dachaufbau</span>
+                </div>
+                <h1 class="text-2xl md:text-3xl font-display font-extrabold text-slate-900 flex items-center gap-3">
+                    4. Dachaufbau (392 mm)
+                </h1>
+                <p class="text-sm text-slate-600 mt-1">
+                    KfW-40 Sparrendach mit 60 mm STEICO Holzfaser-Unterdeckplatte &amp; 240 mm Zellulose-Vollsparrendämmung.
+                </p>
+            </div>
 
-  <!-- Outside/Inside Labels -->
-  <text x="70" y="115" font-size="12" font-weight="700" fill="#DC2626">AUSSEN (Regen &amp; Hitze)</text>
-  <text x="500" y="115" font-size="12" font-weight="700" text-anchor="end" fill="#16A34A">INNEN (Dachraum unbeheizt)</text>
+            <!-- Badges & Fast Actions -->
+            <div class="flex flex-wrap items-center gap-2">
+                <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold bg-blue-50 text-blue-700 border border-blue-200">
+                    <i data-lucide="flame" class="w-3.5 h-3.5 mr-1.5 text-blue-600"></i>
+                    U-Wert ≈ 0,120 W/m²K
+                </span>
+                <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold bg-amber-50 text-amber-800 border border-amber-200">
+                    <i data-lucide="sun" class="w-3.5 h-3.5 mr-1.5 text-amber-700"></i>
+                    Phasenverschiebung &gt; 15 Std.
+                </span>
+                <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold bg-emerald-50 text-emerald-700 border border-emerald-200">
+                    <i data-lucide="cloud-rain" class="w-3.5 h-3.5 mr-1.5 text-emerald-600"></i>
+                    Regensicheres Unterdach
+                </span>
+                <a href="materialien.html" class="inline-flex items-center px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-900 hover:bg-slate-800 text-white shadow-sm transition-all ml-auto md:ml-2">
+                    <i data-lucide="calculator" class="w-3.5 h-3.5 mr-1.5"></i>
+                    Materialplaner
+                </a>
+            </div>
+        </div>
 
-  <!-- 2D Vector Cutaway Layers (Left to Right) -->
-  
-  <!-- 1. Dachziegel / Eindeckung (20mm) -->
-  <rect x="70" y="130" width="20" height="340" fill="#B91C1C" stroke="#991B1B" stroke-width="1"/>
-  <text x="80" y="495" font-size="11" font-weight="700" text-anchor="middle" fill="#0F172A">1</text>
+        <!-- 2-Column Split: Vector Cutaway (Left) & shadcn Cards (Right) -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
 
-  <!-- 2. Standard Trag- & Konterlattung (60mm) -->
-  <rect x="90" y="130" width="35" height="340" fill="#F1F5F9" stroke="#CBD5E1" stroke-dasharray="3,3"/>
-  <rect x="90" y="160" width="35" height="40" fill="#FEF3C7" stroke="#D97706"/>
-  <rect x="90" y="380" width="35" height="40" fill="#FEF3C7" stroke="#D97706"/>
-  <text x="107" y="495" font-size="11" font-weight="700" text-anchor="middle" fill="#0F172A">2</text>
+            <!-- LEFT: Crisp Architectural Vector Drawing Card -->
+            <div class="lg:col-span-5 bg-white rounded-2xl border border-slate-200 shadow-sm p-6 flex flex-col items-center justify-center relative overflow-hidden">
+                <div class="w-full flex items-center justify-between mb-4">
+                    <span class="text-xs font-bold uppercase tracking-wider text-slate-500">Technisches Schnittmodell</span>
+                    <span class="text-xs text-slate-400 font-mono">Dachschnitt Außen/Innen</span>
+                </div>
 
-  <!-- 3. Holzfaser-Unterdeckplatte STEICO (60mm) -->
-  <rect x="125" y="130" width="52" height="340" fill="#FEF3C7" stroke="#F59E0B" stroke-width="1.5"/>
-  <text x="151" y="495" font-size="11" font-weight="700" text-anchor="middle" fill="#0F172A">3</text>
+                <div class="w-full max-w-[400px] mx-auto">
+                    <svg id="svg-dach" xmlns="http://www.w3.org/2000/svg" viewBox="50 70 360 480" width="100%" class="w-full h-auto drop-shadow-sm select-none">
+                        <!-- Outside/Inside Labels -->
+                        <text x="70" y="90" font-size="10.5" font-weight="800" fill="#DC2626">◄ AUSSEN (Wetter)</text>
+                        <text x="390" y="90" font-size="10.5" font-weight="800" text-anchor="end" fill="#16A34A">INNEN (Dachraum) ►</text>
 
-  <!-- 4. Dachsparren 240mm + Zellulose -->
-  <rect x="177" y="130" width="195" height="340" fill="#E2E8F0" opacity="0.6" stroke="#94A3B8"/>
-  <rect x="177" y="130" width="195" height="40" fill="#F59E0B" stroke="#D97706"/>
-  <rect x="177" y="430" width="195" height="40" fill="#F59E0B" stroke="#D97706"/>
-  <text x="274" y="290" font-size="12" font-weight="700" fill="#2563EB" text-anchor="middle">Zellulose-Einblasdämmung</text>
-  <text x="274" y="310" font-size="11" font-weight="600" fill="#334155" text-anchor="middle">(240 mm Zwischensparren)</text>
-  <text x="274" y="495" font-size="11" font-weight="700" text-anchor="middle" fill="#0F172A">4</text>
+                        <!-- Schicht 1: Dachziegel (20mm) -->
+                        <g id="svg-layer-1" class="layer-highlight cursor-pointer">
+                            <rect x="70" y="105" width="20" height="340" fill="#B91C1C" stroke="#991B1B" stroke-width="1.5" rx="1"/>
+                            <circle cx="80" cy="465" r="8.5" fill="#0F172A"/>
+                            <text x="80" y="468.5" font-size="9" font-weight="700" text-anchor="middle" fill="#FFFFFF">1</text>
+                        </g>
 
-  <!-- 5. OSB/3 Platte (12 mm stoßverklebt als Dampfbremse & Luftdichtung direkt unter Sparren) -->
-  <rect x="372" y="130" width="18" height="340" fill="#FDE68A" stroke="#2563EB" stroke-width="2"/>
-  <text x="381" y="495" font-size="11" font-weight="700" text-anchor="middle" fill="#0F172A">5</text>
+                        <!-- Schicht 2: Trag- & Konterlattung (60mm) -->
+                        <g id="svg-layer-2" class="layer-highlight cursor-pointer">
+                            <rect x="90" y="105" width="35" height="340" fill="#F1F5F9" stroke="#CBD5E1" stroke-dasharray="3,3"/>
+                            <rect x="90" y="135" width="35" height="40" fill="#FEF3C7" stroke="#D97706"/>
+                            <rect x="90" y="355" width="35" height="40" fill="#FEF3C7" stroke="#D97706"/>
+                            <circle cx="107.5" cy="465" r="8.5" fill="#0F172A"/>
+                            <text x="107.5" y="468.5" font-size="9" font-weight="700" text-anchor="middle" fill="#FFFFFF">2</text>
+                        </g>
 
-  <!-- Right: Clean Summary Table (Clean Schichtaufbau List) -->
-  <g transform="translate(560, 110)" font-size="12">
-    <rect x="0" y="0" width="390" height="490" rx="12" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1"/>
-    
-    <text x="20" y="30" font-size="14" font-weight="700" fill="#0F172A">Schichtaufbau &amp; Dimensionierung (392 mm)</text>
-    <text x="20" y="48" font-size="11" font-weight="500" fill="#64748B">Von außen (Dach) nach innen (Dachraum):</text>
+                        <!-- Schicht 3: STEICO Unterdeckplatte (60mm) -->
+                        <g id="svg-layer-3" class="layer-highlight cursor-pointer">
+                            <rect x="125" y="105" width="52" height="340" fill="#FEF3C7" stroke="#F59E0B" stroke-width="1.5"/>
+                            <circle cx="151" cy="465" r="8.5" fill="#0F172A"/>
+                            <text x="151" y="468.5" font-size="9" font-weight="700" text-anchor="middle" fill="#FFFFFF">3</text>
+                        </g>
 
-    <!-- Table Rows -->
-    <g transform="translate(20, 75)" font-size="11">
-      <!-- Row 1 -->
-      <text x="0" y="0" font-weight="700" fill="#B91C1C">1. Dachziegel-Eindeckung (ca. 20 mm)</text>
-      <line x1="0" y1="12" x2="350" y2="12" stroke="#F1F5F9"/>
+                        <!-- Schicht 4: Dachsparren 240 mm + Zellulose -->
+                        <g id="svg-layer-4" class="layer-highlight cursor-pointer">
+                            <rect x="177" y="105" width="195" height="340" fill="#E2E8F0" opacity="0.6" stroke="#94A3B8"/>
+                            <rect x="177" y="105" width="195" height="40" fill="#F59E0B" stroke="#D97706"/>
+                            <rect x="177" y="405" width="195" height="40" fill="#F59E0B" stroke="#D97706"/>
 
-      <!-- Row 2 -->
-      <text x="0" y="35" font-weight="700" fill="#334155">2. Standard Trag- &amp; Konterlattung (60 mm)</text>
-      <line x1="0" y1="47" x2="350" y2="47" stroke="#F1F5F9"/>
+                            <rect x="188" y="245" width="174" height="48" rx="8" fill="#FFFFFF" fill-opacity="0.95" stroke="#E2E8F0" stroke-width="1"/>
+                            <text x="275" y="265" font-size="11" font-weight="700" fill="#2563EB" text-anchor="middle">Zellulose-Einblasdämmung</text>
+                            <text x="275" y="281" font-size="9" font-weight="600" fill="#334155" text-anchor="middle">(240 mm Vollsparren)</text>
 
-      <!-- Row 3 -->
-      <text x="0" y="70" font-weight="700" fill="#B45309">3. Holzfaser-Unterdeckplatte STEICO (60 mm)</text>
-      <line x1="0" y1="82" x2="350" y2="82" stroke="#F1F5F9"/>
+                            <circle cx="274.5" cy="465" r="8.5" fill="#0F172A"/>
+                            <text x="274.5" y="468.5" font-size="9" font-weight="700" text-anchor="middle" fill="#FFFFFF">4</text>
+                        </g>
 
-      <!-- Row 4 -->
-      <text x="0" y="105" font-weight="700" fill="#0F172A">4. Dachsparren (240 mm) + Zellulose-Dämmung</text>
-      <line x1="0" y1="117" x2="350" y2="117" stroke="#F1F5F9"/>
+                        <!-- Schicht 5: OSB/3 12 mm stoßverklebt -->
+                        <g id="svg-layer-5" class="layer-highlight cursor-pointer">
+                            <rect x="372" y="105" width="18" height="340" fill="#FDE68A" stroke="#2563EB" stroke-width="2"/>
+                            <circle cx="381" cy="465" r="8.5" fill="#0F172A"/>
+                            <text x="381" y="468.5" font-size="9" font-weight="700" text-anchor="middle" fill="#FFFFFF">5</text>
+                        </g>
 
-      <!-- Row 5 -->
-      <text x="0" y="140" font-weight="700" fill="#2563EB">5. OSB/3 (12 mm stoßverklebt) als Dampfbremse &amp; Beplankung</text>
-    </g>
+                        <!-- Massketten -->
+                        <g transform="translate(0, 485)" font-size="9" font-family="'Inter', sans-serif">
+                            <line x1="70" y1="0" x2="390" y2="0" stroke="#CBD5E1" stroke-width="1"/>
+                            <text x="80" y="12" text-anchor="middle" font-weight="700" fill="#B91C1C">20</text>
+                            <text x="107.5" y="12" text-anchor="middle" font-weight="700" fill="#64748B">60</text>
+                            <text x="151" y="12" text-anchor="middle" font-weight="700" fill="#CA8A04">60</text>
+                            <text x="275" y="12" text-anchor="middle" font-weight="800" fill="#0F172A">240 mm Sparren</text>
+                            <text x="381" y="12" text-anchor="middle" font-weight="700" fill="#2563EB">12</text>
 
-    <!-- Key Performance Box -->
-    <rect x="20" y="335" width="350" height="145" rx="8" fill="#F8FAFC" stroke="#E2E8F0"/>
-    <text x="35" y="358" font-size="12" font-weight="700" fill="#0F172A">Dachleistung &amp; Lieferumfang (392 mm):</text>
-    <text x="35" y="378" font-size="11" font-weight="700" fill="#16A34A">• Palmatin Werkssatz: 240mm Sparren, Pfetten &amp; Lattung ab Werk</text>
-    <text x="35" y="398" font-size="11" font-weight="700" fill="#D97706">• Bauseitiger Zukauf DE: Dachpfannen / Tondachziegel (bauseits)</text>
-    <text x="35" y="418" font-size="11" fill="#475569">• U-Wert: ca. 0,120 W/(m²K) (Hocheffizient KfW-40)</text>
-    <text x="35" y="438" font-size="11" fill="#475569">• Dämmung: 60 mm STEICO + 240 mm Sparren</text>
-    <text x="35" y="458" font-size="11" fill="#16A34A">• Dampfbremse: OSB/3 stoßverklebt als Dachraumabschluss</text>
-  </g>
+                            <!-- Gesamtstärke Badge -->
+                            <line x1="70" y1="26" x2="390" y2="26" stroke="#2563EB" stroke-width="1.5"/>
+                            <polyline points="66,26 73,23 73,29" fill="#2563EB"/>
+                            <polyline points="394,26 387,23 387,29" fill="#2563EB"/>
+                            <rect x="180" y="17" width="100" height="18" rx="4" fill="#2563EB"/>
+                            <text x="230" y="30" text-anchor="middle" font-size="9.5" font-weight="800" fill="#FFFFFF">Gesamt: 392 mm</text>
+                        </g>
+                    </svg>
+                </div>
 
-</svg>
+                <div class="mt-4 text-center text-xs text-slate-500 flex items-center gap-2">
+                    <i data-lucide="info" class="w-3.5 h-3.5 text-blue-500"></i>
+                    Tipp: Schichten in der Tabelle berühren zum Hervorheben im Schnitt.
+                </div>
+            </div>
+
+            <!-- RIGHT: Modern shadcn Cards for Layers & Physics -->
+            <div class="lg:col-span-7 space-y-6">
+
+                <!-- Layer Breakdown Card (shadcn Table) -->
+                <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
+                    <div class="px-6 py-4 border-b border-slate-100 flex items-center justify-between">
+                        <div>
+                            <h2 class="text-base font-bold text-slate-900">Schichtaufbau (392 mm Gesamtstärke)</h2>
+                            <p class="text-xs text-slate-500">Von oben (Dacheindeckung) nach innen (Dachraum)</p>
+                        </div>
+                        <span class="text-xs font-mono font-semibold px-2.5 py-1 bg-slate-100 rounded-md text-slate-700">5 Schichten</span>
+                    </div>
+
+                    <div class="divide-y divide-slate-100 text-xs">
+                        <!-- Schicht 1 -->
+                        <div id="row-layer-1" class="layer-row px-6 py-3 hover:bg-slate-50 transition-colors flex items-center justify-between gap-4 cursor-pointer">
+                            <div class="flex items-center gap-3">
+                                <span class="w-6 h-6 rounded-full bg-red-700 text-white text-xs font-bold flex items-center justify-center shrink-0">1</span>
+                                <div>
+                                    <div class="font-bold text-slate-900">Tondachziegel / Betondachsteine</div>
+                                    <div class="text-slate-500 text-[11px]">Robuste Eindeckung (z.B. Braas / Erlus) gegen Hagel, Schnee &amp; Starkregen</div>
+                                </div>
+                            </div>
+                            <div class="text-right shrink-0">
+                                <span class="font-bold text-slate-900">ca. 20 mm</span>
+                                <div class="text-[10px] text-slate-400">Bauseits DE</div>
+                            </div>
+                        </div>
+
+                        <!-- Schicht 2 -->
+                        <div id="row-layer-2" class="layer-row px-6 py-3 hover:bg-slate-50 transition-colors flex items-center justify-between gap-4 cursor-pointer">
+                            <div class="flex items-center gap-3">
+                                <span class="w-6 h-6 rounded-full bg-slate-400 text-white text-xs font-bold flex items-center justify-center shrink-0">2</span>
+                                <div>
+                                    <div class="font-bold text-slate-900">Trag- und Konterlattung (30x50 / 40x60 mm)</div>
+                                    <div class="text-slate-500 text-[11px]">Hinterlüftungsebene, schützt vor sommerlicher Hitzestauung</div>
+                                </div>
+                            </div>
+                            <div class="text-right shrink-0">
+                                <span class="font-bold text-slate-900">60 mm</span>
+                                <div class="text-[10px] text-amber-800 font-semibold">Palmatin Werk</div>
+                            </div>
+                        </div>
+
+                        <!-- Schicht 3 -->
+                        <div id="row-layer-3" class="layer-row px-6 py-3 hover:bg-slate-50 transition-colors flex items-center justify-between gap-4 cursor-pointer">
+                            <div class="flex items-center gap-3">
+                                <span class="w-6 h-6 rounded-full bg-amber-500 text-white text-xs font-bold flex items-center justify-center shrink-0">3</span>
+                                <div>
+                                    <div class="font-bold text-slate-900">60 mm STEICO universal / special dry</div>
+                                    <div class="text-slate-500 text-[11px]">Regensichere Holzfaser-Unterdeckplatte mit Nut &amp; Feder, winddicht ohne Folie</div>
+                                </div>
+                            </div>
+                            <div class="text-right shrink-0">
+                                <span class="font-bold text-slate-900">60 mm</span>
+                                <div class="text-[10px] text-slate-400">Bauseits DE</div>
+                            </div>
+                        </div>
+
+                        <!-- Schicht 4 -->
+                        <div id="row-layer-4" class="layer-row px-6 py-3 hover:bg-slate-50 transition-colors flex items-center justify-between gap-4 cursor-pointer bg-amber-50/30">
+                            <div class="flex items-center gap-3">
+                                <span class="w-6 h-6 rounded-full bg-blue-600 text-white text-xs font-bold flex items-center justify-center shrink-0">4</span>
+                                <div>
+                                    <div class="font-bold text-slate-900 flex items-center gap-1.5">
+                                        <span>240 mm Sparren + Zellulose-Einblasdämmung</span>
+                                        <span class="px-1.5 py-0.5 rounded text-[9px] font-bold bg-amber-100 text-amber-800">Palmatin Sparren</span>
+                                    </div>
+                                    <div class="text-slate-500 text-[11px]">C24 Holzsparren ab Werk + fugenlose, setzungssichere Zellulose (038)</div>
+                                </div>
+                            </div>
+                            <div class="text-right shrink-0">
+                                <span class="font-bold text-slate-900">240 mm</span>
+                                <div class="text-[10px] text-slate-400">Werk / Zukauf</div>
+                            </div>
+                        </div>
+
+                        <!-- Schicht 5 -->
+                        <div id="row-layer-5" class="layer-row px-6 py-3 hover:bg-slate-50 transition-colors flex items-center justify-between gap-4 cursor-pointer">
+                            <div class="flex items-center gap-3">
+                                <span class="w-6 h-6 rounded-full bg-amber-700 text-white text-xs font-bold flex items-center justify-center shrink-0">5</span>
+                                <div>
+                                    <div class="font-bold text-blue-700 flex items-center gap-1">
+                                        <span>12 mm OSB/3 stoßverklebt (Dampfbremse &amp; Dachraumabschluss)</span>
+                                        <i data-lucide="shield" class="w-3 h-3 text-blue-600"></i>
+                                    </div>
+                                    <div class="text-slate-500 text-[11px]">Feste Untersicht im Dachraum, dauerhaft luftdicht abgeklebt mit Airstop-Band</div>
+                                </div>
+                            </div>
+                            <div class="text-right shrink-0">
+                                <span class="font-bold text-slate-900">12 mm</span>
+                                <div class="text-[10px] text-slate-400">Bauseits DE</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Key Benefits & Practical Advantages (shadcn Card) -->
+                <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 space-y-4">
+                    <h3 class="text-sm font-bold uppercase tracking-wider text-slate-900 flex items-center gap-2">
+                        <i data-lucide="shield-check" class="w-4 h-4 text-emerald-600"></i>
+                        Vorteile des KfW-40 Dachaufbaus
+                    </h3>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
+                        <div class="p-3.5 rounded-xl bg-slate-50 border border-slate-100 space-y-1">
+                            <div class="font-bold text-slate-900 flex items-center gap-1.5">
+                                <i data-lucide="sun" class="w-3.5 h-3.5 text-amber-600"></i>
+                                Maximale Hitzedämmung (&gt;15 Std.)
+                            </div>
+                            <p class="text-slate-600">
+                                300 mm ökologische Holzfaser &amp; Zellulose besitzen eine extrem hohe Wärmespeicherkapazität – das Dachgeschoss heizt im Hochsommer nicht auf.
+                            </p>
+                        </div>
+
+                        <div class="p-3.5 rounded-xl bg-slate-50 border border-slate-100 space-y-1">
+                            <div class="font-bold text-slate-900 flex items-center gap-1.5">
+                                <i data-lucide="droplets" class="w-3.5 h-3.5 text-blue-600"></i>
+                                Zweite wasserführende Ebene
+                            </div>
+                            <p class="text-slate-600">
+                                Die 60 mm STEICO-Platte fungiert als vollwertiges Unterdach: Fliegt bei Sturm ein Ziegel weg, bleibt der Dachstuhl absolut trocken.
+                            </p>
+                        </div>
+
+                        <div class="p-3.5 rounded-xl bg-slate-50 border border-slate-100 space-y-1">
+                            <div class="font-bold text-slate-900 flex items-center gap-1.5">
+                                <i data-lucide="flame" class="w-3.5 h-3.5 text-emerald-600"></i>
+                                KfW-40 U-Wert Spitzenklasse (0,12 W/m²K)
+                            </div>
+                            <p class="text-slate-600">
+                                Minimiert Wärmeverluste im Winter auf ein absolutes Minimum – Voraussetzung für KfW-40 und Passivhaus-Standard.
+                            </p>
+                        </div>
+
+                        <div class="p-3.5 rounded-xl bg-slate-50 border border-slate-100 space-y-1">
+                            <div class="font-bold text-slate-900 flex items-center gap-1.5">
+                                <i data-lucide="check" class="w-3.5 h-3.5 text-purple-600"></i>
+                                Keine Folien-Dampfbremse nötig
+                            </div>
+                            <p class="text-slate-600">
+                                Die stoßverklebte 12 mm OSB-Platte bildet eine robuste, nicht durchhängende Dampfbremsebene und dient gleichzeitig als sauberer Dachboden-Abschluss.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        lucide.createIcons();
+
+        // Interactive Layer Highlighting between Table and SVG
+        const layers = [1, 2, 3, 4, 5];
+        layers.forEach(num => {
+            const row = document.getElementById("row-layer-" + num);
+            const svgLayer = document.getElementById("svg-layer-" + num);
+
+            if (row && svgLayer) {
+                row.addEventListener("mouseenter", () => {
+                    svgLayer.classList.add("layer-hovered");
+                });
+                row.addEventListener("mouseleave", () => {
+                    svgLayer.classList.remove("layer-hovered");
+                });
+
+                svgLayer.addEventListener("mouseenter", () => {
+                    row.classList.add("bg-blue-50/60");
+                });
+                svgLayer.addEventListener("mouseleave", () => {
+                    row.classList.remove("bg-blue-50/60");
+                });
+            }
+        });
+    </script>
+</body>
+</html>
