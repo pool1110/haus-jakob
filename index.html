@@ -82,6 +82,10 @@
                 <button id="btn-tab-kehlbalken" class="nav-tab px-4 py-2 rounded-lg text-xs font-bold transition-all text-slate-600 hover:text-slate-900 whitespace-nowrap">
                     6. Decke Dachboden
                 </button>
+                <button id="btn-tab-kfw40" class="nav-tab px-4 py-2 rounded-lg text-xs font-bold transition-all text-emerald-700 bg-emerald-50/60 hover:text-emerald-900 whitespace-nowrap flex items-center gap-1.5">
+                    <i data-lucide="shield-check" class="w-3.5 h-3.5 text-emerald-600"></i>
+                    7. KfW-40 &amp; U-Werte
+                </button>
                 <button id="btn-tab-all" class="nav-tab px-4 py-2 rounded-lg text-xs font-bold transition-all text-slate-600 hover:text-slate-900 whitespace-nowrap">
                     Alle Skizzen
                 </button>
@@ -89,6 +93,10 @@
 
             <!-- Right Action: Planer Buttons -->
             <div class="flex items-center gap-2">
+                <a href="kfw40.html" class="px-3.5 py-2 bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs rounded-xl flex items-center gap-1.5 shadow-sm transition-all whitespace-nowrap">
+                    <i data-lucide="shield-check" class="w-4 h-4 text-emerald-400"></i>
+                    KfW-40 &amp; U-Werte
+                </a>
                 <a href="konfigurator.html" class="px-3.5 py-2 bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs rounded-xl flex items-center gap-1.5 shadow-sm transition-all whitespace-nowrap">
                     <i data-lucide="file-spreadsheet" class="w-4 h-4"></i>
                     Wand- &amp; Händlerrechner
@@ -135,6 +143,11 @@
             <iframe src="kehlbalkendecke.html?v=43" class="w-full h-full border-0 block bg-[#FAFAFA]" title="Oberste Geschossdecke Skizze"></iframe>
         </section>
 
+        <!-- KFW-40: U-Werte & Energie-Cockpit -->
+        <section id="sec-kfw40" class="sketch-section hidden w-full h-[calc(100vh-4.25rem)] min-h-[600px] bg-[#FAFAFA]">
+            <iframe src="kfw40.html?v=1" class="w-full h-full border-0 block bg-[#FAFAFA]" title="KfW 40 und U-Werte Cockpit"></iframe>
+        </section>
+
     </main>
 
     <script>
@@ -147,6 +160,7 @@
             const btnDach = document.getElementById('btn-tab-dach');
             const btnZwischen = document.getElementById('btn-tab-zwischen');
             const btnKehlbalken = document.getElementById('btn-tab-kehlbalken');
+            const btnKfw40 = document.getElementById('btn-tab-kfw40');
             const btnAll = document.getElementById('btn-tab-all');
 
             const secBoden = document.getElementById('sec-boden');
@@ -155,9 +169,10 @@
             const secDach = document.getElementById('sec-dach');
             const secZwischen = document.getElementById('sec-zwischen');
             const secKehlbalken = document.getElementById('sec-kehlbalken');
+            const secKfw40 = document.getElementById('sec-kfw40');
 
-            const allNavBtns = [btnBoden, btnWand, btnInnenwand, btnDach, btnZwischen, btnKehlbalken, btnAll];
-            const allSections = [secBoden, secWand, secInnenwand, secDach, secZwischen, secKehlbalken];
+            const allNavBtns = [btnBoden, btnWand, btnInnenwand, btnDach, btnZwischen, btnKehlbalken, btnKfw40, btnAll];
+            const allSections = [secBoden, secWand, secInnenwand, secDach, secZwischen, secKehlbalken, secKfw40];
 
             function activateTab(activeBtn, targetSec) {
                 allNavBtns.forEach(b => b.classList.remove('active'));
@@ -177,6 +192,7 @@
             btnDach.addEventListener('click', () => activateTab(btnDach, secDach));
             btnZwischen.addEventListener('click', () => activateTab(btnZwischen, secZwischen));
             btnKehlbalken.addEventListener('click', () => activateTab(btnKehlbalken, secKehlbalken));
+            btnKfw40.addEventListener('click', () => activateTab(btnKfw40, secKfw40));
             btnAll.addEventListener('click', () => activateTab(btnAll, 'all'));
         });
     </script>
