@@ -41,68 +41,73 @@
     </pattern>
   </defs>
 
-  <!-- Header -->
-  <text x="50" y="45" font-size="20" font-weight="700" fill="#0F172A">3. Innenwandaufbau KfW-40 (169 mm | 12,5 mm Rigips + 12 mm OSB + 120 mm Steinwolle + 12 mm OSB + 12,5 mm Rigips)</text>
-  <text x="50" y="68" font-size="13" font-weight="500" fill="#64748B">Schallschutz Rw ≥ 52 dB | F30-B Brandschutz | Massive Schraubfestigkeit für Hängeschränke &amp; TV | Horizontaler Schnitt</text>
+  <!-- ==================== HEADER (OPTIMIERT, KEINE ÜBERLAPPUNG) ==================== -->
+  <g transform="translate(45, 26)">
+    <text x="0" y="16" font-family="'Outfit', sans-serif" font-size="19" font-weight="800" fill="#0F172A">3. Innenwandaufbau KfW-40 (169 mm Gesamtdicke)</text>
+    <text x="0" y="36" font-size="12" font-weight="600" fill="#2563EB">12,5 mm Rigips + 12 mm OSB + 120 mm Steinwolle + 12 mm OSB + 12,5 mm Rigips</text>
+    <text x="0" y="52" font-size="11" font-weight="500" fill="#64748B">Schallschutz Rw ≥ 52 dB | F30-B Brandschutz | Schwere Lasten bis 50 kg/Schraube | Horizontaler Schnitt</text>
+  </g>
 
-  <!-- Button zur Außenwand -->
+  <!-- Button zur Außenwand (oben rechts, frei platziert) -->
   <a href="wand.html" target="_self" style="cursor: pointer;">
-    <rect x="790" y="32" width="160" height="32" rx="8" fill="#F1F5F9" stroke="#CBD5E1" stroke-width="1"/>
-    <text x="870" y="52" font-size="11" font-weight="700" fill="#2563EB" text-anchor="middle">➔ Zur Außenwand (374 mm)</text>
+    <g transform="translate(775, 26)">
+      <rect x="0" y="0" width="180" height="38" rx="10" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.5"/>
+      <text x="90" y="24" font-size="11" font-weight="700" fill="#2563EB" text-anchor="middle">➔ Zur Außenwand (374 mm)</text>
+    </g>
   </a>
 
-  <line x1="50" y1="85" x2="950" y2="85" stroke="#E2E8F0" stroke-width="1"/>
+  <line x1="45" y1="88" x2="955" y2="88" stroke="#E2E8F0" stroke-width="1"/>
 
-  <!-- Raumbezeichnungen -->
-  <text x="70" y="115" font-size="12" font-weight="700" fill="#2563EB">RAUM A (z. B. Flur / Wohnbereich)</text>
-  <text x="500" y="115" font-size="12" font-weight="700" text-anchor="end" fill="#16A34A">RAUM B (z. B. Schlafzimmer / Bad)</text>
+  <!-- Raumbezeichnungen über den Wandkanten -->
+  <text x="70" y="115" font-size="12" font-weight="700" fill="#2563EB">RAUM A (z. B. Flur / Wohnen)</text>
+  <text x="408" y="115" font-size="12" font-weight="700" text-anchor="end" fill="#16A34A">RAUM B (z. B. Zimmer / Bad)</text>
 
   <!-- ==================== 2D VECTOR CUTAWAY LAYERS (LINKS NACH RECHTS) ==================== -->
   
   <!-- 1. Gips-Karton-Platte 12,5 mm (Raum A) -->
-  <rect x="70" y="130" width="22" height="340" fill="url(#pat-gipskarton)" stroke="#64748B" stroke-width="1.5" rx="1"/>
-  <text x="81" y="495" font-size="11" font-weight="700" text-anchor="middle" fill="#0F172A">1</text>
+  <rect x="70" y="128" width="22" height="340" fill="url(#pat-gipskarton)" stroke="#64748B" stroke-width="1.5" rx="1"/>
+  <text x="81" y="492" font-size="11" font-weight="700" text-anchor="middle" fill="#0F172A">1</text>
 
   <!-- 2. OSB/3-Platte 12 mm (Raum A) -->
-  <rect x="92" y="130" width="22" height="340" fill="url(#pat-osb)" stroke="#B45309" stroke-width="1.5" rx="1"/>
-  <text x="103" y="495" font-size="11" font-weight="700" text-anchor="middle" fill="#0F172A">2</text>
+  <rect x="92" y="128" width="22" height="340" fill="url(#pat-osb)" stroke="#B45309" stroke-width="1.5" rx="1"/>
+  <text x="103" y="492" font-size="11" font-weight="700" text-anchor="middle" fill="#0F172A">2</text>
 
   <!-- 3. KVH Ständerwerk 120 mm + Steinwolle 120 mm -->
   <g id="layer-staender-steinwolle">
     <!-- Vollflächiges Gefach mit 120 mm Steinwolle gefüllt -->
-    <rect x="114" y="130" width="250" height="340" fill="url(#pat-steinwolle)" stroke="#D97706" stroke-width="1.5"/>
+    <rect x="114" y="128" width="250" height="340" fill="url(#pat-steinwolle)" stroke="#D97706" stroke-width="1.5"/>
     
     <!-- Oberer Holzständer KVH (120 mm Tiefe x 60 mm Breite) -->
-    <rect x="114" y="130" width="250" height="45" fill="#F59E0B" stroke="#B45309" stroke-width="1.5"/>
-    <line x1="114" y1="130" x2="364" y2="175" stroke="#B45309" stroke-width="1" stroke-dasharray="2,2"/>
-    <line x1="114" y1="175" x2="364" y2="130" stroke="#B45309" stroke-width="1" stroke-dasharray="2,2"/>
+    <rect x="114" y="128" width="250" height="45" fill="#F59E0B" stroke="#B45309" stroke-width="1.5"/>
+    <line x1="114" y1="128" x2="364" y2="173" stroke="#B45309" stroke-width="1" stroke-dasharray="2,2"/>
+    <line x1="114" y1="173" x2="364" y2="128" stroke="#B45309" stroke-width="1" stroke-dasharray="2,2"/>
 
     <!-- Unterer Holzständer KVH -->
-    <rect x="114" y="425" width="250" height="45" fill="#F59E0B" stroke="#B45309" stroke-width="1.5"/>
-    <line x1="114" y1="425" x2="364" y2="470" stroke="#B45309" stroke-width="1" stroke-dasharray="2,2"/>
-    <line x1="114" y1="470" x2="364" y2="425" stroke="#B45309" stroke-width="1" stroke-dasharray="2,2"/>
+    <rect x="114" y="423" width="250" height="45" fill="#F59E0B" stroke="#B45309" stroke-width="1.5"/>
+    <line x1="114" y1="423" x2="364" y2="468" stroke="#B45309" stroke-width="1" stroke-dasharray="2,2"/>
+    <line x1="114" y1="468" x2="364" y2="423" stroke="#B45309" stroke-width="1" stroke-dasharray="2,2"/>
 
     <!-- Zentrierte Beschriftung im Gefach -->
-    <rect x="144" y="270" width="190" height="55" rx="8" fill="#FFFFFF" fill-opacity="0.92" stroke="#E2E8F0" stroke-width="1"/>
-    <text x="239" y="293" font-size="12" font-weight="700" fill="#B45309" text-anchor="middle">120 mm Steinwolle</text>
-    <text x="239" y="312" font-size="10" font-weight="600" fill="#475569" text-anchor="middle">(Akustik- &amp; Schallschutz WLG 035)</text>
+    <rect x="144" y="268" width="190" height="55" rx="8" fill="#FFFFFF" fill-opacity="0.95" stroke="#E2E8F0" stroke-width="1"/>
+    <text x="239" y="291" font-size="12" font-weight="700" fill="#B45309" text-anchor="middle">120 mm Steinwolle</text>
+    <text x="239" y="310" font-size="10" font-weight="600" fill="#475569" text-anchor="middle">(Akustik- &amp; Schallschutz WLG 035)</text>
 
     <!-- Ständerholz-Label -->
-    <text x="239" y="157" font-size="11" font-weight="700" fill="#FFFFFF" text-anchor="middle">KVH Ständerwerk 120 mm (Palmatin Werkssatz)</text>
-    <text x="239" y="452" font-size="11" font-weight="700" fill="#FFFFFF" text-anchor="middle">Konstruktionsvollholz C24</text>
-    <text x="239" y="495" font-size="11" font-weight="700" text-anchor="middle" fill="#0F172A">3</text>
+    <text x="239" y="155" font-size="11" font-weight="700" fill="#FFFFFF" text-anchor="middle">KVH Ständerwerk 120 mm (Palmatin Werkssatz)</text>
+    <text x="239" y="450" font-size="11" font-weight="700" fill="#FFFFFF" text-anchor="middle">Konstruktionsvollholz C24</text>
+    <text x="239" y="492" font-size="11" font-weight="700" text-anchor="middle" fill="#0F172A">3</text>
   </g>
 
   <!-- 4. OSB/3-Platte 12 mm (Raum B) -->
-  <rect x="364" y="130" width="22" height="340" fill="url(#pat-osb)" stroke="#B45309" stroke-width="1.5" rx="1"/>
-  <text x="375" y="495" font-size="11" font-weight="700" text-anchor="middle" fill="#0F172A">4</text>
+  <rect x="364" y="128" width="22" height="340" fill="url(#pat-osb)" stroke="#B45309" stroke-width="1.5" rx="1"/>
+  <text x="375" y="492" font-size="11" font-weight="700" text-anchor="middle" fill="#0F172A">4</text>
 
   <!-- 5. Gips-Karton-Platte 12,5 mm (Raum B) -->
-  <rect x="386" y="130" width="22" height="340" fill="url(#pat-gipskarton)" stroke="#64748B" stroke-width="1.5" rx="1"/>
-  <text x="397" y="495" font-size="11" font-weight="700" text-anchor="middle" fill="#0F172A">5</text>
+  <rect x="386" y="128" width="22" height="340" fill="url(#pat-gipskarton)" stroke="#64748B" stroke-width="1.5" rx="1"/>
+  <text x="397" y="492" font-size="11" font-weight="700" text-anchor="middle" fill="#0F172A">5</text>
 
   <!-- ==================== MASSKETTEN (UNTEN) ==================== -->
-  <g transform="translate(0, 525)" font-size="10" font-family="'Inter', sans-serif">
+  <g transform="translate(0, 520)" font-size="10" font-family="'Inter', sans-serif">
     <!-- Maß 12,5 mm GKB -->
     <line x1="70" y1="0" x2="92" y2="0" stroke="#64748B" stroke-width="1.5"/>
     <line x1="70" y1="-5" x2="70" y2="5" stroke="#64748B" stroke-width="1.5"/>
@@ -138,8 +143,8 @@
   </g>
 
   <!-- ==================== RECHTS: STRUKTURIERTE TABELLE & HIGHLIGHTS ==================== -->
-  <g transform="translate(530, 100)" font-size="12">
-    <rect x="0" y="0" width="420" height="535" rx="12" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1"/>
+  <g transform="translate(485, 105)" font-size="12">
+    <rect x="0" y="0" width="470" height="535" rx="12" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1"/>
     
     <text x="20" y="28" font-size="14" font-weight="800" fill="#0F172A">Schichtaufbau &amp; Dimensionierung (169 mm)</text>
     <text x="20" y="46" font-size="11" font-weight="500" fill="#64748B">Symmetrischer Trockenbauaufbau mit massiver Aussteifung:</text>
@@ -149,22 +154,22 @@
       <!-- Schicht 1 -->
       <text x="0" y="0" font-weight="700" fill="#475569">1. Gips-Karton-Platte 12,5 mm (Typ A / GKB)</text>
       <text x="0" y="14" font-size="10" fill="#64748B">Glatte Oberfläche für Malervlies/Farbe, Q2/Q3 Spachtelung</text>
-      <line x1="0" y1="22" x2="380" y2="22" stroke="#F1F5F9"/>
+      <line x1="0" y1="22" x2="430" y2="22" stroke="#F1F5F9"/>
 
       <!-- Schicht 2 -->
       <text x="0" y="38" font-weight="700" fill="#D97706">2. OSB/3-Platte 12 mm (Nut &amp; Feder / Stumpf)</text>
       <text x="0" y="52" font-size="10" fill="#64748B">Statische Wandscheibenaussteifung, Tragschicht für Konsollasten</text>
-      <line x1="0" y1="60" x2="380" y2="60" stroke="#F1F5F9"/>
+      <line x1="0" y1="60" x2="430" y2="60" stroke="#F1F5F9"/>
 
       <!-- Schicht 3 -->
       <text x="0" y="76" font-weight="700" fill="#B45309">3. KVH Ständer 120 mm + 120 mm Steinwolle</text>
       <text x="0" y="90" font-size="10" fill="#64748B">Konstruktionsvollholz C24 (e = 62,5 cm) + Rockwool/Isover Akustikdämmung</text>
-      <line x1="0" y1="98" x2="380" y2="98" stroke="#F1F5F9"/>
+      <line x1="0" y1="98" x2="430" y2="98" stroke="#F1F5F9"/>
 
       <!-- Schicht 4 -->
       <text x="0" y="114" font-weight="700" fill="#D97706">4. OSB/3-Platte 12 mm (Raum B)</text>
       <text x="0" y="128" font-size="10" fill="#64748B">Beidseitige Doppelbeplankung für maximale Schalldämmung</text>
-      <line x1="0" y1="136" x2="380" y2="136" stroke="#F1F5F9"/>
+      <line x1="0" y1="136" x2="430" y2="136" stroke="#F1F5F9"/>
 
       <!-- Schicht 5 -->
       <text x="0" y="152" font-weight="700" fill="#475569">5. Gips-Karton-Platte 12,5 mm (Typ A / GKBI im Bad)</text>
@@ -172,11 +177,11 @@
     </g>
 
     <!-- Key Performance Box -->
-    <rect x="20" y="270" width="380" height="245" rx="8" fill="#F8FAFC" stroke="#E2E8F0"/>
+    <rect x="20" y="270" width="430" height="245" rx="8" fill="#F8FAFC" stroke="#E2E8F0"/>
     <text x="35" y="295" font-size="12" font-weight="800" fill="#0F172A">Bauphysikalische Vorteile &amp; Eigenschaften:</text>
     
     <g transform="translate(35, 315)" font-size="11">
-      <text x="0" y="0" font-weight="700" fill="#16A34A">✔ Hervorragender Schallschutz: Rw ≈ 52 - 55 dB</text>
+      <text x="0" y="0" font-weight="700" fill="#16A34A">✔ Hervorragender Schallschutz: Rw ≥ 52 - 55 dB</text>
       <text x="0" y="16" font-size="10" fill="#475569">Biegesteife OSB + biegeweiche GKB + 120 mm Steinwolle dämpfen Sprache &amp; TV optimal.</text>
 
       <text x="0" y="38" font-weight="700" fill="#2563EB">✔ Massive Lastenbefestigung überall möglich</text>
