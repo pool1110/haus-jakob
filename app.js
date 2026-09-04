@@ -84,7 +84,7 @@ const HOTSPOTS_DATA = [
         position: new THREE.Vector3(-0.8, -0.25, 0.9),
         title: 'Passivhaus EPS-Wannenschalung',
         badge: 'Perimeterdämmung',
-        text: 'Vollflächige Unter-Platten-Dämmung (180–300 mm EPS/XPS) und L-förmige Randschalelemente bilden eine geschlossene Thermowanne. Die Betonsohle wird komplett vom kalten Erdreich und Außenklima entkoppelt.',
+        text: 'Vollflächige Unter-Platten-Dämmung (160–300 mm EPS/XPS) und L-förmige Randschalelemente bilden eine geschlossene Thermowanne. Die Betonsohle wird komplett vom kalten Erdreich und Außenklima entkoppelt.',
         extra: '✓ Kapillarbrechende Schottertragschicht unter der Dämmung<br>✓ Hochdruckfeste Dämmelemente'
     },
     {
