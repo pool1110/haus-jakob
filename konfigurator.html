@@ -1430,7 +1430,7 @@
                         </td>
                         <td class="py-3 px-3">
                             <select onchange="updateWall(${idx}, 'type', this.value)" class="w-full bg-slate-50 border border-slate-200 rounded-lg text-xs py-1 px-2 font-medium">
-                                <option value="Außenwand 374 mm (Fassade + STEICO + 180mm Ständer)" ${wall.type.includes('Außenwand') ? 'selected' : ''}>Außenwand (374 mm)</option>
+                                <option value="Außenwand 374 mm (Fassade + STEICO + 180mm Ständer)" ${wall.type.includes('Außenwand') ? 'selected' : ''}>Außenwand (374 mm | 50 dB | U=0,128)</option>
                                 <option value="Schallschutzwand ELW (53 dB - 2x OSB + 2x Rigips)" ${wall.type.includes('Schallschutzwand') ? 'selected' : ''}>ELW-Schallschutzwand (53 dB)</option>
                                 <option value="Innenwand 129 mm (80 mm Ständer + 2x OSB + 2x Rigips)" ${wall.type.includes('129') || wall.type.includes('80') || wall.type.includes('Raumteiler') ? 'selected' : ''}>Innenwand (129 mm | 80er Ständer + 2x OSB + 2x Rigips)</option>
                                 <option value="Tragende Innenwand 169 mm (120 mm Ständer)" ${wall.type.includes('120') || wall.type.includes('Tragende') ? 'selected' : ''}>Tragende Innenwand (169 mm | 120er Ständer)</option>
