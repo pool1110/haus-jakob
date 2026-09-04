@@ -49,7 +49,7 @@
                     4. Dachaufbau (392 mm)
                 </h1>
                 <p class="text-sm text-slate-600 mt-1">
-                    KfW-40 Sparrendach mit 60 mm STEICO Holzfaser-Unterdeckplatte &amp; 240 mm Zellulose-Vollsparrendämmung.
+                    KfW-40 Sparrendach mit 60 mm STEICO Holzfaser-Unterdeckplatte &amp; 240 mm Steinwolle-Vollsparrendämmung (A1 Brandschutz).
                 </p>
             </div>
 
@@ -86,6 +86,13 @@
 
                 <div class="w-full max-w-[400px] mx-auto">
                     <svg id="svg-dach" xmlns="http://www.w3.org/2000/svg" viewBox="50 70 360 480" width="100%" class="w-full h-auto drop-shadow-sm select-none">
+                        <defs>
+                            <pattern id="pat-steinwolle" width="24" height="24" patternUnits="userSpaceOnUse">
+                                <rect width="24" height="24" fill="#FEF3C7"/>
+                                <path d="M 0,6 Q 6,0 12,6 T 24,6" fill="none" stroke="#D97706" stroke-width="1.2" opacity="0.6"/>
+                                <path d="M 0,18 Q 6,12 12,18 T 24,18" fill="none" stroke="#D97706" stroke-width="1.2" opacity="0.6"/>
+                            </pattern>
+                        </defs>
                         <!-- Outside/Inside Labels -->
                         <text x="70" y="90" font-size="10.5" font-weight="800" fill="#DC2626">◄ AUSSEN (Wetter)</text>
                         <text x="390" y="90" font-size="10.5" font-weight="800" text-anchor="end" fill="#16A34A">INNEN (Dachraum) ►</text>
@@ -115,13 +122,13 @@
 
                         <!-- Schicht 4: Dachsparren 240 mm + Zellulose -->
                         <g id="svg-layer-4" class="layer-highlight cursor-pointer">
-                            <rect x="177" y="105" width="195" height="340" fill="#E2E8F0" opacity="0.6" stroke="#94A3B8"/>
+                            <rect x="177" y="105" width="195" height="340" fill="url(#pat-steinwolle)" stroke="#D97706" stroke-width="1.5"/>
                             <rect x="177" y="105" width="195" height="40" fill="#F59E0B" stroke="#D97706"/>
                             <rect x="177" y="405" width="195" height="40" fill="#F59E0B" stroke="#D97706"/>
 
                             <rect x="188" y="245" width="174" height="48" rx="8" fill="#FFFFFF" fill-opacity="0.95" stroke="#E2E8F0" stroke-width="1"/>
-                            <text x="275" y="265" font-size="11" font-weight="700" fill="#2563EB" text-anchor="middle">Zellulose-Einblasdämmung</text>
-                            <text x="275" y="281" font-size="9" font-weight="600" fill="#334155" text-anchor="middle">(240 mm Vollsparren)</text>
+                            <text x="275" y="265" font-size="11" font-weight="700" fill="#B45309" text-anchor="middle">240 mm Steinwolle</text>
+                            <text x="275" y="281" font-size="9" font-weight="600" fill="#475569" text-anchor="middle">(WLG 035 / A1 Brandschutz)</text>
 
                             <circle cx="274.5" cy="465" r="8.5" fill="#0F172A"/>
                             <text x="274.5" y="468.5" font-size="9" font-weight="700" text-anchor="middle" fill="#FFFFFF">4</text>
@@ -224,10 +231,10 @@
                                 <span class="w-6 h-6 rounded-full bg-blue-600 text-white text-xs font-bold flex items-center justify-center shrink-0">4</span>
                                 <div>
                                     <div class="font-bold text-slate-900 flex items-center gap-1.5">
-                                        <span>240 mm Sparren + Zellulose-Einblasdämmung</span>
+                                        <span>240 mm Sparren + Steinwolle (WLG 035)</span>
                                         <span class="px-1.5 py-0.5 rounded text-[9px] font-bold bg-amber-100 text-amber-800">Palmatin Sparren</span>
                                     </div>
-                                    <div class="text-slate-500 text-[11px]">C24 Holzsparren ab Werk + fugenlose, setzungssichere Zellulose (038)</div>
+                                    <div class="text-slate-500 text-[11px]">C24 Holzsparren ab Werk + formstabile Steinwolle-Zwischensparrendämmung (Rockwool Klemmrock WLG 035, Euroklasse A1)</div>
                                 </div>
                             </div>
                             <div class="text-right shrink-0">
@@ -270,7 +277,7 @@
                                 Maximale Hitzedämmung (&gt;15 Std.)
                             </div>
                             <p class="text-slate-600">
-                                300 mm ökologische Holzfaser &amp; Zellulose besitzen eine extrem hohe Wärmespeicherkapazität – das Dachgeschoss heizt im Hochsommer nicht auf.
+                                300 mm Gesamtdämmung (60 mm STEICO Holzfaser + 240 mm Steinwolle) bieten optimalen Hitzeschutz im Sommer und maximalen winterlichen Kälteschutz.
                             </p>
                         </div>
 
