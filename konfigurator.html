@@ -295,7 +295,7 @@
                             1. Wand- &amp; Raumgeometrie
                         </span>
                         <h2 class="font-display font-bold text-2xl text-slate-900 mt-1">Exakte Wandabschnitts-Eingabe (8,5 × 14,0 m | 2 Vollgeschosse)</h2>
-                        <p class="text-xs text-slate-500">Hier können alle Außenwände (374 mm) und Innenwände (169 mm: 12,5 mm Rigips + 12 mm OSB + 120 mm Steinwolle + 12 mm OSB + 12,5 mm Rigips) mit Länge, Höhe und Abzügen (Fenster/Türen) eingegeben werden. Schnittskizzen: <a href="wand.html" target="_blank" class="text-blue-600 hover:text-blue-800 underline font-bold">Außenwand (374 mm)</a> &bull; <a href="innenwand.html" target="_blank" class="text-blue-600 hover:text-blue-800 underline font-bold">Innenwand (169 mm)</a>.</p>
+                        <p class="text-xs text-slate-500">Hier können alle Außenwände (374 mm) und Innenwände (129 mm: 12,5 mm Rigips + 12 mm OSB + 80 mm Steinwolle + 12 mm OSB + 12,5 mm Rigips) mit Länge, Höhe und Abzügen (Fenster/Türen) eingegeben werden. Schnittskizzen: <a href="wand.html" target="_blank" class="text-blue-600 hover:text-blue-800 underline font-bold">Außenwand (374 mm)</a> &bull; <a href="innenwand.html" target="_blank" class="text-blue-600 hover:text-blue-800 underline font-bold">Innenwand (129 mm)</a>.</p>
                     </div>
 
                     <div class="flex items-center gap-2 no-print flex-wrap">
@@ -1432,8 +1432,8 @@
                             <select onchange="updateWall(${idx}, 'type', this.value)" class="w-full bg-slate-50 border border-slate-200 rounded-lg text-xs py-1 px-2 font-medium">
                                 <option value="Außenwand 374 mm (Fassade + STEICO + 180mm Ständer)" ${wall.type.includes('Außenwand') ? 'selected' : ''}>Außenwand (374 mm)</option>
                                 <option value="Schallschutzwand ELW (53 dB - 2x OSB + 2x Rigips)" ${wall.type.includes('Schallschutzwand') ? 'selected' : ''}>ELW-Schallschutzwand (53 dB)</option>
-                                <option value="Tragende Innenwand (120 mm Steinwolle + 2x OSB + 2x Rigips)" ${wall.type.includes('Tragende') ? 'selected' : ''}>Tragende Innenwand (169 mm | 120er Steinwolle + 2x OSB + 2x Rigips)</option>
-                                <option value="Innenwand Raumteiler (Ständer 80 mm)" ${wall.type.includes('Raumteiler') ? 'selected' : ''}>Innenwand Raumteiler (80 mm)</option>
+                                <option value="Innenwand 129 mm (80 mm Ständer + 2x OSB + 2x Rigips)" ${wall.type.includes('129') || wall.type.includes('80') || wall.type.includes('Raumteiler') ? 'selected' : ''}>Innenwand (129 mm | 80er Ständer + 2x OSB + 2x Rigips)</option>
+                                <option value="Tragende Innenwand 169 mm (120 mm Ständer)" ${wall.type.includes('120') || wall.type.includes('Tragende') ? 'selected' : ''}>Tragende Innenwand (169 mm | 120er Ständer)</option>
                             </select>
                         </td>
                         <td class="py-3 px-2 text-right">
