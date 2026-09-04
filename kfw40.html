@@ -882,44 +882,81 @@
                 </div>
             </div>
 
-            <!-- Fördercheck Card (KfW 297/298 KFN) -->
-            <div class="lg:col-span-5 bg-white rounded-2xl border border-slate-200 shadow-sm p-6 space-y-5 print-card">
+            <!-- Fördercheck Card (Aktuelles Fördermittel-Cockpit) -->
+            <div class="lg:col-span-5 bg-white rounded-2xl border border-slate-200 shadow-sm p-6 space-y-4 print-card">
                 <div class="flex items-center justify-between pb-3 border-b border-slate-200">
                     <div>
-                        <span class="text-xs font-bold uppercase tracking-wider text-slate-500">Fördermittel-Cockpit</span>
-                        <h3 class="font-display font-extrabold text-lg text-slate-900">KfW 297/298 (KFN)</h3>
+                        <div class="flex items-center gap-2">
+                            <span class="text-xs font-bold uppercase tracking-wider text-slate-500">Fördermittel-Cockpit</span>
+                            <span class="px-2 py-0.5 bg-emerald-100 text-emerald-800 text-[10px] font-extrabold rounded-md uppercase">Stand 2026</span>
+                        </div>
+                        <h3 class="font-display font-extrabold text-lg text-slate-900">Bundesförderung &amp; Steuervorteile</h3>
                     </div>
-                    <span class="px-2.5 py-1 bg-emerald-100 text-emerald-800 rounded-lg font-bold text-xs">2x WE Bonus</span>
+                    <span class="px-2.5 py-1 bg-blue-100 text-blue-800 rounded-lg font-bold text-xs">2x WE Bonus</span>
                 </div>
 
                 <div class="space-y-3 text-xs">
-                    <div class="p-4 bg-slate-900 text-white rounded-xl space-y-2">
+                    <!-- 1. KFN 297 / 298 -->
+                    <div class="p-4 bg-slate-950 text-white rounded-xl space-y-2 relative overflow-hidden">
                         <div class="flex justify-between items-center text-slate-300">
-                            <span>Max. Förderkredit KFN:</span>
+                            <span class="font-bold flex items-center gap-1.5 text-white">
+                                <i data-lucide="landmark" class="w-4 h-4 text-emerald-400"></i>
+                                KfW 297 / 298 (KFN Neubau)
+                            </span>
                             <span class="font-mono text-emerald-400 font-bold text-sm">Bis zu 300.000 €</span>
                         </div>
-                        <div class="text-[11px] text-slate-400">
-                            100.000 € pro Wohneinheit (Standard) bzw. 150.000 € mit QNG-Zertifikat. Bei Haus Jakob (2 WE: Hauptwohnung + ELW) verdoppelt sich der Kreditrahmen auf <strong>200.000 € bis 300.000 €</strong>.
+                        <div class="text-[11px] text-slate-300 leading-relaxed">
+                            Förderkredit für 2 Wohneinheiten (Hauptwhg. + ELW):
+                            <strong class="text-white">200.000 €</strong> (KFN Standard, 100k€/WE) bzw. <strong class="text-emerald-400">300.000 €</strong> (mit QNG-Siegel, 150k€/WE).
+                        </div>
+                        <div class="pt-2 border-t border-slate-800 flex justify-between items-center text-[11px]">
+                            <span class="text-slate-400">Subventionierter Zins:</span>
+                            <span class="font-mono font-bold text-emerald-300">ab ca. 0,60 % bis 1,8 % eff.</span>
+                        </div>
+                        <div class="text-[10px] text-emerald-400/90 font-medium">
+                            ✓ Zinsersparnis über 10 Jahre: ca. <strong>35.000 € bis 55.000 €</strong> ggü. Marktzins (~3,6%)
                         </div>
                     </div>
 
-                    <div class="p-3.5 bg-slate-50 rounded-xl border border-slate-200 space-y-2">
+                    <!-- 2. Familien-Alternative KfW 300 -->
+                    <div class="p-3.5 bg-blue-50/70 rounded-xl border border-blue-200/80 space-y-1.5">
                         <div class="font-bold text-slate-900 flex items-center justify-between">
-                            <span>Zinsverbilligungs-Vorteil:</span>
-                            <span class="text-emerald-700 font-mono font-bold">&approx; 1,5 % bis 2,0 % Zinsrabatt</span>
+                            <span class="flex items-center gap-1.5 text-blue-900">
+                                <i data-lucide="users" class="w-3.5 h-3.5 text-blue-700"></i>
+                                Alternative: KfW 300 (WEF für Familien)
+                            </span>
+                            <span class="text-blue-800 font-mono font-bold">Zins ab ~0,01 %</span>
                         </div>
-                        <p class="text-slate-600 text-[11px]">
-                            Gegenüber dem regulären Bankzins spart der KfW-Zuschuss über 10 Jahre Zinsbindung ca. <strong class="text-slate-900">30.000 € bis 45.000 € an Zinskosten</strong> ein.
+                        <p class="text-slate-600 text-[11px] leading-relaxed">
+                            Für selbstnutzende Familien mit Kindern (zvE bis 90.000 € + 10k€ je Kind): Förderkredit von <strong class="text-slate-900">170.000 € bis 270.000 €</strong> mit extrem subventionierten Zinssätzen.
                         </p>
                     </div>
 
-                    <div class="p-3.5 bg-slate-50 rounded-xl border border-slate-200 space-y-2">
+                    <!-- 3. Steuer-Turbo für die Einliegerwohnung (ELW) -->
+                    <div class="p-3.5 bg-amber-50/70 rounded-xl border border-amber-200/80 space-y-1.5">
                         <div class="font-bold text-slate-900 flex items-center justify-between">
-                            <span>Zuschuss Energieberater (KfW 458/BAFA):</span>
-                            <span class="text-emerald-700 font-mono font-bold">50% Förderung</span>
+                            <span class="flex items-center gap-1.5 text-amber-900">
+                                <i data-lucide="percent" class="w-3.5 h-3.5 text-amber-700"></i>
+                                Steuer-Bonus Einliegerwohnung (ELW)
+                            </span>
+                            <span class="text-amber-800 font-mono font-bold">5% AfA degressiv</span>
                         </div>
-                        <p class="text-slate-600 text-[11px]">
-                            Die energetische Fachplanung und Baubegleitung durch den dena-Energieberater wird mit bis zu 50% (max. 4.000 € Zuschuss) vom Staat bezuschusst.
+                        <p class="text-slate-600 text-[11px] leading-relaxed">
+                            Bei Vermietung der ELW: <strong class="text-slate-900">5 % degressive AfA (§ 7 Abs. 5a EStG)</strong> + bei QNG zusätzlich <strong class="text-slate-900">5 % Sonder-AfA (§ 7b EStG)</strong> über 4 Jahre. Tausende Euro Liquiditätsgewinn bei der Steuer!
+                        </p>
+                    </div>
+
+                    <!-- 4. Klarstellung Energieberater / Zuschuss -->
+                    <div class="p-3.5 bg-slate-50 rounded-xl border border-slate-200 space-y-1">
+                        <div class="font-bold text-slate-800 flex items-center justify-between">
+                            <span class="flex items-center gap-1 text-slate-700">
+                                <i data-lucide="info" class="w-3.5 h-3.5 text-slate-500"></i>
+                                Energieberater &amp; Baubegleitung:
+                            </span>
+                            <span class="text-slate-700 font-mono font-semibold">100% mitfinanzierbar</span>
+                        </div>
+                        <p class="text-slate-500 text-[10.5px] leading-relaxed">
+                            <em>Faktencheck:</em> Im KFN-Neubau gibt es keinen separaten BAFA-Barzuschuss mehr (KfW 458 gilt nur für Altbau-Sanierung). Die Energieberaterkosten (ca. 3.500 €) werden stattdessen voll über den zinsverbilligten KFN-Kredit abgedeckt.
                         </p>
                     </div>
                 </div>
@@ -948,7 +985,7 @@
                     </div>
                     <div>
                         <div class="font-bold text-slate-900">H'T &le; 55% des Referenzgebäudes</div>
-                        <div class="text-slate-600 text-[11px]">Erreicht: 44,7% (H'T = 0,170 W/m²K vs. 0,380 W/m²K)</div>
+                        <div class="text-slate-600 text-[11px]">Erreicht: 45,8% (H'T = 0,174 W/m²K vs. 0,380 W/m²K)</div>
                     </div>
                 </div>
 
