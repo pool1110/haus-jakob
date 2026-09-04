@@ -68,16 +68,19 @@
                     1. Bodenplatte
                 </button>
                 <button id="btn-tab-wand" class="nav-tab px-4 py-2 rounded-lg text-xs font-bold transition-all text-slate-600 hover:text-slate-900 whitespace-nowrap">
-                    2. Wandaufbau
+                    2. Außenwand
+                </button>
+                <button id="btn-tab-innenwand" class="nav-tab px-4 py-2 rounded-lg text-xs font-bold transition-all text-slate-600 hover:text-slate-900 whitespace-nowrap">
+                    3. Innenwand
                 </button>
                 <button id="btn-tab-dach" class="nav-tab px-4 py-2 rounded-lg text-xs font-bold transition-all text-slate-600 hover:text-slate-900 whitespace-nowrap">
-                    3. Dachaufbau
+                    4. Dachaufbau
                 </button>
                 <button id="btn-tab-zwischen" class="nav-tab px-4 py-2 rounded-lg text-xs font-bold transition-all text-slate-600 hover:text-slate-900 whitespace-nowrap">
-                    4. Zwischendecke
+                    5. Zwischendecke
                 </button>
                 <button id="btn-tab-kehlbalken" class="nav-tab px-4 py-2 rounded-lg text-xs font-bold transition-all text-slate-600 hover:text-slate-900 whitespace-nowrap">
-                    5. Decke Dachboden
+                    6. Decke Dachboden
                 </button>
                 <button id="btn-tab-all" class="nav-tab px-4 py-2 rounded-lg text-xs font-bold transition-all text-slate-600 hover:text-slate-900 whitespace-nowrap">
                     Alle Skizzen
@@ -117,10 +120,10 @@
             </div>
         </section>
 
-        <!-- SKIZZE 2: Wandaufbau (FRAMELESS) -->
+        <!-- SKIZZE 2: Außenwandaufbau (FRAMELESS) -->
         <section id="sec-wand" class="sketch-section hidden w-full bg-[#FAFAFA]">
             <div class="flex items-center justify-between px-6 py-2 bg-slate-100/70 border-b border-slate-200">
-                <span class="text-xs font-bold text-slate-700">2. Wandaufbau KfW-40 (374 mm | 18 mm Fichtenholz + 60 mm STEICO + 180 mm Ständer + 2x 12 mm OSB + 12 mm Rigips)</span>
+                <span class="text-xs font-bold text-slate-700">2. Außenwandaufbau KfW-40 (374 mm | 18 mm Fichtenholz + 60 mm STEICO + 180 mm Ständer + 2x 12 mm OSB + 12 mm Rigips)</span>
                 <a href="wand.html?v=30" target="_blank" class="text-xs text-slate-600 hover:text-slate-900 font-bold flex items-center gap-1">
                     <span>Vollbild</span>
                     <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
@@ -128,14 +131,29 @@
             </div>
             
             <div class="w-full h-[calc(100vh-6.5rem)] min-h-[500px] bg-[#FAFAFA]">
-                <iframe src="wand.html?v=30" class="w-full h-full border-0 block bg-[#FAFAFA]" title="Wandaufbau Skizze"></iframe>
+                <iframe src="wand.html?v=30" class="w-full h-full border-0 block bg-[#FAFAFA]" title="Außenwandaufbau Skizze"></iframe>
             </div>
         </section>
 
-        <!-- SKIZZE 3: Dachaufbau (FRAMELESS) -->
+        <!-- SKIZZE 3: Innenwandaufbau (FRAMELESS) -->
+        <section id="sec-innenwand" class="sketch-section hidden w-full bg-[#FAFAFA]">
+            <div class="flex items-center justify-between px-6 py-2 bg-slate-100/70 border-b border-slate-200">
+                <span class="text-xs font-bold text-slate-700">3. Innenwandaufbau KfW-40 (169 mm | 12,5 mm Rigips + 12 mm OSB + 120 mm Steinwolle + 12 mm OSB + 12,5 mm Rigips)</span>
+                <a href="innenwand.html?v=30" target="_blank" class="text-xs text-slate-600 hover:text-slate-900 font-bold flex items-center gap-1">
+                    <span>Vollbild</span>
+                    <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+                </a>
+            </div>
+            
+            <div class="w-full h-[calc(100vh-6.5rem)] min-h-[500px] bg-[#FAFAFA]">
+                <iframe src="innenwand.html?v=30" class="w-full h-full border-0 block bg-[#FAFAFA]" title="Innenwandaufbau Skizze"></iframe>
+            </div>
+        </section>
+
+        <!-- SKIZZE 4: Dachaufbau (FRAMELESS) -->
         <section id="sec-dach" class="sketch-section hidden w-full bg-[#FAFAFA]">
             <div class="flex items-center justify-between px-6 py-2 bg-slate-100/70 border-b border-slate-200">
-                <span class="text-xs font-bold text-slate-700">3. Dachaufbau KfW-40 (392 mm | 60 mm STEICO Holzfaser | 12 mm OSB Dampfbremse)</span>
+                <span class="text-xs font-bold text-slate-700">4. Dachaufbau KfW-40 (392 mm | 60 mm STEICO Holzfaser | 12 mm OSB Dampfbremse)</span>
                 <a href="dach.html?v=30" target="_blank" class="text-xs text-slate-600 hover:text-slate-900 font-bold flex items-center gap-1">
                     <span>Vollbild</span>
                     <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
@@ -147,10 +165,10 @@
             </div>
         </section>
 
-        <!-- SKIZZE 4: Zwischendecke (FRAMELESS) -->
+        <!-- SKIZZE 5: Zwischendecke (FRAMELESS) -->
         <section id="sec-zwischen" class="sketch-section hidden w-full bg-[#FAFAFA]">
             <div class="flex items-center justify-between px-6 py-2 bg-slate-100/70 border-b border-slate-200">
-                <span class="text-xs font-bold text-slate-700">4. Zwischendecke EG/OG (417 mm | 50 mm Nassestrich auf FBH + 30 mm Trittschall | Ln,w &lt; 38 dB)</span>
+                <span class="text-xs font-bold text-slate-700">5. Zwischendecke EG/OG (417 mm | 50 mm Nassestrich auf FBH + 30 mm Trittschall | Ln,w &lt; 38 dB)</span>
                 <a href="zwischendecke.html?v=30" target="_blank" class="text-xs text-slate-600 hover:text-slate-900 font-bold flex items-center gap-1">
                     <span>Vollbild</span>
                     <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
@@ -162,10 +180,10 @@
             </div>
         </section>
 
-        <!-- SKIZZE 5: Oberste Geschossdecke Dachboden (FRAMELESS) -->
+        <!-- SKIZZE 6: Oberste Geschossdecke Dachboden (FRAMELESS) -->
         <section id="sec-kehlbalken" class="sketch-section hidden w-full bg-[#FAFAFA]">
             <div class="flex items-center justify-between px-6 py-2 bg-slate-100/70 border-b border-slate-200">
-                <span class="text-xs font-bold text-slate-700">5. Oberste Geschossdecke OG-Dachboden (197 mm | 22 mm OSB Lagerboden + 160 mm Kehlbalken + 15 mm Rigips)</span>
+                <span class="text-xs font-bold text-slate-700">6. Oberste Geschossdecke OG-Dachboden (197 mm | 22 mm OSB Lagerboden + 160 mm Kehlbalken + 15 mm Rigips)</span>
                 <a href="kehlbalkendecke.html?v=30" target="_blank" class="text-xs text-slate-600 hover:text-slate-900 font-bold flex items-center gap-1">
                     <span>Vollbild</span>
                     <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
@@ -185,6 +203,7 @@
 
             const btnBoden = document.getElementById('btn-tab-boden');
             const btnWand = document.getElementById('btn-tab-wand');
+            const btnInnenwand = document.getElementById('btn-tab-innenwand');
             const btnDach = document.getElementById('btn-tab-dach');
             const btnZwischen = document.getElementById('btn-tab-zwischen');
             const btnKehlbalken = document.getElementById('btn-tab-kehlbalken');
@@ -192,12 +211,13 @@
 
             const secBoden = document.getElementById('sec-boden');
             const secWand = document.getElementById('sec-wand');
+            const secInnenwand = document.getElementById('sec-innenwand');
             const secDach = document.getElementById('sec-dach');
             const secZwischen = document.getElementById('sec-zwischen');
             const secKehlbalken = document.getElementById('sec-kehlbalken');
 
-            const allNavBtns = [btnBoden, btnWand, btnDach, btnZwischen, btnKehlbalken, btnAll];
-            const allSections = [secBoden, secWand, secDach, secZwischen, secKehlbalken];
+            const allNavBtns = [btnBoden, btnWand, btnInnenwand, btnDach, btnZwischen, btnKehlbalken, btnAll];
+            const allSections = [secBoden, secWand, secInnenwand, secDach, secZwischen, secKehlbalken];
 
             function activateTab(activeBtn, targetSec) {
                 allNavBtns.forEach(b => b.classList.remove('active'));
@@ -213,6 +233,7 @@
 
             btnBoden.addEventListener('click', () => activateTab(btnBoden, secBoden));
             btnWand.addEventListener('click', () => activateTab(btnWand, secWand));
+            btnInnenwand.addEventListener('click', () => activateTab(btnInnenwand, secInnenwand));
             btnDach.addEventListener('click', () => activateTab(btnDach, secDach));
             btnZwischen.addEventListener('click', () => activateTab(btnZwischen, secZwischen));
             btnKehlbalken.addEventListener('click', () => activateTab(btnKehlbalken, secKehlbalken));
