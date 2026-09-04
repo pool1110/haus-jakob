@@ -53,40 +53,57 @@
 </head>
 <body class="bg-slate-50 text-slate-900 font-sans antialiased selection:bg-slate-800 selection:text-white min-h-screen">
 
-    <!-- Clean Corporate Header Navigation (HAUS JAKOB) -->
-    <header class="sticky top-0 z-50 bg-white border-b border-slate-200 shadow-sm px-4 md:px-6 py-3 no-print">
-        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+    <!-- Unified Primary Navigation (Ebene 1) -->
+    <header class="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-slate-200 shadow-xs px-4 md:px-6 py-2.5 no-print">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-3">
             
-            <div class="flex items-center gap-3">
-                <a href="index.html" class="p-2 bg-slate-100 border border-slate-200 rounded-xl text-slate-700 hover:text-slate-900 hover:bg-slate-200 transition-all" title="Zurück zu den Skizzen">
-                    <i data-lucide="arrow-left" class="w-5 h-5"></i>
-                </a>
-                <div class="flex items-center gap-3">
-                    <div class="px-3.5 py-1.5 bg-slate-900 text-white rounded-xl font-display font-extrabold text-lg tracking-wide shadow-sm">
-                        HAUS JAKOB
-                    </div>
-                    <div class="h-6 w-px bg-slate-300 hidden sm:block"></div>
-                    <span class="font-display font-semibold text-sm md:text-base text-slate-700 hidden sm:inline">Chronologischer Bauablauf- &amp; Einkaufsplaner</span>
+            <!-- Brand & Logo -->
+            <a href="index.html" class="flex items-center gap-3 shrink-0">
+                <div class="px-3 py-1.5 bg-slate-900 text-white rounded-xl font-display font-extrabold text-base tracking-wide shadow-sm flex items-center gap-2">
+                    <span>HAUS JAKOB</span>
+                    <span class="text-[10px] uppercase font-bold tracking-wider px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">KfW 40</span>
                 </div>
-            </div>
+                <div class="h-5 w-px bg-slate-200 hidden sm:block"></div>
+                <span class="text-xs font-semibold text-slate-500 hidden sm:inline">Material- &amp; Bauphasenplaner</span>
+            </a>
+
+            <!-- 4 Core Navigation Modules (Segmented Switcher) -->
+            <nav class="flex items-center p-1 bg-slate-100 rounded-xl border border-slate-200 gap-1 overflow-x-auto max-w-full">
+                <!-- 1. Schnittmodelle -->
+                <a href="index.html" class="px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all text-slate-600 hover:text-slate-900 hover:bg-white/80 flex items-center gap-1.5 whitespace-nowrap">
+                    <i data-lucide="box" class="w-3.5 h-3.5 text-slate-600"></i>
+                    <span>Schnittmodelle</span>
+                </a>
+                <!-- 2. KfW-40 & U-Werte -->
+                <a href="kfw40.html" class="px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all text-slate-600 hover:text-slate-900 hover:bg-white/80 flex items-center gap-1.5 whitespace-nowrap">
+                    <i data-lucide="shield-check" class="w-3.5 h-3.5 text-emerald-600"></i>
+                    <span>KfW-40 &amp; U-Werte</span>
+                </a>
+                <!-- 3. Wand- & Händlerrechner -->
+                <a href="konfigurator.html" class="px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all text-slate-600 hover:text-slate-900 hover:bg-white/80 flex items-center gap-1.5 whitespace-nowrap">
+                    <i data-lucide="file-spreadsheet" class="w-3.5 h-3.5 text-blue-600"></i>
+                    <span>Wand- &amp; Händlerrechner</span>
+                </a>
+                <!-- 4. Materialplaner (Active) -->
+                <a href="materialien.html" class="px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all bg-slate-900 text-white shadow-sm flex items-center gap-1.5 whitespace-nowrap">
+                    <i data-lucide="calculator" class="w-3.5 h-3.5 text-emerald-400"></i>
+                    <span>Materialplaner</span>
+                </a>
+            </nav>
 
             <!-- Action Buttons -->
-            <div class="flex items-center gap-2 flex-wrap">
-                <a href="kfw40.html" class="px-3.5 py-2 bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs rounded-xl flex items-center gap-1.5 shadow-sm transition-all" title="Zu den U-Werten &amp; KfW-40 Nachweisen">
-                    <i data-lucide="shield-check" class="w-4 h-4 text-emerald-400"></i>
-                    <span>KfW 40 &amp; U-Werte</span>
+            <div class="flex items-center gap-2 flex-wrap shrink-0">
+                <a href="konfigurator.html" class="px-3 py-1.5 bg-blue-50 hover:bg-blue-100 text-blue-800 border border-blue-200 font-bold text-xs rounded-xl flex items-center gap-1.5 shadow-2xs transition-all" title="Zum Baustoffhändler-Rechner">
+                    <i data-lucide="file-spreadsheet" class="w-3.5 h-3.5 text-blue-600"></i>
+                    <span>Händlerliste (<span id="header-trader-count" class="text-blue-900 font-extrabold">0</span>)</span>
                 </a>
-                <a href="konfigurator.html" class="px-3.5 py-2 bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs rounded-xl flex items-center gap-1.5 shadow-sm transition-all" title="Zum Wand-, Raum- &amp; Baustoffhändler-Konfigurator">
-                    <i data-lucide="file-spreadsheet" class="w-4 h-4 text-blue-200"></i>
-                    <span>Händlerliste (<span id="header-trader-count" class="text-amber-300 font-extrabold">0</span>) ➔</span>
-                </a>
-                <div id="cloud-sync-badge" class="px-3 py-1.5 bg-emerald-100 border border-emerald-300 text-emerald-800 rounded-xl text-xs font-bold flex items-center gap-1.5 shadow-sm">
+                <div id="cloud-sync-badge" class="px-3 py-1 bg-emerald-100 border border-emerald-300 text-emerald-800 rounded-xl text-xs font-bold flex items-center gap-1.5 shadow-2xs">
                     <i data-lucide="cloud" class="w-3.5 h-3.5 text-emerald-600"></i>
-                    <span id="sync-status-text">Echtzeit Cloud-Sync</span>
+                    <span id="sync-status-text">Sync Aktiv</span>
                 </div>
-                <button id="btn-export-csv" class="px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs rounded-xl flex items-center gap-1.5 shadow-sm transition-all">
-                    <i data-lucide="download" class="w-4 h-4"></i>
-                    CSV Export
+                <button id="btn-export-csv" class="px-3.5 py-1.5 bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs rounded-xl flex items-center gap-1.5 shadow-sm transition-all">
+                    <i data-lucide="download" class="w-3.5 h-3.5 text-slate-300"></i>
+                    <span>CSV</span>
                 </button>
             </div>
 

@@ -58,65 +58,88 @@
 </head>
 <body class="bg-slate-50 text-slate-900 font-sans antialiased selection:bg-slate-800 selection:text-white min-h-screen">
 
-    <!-- Header Navigation -->
-    <header class="sticky top-0 z-50 bg-white border-b border-slate-200 shadow-sm px-4 md:px-6 py-3 no-print">
-        <div class="max-w-[1920px] mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+    <!-- Unified Primary Navigation (Ebene 1) -->
+    <header class="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-slate-200 shadow-xs px-4 md:px-6 py-2.5 no-print">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-3">
             
-            <div class="flex items-center gap-3">
-                <a href="materialien.html" class="p-2 bg-slate-100 border border-slate-200 rounded-xl text-slate-700 hover:text-slate-900 hover:bg-slate-200 transition-all" title="Zurück zum Materialplaner">
-                    <i data-lucide="arrow-left" class="w-5 h-5"></i>
-                </a>
-                <div class="flex items-center gap-3">
-                    <div class="px-3.5 py-1.5 bg-slate-900 text-white rounded-xl font-display font-extrabold text-lg tracking-wide shadow-sm">
-                        HAUS JAKOB
-                    </div>
-                    <div class="h-6 w-px bg-slate-300 hidden sm:block"></div>
-                    <span class="font-display font-semibold text-sm md:text-base text-slate-700 hidden sm:inline">Wand- &amp; Baustoffhändler-Konfigurator</span>
+            <!-- Brand & Logo -->
+            <a href="index.html" class="flex items-center gap-3 shrink-0">
+                <div class="px-3 py-1.5 bg-slate-900 text-white rounded-xl font-display font-extrabold text-base tracking-wide shadow-sm flex items-center gap-2">
+                    <span>HAUS JAKOB</span>
+                    <span class="text-[10px] uppercase font-bold tracking-wider px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">KfW 40</span>
                 </div>
-            </div>
+                <div class="h-5 w-px bg-slate-200 hidden sm:block"></div>
+                <span class="text-xs font-semibold text-slate-500 hidden sm:inline">Wand- &amp; Händler-Konfigurator</span>
+            </a>
 
-            <!-- Tab Switcher Header -->
-            <div class="flex items-center p-1 bg-slate-100 rounded-xl border border-slate-200 gap-1 overflow-x-auto max-w-full">
-                <button id="tab-btn-haendler" onclick="switchTab('haendler')" class="tab-btn active px-4 py-2 rounded-lg text-xs font-bold transition-all text-slate-600 hover:text-slate-900 whitespace-nowrap flex items-center gap-1.5">
-                    <i data-lucide="file-spreadsheet" class="w-3.5 h-3.5 text-emerald-500"></i>
-                    <span>Baustoffhändler-Ausschreibung</span>
-                </button>
-                <button id="tab-btn-waende" onclick="switchTab('waende')" class="tab-btn px-4 py-2 rounded-lg text-xs font-bold transition-all text-slate-600 hover:text-slate-900 whitespace-nowrap flex items-center gap-1.5">
-                    <i data-lucide="layout-grid" class="w-3.5 h-3.5 text-blue-500"></i>
-                    <span>1. Wand- &amp; Flächenrechner</span>
-                </button>
-                <button id="tab-btn-fenster" onclick="switchTab('fenster')" class="tab-btn px-4 py-2 rounded-lg text-xs font-bold transition-all text-slate-600 hover:text-slate-900 whitespace-nowrap flex items-center gap-1.5">
-                    <i data-lucide="panels-top-left" class="w-3.5 h-3.5 text-amber-500"></i>
-                    <span>2. Fenster &amp; Haustüren</span>
-                </button>
-                <button id="tab-btn-tueren" onclick="switchTab('tueren')" class="tab-btn px-4 py-2 rounded-lg text-xs font-bold transition-all text-slate-600 hover:text-slate-900 whitespace-nowrap flex items-center gap-1.5">
-                    <i data-lucide="door-closed" class="w-3.5 h-3.5 text-indigo-500"></i>
-                    <span>3. Innentüren-Planer</span>
-                </button>
-                <button id="tab-btn-ausstattung" onclick="switchTab('ausstattung')" class="tab-btn px-4 py-2 rounded-lg text-xs font-bold transition-all text-slate-600 hover:text-slate-900 whitespace-nowrap flex items-center gap-1.5">
-                    <i data-lucide="bath" class="w-3.5 h-3.5 text-teal-500"></i>
-                    <span>4. Bäder &amp; Ausstattung</span>
-                </button>
-            </div>
-
-            <!-- Header Actions -->
-            <div class="flex items-center gap-2 flex-wrap">
-                <a href="kfw40.html" class="px-3.5 py-2 bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs rounded-xl flex items-center gap-1.5 shadow-sm transition-all" title="Zu den U-Werten &amp; KfW-40 Nachweisen">
-                    <i data-lucide="shield-check" class="w-3.5 h-3.5 text-emerald-400"></i>
-                    KfW-40 &amp; U-Werte
-                </a>
-                <div id="cloud-sync-badge" class="px-3 py-1.5 bg-emerald-100 border border-emerald-300 text-emerald-800 rounded-xl text-xs font-bold flex items-center gap-1.5 shadow-sm">
-                    <i data-lucide="cloud" class="w-3.5 h-3.5 text-emerald-600"></i>
-                    <span id="sync-status-text">Cloud Sync Aktiv</span>
-                </div>
-                <a href="index.html" class="px-3.5 py-2 bg-slate-100 hover:bg-slate-200 text-slate-800 border border-slate-200 font-bold text-xs rounded-xl flex items-center gap-1.5 transition-all">
+            <!-- 4 Core Navigation Modules (Segmented Switcher) -->
+            <nav class="flex items-center p-1 bg-slate-100 rounded-xl border border-slate-200 gap-1 overflow-x-auto max-w-full">
+                <!-- 1. Schnittmodelle -->
+                <a href="index.html" class="px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all text-slate-600 hover:text-slate-900 hover:bg-white/80 flex items-center gap-1.5 whitespace-nowrap">
                     <i data-lucide="box" class="w-3.5 h-3.5 text-slate-600"></i>
-                    Schnittskizzen
+                    <span>Schnittmodelle</span>
                 </a>
+                <!-- 2. KfW-40 & U-Werte -->
+                <a href="kfw40.html" class="px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all text-slate-600 hover:text-slate-900 hover:bg-white/80 flex items-center gap-1.5 whitespace-nowrap">
+                    <i data-lucide="shield-check" class="w-3.5 h-3.5 text-emerald-600"></i>
+                    <span>KfW-40 &amp; U-Werte</span>
+                </a>
+                <!-- 3. Wand- & Händlerrechner (Active) -->
+                <a href="konfigurator.html" class="px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all bg-slate-900 text-white shadow-sm flex items-center gap-1.5 whitespace-nowrap">
+                    <i data-lucide="file-spreadsheet" class="w-3.5 h-3.5 text-blue-400"></i>
+                    <span>Wand- &amp; Händlerrechner</span>
+                </a>
+                <!-- 4. Materialplaner -->
+                <a href="materialien.html" class="px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all text-slate-600 hover:text-slate-900 hover:bg-white/80 flex items-center gap-1.5 whitespace-nowrap">
+                    <i data-lucide="calculator" class="w-3.5 h-3.5 text-emerald-600"></i>
+                    <span>Materialplaner</span>
+                </a>
+            </nav>
+
+            <!-- Right Actions -->
+            <div class="flex items-center gap-2 shrink-0">
+                <div id="cloud-sync-badge" class="px-3 py-1 bg-emerald-100 border border-emerald-300 text-emerald-800 rounded-lg text-xs font-bold flex items-center gap-1.5 shadow-xs">
+                    <i data-lucide="cloud" class="w-3.5 h-3.5 text-emerald-600"></i>
+                    <span id="sync-status-text">Sync Aktiv</span>
+                </div>
             </div>
 
         </div>
     </header>
+
+    <!-- Sub-Toolbar for Configurator Tabs (Ebene 2) -->
+    <div class="sticky top-[53px] z-40 bg-slate-50/95 backdrop-blur-sm border-b border-slate-200 px-4 md:px-6 py-2 shadow-xs no-print">
+        <div class="max-w-7xl mx-auto flex items-center justify-between gap-3 overflow-x-auto">
+            <div class="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-slate-500 shrink-0">
+                <i data-lucide="sliders" class="w-4 h-4 text-blue-600"></i>
+                <span class="hidden sm:inline">Konfigurator-Ansicht:</span>
+            </div>
+
+            <!-- Tab Switcher Sub-Bar -->
+            <div class="flex items-center gap-1 overflow-x-auto py-0.5 max-w-full">
+                <button id="tab-btn-haendler" onclick="switchTab('haendler')" class="tab-btn active px-3 py-1.5 rounded-lg text-xs font-bold transition-all whitespace-nowrap flex items-center gap-1.5">
+                    <i data-lucide="file-spreadsheet" class="w-3.5 h-3.5 text-emerald-600"></i>
+                    <span>Baustoffhändler-Ausschreibung</span>
+                </button>
+                <button id="tab-btn-waende" onclick="switchTab('waende')" class="tab-btn px-3 py-1.5 rounded-lg text-xs font-bold transition-all text-slate-700 hover:text-slate-900 hover:bg-white border border-transparent whitespace-nowrap flex items-center gap-1.5">
+                    <i data-lucide="layout-grid" class="w-3.5 h-3.5 text-blue-500"></i>
+                    <span>1. Wand- &amp; Flächenrechner</span>
+                </button>
+                <button id="tab-btn-fenster" onclick="switchTab('fenster')" class="tab-btn px-3 py-1.5 rounded-lg text-xs font-bold transition-all text-slate-700 hover:text-slate-900 hover:bg-white border border-transparent whitespace-nowrap flex items-center gap-1.5">
+                    <i data-lucide="panels-top-left" class="w-3.5 h-3.5 text-amber-500"></i>
+                    <span>2. Fenster &amp; Haustüren</span>
+                </button>
+                <button id="tab-btn-tueren" onclick="switchTab('tueren')" class="tab-btn px-3 py-1.5 rounded-lg text-xs font-bold transition-all text-slate-700 hover:text-slate-900 hover:bg-white border border-transparent whitespace-nowrap flex items-center gap-1.5">
+                    <i data-lucide="door-closed" class="w-3.5 h-3.5 text-indigo-500"></i>
+                    <span>3. Innentüren-Planer</span>
+                </button>
+                <button id="tab-btn-ausstattung" onclick="switchTab('ausstattung')" class="tab-btn px-3 py-1.5 rounded-lg text-xs font-bold transition-all text-slate-700 hover:text-slate-900 hover:bg-white border border-transparent whitespace-nowrap flex items-center gap-1.5">
+                    <i data-lucide="bath" class="w-3.5 h-3.5 text-teal-500"></i>
+                    <span>4. Bäder &amp; Ausstattung</span>
+                </button>
+            </div>
+        </div>
+    </div>
 
     <!-- Main Content Container -->
     <main class="max-w-[1920px] mx-auto p-4 md:p-6 space-y-6">

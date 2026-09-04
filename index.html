@@ -35,10 +35,10 @@
             background-color: #FAFAFA;
             color: #0f172a;
         }
-        .nav-tab.active {
+        .sketch-tab.active {
             background-color: #0f172a !important;
             color: #ffffff !important;
-            box-shadow: 0 2px 8px rgba(15, 23, 42, 0.12);
+            box-shadow: 0 1px 3px rgba(15, 23, 42, 0.12);
         }
         iframe {
             border: none !important;
@@ -49,103 +49,113 @@
 </head>
 <body class="bg-[#FAFAFA] text-slate-900 font-sans antialiased selection:bg-slate-800 selection:text-white min-h-screen">
 
-    <!-- Clean, Spacious Header -->
-    <header class="sticky top-0 z-50 bg-white border-b border-slate-200 px-4 md:px-6 py-3">
-        <div class="max-w-[1920px] mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+    <!-- Unified Primary Navigation (Ebene 1) -->
+    <header class="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-slate-200 shadow-xs px-4 md:px-6 py-2.5">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-3">
             
-            <!-- Project Title & Logo (Haus Jakob) -->
-            <div class="flex items-center gap-3">
-                <div class="px-3.5 py-1.5 bg-slate-900 text-white rounded-xl font-display font-extrabold text-lg tracking-wide shadow-sm">
-                    HAUS JAKOB
+            <!-- Brand & Logo -->
+            <a href="index.html" class="flex items-center gap-3 shrink-0">
+                <div class="px-3 py-1.5 bg-slate-900 text-white rounded-xl font-display font-extrabold text-base tracking-wide shadow-sm flex items-center gap-2">
+                    <span>HAUS JAKOB</span>
+                    <span class="text-[10px] uppercase font-bold tracking-wider px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">KfW 40</span>
                 </div>
-                <div class="h-6 w-px bg-slate-300 hidden sm:block"></div>
-                <span class="font-display font-semibold text-sm md:text-base text-slate-700 hidden sm:inline">KfW-40 Schnittmodelle</span>
-            </div>
+                <div class="h-5 w-px bg-slate-200 hidden sm:block"></div>
+                <span class="text-xs font-semibold text-slate-500 hidden sm:inline">Holzrahmenhaus Planung</span>
+            </a>
 
-            <!-- Tab Navigation Buttons -->
+            <!-- 4 Core Navigation Modules (Segmented Switcher) -->
             <nav class="flex items-center p-1 bg-slate-100 rounded-xl border border-slate-200 gap-1 overflow-x-auto max-w-full">
-                <button id="btn-tab-boden" class="nav-tab active px-4 py-2 rounded-lg text-xs font-bold transition-all text-slate-600 hover:text-slate-900 whitespace-nowrap">
-                    1. Bodenplatte
-                </button>
-                <button id="btn-tab-wand" class="nav-tab px-4 py-2 rounded-lg text-xs font-bold transition-all text-slate-600 hover:text-slate-900 whitespace-nowrap">
-                    2. Außenwand
-                </button>
-                <button id="btn-tab-innenwand" class="nav-tab px-4 py-2 rounded-lg text-xs font-bold transition-all text-slate-600 hover:text-slate-900 whitespace-nowrap">
-                    3. Innenwand
-                </button>
-                <button id="btn-tab-dach" class="nav-tab px-4 py-2 rounded-lg text-xs font-bold transition-all text-slate-600 hover:text-slate-900 whitespace-nowrap">
-                    4. Dachaufbau
-                </button>
-                <button id="btn-tab-zwischen" class="nav-tab px-4 py-2 rounded-lg text-xs font-bold transition-all text-slate-600 hover:text-slate-900 whitespace-nowrap">
-                    5. Zwischendecke
-                </button>
-                <button id="btn-tab-kehlbalken" class="nav-tab px-4 py-2 rounded-lg text-xs font-bold transition-all text-slate-600 hover:text-slate-900 whitespace-nowrap">
-                    6. Decke Dachboden
-                </button>
-                <button id="btn-tab-kfw40" class="nav-tab px-4 py-2 rounded-lg text-xs font-bold transition-all text-emerald-700 bg-emerald-50/60 hover:text-emerald-900 whitespace-nowrap flex items-center gap-1.5">
+                <!-- 1. Schnittmodelle (Active) -->
+                <a href="index.html" class="px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all bg-slate-900 text-white shadow-sm flex items-center gap-1.5 whitespace-nowrap">
+                    <i data-lucide="box" class="w-3.5 h-3.5 text-slate-300"></i>
+                    <span>Schnittmodelle</span>
+                </a>
+                <!-- 2. KfW-40 & U-Werte -->
+                <a href="kfw40.html" class="px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all text-slate-600 hover:text-slate-900 hover:bg-white/80 flex items-center gap-1.5 whitespace-nowrap">
                     <i data-lucide="shield-check" class="w-3.5 h-3.5 text-emerald-600"></i>
-                    7. KfW-40 &amp; U-Werte
-                </button>
-                <button id="btn-tab-all" class="nav-tab px-4 py-2 rounded-lg text-xs font-bold transition-all text-slate-600 hover:text-slate-900 whitespace-nowrap">
-                    Alle Skizzen
-                </button>
+                    <span>KfW-40 &amp; U-Werte</span>
+                </a>
+                <!-- 3. Wand- & Händlerrechner -->
+                <a href="konfigurator.html" class="px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all text-slate-600 hover:text-slate-900 hover:bg-white/80 flex items-center gap-1.5 whitespace-nowrap">
+                    <i data-lucide="file-spreadsheet" class="w-3.5 h-3.5 text-blue-600"></i>
+                    <span>Wand- &amp; Händlerrechner</span>
+                </a>
+                <!-- 4. Materialplaner -->
+                <a href="materialien.html" class="px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all text-slate-600 hover:text-slate-900 hover:bg-white/80 flex items-center gap-1.5 whitespace-nowrap">
+                    <i data-lucide="calculator" class="w-3.5 h-3.5 text-emerald-600"></i>
+                    <span>Materialplaner</span>
+                </a>
             </nav>
-
-            <!-- Right Action: Planer Buttons -->
-            <div class="flex items-center gap-2">
-                <a href="kfw40.html" class="px-3.5 py-2 bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs rounded-xl flex items-center gap-1.5 shadow-sm transition-all whitespace-nowrap">
-                    <i data-lucide="shield-check" class="w-4 h-4 text-emerald-400"></i>
-                    KfW-40 &amp; U-Werte
-                </a>
-                <a href="konfigurator.html" class="px-3.5 py-2 bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs rounded-xl flex items-center gap-1.5 shadow-sm transition-all whitespace-nowrap">
-                    <i data-lucide="file-spreadsheet" class="w-4 h-4"></i>
-                    Wand- &amp; Händlerrechner
-                </a>
-                <a href="materialien.html" class="px-3.5 py-2 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs rounded-xl flex items-center gap-1.5 shadow-sm transition-all whitespace-nowrap">
-                    <i data-lucide="calculator" class="w-4 h-4"></i>
-                    Materialplaner
-                </a>
-            </div>
 
         </div>
     </header>
 
+    <!-- Sub-Navigation for Cutaway Models (Ebene 2) -->
+    <div class="sticky top-[53px] z-40 bg-slate-50/95 backdrop-blur-sm border-b border-slate-200 px-4 md:px-6 py-2 shadow-xs">
+        <div class="max-w-7xl mx-auto flex items-center justify-between gap-3 overflow-x-auto">
+            <div class="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-slate-500 shrink-0">
+                <i data-lucide="layers" class="w-4 h-4 text-blue-600"></i>
+                <span class="hidden sm:inline">CAD-Schnittmodell:</span>
+            </div>
+
+            <!-- Segmented Sketch Buttons -->
+            <div class="flex items-center gap-1 overflow-x-auto py-0.5 max-w-full">
+                <button id="btn-tab-boden" class="sketch-tab active px-3 py-1.5 rounded-lg text-xs font-bold transition-all whitespace-nowrap">
+                    1. Bodenplatte
+                </button>
+                <button id="btn-tab-wand" class="sketch-tab px-3 py-1.5 rounded-lg text-xs font-bold transition-all text-slate-700 hover:text-slate-900 hover:bg-white border border-transparent whitespace-nowrap">
+                    2. Außenwand
+                </button>
+                <button id="btn-tab-innenwand" class="sketch-tab px-3 py-1.5 rounded-lg text-xs font-bold transition-all text-slate-700 hover:text-slate-900 hover:bg-white border border-transparent whitespace-nowrap">
+                    3. Innenwand
+                </button>
+                <button id="btn-tab-dach" class="sketch-tab px-3 py-1.5 rounded-lg text-xs font-bold transition-all text-slate-700 hover:text-slate-900 hover:bg-white border border-transparent whitespace-nowrap">
+                    4. Dachaufbau
+                </button>
+                <button id="btn-tab-zwischen" class="sketch-tab px-3 py-1.5 rounded-lg text-xs font-bold transition-all text-slate-700 hover:text-slate-900 hover:bg-white border border-transparent whitespace-nowrap">
+                    5. Zwischendecke
+                </button>
+                <button id="btn-tab-kehlbalken" class="sketch-tab px-3 py-1.5 rounded-lg text-xs font-bold transition-all text-slate-700 hover:text-slate-900 hover:bg-white border border-transparent whitespace-nowrap">
+                    6. Decke Dachboden
+                </button>
+                <button id="btn-tab-all" class="sketch-tab px-3 py-1.5 rounded-lg text-xs font-bold transition-all text-slate-700 hover:text-slate-900 hover:bg-white border border-transparent whitespace-nowrap">
+                    Alle Skizzen
+                </button>
+            </div>
+        </div>
+    </div>
+
     <!-- Main Section Viewports: COMPLETELY SEAMLESS -->
-    <main class="relative w-full min-h-[calc(100vh-4rem)] p-0">
+    <main class="relative w-full min-h-[calc(100vh-6.5rem)] p-0">
 
         <!-- SKIZZE 1: Thermobodenplatte -->
-        <section id="sec-boden" class="sketch-section w-full h-[calc(100vh-4.25rem)] min-h-[600px] bg-[#FAFAFA]">
+        <section id="sec-boden" class="sketch-section w-full h-[calc(100vh-6.75rem)] min-h-[600px] bg-[#FAFAFA]">
             <iframe src="bodenplatte.html?v=43" class="w-full h-full border-0 block bg-[#FAFAFA]" title="Thermobodenplatte Skizze"></iframe>
         </section>
 
         <!-- SKIZZE 2: Außenwandaufbau -->
-        <section id="sec-wand" class="sketch-section hidden w-full h-[calc(100vh-4.25rem)] min-h-[600px] bg-[#FAFAFA]">
+        <section id="sec-wand" class="sketch-section hidden w-full h-[calc(100vh-6.75rem)] min-h-[600px] bg-[#FAFAFA]">
             <iframe src="wand.html?v=43" class="w-full h-full border-0 block bg-[#FAFAFA]" title="Außenwandaufbau Skizze"></iframe>
         </section>
 
         <!-- SKIZZE 3: Innenwandaufbau -->
-        <section id="sec-innenwand" class="sketch-section hidden w-full h-[calc(100vh-4.25rem)] min-h-[600px] bg-[#FAFAFA]">
+        <section id="sec-innenwand" class="sketch-section hidden w-full h-[calc(100vh-6.75rem)] min-h-[600px] bg-[#FAFAFA]">
             <iframe src="innenwand.html?v=43" class="w-full h-full border-0 block bg-[#FAFAFA]" title="Innenwandaufbau Skizze"></iframe>
         </section>
 
         <!-- SKIZZE 4: Dachaufbau -->
-        <section id="sec-dach" class="sketch-section hidden w-full h-[calc(100vh-4.25rem)] min-h-[600px] bg-[#FAFAFA]">
+        <section id="sec-dach" class="sketch-section hidden w-full h-[calc(100vh-6.75rem)] min-h-[600px] bg-[#FAFAFA]">
             <iframe src="dach.html?v=43" class="w-full h-full border-0 block bg-[#FAFAFA]" title="Dachaufbau Skizze"></iframe>
         </section>
 
         <!-- SKIZZE 5: Zwischendecke -->
-        <section id="sec-zwischen" class="sketch-section hidden w-full h-[calc(100vh-4.25rem)] min-h-[600px] bg-[#FAFAFA]">
+        <section id="sec-zwischen" class="sketch-section hidden w-full h-[calc(100vh-6.75rem)] min-h-[600px] bg-[#FAFAFA]">
             <iframe src="zwischendecke.html?v=43" class="w-full h-full border-0 block bg-[#FAFAFA]" title="Zwischendecke Skizze"></iframe>
         </section>
 
         <!-- SKIZZE 6: Oberste Geschossdecke Dachboden -->
-        <section id="sec-kehlbalken" class="sketch-section hidden w-full h-[calc(100vh-4.25rem)] min-h-[600px] bg-[#FAFAFA]">
+        <section id="sec-kehlbalken" class="sketch-section hidden w-full h-[calc(100vh-6.75rem)] min-h-[600px] bg-[#FAFAFA]">
             <iframe src="kehlbalkendecke.html?v=43" class="w-full h-full border-0 block bg-[#FAFAFA]" title="Oberste Geschossdecke Skizze"></iframe>
-        </section>
-
-        <!-- KFW-40: U-Werte & Energie-Cockpit -->
-        <section id="sec-kfw40" class="sketch-section hidden w-full h-[calc(100vh-4.25rem)] min-h-[600px] bg-[#FAFAFA]">
-            <iframe src="kfw40.html?v=1" class="w-full h-full border-0 block bg-[#FAFAFA]" title="KfW 40 und U-Werte Cockpit"></iframe>
         </section>
 
     </main>
@@ -160,7 +170,6 @@
             const btnDach = document.getElementById('btn-tab-dach');
             const btnZwischen = document.getElementById('btn-tab-zwischen');
             const btnKehlbalken = document.getElementById('btn-tab-kehlbalken');
-            const btnKfw40 = document.getElementById('btn-tab-kfw40');
             const btnAll = document.getElementById('btn-tab-all');
 
             const secBoden = document.getElementById('sec-boden');
@@ -169,13 +178,14 @@
             const secDach = document.getElementById('sec-dach');
             const secZwischen = document.getElementById('sec-zwischen');
             const secKehlbalken = document.getElementById('sec-kehlbalken');
-            const secKfw40 = document.getElementById('sec-kfw40');
 
-            const allNavBtns = [btnBoden, btnWand, btnInnenwand, btnDach, btnZwischen, btnKehlbalken, btnKfw40, btnAll];
-            const allSections = [secBoden, secWand, secInnenwand, secDach, secZwischen, secKehlbalken, secKfw40];
+            const allNavBtns = [btnBoden, btnWand, btnInnenwand, btnDach, btnZwischen, btnKehlbalken, btnAll];
+            const allSections = [secBoden, secWand, secInnenwand, secDach, secZwischen, secKehlbalken];
 
             function activateTab(activeBtn, targetSec) {
-                allNavBtns.forEach(b => b.classList.remove('active'));
+                allNavBtns.forEach(b => {
+                    b.classList.remove('active');
+                });
                 activeBtn.classList.add('active');
 
                 if (targetSec === 'all') {
@@ -192,7 +202,6 @@
             btnDach.addEventListener('click', () => activateTab(btnDach, secDach));
             btnZwischen.addEventListener('click', () => activateTab(btnZwischen, secZwischen));
             btnKehlbalken.addEventListener('click', () => activateTab(btnKehlbalken, secKehlbalken));
-            btnKfw40.addEventListener('click', () => activateTab(btnKfw40, secKfw40));
             btnAll.addEventListener('click', () => activateTab(btnAll, 'all'));
         });
     </script>
