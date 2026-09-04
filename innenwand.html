@@ -57,9 +57,16 @@
 
   <line x1="45" y1="88" x2="955" y2="88" stroke="#E2E8F0" stroke-width="1"/>
 
-  <!-- Raumbezeichnungen exakt über den Wandkanten -->
-  <text x="70" y="115" font-size="12" font-weight="700" fill="#2563EB">RAUM A (z. B. Flur / Wohnen)</text>
-  <text x="324" y="115" font-size="12" font-weight="700" text-anchor="end" fill="#16A34A">RAUM B (z. B. Zimmer / Bad)</text>
+  <!-- Raumbezeichnungen mit klarer Trennung & Pfeilen (keine Überlappung) -->
+  <g transform="translate(70, 104)">
+    <text x="0" y="0" font-size="11" font-weight="800" fill="#2563EB">◄ RAUM A</text>
+    <text x="0" y="13" font-size="9.5" font-weight="600" fill="#64748B">Flur / Wohnen</text>
+  </g>
+
+  <g transform="translate(324, 104)">
+    <text x="0" y="0" font-size="11" font-weight="800" text-anchor="end" fill="#16A34A">RAUM B ►</text>
+    <text x="0" y="13" font-size="9.5" font-weight="600" text-anchor="end" fill="#64748B">Zimmer / Bad</text>
+  </g>
 
   <!-- ==================== 2D VECTOR CUTAWAY LAYERS (LINKS NACH RECHTS) ==================== -->
   
