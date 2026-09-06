@@ -931,7 +931,7 @@
     <!-- Core State & Calculation Script -->
     <script>
         // 1. Reale Baukostenkalkulation für Haus Jakob (14 x 9 m | 2 Vollgeschosse | Satteldach | KfW 40)
-        // Einheitliche Datenbasis: Fremdkosten (Kosten - Eigenleistung) entsprechen exakt den 382.470,95 € Material-/Anschaffungskosten
+        // Einheitliche Datenbasis: Fremdkosten (Kosten - Eigenleistung) entsprechen exakt den 392.190,95 € Material-/Anschaffungskosten
         const JAKOB_14x9_DATA = {
             meta: {
                 anfrage: "Neubau KfW-40 Holzhaus 14x9m (2 Vollgeschosse, Satteldach)",
@@ -968,7 +968,7 @@
                 naturstein_kosten: 0,             naturstein_eigen: 0,         // Fensterbänke bei Tischlerarbeiten enthalten
                 tischler_kosten: 7280,            tischler_eigen: 1800,        // Pos 8.6-8.7: 14 Innentüren CPL (4.130 €) + 18 Fensterbänke (1.350 €) + Eigenleistung (1.800 €)
                 maler_kosten: 29709.40,           maler_eigen: 12000,          // Pos 7.1-7.3, 7.5-7.6 Trockenbau (12.181,50 €) + Pos 8.1-8.3 Finish Spachtel/Vlies/Farbe (5.527,90 €) + Eigenleistung (12.000 €)
-                rolladen_kosten: 0,               rolladen_eigen: 0,
+                rolladen_kosten: 8420,            rolladen_eigen: 1200,        // Pos 5.4: 19x elektrische Alu-Vorbaurollläden in DE gekauft (7.220 €) + Eigenleistung Montage (1.200 €)
                 baukosten_sonstiges_kosten: 0,    baukosten_sonstiges_eigen: 0,
 
                 // Seite 2: Baunebenkosten (Phase 1 & Phase 6)
@@ -982,7 +982,7 @@
 
                 // Seite 3: Außenanlagen (Phase 2, 3 & 4)
                 entwaesserung_kosten: 1500,       entwaesserung_eigen: 400,    // Pos 2.2: Betonschacht DN 1000 (1.100 €) + Eigenleistung Einbau (400 €)
-                hof_kosten: 0,                    hof_eigen: 0,                // Optional bauseits
+                hof_kosten: 4300,                 hof_eigen: 1800,             // Pos 2.11 & 2.12: 75 m² Pflastersteine, Splitt & Tiefborde (2.500 €) + Eigenleistung Verlegen (1.800 €)
                 aussen_sonstige_kosten: 0,        aussen_sonstige_eigen: 0,    // Optional bauseits
                 garagen_kosten: 11000,            garagen_eigen: 4283          // Pos 3.7 Carport/Terrasse Holz (4.200 €) + Pos 4.2 Terrassendach (1.365 €) + Pos 4.3 Carport Trapezblech (1.152 €) + Eigenleistung (4.283 €)
             }
@@ -1031,10 +1031,10 @@
         };
 
         // App State loaded from localStorage or Standard 14x9 Data
-        let appState = JSON.parse(localStorage.getItem('kfw40_baukosten_aufstellung_v5'));
-        if (!appState || appState.values?.grundstueck === 88800 || appState.values?.maurer_kosten === 28500) {
+        let appState = JSON.parse(localStorage.getItem('kfw40_baukosten_aufstellung_v6'));
+        if (!appState || appState.values?.grundstueck === 88800 || appState.values?.rolladen_kosten === 0) {
             appState = JSON.parse(JSON.stringify(JAKOB_14x9_DATA));
-            localStorage.setItem('kfw40_baukosten_aufstellung_v5', JSON.stringify(appState));
+            localStorage.setItem('kfw40_baukosten_aufstellung_v6', JSON.stringify(appState));
         }
 
         // Format number in German format (e.g. "12.345,67" or "12.345")
@@ -1061,8 +1061,9 @@
 
         // Save state to LocalStorage
         function saveState() {
-            localStorage.setItem('kfw40_baukosten_aufstellung_v5', JSON.stringify(appState));
+            localStorage.setItem('kfw40_baukosten_aufstellung_v6', JSON.stringify(appState));
         }
+
 
 
         // Update Meta Information
@@ -1240,7 +1241,7 @@
                 { id: 'tischler', label: 'Tischlerarbeiten', hint: 'Phase 8 Pos 8.6, 8.7: 14 CPL Weißlack Innentüren mit Zargen & 18 Fensterbänke' },
                 { id: 'glaser', label: 'Glaserarbeiten', hint: 'Phase 3 & 5: Palmatin Passivhaus-Fenster + 2x gedämmte Haustüren & RAL-Set' },
                 { id: 'maler', label: 'Malerarbeiten', hint: 'Phase 7 & 8: 742 m² Trockenbau (OSB/Rigips) + Spachteln Q2/Q3, Vlies & Silikatfarbe' },
-                { id: 'rolladen', label: 'Rolladenarbeiten', hint: 'Bauseits / Optional' },
+                { id: 'rolladen', label: 'Rolladenarbeiten', hint: 'Phase 5 Pos 5.4: 18x Vorbaurollläden + 1x Schiebetür elektrisch in DE (7.220 €)' },
                 { id: 'baukosten_sonstiges', label: 'Sonstiges (Baukosten)', hint: 'Baustelleninfrastruktur & Mithilfe' }
             ];
 
@@ -1302,7 +1303,7 @@
             // Außenanlagen Rows
             const aussen = [
                 { id: 'entwaesserung', label: 'Entwässerung', hint: 'Phase 2 Pos 2.2: Revisionsschacht DN 1000' },
-                { id: 'hof', label: 'Hofbefestigung', hint: 'Auffahrt & Stellplätze (optional bauseits)' },
+                { id: 'hof', label: 'Hofbefestigung', hint: 'Phase 2 Pos 2.11, 2.12: 75 m² Betonpflaster 8cm, Splittbett & Tiefborde (2.500 €)' },
                 { id: 'aussen_sonstige', label: 'Sonstige Außenanlagen, Erdarbeiten, Grünanlagen etc.', hint: 'Garten, Humusierung & Zaun (optional bauseits)' },
                 { id: 'garagen', label: 'Garagen, Carports etc.', hint: 'Phase 3 Pos 3.7 + Phase 4 Pos 4.2, 4.3: Carport 36 m² & Terrassendach 21 m²' }
             ];
@@ -1473,8 +1474,12 @@
                 v.fliesen_eigen = 0;
                 v.naturstein_kosten = 0;
                 v.naturstein_eigen = 0;
-                v.rolladen_kosten = 0;
-                v.rolladen_eigen = 0;
+                
+                // Rolladenarbeiten (Phase 5 Pos 5.4 - elektrisch in DE gekauft)
+                const rolladenMat = sumPos(matData.bauelemente, ['5.4']) || 7220;
+                v.rolladen_eigen = 1200;
+                v.rolladen_kosten = rolladenMat + v.rolladen_eigen; // 8.420 €
+
                 v.baukosten_sonstiges_kosten = 0;
                 v.baukosten_sonstiges_eigen = 0;
 
@@ -1487,8 +1492,11 @@
                 v.garagen_eigen = 4283;
                 v.garagen_kosten = garagenMat + v.garagen_eigen; // 11.000 €
 
-                v.hof_kosten = 0;
-                v.hof_eigen = 0;
+                // Hofbefestigung / Pflaster Einfahrt (Phase 2 Pos 2.11, 2.12)
+                const hofMat = sumPos(matData.boden, ['2.11', '2.12']) || 2500;
+                v.hof_eigen = 1800;
+                v.hof_kosten = hofMat + v.hof_eigen; // 4.300 €
+
                 v.aussen_sonstige_kosten = 0;
                 v.aussen_sonstige_eigen = 0;
 
@@ -1497,7 +1505,7 @@
                 renderPreviewValues();
                 renderFormValues();
 
-                showToast('Erfolgreich: 100% synchron mit Materialplaner (Fremdkapital / Material = ' + formatEUR(388397.95) + ' €)!', 'emerald');
+                showToast('Erfolgreich: 100% synchron mit Materialplaner (Fremdkapital / Material = ' + formatEUR(392190.95) + ' €)!', 'emerald');
             } catch(err) {
                 console.error('Import error:', err);
                 showToast('Fehler beim Importieren der Daten: ' + err.message, 'rose');
