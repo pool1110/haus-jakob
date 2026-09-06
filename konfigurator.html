@@ -600,7 +600,7 @@
                     </div>
                     <div class="p-3.5 bg-purple-50 border border-purple-200 rounded-xl">
                         <span class="text-[11px] font-bold text-purple-800 uppercase tracking-wider block">Klick-Vinylbodenbelag:</span>
-                        <span class="font-display font-extrabold text-xl text-purple-950 font-mono">210 m²</span>
+                        <span class="font-display font-extrabold text-xl text-purple-950 font-mono">219 m²</span>
                     </div>
                     <div class="p-3.5 bg-emerald-50 border border-emerald-200 rounded-xl">
                         <span class="text-[11px] font-bold text-emerald-800 uppercase tracking-wider block">Steckdosen &amp; Schalter:</span>
@@ -613,11 +613,11 @@
             <div class="bg-white border border-slate-200 rounded-2xl shadow-sm print-card overflow-hidden">
                 <div class="overflow-x-auto">
                     <table class="w-full text-left text-xs font-sans">
-                        <thead>
-                            <tr class="border-b border-slate-200 text-slate-700 uppercase tracking-wider text-[11px] bg-slate-100">
-                                <th class="py-3 px-3 w-12">Nr.</th>
+                        <thead class="bg-slate-50 text-slate-500 font-bold uppercase tracking-wider text-[11px] border-b border-slate-200">
+                            <tr>
+                                <th class="py-3 px-3 w-12 text-center">Nr.</th>
                                 <th class="py-3 px-3 w-48">Bereich / Gewerk</th>
-                                <th class="py-3 px-3">Ausstattungsbezeichnung &amp; Spezifikation</th>
+                                <th class="py-3 px-4">Ausstattungsbezeichnung &amp; Spezifikation</th>
                                 <th class="py-3 px-2 text-right w-24">Menge</th>
                                 <th class="py-3 px-2 text-left w-20">Einheit</th>
                                 <th class="py-3 px-3 w-48">Zusatzanmerkung</th>
@@ -630,12 +630,11 @@
                     </table>
                 </div>
             </div>
-
         </section>
 
     </main>
 
-    <!-- Script Application Logic -->
+    <!-- App Data Script -->
     <script>
         // ==========================================
         // 1. DATA MODELS & PRESETS
@@ -643,15 +642,15 @@
 
         const DEFAULT_CONFIG = {
             waende: [
-                { id: 'w1', name: 'AW Nord (EG & OG)', type: 'Außenwand 374 mm (Fassade + STEICO + 180mm Ständer)', len: 14.0, height: 5.70, cutouts: 16.0 },
-                { id: 'w2', name: 'AW Süd mit Schiebetür & Fenster', type: 'Außenwand 374 mm (Fassade + STEICO + 180mm Ständer)', len: 14.0, height: 5.70, cutouts: 20.0 },
-                { id: 'w3', name: 'AW Ost (Giebelseite)', type: 'Außenwand 374 mm (Fassade + STEICO + 180mm Ständer)', len: 8.5, height: 5.70, cutouts: 4.5 },
-                { id: 'w4', name: 'AW West (Giebelseite mit Eingang)', type: 'Außenwand 374 mm (Fassade + STEICO + 180mm Ständer)', len: 8.5, height: 5.70, cutouts: 6.5 },
-                { id: 'w5', name: 'Wohnungstrennwand ELW (EG)', type: 'Schallschutzwand ELW (53 dB - 2x OSB + 2x Rigips)', len: 8.5, height: 2.80, cutouts: 0.0 },
-                { id: 'w6', name: 'Tragende Innenwand EG Längsachse', type: 'Tragende Innenwand (Ständer 120 mm)', len: 9.0, height: 2.80, cutouts: 4.0 },
-                { id: 'w7', name: 'Nichttragende Trennwände EG', type: 'Innenwand Raumteiler (Ständer 80 mm)', len: 16.0, height: 2.80, cutouts: 6.0 },
-                { id: 'w8', name: 'Tragende Innenwand OG Längsachse', type: 'Tragende Innenwand (Ständer 120 mm)', len: 10.0, height: 2.70, cutouts: 4.0 },
-                { id: 'w9', name: 'Nichttragende Trennwände OG (Zimmer/Bad)', type: 'Innenwand Raumteiler (Ständer 80 mm)', len: 24.0, height: 2.70, cutouts: 8.0 }
+                { id: 'w1', name: 'AW Nord (EG & OG)', type: 'Außenwand 374 mm (Fassade + STEICO + 180mm Ständer)', len: 14.0, height: 5.70, cutouts: 17.5 },
+                { id: 'w2', name: 'AW Süd mit Schiebetür & Fenster', type: 'Außenwand 374 mm (Fassade + STEICO + 180mm Ständer)', len: 14.0, height: 5.70, cutouts: 18.0 },
+                { id: 'w3', name: 'AW Ost (Giebelseite)', type: 'Außenwand 374 mm (Fassade + STEICO + 180mm Ständer)', len: 9.0, height: 5.70, cutouts: 3.2 },
+                { id: 'w4', name: 'AW West (Giebelseite mit Eingang)', type: 'Außenwand 374 mm (Fassade + STEICO + 180mm Ständer)', len: 9.0, height: 5.70, cutouts: 3.3 },
+                { id: 'w5', name: 'Wohnungstrennwand ELW (EG)', type: 'Schallschutzwand ELW (53 dB - 2x OSB + 2x Rigips)', len: 8.5, height: 2.65, cutouts: 0.0 },
+                { id: 'w6', name: 'Tragende Innenwand EG Längsachse', type: 'Tragende Innenwand (Ständer 120 mm)', len: 10.0, height: 2.65, cutouts: 3.0 },
+                { id: 'w7', name: 'Nichttragende Trennwände EG', type: 'Innenwand Raumteiler (Ständer 80 mm)', len: 18.11, height: 2.65, cutouts: 8.9 },
+                { id: 'w8', name: 'Tragende Innenwand OG Längsachse', type: 'Tragende Innenwand (Ständer 120 mm)', len: 4.60, height: 2.60, cutouts: 1.9 },
+                { id: 'w9', name: 'Nichttragende Trennwände OG (Zimmer/Bad)', type: 'Innenwand Raumteiler (Ständer 80 mm)', len: 35.08, height: 2.60, cutouts: 9.6 }
             ],
 
             fenster: [
@@ -676,8 +675,8 @@
                 { id: 'a5', category: 'Duschbad ELW EG', name: 'Bodenebene Dusche 90x90 cm inkl. Duschrinne, Glas-Eckeinstieg & Armatur', qty: 1, unit: 'Set', note: 'Komplettset' },
                 { id: 'a6', category: 'Duschbad ELW EG', name: 'Waschtisch 60cm inkl. Unterschrank & Wand-WC Set spülrandlos', qty: 1, unit: 'Set', note: 'Vorwandelement Geberit' },
                 { id: 'a7', category: 'Gäste-WC EG', name: 'Handwaschbecken 45cm mit Kalt-/Warm-Armatur & Wand-WC Set', qty: 1, unit: 'Set', note: 'Kompakt-Sanitär' },
-                { id: 'a9', category: 'Böden', name: 'Rigid-Klick-Vinylboden 100% wasserfest (Nutzschicht 0,55mm, Kl. 23/33)', qty: 210, unit: 'm²', note: 'Vollflächig EG + OG + Bäder' },
-                { id: 'a10', category: 'Böden', name: 'MDF-Sockelleisten weiß foliert 60x15 mm inkl. Montageclips', qty: 310, unit: 'lfm', note: 'Passend zu Vinylboden' },
+                { id: 'a9', category: 'Böden', name: 'Rigid-Klick-Vinylboden 100% wasserfest (Nutzschicht 0,55mm, Kl. 23/33)', qty: 219, unit: 'm²', note: 'Vollflächig EG (109,5 m²) + OG (109,5 m²)' },
+                { id: 'a10', category: 'Böden', name: 'MDF-Sockelleisten weiß foliert 60x15 mm inkl. Montageclips', qty: 220, unit: 'lfm', note: 'Passend zu Vinylboden' },
                 { id: 'a11', category: 'Elektro', name: 'Schalter- & Steckdosenprogramm reinweiß glänzend (Gira E2 / Busch-Jaeger)', qty: 270, unit: 'Stk', note: '200 Steckdosen + 70 Schalter/Taster' },
                 { id: 'a12', category: 'Elektro', name: 'LED-Deckeneinbauspots warmweiß / dimmbar (IP44 in Bädern)', qty: 45, unit: 'Stk', note: 'Inkl. LED-Treiber' }
             ],
@@ -715,8 +714,8 @@
                     category: 'trockenbau',
                     pos: '1.1',
                     title: 'OSB/3 Platten 12 mm ungeschliffen (CE nach EN 300, formaldehydfrei verleimt)',
-                    spec: 'Format 2.500 × 1.250 mm (stumpfe Kante) zur bauseitigen 2. Wandbeplankung über der Installationsebene (Außenwände) und 2. Beplankungsseite aller Innenwände.',
-                    qty: 480,
+                    spec: 'Format 2.500 × 1.250 mm (stumpfe Kante) zur bauseitigen 2. Wandbeplankung über der Installationsebene (Außenwände 195,3 m²) und 2. Beplankungsseite aller Innenwände (164,1 m² netto).',
+                    qty: 395,
                     unit: 'm²',
                     brand: 'EGGER / Kronospan',
                     price: 6.80,
@@ -728,8 +727,8 @@
                     category: 'trockenbau',
                     pos: '1.2',
                     title: 'Gipskartonplatten 12,5 mm (Typ A / GKB nach DIN EN 520)',
-                    spec: 'Kantenform HRAK (halbrunde abgeflachte Kante), Format 2.000 × 1.250 mm / 2.600 × 600 mm (Einmannplatte) für Wand- & Deckenbeplankung im EG & OG.',
-                    qty: 620,
+                    spec: 'Kantenform HRAK (halbrunde abgeflachte Kante), Format 2.000 × 1.250 mm / 2.600 × 600 mm für Wand- & Deckenbeplankung im EG & OG (642 m² Standard + 100 m² GKBI Feuchtraum = 742 m²).',
+                    qty: 642,
                     unit: 'm²',
                     brand: 'Knauf GKB / Rigips RB',
                     price: 4.50,
@@ -754,8 +753,8 @@
                     category: 'trockenbau',
                     pos: '1.4',
                     title: 'OSB/3 Verlegeplatten 22 mm Nut & Feder 4-seitig (DIN EN 300)',
-                    spec: 'Format 2.500 × 675 mm, geschliffen/ungeschliffen. Als statische Tragschicht auf der 240mm KVH-Zwischendecke OG (119 m²) und als begehbarer Dachbodenbelag (119 m²).',
-                    qty: 238,
+                    spec: 'Format 2.500 × 675 mm, geschliffen/ungeschliffen. Als statische Tragschicht auf der 240mm KVH-Zwischendecke OG (109,5 m²) und als begehbarer Dachbodenbelag (109,5 m²).',
+                    qty: 219,
                     unit: 'm²',
                     brand: 'EGGER OSB 4 Top',
                     price: 13.50,
@@ -767,10 +766,10 @@
                     category: 'trockenbau',
                     pos: '1.5',
                     title: 'Fugenspachtel & Finish-Spachtelmasse Q2/Q3 (z.B. Knauf Uniflott / Rigips Vario)',
-                    spec: 'Hochfester kunstharzvergüteter Spezialgips für Fugenverspachtelung ohne/mit Bewehrungsstreifen + Feinspachtel für 920 m² Wand-/Deckenfläche.',
-                    qty: 450,
+                    spec: 'Hochfester kunstharzvergüteter Spezialgips für Fugenverspachtelung ohne/mit Bewehrungsstreifen + Feinspachtel für 742 m² Wand-/Deckenfläche.',
+                    qty: 380,
                     unit: 'kg',
-                    brand: 'Knauf Uniflott (18x 25kg Säcke)',
+                    brand: 'Knauf Uniflott (15x 25kg Säcke)',
                     price: 1.40,
                     note: 'Inkl. Glasfaser-Fugendeckstreifen',
                     selected: true
@@ -794,11 +793,11 @@
                     pos: '2.1',
                     title: 'Trittschalldämmung Mineralwolle / EPS DES-sg 30-2 mm (nach DIN 4109)',
                     spec: 'Dynamische Steifigkeit s\' ≤ 10 MN/m³, Trittschallverbesserungsmaß ΔLw ≥ 30 dB. Hochwirksame Entkopplung unter 50 mm schwimmendem Nassestrich im OG.',
-                    qty: 110,
+                    qty: 109.5,
                     unit: 'm²',
                     brand: 'ISOVER Akustic EP 3',
                     price: 7.80,
-                    note: '110 m² für Obergeschoss',
+                    note: '109,5 m² für Obergeschoss',
                     selected: true
                 },
                 {
@@ -858,8 +857,8 @@
                     category: 'dach',
                     pos: '3.1',
                     title: 'Tondachziegel / Dachsteine anthrazit engobiert (z.B. Braas Rubin 11V / Creaton Domino)',
-                    spec: 'Für 155 m² Steildachfläche (ca. 1.800 Flächenziegel) inkl. Formziegel: 25 lfm Firstziegel mit Firstklammern, 32 Stk Ortgangziegel (links/rechts) & 6 Stk Dunstrohr-/Lüfterziegel.',
-                    qty: 155,
+                    spec: 'Für 178,9 m² geneigte Steildachfläche (ca. 2.050 Flächenziegel) inkl. Formziegel: 28 lfm Firstziegel mit Firstklammern, 32 Stk Ortgangziegel (links/rechts) & 6 Stk Dunstrohr-/Lüfterziegel.',
+                    qty: 178.9,
                     unit: 'm²',
                     brand: 'Braas Rubin 11V Tiefschwarz',
                     price: 24.50,
@@ -910,12 +909,12 @@
                     category: 'ausbau',
                     pos: '4.1',
                     title: 'Rigid-SPC Klick-Vinylboden Eiche Natur / Modern (Beanspruchungsklasse 23/33)',
-                    spec: 'Gesamtdicke ca. 5,0 - 6,0 mm mit 0,55 mm Nutzschicht und integrierter IXPE-Trittschalldämmung, 100% wasserfest für alle Wohnräume, Flure, Küche & Bäder (210 m²).',
-                    qty: 210,
+                    spec: 'Gesamtdicke ca. 5,0 - 6,0 mm mit 0,55 mm Nutzschicht und integrierter IXPE-Trittschalldämmung, 100% wasserfest für alle Wohnräume, Flure, Küche & Bäder (219 m²).',
+                    qty: 219,
                     unit: 'm²',
                     brand: 'HARO Disano / Meister Rigid',
                     price: 32.00,
-                    note: '210 m² vollflächig EG & OG',
+                    note: '219 m² vollflächig EG & OG',
                     selected: true
                 },
                 {
@@ -923,8 +922,8 @@
                     category: 'ausbau',
                     pos: '4.2',
                     title: 'Sockelleisten MDF weiß foliert 60 × 15 mm kubisch',
-                    spec: '310 lfm moderne Sockelleisten mit Kabelkanalfräsung inkl. 350 Stk Montage-Clipse und Dübel/Schrauben.',
-                    qty: 310,
+                    spec: '220 lfm moderne Sockelleisten mit Kabelkanalfräsung inkl. 250 Stk Montage-Clipse und Dübel/Schrauben.',
+                    qty: 220,
                     unit: 'lfm',
                     brand: 'Küberit Sockelleiste 60mm',
                     price: 4.50,
@@ -1503,8 +1502,8 @@
 
         let matSyncTimeout = null;
         function syncCalculatedWallsToMaterialData(osbWandQty, rigipsWandQty, awNetto) {
-            // Calculate totals including ceiling areas (2x 119m² = 238m² Decken)
-            const deckenM2 = 238;
+            // Calculate totals including ceiling areas (2x 109.5m² = 219m² Decken laut ArchiTouch)
+            const deckenM2 = 219;
             const totalOsbRunden = Math.max(10, Math.round(osbWandQty));
             const totalRigipsGesamt = Math.max(10, Math.round(rigipsWandQty + deckenM2));
             const totalSpachtelKg = Math.round(totalRigipsGesamt * 0.65);

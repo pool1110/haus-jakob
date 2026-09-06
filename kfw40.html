@@ -666,18 +666,18 @@
                     <tfoot class="bg-slate-50/90 font-bold border-t-2 border-slate-200 text-slate-900">
                         <tr>
                             <td class="p-3 pl-4">Wärmebrückenzuschlag (ΔU_WB = 0,020 W/m²K)</td>
-                            <td id="calc-total-area-wb" class="p-3 text-right font-mono">534,8 m²</td>
+                            <td id="calc-total-area-wb" class="p-3 text-right font-mono">558,8 m²</td>
                             <td class="p-3 text-right font-mono text-purple-600">0,020</td>
                             <td class="p-3 text-center font-mono">1,00</td>
-                            <td id="calc-wb-ht" class="p-3 text-right font-mono text-purple-700 pr-4">10,70 W/K</td>
+                            <td id="calc-wb-ht" class="p-3 text-right font-mono text-purple-700 pr-4">11,18 W/K</td>
                         </tr>
                         <tr class="bg-slate-100 text-sm">
                             <td class="p-3.5 pl-4 uppercase tracking-wider font-extrabold">Summe Hüllfläche &amp; Spezifischer Verlust</td>
-                            <td id="calc-total-area" class="p-3.5 text-right font-mono font-extrabold text-blue-700">534,8 m²</td>
+                            <td id="calc-total-area" class="p-3.5 text-right font-mono font-extrabold text-blue-700">558,8 m²</td>
                             <td colspan="2" class="p-3.5 text-center font-bold text-slate-600">
-                                Mittlerer U-Wert: <span id="calc-mean-u" class="font-mono text-emerald-600 font-extrabold">0,150 W/m²K</span>
+                                Mittlerer U-Wert: <span id="calc-mean-u" class="font-mono text-emerald-600 font-extrabold">0,170 W/m²K</span>
                             </td>
-                            <td id="calc-total-ht" class="p-3.5 text-right font-mono font-extrabold text-emerald-700 text-base pr-4">90,92 W/K</td>
+                            <td id="calc-total-ht" class="p-3.5 text-right font-mono font-extrabold text-emerald-700 text-base pr-4">105,97 W/K</td>
                         </tr>
                     </tfoot>
                 </table>
@@ -860,11 +860,11 @@
                     </div>
                     <div class="p-3 bg-slate-50 rounded-xl border border-slate-100 space-y-1">
                         <span class="text-slate-500 font-semibold block">Hüllfläche gesamt (A):</span>
-                        <span class="text-slate-900 font-bold font-mono text-sm">534,8 m²</span>
+                        <span class="text-slate-900 font-bold font-mono text-sm">558,8 m²</span>
                     </div>
                     <div class="p-3 bg-slate-50 rounded-xl border border-slate-100 space-y-1">
                         <span class="text-slate-500 font-semibold block">Kompaktheit (A / Ve Verhältnis):</span>
-                        <span class="text-slate-900 font-bold font-mono text-sm">0,637 m⁻¹ <span class="text-[10px] text-emerald-600 font-bold">(Sehr kompakt)</span></span>
+                        <span class="text-slate-900 font-bold font-mono text-sm">0,665 m⁻¹ <span class="text-[10px] text-emerald-600 font-bold">(Sehr kompakt)</span></span>
                     </div>
                     <div class="p-3 bg-slate-50 rounded-xl border border-slate-100 space-y-1">
                         <span class="text-slate-500 font-semibold block">Anzahl Wohneinheiten:</span>
@@ -1092,10 +1092,10 @@
     <script>
         // Initial Dataset of Envelope Components
         const defaultComponents = [
-            { id: 'wand', name: 'Außenwand (374 mm Holzrahmenbau)', area: 213.5, u: 0.128, fx: 1.0, link: 'wand.html' },
-            { id: 'dach', name: 'Steildach (392 mm Sparrendach)', area: 155.0, u: 0.120, fx: 1.0, link: 'dach.html' },
-            { id: 'boden', name: 'Thermobodenplatte gegen Erdreich (160 mm XPS)', area: 119.0, u: 0.170, fx: 0.6, link: 'bodenplatte.html' }, // Fx = 0.6 gegen Erdreich
-            { id: 'fenster', name: 'Passivhaus-Fenster 3-fach Verglasung', area: 36.2, u: 0.780, fx: 1.0, link: 'konfigurator.html#tab-fenster' },
+            { id: 'wand', name: 'Außenwand (374 mm Holzrahmenbau netto)', area: 211.9, u: 0.128, fx: 1.0, link: 'wand.html' },
+            { id: 'dach', name: 'Steildach geneigt (392 mm Sparrendach)', area: 178.9, u: 0.120, fx: 1.0, link: 'dach.html' },
+            { id: 'boden', name: 'Thermobodenplatte gegen Erdreich (160 mm XPS)', area: 126.0, u: 0.170, fx: 0.6, link: 'bodenplatte.html' }, // Fx = 0.6 gegen Erdreich
+            { id: 'fenster', name: 'Passivhaus-Fenster 3-fach Verglasung', area: 30.68, u: 0.780, fx: 1.0, link: 'konfigurator.html#tab-fenster' },
             { id: 'schiebetuer', name: 'Hebe-Schiebetür Terrasse', area: 6.75, u: 0.820, fx: 1.0, link: 'konfigurator.html#tab-fenster' },
             { id: 'haustuer', name: 'Haupteingangstür gedämmt', area: 2.42, u: 0.800, fx: 1.0, link: 'materialien.html#phase-5' },
             { id: 'elwtuer', name: 'Nebeneingangstür ELW gedämmt', area: 2.15, u: 0.900, fx: 1.0, link: 'materialien.html#phase-5' }

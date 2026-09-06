@@ -269,7 +269,7 @@
                     Baukostenaufstellung: Haus Jakob (14 x 9 m | 2 Vollgeschosse | Satteldach)
                 </h2>
                 <p class="text-xs text-slate-500">
-                    Kalkulation für 126 m² Grundfläche (252 m² BGF), KfW-40 Holzrahmenbauweise und Eigenleistungen (Muskelhypothek).
+                    Kalkulation für 126 m² Grundfläche (252 m² BGF | 219 m² Wohnfläche laut ArchiTouch), KfW-40 Holzrahmenbauweise und Eigenleistungen (Muskelhypothek).
                 </p>
             </div>
 
@@ -953,20 +953,20 @@
                 hausbauvertrag_kosten: 0,
                 hausbauvertrag_eigen: 0,
                 erdarbeiten_kosten: 6500,         erdarbeiten_eigen: 2500,     // Aushub 14x9m + Schacht + Feinplanum
-                maurer_kosten: 28500,             maurer_eigen: 9500,          // Thermobodenplatte 126 m², 160mm XPS, C25/30 Beton, Bewehrung
-                zimmerer_kosten: 138000,          zimmerer_eigen: 25000,       // Palmatin Holzrahmenbausatz 14x9m (5,70m Höhe), Zwischendecke 126m², Kehlbalken 126m², Dachstuhl
-                dach_kosten: 18500,               dach_eigen: 7000,            // Satteldach 175 m² Tondachziegel, Lattung, Unterdeckbahn, First/Ortgang
+                maurer_kosten: 28500,             maurer_eigen: 9500,          // Thermobodenplatte 126 m², 160mm XPS, C25/30 Beton (25.2 m³), Bewehrung
+                zimmerer_kosten: 138000,          zimmerer_eigen: 25000,       // Palmatin Holzrahmenbausatz 14x9m (44.52m Umfang, 253.9 m² AW brutto, 76.29 lfm IW), Zwischendecke 126m², Kehlbalken 126m², Dachstuhl 178.9 m²
+                dach_kosten: 18500,               dach_eigen: 7000,            // Satteldach 178,9 m² Tondachziegel, Lattung, Unterdeckbahn, First/Ortgang
                 klempner_kosten: 3800,            klempner_eigen: 1200,        // Zink-Dachrinnen halbrunnd RG 125 Traufe 2x15m, Fallrohre
                 sanitaer_kosten: 16500,           sanitaer_eigen: 6500,        // Rohinstallation Trinkwasser/Abwasser Geberit, Hauptbad OG, Duschbad ELW, Gäste-WC, Kemper-Zapfstellen
-                heizung_kosten: 28500,            heizung_eigen: 7500,         // Luft-Wasser-WP 10-12 kW R290, 300L WW, 230 m² FBH EG/OG, KWL Lüftung mit WRG
+                heizung_kosten: 28500,            heizung_eigen: 7500,         // Luft-Wasser-WP 10-12 kW R290, 300L WW, 219 m² FBH EG/OG (109,5 m² EG + 109,5 m² OG), KWL Lüftung mit WRG
                 elektro_kosten: 24500,            elektro_eigen: 8000,         // Zählerschrank Haus+ELW, 2.800m NYM, Schalter Gira, PV-Anlage 10 kWp + 7,7 kWh Batterie, Wallbox
                 metallbau_kosten: 1500,           metallbau_eigen: 500,        // Treppengeländer & Absturzsicherung
-                boden_kosten: 13500,              boden_eigen: 5500,           // 115 m² Fließestrich OG + 210 m² Klick-Vinyl vollflächig + Sockelleisten
+                boden_kosten: 13500,              boden_eigen: 5500,           // 109,5 m² Fließestrich OG + 219 m² Klick-Vinyl vollflächig + Sockelleisten
                 fliesen_kosten: 4500,             fliesen_eigen: 2200,         // Fliesenarbeiten Bäder & WC Nassbereich
                 naturstein_kosten: 1200,          naturstein_eigen: 500,       // Fensterbänke innen & außen (Agglo/Alu)
                 tischler_kosten: 7500,            tischler_eigen: 2500,        // 14 CPL Weißlack Innentüren mit Zargen, Geschosstreppe Echtholz
-                glaser_kosten: 19500,             glaser_eigen: 3500,          // 19 Passivhaus-Fenster 3-fach Ug=0,5, Hebe-Schiebetür 3x2,25m, Haustüren
-                maler_kosten: 9500,               maler_eigen: 6500,           // 950 m² Trockenbau spachteln Q2/Q3, Glattvlies, 2x Silikatfarbe
+                glaser_kosten: 19500,             glaser_eigen: 3500,          // 19 Passivhaus-Fenster 3-fach Ug=0,5 (42,0 m² Glas-/Rahmenfläche inkl. Hebe-Schiebetür 3x2,25m und Haustüren)
+                maler_kosten: 9500,               maler_eigen: 6500,           // 742 m² Trockenbau spachteln Q2/Q3, Glattvlies, 2x Silikatfarbe
                 rolladen_kosten: 6500,            rolladen_eigen: 1500,        // Elektrische Alu-Rollläden anthrazit
                 baukosten_sonstiges_kosten: 2500, baukosten_sonstiges_eigen: 1000, // Gerüstbau Mithilfe, Bauschuttcontainer
 
@@ -1030,10 +1030,10 @@
         };
 
         // App State loaded from localStorage or Standard 14x9 Data
-        let appState = JSON.parse(localStorage.getItem('kfw40_baukosten_aufstellung_v2'));
+        let appState = JSON.parse(localStorage.getItem('kfw40_baukosten_aufstellung_v3'));
         if (!appState || appState.values?.grundstueck === 81984) {
             appState = JSON.parse(JSON.stringify(JAKOB_14x9_DATA));
-            localStorage.setItem('kfw40_baukosten_aufstellung_v2', JSON.stringify(appState));
+            localStorage.setItem('kfw40_baukosten_aufstellung_v3', JSON.stringify(appState));
         }
 
         // Format number in German format (e.g. "12.345,67" or "12.345")
@@ -1060,7 +1060,7 @@
 
         // Save state to LocalStorage
         function saveState() {
-            localStorage.setItem('kfw40_baukosten_aufstellung_v2', JSON.stringify(appState));
+            localStorage.setItem('kfw40_baukosten_aufstellung_v3', JSON.stringify(appState));
         }
 
         // Update Meta Information
