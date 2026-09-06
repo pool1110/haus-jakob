@@ -1,0 +1,1527 @@
+<!DOCTYPE html>
+<html lang="de" class="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Haus Jakob | Aufstellung Ihrer Baukosten (Bank &amp; Eigenleistungen)</title>
+    <meta name="description" content="Offizielle Baukostenaufstellung mit Eigenleistungen für Banken, KfW und Baufinanzierung für das Holzhaus-Projekt Haus Jakob.">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Outfit', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Lucide Icons CDN -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- html2pdf.js for Client-Side PDF Generation -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
+    <style>
+        /* PDF Page Layout & Dimensions */
+        .pdf-page {
+            width: 210mm;
+            min-height: 297mm;
+            padding: 20mm 20mm 15mm 20mm;
+            background: #ffffff;
+            position: relative;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, 'Inter', sans-serif;
+            color: #111827;
+            font-size: 11px;
+            line-height: 1.35;
+        }
+
+        /* 1:1 Bank Document Table Styles */
+        .bank-table {
+            width: 100%;
+            border-collapse: collapse;
+            border-spacing: 0;
+            border: 1px solid #9ca3af;
+        }
+        .bank-table th, .bank-table td {
+            border: 1px solid #cbd5e1;
+            padding: 4.5px 8px;
+            vertical-align: middle;
+        }
+        .bank-table .section-th {
+            background-color: #f1f5f9;
+            font-weight: 700;
+            color: #0f172a;
+            text-align: left;
+            border: 1px solid #9ca3af;
+        }
+        .bank-table .sub-th {
+            background-color: #f8fafc;
+            font-weight: 700;
+            color: #1e293b;
+            text-align: left;
+        }
+        .bank-table .total-td {
+            font-weight: 800;
+            background-color: #f8fafc;
+            border-top: 2px solid #64748b;
+        }
+        .bank-banner {
+            background-color: #555c66;
+            color: #ffffff;
+            font-weight: 700;
+            padding: 6px 12px;
+            border-radius: 4px;
+            font-size: 13px;
+            margin-bottom: 12px;
+        }
+
+        /* Print Optimization */
+        @media print {
+            @page {
+                size: A4 portrait;
+                margin: 0;
+            }
+            body {
+                background: white !important;
+                color: black !important;
+                padding: 0 !important;
+                margin: 0 !important;
+            }
+            header, .no-print, #editor-view, #toast-container {
+                display: none !important;
+            }
+            #preview-wrapper {
+                display: block !important;
+                padding: 0 !important;
+                margin: 0 !important;
+                background: transparent !important;
+            }
+            .pdf-page {
+                width: 210mm !important;
+                height: 297mm !important;
+                max-height: 297mm !important;
+                page-break-after: always !important;
+                break-after: page !important;
+                margin: 0 !important;
+                padding: 15mm 20mm 15mm 20mm !important;
+                box-shadow: none !important;
+                border: none !important;
+                box-sizing: border-box !important;
+            }
+            .bank-table {
+                font-size: 10px !important;
+            }
+        }
+
+        /* Screen Preview Shadow */
+        .page-shadow {
+            box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.15), 0 4px 10px rgba(0, 0, 0, 0.05);
+        }
+        
+        /* Interactive Inputs in preview */
+        .live-cell-input {
+            width: 100%;
+            text-align: right;
+            background: transparent;
+            border: none;
+            outline: none;
+            font-family: inherit;
+            font-size: inherit;
+            font-weight: inherit;
+            color: inherit;
+            padding: 0;
+        }
+        .live-cell-input:focus {
+            background: #eff6ff;
+            outline: 1px dashed #3b82f6;
+            border-radius: 2px;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-900 font-sans antialiased selection:bg-slate-800 selection:text-white min-h-screen">
+
+    <!-- Unified Primary Navigation (Ebene 1) -->
+    <header class="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-slate-200 shadow-xs px-4 md:px-6 py-2.5 no-print">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-3">
+            
+            <!-- Brand & Logo -->
+            <a href="index.html" class="flex items-center gap-3 shrink-0">
+                <div class="px-3 py-1.5 bg-slate-900 text-white rounded-xl font-display font-extrabold text-base tracking-wide shadow-sm flex items-center gap-2">
+                    <span>HAUS JAKOB</span>
+                    <span class="text-[10px] uppercase font-bold tracking-wider px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">KfW 40</span>
+                </div>
+                <div class="h-5 w-px bg-slate-200 hidden sm:block"></div>
+                <span class="text-xs font-semibold text-slate-500 hidden sm:inline">Finanzierungs- &amp; Baukostenaufstellung</span>
+            </a>
+
+            <!-- 5 Core Navigation Modules (Segmented Switcher) -->
+            <nav class="flex items-center p-1 bg-slate-100 rounded-xl border border-slate-200 gap-1 overflow-x-auto max-w-full">
+                <!-- 1. Schnittmodelle -->
+                <a href="index.html" class="px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all text-slate-600 hover:text-slate-900 hover:bg-white/80 flex items-center gap-1.5 whitespace-nowrap">
+                    <i data-lucide="box" class="w-3.5 h-3.5 text-slate-600"></i>
+                    <span>Schnittmodelle</span>
+                </a>
+                <!-- 2. KfW-40 & U-Werte -->
+                <a href="kfw40.html" class="px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all text-slate-600 hover:text-slate-900 hover:bg-white/80 flex items-center gap-1.5 whitespace-nowrap">
+                    <i data-lucide="shield-check" class="w-3.5 h-3.5 text-emerald-600"></i>
+                    <span>KfW-40 &amp; U-Werte</span>
+                </a>
+                <!-- 3. Wand- & Händlerrechner -->
+                <a href="konfigurator.html" class="px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all text-slate-600 hover:text-slate-900 hover:bg-white/80 flex items-center gap-1.5 whitespace-nowrap">
+                    <i data-lucide="file-spreadsheet" class="w-3.5 h-3.5 text-blue-600"></i>
+                    <span>Wand- &amp; Händlerrechner</span>
+                </a>
+                <!-- 4. Materialplaner -->
+                <a href="materialien.html" class="px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all text-slate-600 hover:text-slate-900 hover:bg-white/80 flex items-center gap-1.5 whitespace-nowrap">
+                    <i data-lucide="calculator" class="w-3.5 h-3.5 text-emerald-600"></i>
+                    <span>Materialplaner</span>
+                </a>
+                <!-- 5. Baukostenaufstellung (Active) -->
+                <a href="baukosten.html" class="px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all bg-slate-900 text-white shadow-sm flex items-center gap-1.5 whitespace-nowrap">
+                    <i data-lucide="landmark" class="w-3.5 h-3.5 text-amber-400"></i>
+                    <span>Baukosten (Bank-PDF)</span>
+                </a>
+            </nav>
+
+            <!-- Quick Export Actions in Header -->
+            <div class="flex items-center gap-2 shrink-0">
+                <button onclick="window.print()" class="px-3 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-800 border border-slate-300 font-bold text-xs rounded-xl flex items-center gap-1.5 shadow-2xs transition-all" title="Über Druckdialog als Vektor-PDF sichern">
+                    <i data-lucide="printer" class="w-3.5 h-3.5 text-slate-600"></i>
+                    <span>Drucken / PDF</span>
+                </button>
+                <button onclick="downloadDirectPDF()" id="btn-dl-pdf" class="px-3.5 py-1.5 bg-amber-600 hover:bg-amber-700 text-white font-bold text-xs rounded-xl flex items-center gap-1.5 shadow-sm transition-all" title="Erzeugt direkt eine 3-seitige PDF-Datei">
+                    <i data-lucide="file-down" class="w-3.5 h-3.5 text-white"></i>
+                    <span id="dl-btn-text">PDF Download</span>
+                </button>
+            </div>
+
+        </div>
+    </header>
+
+    <!-- Sub-Toolbar & Action Bar (shadcn style) -->
+    <div class="sticky top-[53px] z-40 bg-white/95 backdrop-blur-sm border-b border-slate-200 px-4 md:px-6 py-2.5 shadow-xs no-print">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-3">
+            
+            <!-- View Mode Switcher: Tab Segmented Control -->
+            <div class="flex items-center p-1 bg-slate-100 rounded-xl border border-slate-200 gap-1 w-full md:w-auto">
+                <button id="tab-btn-preview" onclick="switchView('preview')" class="flex-1 md:flex-none px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all bg-white text-slate-900 shadow-xs flex items-center justify-center gap-1.5">
+                    <i data-lucide="eye" class="w-3.5 h-3.5 text-amber-600"></i>
+                    <span>1:1 PDF-Vorschau (3 Seiten)</span>
+                </button>
+                <button id="tab-btn-form" onclick="switchView('form')" class="flex-1 md:flex-none px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all text-slate-600 hover:text-slate-900 flex items-center justify-center gap-1.5">
+                    <i data-lucide="edit-3" class="w-3.5 h-3.5 text-blue-600"></i>
+                    <span>Formular-Schnelleingabe</span>
+                </button>
+            </div>
+
+            <!-- Smart Data Actions -->
+            <div class="flex items-center gap-2 flex-wrap justify-end w-full md:w-auto">
+                <button onclick="importFromMaterialplaner()" class="px-3 py-1.5 bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-300 rounded-xl text-xs font-bold flex items-center gap-1.5 transition-all shadow-2xs" title="Liest die aktuellen Zahlen aus Phase 1 bis 9 von Haus Jakob ein">
+                    <i data-lucide="sparkles" class="w-3.5 h-3.5 text-emerald-600"></i>
+                    <span>Zahlen aus Materialplaner importieren</span>
+                </button>
+                <button onclick="loadSampleData()" class="px-3 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-200 rounded-xl text-xs font-bold flex items-center gap-1.5 transition-all shadow-2xs" title="Lädt die originalen Beispielwerte aus der Bankvorlage">
+                    <i data-lucide="file-text" class="w-3.5 h-3.5 text-slate-600"></i>
+                    <span>Musterzahlen laden</span>
+                </button>
+                <button onclick="resetData()" class="px-3 py-1.5 bg-rose-50 hover:bg-rose-100 text-rose-700 border border-rose-200 rounded-xl text-xs font-bold flex items-center gap-1.5 transition-all shadow-2xs" title="Alle Beträge leeren">
+                    <i data-lucide="trash-2" class="w-3.5 h-3.5 text-rose-600"></i>
+                    <span>Leeren</span>
+                </button>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Live Toast Notification Container -->
+    <div id="toast-container" class="fixed bottom-5 right-5 z-50 flex flex-col gap-2 pointer-events-none no-print"></div>
+
+    <!-- MAIN CONTAINER -->
+    <main class="max-w-7xl mx-auto p-4 md:p-6 space-y-6">
+
+        <!-- Info Card / Overview Summary Bar -->
+        <div class="bg-white border border-slate-200 rounded-2xl p-5 shadow-xs flex flex-col lg:flex-row items-center justify-between gap-4 no-print">
+            <div class="space-y-1">
+                <div class="flex items-center gap-2">
+                    <span class="px-2.5 py-0.5 rounded-full text-[11px] font-extrabold bg-amber-100 text-amber-900 border border-amber-300">
+                        Bankstandard Formular
+                    </span>
+                    <span class="text-xs text-slate-500 font-medium">Baukosten &amp; Eigenleistungsaufstellung nach DIN 276</span>
+                </div>
+                <h2 class="font-display font-bold text-lg text-slate-900">
+                    Baukostenaufstellung für Finanzierungsanfrage &amp; KfW
+                </h2>
+                <p class="text-xs text-slate-500">
+                    Sie können die Werte direkt in der 1:1 Vorschau bearbeiten oder im Tab „Formular-Schnelleingabe“. Alle Summen und Eigenleistungen berechnen sich live.
+                </p>
+            </div>
+
+            <!-- Live Summary Badges (shadcn Card style) -->
+            <div class="flex items-center gap-3 bg-slate-50 p-2.5 rounded-xl border border-slate-200 shrink-0">
+                <div class="px-3 py-1 text-right">
+                    <span class="text-[10px] font-bold uppercase tracking-wider text-slate-400 block">Gesamtkosten</span>
+                    <span id="badge-total-cost" class="font-mono font-extrabold text-slate-900 text-lg">0,00 €</span>
+                </div>
+                <div class="h-8 w-px bg-slate-200"></div>
+                <div class="px-3 py-1 text-right">
+                    <span class="text-[10px] font-bold uppercase tracking-wider text-emerald-600 block">Eigenleistung</span>
+                    <span id="badge-total-eigen" class="font-mono font-extrabold text-emerald-600 text-lg">0,00 €</span>
+                </div>
+                <div class="h-8 w-px bg-slate-200"></div>
+                <div class="px-3 py-1 text-right">
+                    <span class="text-[10px] font-bold uppercase tracking-wider text-blue-600 block">Bank-Kosten (Fremd)</span>
+                    <span id="badge-total-bank" class="font-mono font-extrabold text-blue-700 text-lg">0,00 €</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- ========================================================================= -->
+        <!-- VIEW 1: 1:1 DOKUMENTEN-VORSCHAU (3 SEITEN A4) -->
+        <!-- ========================================================================= -->
+        <div id="preview-wrapper" class="flex flex-col items-center gap-8 py-4">
+            
+            <div id="pdf-export-content" class="flex flex-col items-center gap-8">
+                
+                <!-- ------------------------------------------------------------- -->
+                <!-- SEITE 1: GRUNDSTÜCK, ERWERBS- & ERSCHLIESSUNGSKOSTEN -->
+                <!-- ------------------------------------------------------------- -->
+                <div class="pdf-page page-shadow" id="page-1">
+                    
+                    <!-- Header Title -->
+                    <h1 class="text-2xl font-bold tracking-tight text-slate-950 mb-8" style="font-size: 24px; font-weight: 800; font-family: Arial, Helvetica, sans-serif;">
+                        Aufstellung Ihrer Baukosten
+                    </h1>
+
+                    <!-- Metadata Header Fields -->
+                    <div class="space-y-2 mb-8 text-[11px]">
+                        <div class="flex items-baseline">
+                            <span class="w-48 font-bold text-slate-900">Finanzierungsanfrage:</span>
+                            <input type="text" id="meta-anfrage" oninput="updateMeta('anfrage', this.value)" placeholder="z.B. Haus Jakob KfW 40" class="flex-1 border-b border-slate-300 pb-0.5 outline-none font-medium focus:border-slate-800 bg-transparent">
+                        </div>
+                        <div class="flex items-baseline">
+                            <span class="w-48 font-bold text-slate-900">Antragsteller/in:</span>
+                            <input type="text" id="meta-antragsteller" oninput="updateMeta('antragsteller', this.value)" placeholder="Name(n) der Antragsteller" class="flex-1 border-b border-slate-300 pb-0.5 outline-none font-medium focus:border-slate-800 bg-transparent">
+                        </div>
+                        <div class="flex items-baseline">
+                            <span class="w-48 font-bold text-slate-900">Adresse des Objekts:</span>
+                            <input type="text" id="meta-adresse" oninput="updateMeta('adresse', this.value)" placeholder="Straße, PLZ Ort (Flurstück 444 m²)" class="flex-1 border-b border-slate-300 pb-0.5 outline-none font-medium focus:border-slate-800 bg-transparent">
+                        </div>
+                        <div class="flex items-baseline">
+                            <span class="w-48 font-bold text-slate-900">Vermittler:</span>
+                            <input type="text" id="meta-vermittler" oninput="updateMeta('vermittler', this.value)" placeholder="Name / Bank / Berater" class="flex-1 border-b border-slate-300 pb-0.5 outline-none font-medium focus:border-slate-800 bg-transparent">
+                        </div>
+                    </div>
+
+                    <!-- Dark Section Banner -->
+                    <div class="bank-banner">
+                        Detaillierte Aufstellung Ihrer Baukosten (inkl. Eigenleistungen)
+                    </div>
+
+                    <!-- Page 1 Table -->
+                    <table class="bank-table">
+                        <tbody>
+                            <!-- Header 1: Kosten des Baugrundstücks -->
+                            <tr>
+                                <th colspan="2" class="section-th">Kosten des Baugrundstücks</th>
+                            </tr>
+                            <tr>
+                                <td class="w-[72%] font-medium">Grundstück</td>
+                                <td class="w-[28%] text-right font-medium">
+                                    <div class="flex items-center justify-end gap-1">
+                                        <input type="text" id="cell-grundstueck" onchange="handleValueChange('grundstueck', this.value)" class="live-cell-input">
+                                        <span class="text-slate-500 text-[10px]">EUR</span>
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <!-- Header 2: Erwerbskosten -->
+                            <tr>
+                                <th colspan="2" class="section-th">Erwerbskosten</th>
+                            </tr>
+                            <tr>
+                                <td class="pl-6 font-medium">Notar- und Grundbuchkosten</td>
+                                <td class="text-right font-medium">
+                                    <div class="flex items-center justify-end gap-1">
+                                        <input type="text" id="cell-notar" onchange="handleValueChange('notar', this.value)" class="live-cell-input">
+                                        <span class="text-slate-500 text-[10px]">EUR</span>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="pl-6 font-medium">Grunderwerbsteuer</td>
+                                <td class="text-right font-medium">
+                                    <div class="flex items-center justify-end gap-1">
+                                        <input type="text" id="cell-steuer" onchange="handleValueChange('steuer', this.value)" class="live-cell-input">
+                                        <span class="text-slate-500 text-[10px]">EUR</span>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="pl-6 font-medium">Maklerprovision</td>
+                                <td class="text-right font-medium">
+                                    <div class="flex items-center justify-end gap-1">
+                                        <input type="text" id="cell-makler" onchange="handleValueChange('makler', this.value)" class="live-cell-input">
+                                        <span class="text-slate-500 text-[10px]">EUR</span>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="pl-6 font-medium">Sonstige Kosten</td>
+                                <td class="text-right font-medium">
+                                    <div class="flex items-center justify-end gap-1">
+                                        <input type="text" id="cell-sonstige_erwerb" onchange="handleValueChange('sonstige_erwerb', this.value)" class="live-cell-input">
+                                        <span class="text-slate-500 text-[10px]">EUR</span>
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <!-- Header 3: Erschließungskosten -->
+                            <tr>
+                                <th colspan="2" class="section-th">Erschließungskosten</th>
+                            </tr>
+                            <tr>
+                                <td class="pl-6 font-medium">Abfindungen/Entschädigungen</td>
+                                <td class="text-right font-medium">
+                                    <div class="flex items-center justify-end gap-1">
+                                        <input type="text" id="cell-abfindungen" onchange="handleValueChange('abfindungen', this.value)" class="live-cell-input">
+                                        <span class="text-slate-500 text-[10px]">EUR</span>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="pl-6 font-medium">Herrichten des Bauplatzes</td>
+                                <td class="text-right font-medium">
+                                    <div class="flex items-center justify-end gap-1">
+                                        <input type="text" id="cell-herrichten" onchange="handleValueChange('herrichten', this.value)" class="live-cell-input">
+                                        <span class="text-slate-500 text-[10px]">EUR</span>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="pl-6 font-medium">Erschließungskosten bzw. Anliegerbeiträge (öfftl. Erschließung)</td>
+                                <td class="text-right font-medium">
+                                    <div class="flex items-center justify-end gap-1">
+                                        <input type="text" id="cell-erschliessung" onchange="handleValueChange('erschliessung', this.value)" class="live-cell-input">
+                                        <span class="text-slate-500 text-[10px]">EUR</span>
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <!-- Zwischensumme 1 -->
+                            <tr class="total-td">
+                                <td class="font-bold">Zwischensumme</td>
+                                <td class="text-right font-bold text-slate-900">
+                                    <span id="disp-zs-1">0,00</span> <span class="text-slate-600 text-[10px]">EUR</span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <!-- Page 1 Footer -->
+                    <div class="absolute bottom-5 right-8 text-[10px] text-slate-400">
+                        Seite 1 von 3
+                    </div>
+                </div>
+
+                <!-- ------------------------------------------------------------- -->
+                <!-- SEITE 2: BAUKOSTEN & BAUNEBENKOSTEN -->
+                <!-- ------------------------------------------------------------- -->
+                <div class="pdf-page page-shadow" id="page-2">
+                    
+                    <!-- Table Baukosten -->
+                    <table class="bank-table mb-8">
+                        <thead>
+                            <tr>
+                                <th class="section-th w-[50%]">Baukosten</th>
+                                <th class="w-[25%] text-right section-th font-bold">Kosten</th>
+                                <th class="w-[25%] text-center section-th font-bold leading-tight">
+                                    davon Eigenleistungen<br>
+                                    <span class="font-normal text-[9px]">(nur Lohnkosten)</span>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Hausbauvertrag Gesamtauftrag -->
+                            <tr>
+                                <td class="font-bold">Hausbauvertrag – Gesamtauftrag</td>
+                                <td class="text-right">
+                                    <div class="flex items-center justify-end gap-1">
+                                        <input type="text" id="cell-hausbauvertrag-kosten" onchange="handleValueChange('hausbauvertrag_kosten', this.value)" class="live-cell-input">
+                                        <span class="text-slate-500 text-[9px]">EUR</span>
+                                    </div>
+                                </td>
+                                <td class="text-right">
+                                    <div class="flex items-center justify-end gap-1">
+                                        <input type="text" id="cell-hausbauvertrag-eigen" onchange="handleValueChange('hausbauvertrag_eigen', this.value)" class="live-cell-input">
+                                        <span class="text-slate-500 text-[9px]">EUR</span>
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <!-- Subheader Einzelgewerke -->
+                            <tr>
+                                <th colspan="3" class="sub-th">oder Einzelgewerke</th>
+                            </tr>
+
+                            <!-- Dynamic Einzelgewerke Rows -->
+                            <tr id="row-erdarbeiten">
+                                <td class="pl-6 font-medium">Erdarbeiten</td>
+                                <td class="text-right"><div class="flex items-center justify-end gap-1"><input type="text" id="cell-erdarbeiten-kosten" onchange="handleValueChange('erdarbeiten_kosten', this.value)" class="live-cell-input"><span class="text-slate-500 text-[9px]">EUR</span></div></td>
+                                <td class="text-right"><div class="flex items-center justify-end gap-1"><input type="text" id="cell-erdarbeiten-eigen" onchange="handleValueChange('erdarbeiten_eigen', this.value)" class="live-cell-input"><span class="text-slate-500 text-[9px]">EUR</span></div></td>
+                            </tr>
+                            <tr id="row-maurer">
+                                <td class="pl-6 font-medium">Maurer-, Beton-, Putz- und Isolierungsarbeiten</td>
+                                <td class="text-right"><div class="flex items-center justify-end gap-1"><input type="text" id="cell-maurer-kosten" onchange="handleValueChange('maurer_kosten', this.value)" class="live-cell-input"><span class="text-slate-500 text-[9px]">EUR</span></div></td>
+                                <td class="text-right"><div class="flex items-center justify-end gap-1"><input type="text" id="cell-maurer-eigen" onchange="handleValueChange('maurer_eigen', this.value)" class="live-cell-input"><span class="text-slate-500 text-[9px]">EUR</span></div></td>
+                            </tr>
+                            <tr id="row-zimmerer">
+                                <td class="pl-6 font-medium">Zimmerarbeiten</td>
+                                <td class="text-right"><div class="flex items-center justify-end gap-1"><input type="text" id="cell-zimmerer-kosten" onchange="handleValueChange('zimmerer_kosten', this.value)" class="live-cell-input"><span class="text-slate-500 text-[9px]">EUR</span></div></td>
+                                <td class="text-right"><div class="flex items-center justify-end gap-1"><input type="text" id="cell-zimmerer-eigen" onchange="handleValueChange('zimmerer_eigen', this.value)" class="live-cell-input"><span class="text-slate-500 text-[9px]">EUR</span></div></td>
+                            </tr>
+                            <tr id="row-dach">
+                                <td class="pl-6 font-medium">Dachdeckerarbeiten</td>
+                                <td class="text-right"><div class="flex items-center justify-end gap-1"><input type="text" id="cell-dach-kosten" onchange="handleValueChange('dach_kosten', this.value)" class="live-cell-input"><span class="text-slate-500 text-[9px]">EUR</span></div></td>
+                                <td class="text-right"><div class="flex items-center justify-end gap-1"><input type="text" id="cell-dach-eigen" onchange="handleValueChange('dach_eigen', this.value)" class="live-cell-input"><span class="text-slate-500 text-[9px]">EUR</span></div></td>
+                            </tr>
+                            <tr id="row-klempner">
+                                <td class="pl-6 font-medium">Klempnerarbeiten</td>
+                                <td class="text-right"><div class="flex items-center justify-end gap-1"><input type="text" id="cell-klempner-kosten" onchange="handleValueChange('klempner_kosten', this.value)" class="live-cell-input"><span class="text-slate-500 text-[9px]">EUR</span></div></td>
+                                <td class="text-right"><div class="flex items-center justify-end gap-1"><input type="text" id="cell-klempner-eigen" onchange="handleValueChange('klempner_eigen', this.value)" class="live-cell-input"><span class="text-slate-500 text-[9px]">EUR</span></div></td>
+                            </tr>
+                            <tr id="row-sanitaer">
+                                <td class="pl-6 font-medium">Sanitär-Installation</td>
+                                <td class="text-right"><div class="flex items-center justify-end gap-1"><input type="text" id="cell-sanitaer-kosten" onchange="handleValueChange('sanitaer_kosten', this.value)" class="live-cell-input"><span class="text-slate-500 text-[9px]">EUR</span></div></td>
+                                <td class="text-right"><div class="flex items-center justify-end gap-1"><input type="text" id="cell-sanitaer-eigen" onchange="handleValueChange('sanitaer_eigen', this.value)" class="live-cell-input"><span class="text-slate-500 text-[9px]">EUR</span></div></td>
+                            </tr>
+                            <tr id="row-heizung">
+                                <td class="pl-6 font-medium">Heizungsarbeiten</td>
+                                <td class="text-right"><div class="flex items-center justify-end gap-1"><input type="text" id="cell-heizung-kosten" onchange="handleValueChange('heizung_kosten', this.value)" class="live-cell-input"><span class="text-slate-500 text-[9px]">EUR</span></div></td>
+                                <td class="text-right"><div class="flex items-center justify-end gap-1"><input type="text" id="cell-heizung-eigen" onchange="handleValueChange('heizung_eigen', this.value)" class="live-cell-input"><span class="text-slate-500 text-[9px]">EUR</span></div></td>
+                            </tr>
+                            <tr id="row-elektro">
+                                <td class="pl-6 font-medium">Elektro-Installation</td>
+                                <td class="text-right"><div class="flex items-center justify-end gap-1"><input type="text" id="cell-elektro-kosten" onchange="handleValueChange('elektro_kosten', this.value)" class="live-cell-input"><span class="text-slate-500 text-[9px]">EUR</span></div></td>
+                                <td class="text-right"><div class="flex items-center justify-end gap-1"><input type="text" id="cell-elektro-eigen" onchange="handleValueChange('elektro_eigen', this.value)" class="live-cell-input"><span class="text-slate-500 text-[9px]">EUR</span></div></td>
+                            </tr>
+                            <tr id="row-metallbau">
+                                <td class="pl-6 font-medium">Metallbauarbeiten</td>
+                                <td class="text-right"><div class="flex items-center justify-end gap-1"><input type="text" id="cell-metallbau-kosten" onchange="handleValueChange('metallbau_kosten', this.value)" class="live-cell-input"><span class="text-slate-500 text-[9px]">EUR</span></div></td>
+                                <td class="text-right"><div class="flex items-center justify-end gap-1"><input type="text" id="cell-metallbau-eigen" onchange="handleValueChange('metallbau_eigen', this.value)" class="live-cell-input"><span class="text-slate-500 text-[9px]">EUR</span></div></td>
+                            </tr>
+                            <tr id="row-boden">
+                                <td class="pl-6 font-medium">Fußbodenarbeiten (Estrich, Belag)</td>
+                                <td class="text-right"><div class="flex items-center justify-end gap-1"><input type="text" id="cell-boden-kosten" onchange="handleValueChange('boden_kosten', this.value)" class="live-cell-input"><span class="text-slate-500 text-[9px]">EUR</span></div></td>
+                                <td class="text-right"><div class="flex items-center justify-end gap-1"><input type="text" id="cell-boden-eigen" onchange="handleValueChange('boden_eigen', this.value)" class="live-cell-input"><span class="text-slate-500 text-[9px]">EUR</span></div></td>
+                            </tr>
+                            <tr id="row-fliesen">
+                                <td class="pl-6 font-medium">Fliesenarbeiten</td>
+                                <td class="text-right"><div class="flex items-center justify-end gap-1"><input type="text" id="cell-fliesen-kosten" onchange="handleValueChange('fliesen_kosten', this.value)" class="live-cell-input"><span class="text-slate-500 text-[9px]">EUR</span></div></td>
+                                <td class="text-right"><div class="flex items-center justify-end gap-1"><input type="text" id="cell-fliesen-eigen" onchange="handleValueChange('fliesen_eigen', this.value)" class="live-cell-input"><span class="text-slate-500 text-[9px]">EUR</span></div></td>
+                            </tr>
+                            <tr id="row-naturstein">
+                                <td class="pl-6 font-medium">Natur- und Betonwerksteinarbeiten</td>
+                                <td class="text-right"><div class="flex items-center justify-end gap-1"><input type="text" id="cell-naturstein-kosten" onchange="handleValueChange('naturstein_kosten', this.value)" class="live-cell-input"><span class="text-slate-500 text-[9px]">EUR</span></div></td>
+                                <td class="text-right"><div class="flex items-center justify-end gap-1"><input type="text" id="cell-naturstein-eigen" onchange="handleValueChange('naturstein_eigen', this.value)" class="live-cell-input"><span class="text-slate-500 text-[9px]">EUR</span></div></td>
+                            </tr>
+                            <tr id="row-tischler">
+                                <td class="pl-6 font-medium">Tischlerarbeiten</td>
+                                <td class="text-right"><div class="flex items-center justify-end gap-1"><input type="text" id="cell-tischler-kosten" onchange="handleValueChange('tischler_kosten', this.value)" class="live-cell-input"><span class="text-slate-500 text-[9px]">EUR</span></div></td>
+                                <td class="text-right"><div class="flex items-center justify-end gap-1"><input type="text" id="cell-tischler-eigen" onchange="handleValueChange('tischler_eigen', this.value)" class="live-cell-input"><span class="text-slate-500 text-[9px]">EUR</span></div></td>
+                            </tr>
+                            <tr id="row-glaser">
+                                <td class="pl-6 font-medium">Glaserarbeiten</td>
+                                <td class="text-right"><div class="flex items-center justify-end gap-1"><input type="text" id="cell-glaser-kosten" onchange="handleValueChange('glaser_kosten', this.value)" class="live-cell-input"><span class="text-slate-500 text-[9px]">EUR</span></div></td>
+                                <td class="text-right"><div class="flex items-center justify-end gap-1"><input type="text" id="cell-glaser-eigen" onchange="handleValueChange('glaser_eigen', this.value)" class="live-cell-input"><span class="text-slate-500 text-[9px]">EUR</span></div></td>
+                            </tr>
+                            <tr id="row-maler">
+                                <td class="pl-6 font-medium">Malerarbeiten</td>
+                                <td class="text-right"><div class="flex items-center justify-end gap-1"><input type="text" id="cell-maler-kosten" onchange="handleValueChange('maler_kosten', this.value)" class="live-cell-input"><span class="text-slate-500 text-[9px]">EUR</span></div></td>
+                                <td class="text-right"><div class="flex items-center justify-end gap-1"><input type="text" id="cell-maler-eigen" onchange="handleValueChange('maler_eigen', this.value)" class="live-cell-input"><span class="text-slate-500 text-[9px]">EUR</span></div></td>
+                            </tr>
+                            <tr id="row-rolladen">
+                                <td class="pl-6 font-medium">Rolladenarbeiten</td>
+                                <td class="text-right"><div class="flex items-center justify-end gap-1"><input type="text" id="cell-rolladen-kosten" onchange="handleValueChange('rolladen_kosten', this.value)" class="live-cell-input"><span class="text-slate-500 text-[9px]">EUR</span></div></td>
+                                <td class="text-right"><div class="flex items-center justify-end gap-1"><input type="text" id="cell-rolladen-eigen" onchange="handleValueChange('rolladen_eigen', this.value)" class="live-cell-input"><span class="text-slate-500 text-[9px]">EUR</span></div></td>
+                            </tr>
+                            <tr id="row-baukosten-sonstiges">
+                                <td class="pl-6 font-medium">Sonstiges</td>
+                                <td class="text-right"><div class="flex items-center justify-end gap-1"><input type="text" id="cell-baukosten_sonstiges-kosten" onchange="handleValueChange('baukosten_sonstiges_kosten', this.value)" class="live-cell-input"><span class="text-slate-500 text-[9px]">EUR</span></div></td>
+                                <td class="text-right"><div class="flex items-center justify-end gap-1"><input type="text" id="cell-baukosten_sonstiges-eigen" onchange="handleValueChange('baukosten_sonstiges_eigen', this.value)" class="live-cell-input"><span class="text-slate-500 text-[9px]">EUR</span></div></td>
+                            </tr>
+
+                            <!-- Zwischensumme Baukosten -->
+                            <tr class="total-td">
+                                <td class="font-bold">Zwischensumme</td>
+                                <td class="text-right font-bold text-slate-900"><span id="disp-zs-2-kosten">0,00</span> <span class="text-slate-600 text-[9px]">EUR</span></td>
+                                <td class="text-right font-bold text-slate-900"><span id="disp-zs-2-eigen">0,00</span> <span class="text-slate-600 text-[9px]">EUR</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <!-- Table Baunebenkosten -->
+                    <table class="bank-table">
+                        <thead>
+                            <tr>
+                                <th class="section-th w-[50%]">Baunebenkosten</th>
+                                <th class="w-[25%] text-right section-th font-bold">Kosten</th>
+                                <th class="w-[25%] text-center section-th font-bold">davon Eigenleistungen</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="pl-6 font-medium">Architekten- und Statikergebühren</td>
+                                <td class="text-right"><div class="flex items-center justify-end gap-1"><input type="text" id="cell-architekt-kosten" onchange="handleValueChange('architekt_kosten', this.value)" class="live-cell-input"><span class="text-slate-500 text-[9px]">EUR</span></div></td>
+                                <td class="text-right"><div class="flex items-center justify-end gap-1"><input type="text" id="cell-architekt-eigen" onchange="handleValueChange('architekt_eigen', this.value)" class="live-cell-input"><span class="text-slate-500 text-[9px]">EUR</span></div></td>
+                            </tr>
+                            <tr>
+                                <td class="pl-6 font-medium">Verwaltungs- bzw. Behördenkosten</td>
+                                <td class="text-right"><div class="flex items-center justify-end gap-1"><input type="text" id="cell-verwaltung-kosten" onchange="handleValueChange('verwaltung_kosten', this.value)" class="live-cell-input"><span class="text-slate-500 text-[9px]">EUR</span></div></td>
+                                <td class="text-right"><div class="flex items-center justify-end gap-1"><input type="text" id="cell-verwaltung-eigen" onchange="handleValueChange('verwaltung_eigen', this.value)" class="live-cell-input"><span class="text-slate-500 text-[9px]">EUR</span></div></td>
+                            </tr>
+                            <tr>
+                                <td class="pl-6 font-medium">Kosten Beschaffung Finanzierungsmittel</td>
+                                <td class="text-right"><div class="flex items-center justify-end gap-1"><input type="text" id="cell-finanzierung-kosten" onchange="handleValueChange('finanzierung_kosten', this.value)" class="live-cell-input"><span class="text-slate-500 text-[9px]">EUR</span></div></td>
+                                <td class="text-right"><div class="flex items-center justify-end gap-1"><input type="text" id="cell-finanzierung-eigen" onchange="handleValueChange('finanzierung_eigen', this.value)" class="live-cell-input"><span class="text-slate-500 text-[9px]">EUR</span></div></td>
+                            </tr>
+                            <tr>
+                                <td class="pl-6 font-medium">Sonstige Baunebenkosten</td>
+                                <td class="text-right"><div class="flex items-center justify-end gap-1"><input type="text" id="cell-sonstige_neben-kosten" onchange="handleValueChange('sonstige_neben_kosten', this.value)" class="live-cell-input"><span class="text-slate-500 text-[9px]">EUR</span></div></td>
+                                <td class="text-right"><div class="flex items-center justify-end gap-1"><input type="text" id="cell-sonstige_neben-eigen" onchange="handleValueChange('sonstige_neben_eigen', this.value)" class="live-cell-input"><span class="text-slate-500 text-[9px]">EUR</span></div></td>
+                            </tr>
+                            <tr>
+                                <td class="pl-6 font-medium">Wasseranschluss</td>
+                                <td class="text-right"><div class="flex items-center justify-end gap-1"><input type="text" id="cell-wasser-kosten" onchange="handleValueChange('wasser_kosten', this.value)" class="live-cell-input"><span class="text-slate-500 text-[9px]">EUR</span></div></td>
+                                <td class="text-right"><div class="flex items-center justify-end gap-1"><input type="text" id="cell-wasser-eigen" onchange="handleValueChange('wasser_eigen', this.value)" class="live-cell-input"><span class="text-slate-500 text-[9px]">EUR</span></div></td>
+                            </tr>
+                            <tr>
+                                <td class="pl-6 font-medium">Gasanschluss</td>
+                                <td class="text-right"><div class="flex items-center justify-end gap-1"><input type="text" id="cell-gas-kosten" onchange="handleValueChange('gas_kosten', this.value)" class="live-cell-input"><span class="text-slate-500 text-[9px]">EUR</span></div></td>
+                                <td class="text-right"><div class="flex items-center justify-end gap-1"><input type="text" id="cell-gas-eigen" onchange="handleValueChange('gas_eigen', this.value)" class="live-cell-input"><span class="text-slate-500 text-[9px]">EUR</span></div></td>
+                            </tr>
+                            <tr>
+                                <td class="pl-6 font-medium">Elektrizitätsanschluss</td>
+                                <td class="text-right"><div class="flex items-center justify-end gap-1"><input type="text" id="cell-strom-kosten" onchange="handleValueChange('strom_kosten', this.value)" class="live-cell-input"><span class="text-slate-500 text-[9px]">EUR</span></div></td>
+                                <td class="text-right"><div class="flex items-center justify-end gap-1"><input type="text" id="cell-strom-eigen" onchange="handleValueChange('strom_eigen', this.value)" class="live-cell-input"><span class="text-slate-500 text-[9px]">EUR</span></div></td>
+                            </tr>
+
+                            <!-- Zwischensumme Baunebenkosten -->
+                            <tr class="total-td">
+                                <td class="font-bold">Zwischensumme</td>
+                                <td class="text-right font-bold text-slate-900"><span id="disp-zs-3-kosten">0,00</span> <span class="text-slate-600 text-[9px]">EUR</span></td>
+                                <td class="text-right font-bold text-slate-900"><span id="disp-zs-3-eigen">0,00</span> <span class="text-slate-600 text-[9px]">EUR</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <!-- Page 2 Footer -->
+                    <div class="absolute bottom-5 right-8 text-[10px] text-slate-400">
+                        Seite 2 von 3
+                    </div>
+                </div>
+
+                <!-- ------------------------------------------------------------- -->
+                <!-- SEITE 3: AUSSENANLAGEN, ZUSAMMENFASSUNG & UNTERSCHRIFTEN -->
+                <!-- ------------------------------------------------------------- -->
+                <div class="pdf-page page-shadow flex flex-col justify-between" id="page-3">
+                    <div>
+                        <!-- Table Außenanlagen -->
+                        <table class="bank-table mb-10">
+                            <thead>
+                                <tr>
+                                    <th class="section-th w-[50%]">Kosten der Außenanlagen</th>
+                                    <th class="w-[25%] text-right section-th font-bold">Kosten</th>
+                                    <th class="w-[25%] text-center section-th font-bold leading-tight">
+                                        davon Eigenleistungen<br>
+                                        <span class="font-normal text-[9px]">(nur Lohnkosten)</span>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="pl-6 font-medium">Entwässerung</td>
+                                    <td class="text-right"><div class="flex items-center justify-end gap-1"><input type="text" id="cell-entwaesserung-kosten" onchange="handleValueChange('entwaesserung_kosten', this.value)" class="live-cell-input"><span class="text-slate-500 text-[9px]">EUR</span></div></td>
+                                    <td class="text-right"><div class="flex items-center justify-end gap-1"><input type="text" id="cell-entwaesserung-eigen" onchange="handleValueChange('entwaesserung_eigen', this.value)" class="live-cell-input"><span class="text-slate-500 text-[9px]">EUR</span></div></td>
+                                </tr>
+                                <tr>
+                                    <td class="pl-6 font-medium">Hofbefestigung</td>
+                                    <td class="text-right"><div class="flex items-center justify-end gap-1"><input type="text" id="cell-hof-kosten" onchange="handleValueChange('hof_kosten', this.value)" class="live-cell-input"><span class="text-slate-500 text-[9px]">EUR</span></div></td>
+                                    <td class="text-right"><div class="flex items-center justify-end gap-1"><input type="text" id="cell-hof-eigen" onchange="handleValueChange('hof_eigen', this.value)" class="live-cell-input"><span class="text-slate-500 text-[9px]">EUR</span></div></td>
+                                </tr>
+                                <tr>
+                                    <td class="pl-6 font-medium">Sonstige Außenanlagen, Erdarbeiten, Grünanlagen etc.</td>
+                                    <td class="text-right"><div class="flex items-center justify-end gap-1"><input type="text" id="cell-aussen_sonstige-kosten" onchange="handleValueChange('aussen_sonstige_kosten', this.value)" class="live-cell-input"><span class="text-slate-500 text-[9px]">EUR</span></div></td>
+                                    <td class="text-right"><div class="flex items-center justify-end gap-1"><input type="text" id="cell-aussen_sonstige-eigen" onchange="handleValueChange('aussen_sonstige_eigen', this.value)" class="live-cell-input"><span class="text-slate-500 text-[9px]">EUR</span></div></td>
+                                </tr>
+                                <tr>
+                                    <td class="pl-6 font-medium">Garagen, Carports etc.</td>
+                                    <td class="text-right"><div class="flex items-center justify-end gap-1"><input type="text" id="cell-garagen-kosten" onchange="handleValueChange('garagen_kosten', this.value)" class="live-cell-input"><span class="text-slate-500 text-[9px]">EUR</span></div></td>
+                                    <td class="text-right"><div class="flex items-center justify-end gap-1"><input type="text" id="cell-garagen-eigen" onchange="handleValueChange('garagen_eigen', this.value)" class="live-cell-input"><span class="text-slate-500 text-[9px]">EUR</span></div></td>
+                                </tr>
+                                <!-- Zwischensumme Außenanlagen -->
+                                <tr class="total-td">
+                                    <td class="font-bold">Zwischensumme</td>
+                                    <td class="text-right font-bold text-slate-900"><span id="disp-zs-4-kosten">0,00</span> <span class="text-slate-600 text-[9px]">EUR</span></td>
+                                    <td class="text-right font-bold text-slate-900"><span id="disp-zs-4-eigen">0,00</span> <span class="text-slate-600 text-[9px]">EUR</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <!-- Dark Section Banner Zusammenfassung -->
+                        <div class="bank-banner">
+                            Zusammenfassung
+                        </div>
+
+                        <!-- Table Zusammenfassung -->
+                        <table class="bank-table mb-16">
+                            <thead>
+                                <tr>
+                                    <th class="section-th w-[50%]">Gesamtkosten</th>
+                                    <th class="w-[25%] text-right section-th font-bold"></th>
+                                    <th class="w-[25%] text-center section-th font-bold">davon Eigenleistungen</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="font-medium">Kosten des Baugrundstücks</td>
+                                    <td class="text-right font-medium"><span id="disp-sum-grundstueck">0,00</span> <span class="text-slate-500 text-[9px]">EUR</span></td>
+                                    <td class="text-center text-slate-400 font-medium">-</td>
+                                </tr>
+                                <tr>
+                                    <td class="font-medium">Baukosten</td>
+                                    <td class="text-right font-medium"><span id="disp-sum-baukosten">0,00</span> <span class="text-slate-500 text-[9px]">EUR</span></td>
+                                    <td class="text-right font-medium"><span id="disp-sum-baukosten-eigen">0,00</span> <span class="text-slate-500 text-[9px]">EUR</span></td>
+                                </tr>
+                                <tr>
+                                    <td class="font-medium">Baunebenkosten</td>
+                                    <td class="text-right font-medium"><span id="disp-sum-nebenkosten">0,00</span> <span class="text-slate-500 text-[9px]">EUR</span></td>
+                                    <td class="text-right font-medium"><span id="disp-sum-nebenkosten-eigen">0,00</span> <span class="text-slate-500 text-[9px]">EUR</span></td>
+                                </tr>
+                                <tr>
+                                    <td class="font-medium">Kosten der Außenanlagen</td>
+                                    <td class="text-right font-medium"><span id="disp-sum-aussenanlagen">0,00</span> <span class="text-slate-500 text-[9px]">EUR</span></td>
+                                    <td class="text-right font-medium"><span id="disp-sum-aussenanlagen-eigen">0,00</span> <span class="text-slate-500 text-[9px]">EUR</span></td>
+                                </tr>
+                                <!-- Gesamtsumme -->
+                                <tr class="total-td" style="background-color: #f1f5f9;">
+                                    <td class="font-extrabold text-slate-950 text-xs">Gesamt</td>
+                                    <td class="text-right font-extrabold text-slate-950 text-xs"><span id="disp-sum-total-kosten">0,00</span> <span class="text-slate-700 text-[10px]">EUR</span></td>
+                                    <td class="text-right font-extrabold text-emerald-800 text-xs"><span id="disp-sum-total-eigen">0,00</span> <span class="text-emerald-700 text-[10px]">EUR</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <!-- Official Signature Block with X Marker -->
+                        <div class="mt-14 space-y-12 text-[11px]">
+                            <!-- Signature 1: Bauherr -->
+                            <div class="relative">
+                                <div class="text-base font-serif font-black text-slate-900 mb-1 ml-44">✗</div>
+                                <div class="border-t border-slate-700 pt-1.5 flex justify-between">
+                                    <span class="text-slate-700 font-medium">Ort, Datum</span>
+                                    <span class="text-slate-900 font-bold">Bauherr</span>
+                                </div>
+                            </div>
+
+                            <!-- Signature 2: Architekt / Bauunternehmer -->
+                            <div class="relative">
+                                <div class="text-base font-serif font-black text-slate-900 mb-1 ml-44">✗</div>
+                                <div class="border-t border-slate-700 pt-1.5 flex justify-between">
+                                    <span class="text-slate-700 font-medium">Ort, Datum</span>
+                                    <span class="text-slate-900 font-bold">Architekt/Bauunternehmer</span>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- Page 3 Footer -->
+                    <div class="text-right text-[10px] text-slate-400 pt-6">
+                        Seite 3 von 3
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- ========================================================================= -->
+        <!-- VIEW 2: SCHNELLEINGABE-FORMULAR (shadcn Card Tables) -->
+        <!-- ========================================================================= -->
+        <div id="editor-view" class="hidden space-y-6 no-print">
+            
+            <!-- Stammdaten Card -->
+            <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-xs space-y-4">
+                <div class="flex items-center gap-2 pb-2 border-b border-slate-200">
+                    <i data-lucide="building" class="w-4 h-4 text-slate-700"></i>
+                    <h3 class="font-display font-bold text-base text-slate-900">1. Kopf- &amp; Antragsdaten</h3>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
+                    <div>
+                        <label class="block font-semibold text-slate-700 mb-1">Finanzierungsanfrage / Aktenzeichen:</label>
+                        <input type="text" id="form-anfrage" oninput="syncMeta('anfrage', this.value)" class="w-full px-3 py-2 border border-slate-200 rounded-xl focus:border-slate-800 outline-none">
+                    </div>
+                    <div>
+                        <label class="block font-semibold text-slate-700 mb-1">Antragsteller/in (Name):</label>
+                        <input type="text" id="form-antragsteller" oninput="syncMeta('antragsteller', this.value)" class="w-full px-3 py-2 border border-slate-200 rounded-xl focus:border-slate-800 outline-none">
+                    </div>
+                    <div>
+                        <label class="block font-semibold text-slate-700 mb-1">Adresse des Bauobjekts:</label>
+                        <input type="text" id="form-adresse" oninput="syncMeta('adresse', this.value)" class="w-full px-3 py-2 border border-slate-200 rounded-xl focus:border-slate-800 outline-none">
+                    </div>
+                    <div>
+                        <label class="block font-semibold text-slate-700 mb-1">Finanzierungsvermittler / Bank:</label>
+                        <input type="text" id="form-vermittler" oninput="syncMeta('vermittler', this.value)" class="w-full px-3 py-2 border border-slate-200 rounded-xl focus:border-slate-800 outline-none">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Baugrundstück & Erwerb Card -->
+            <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-xs space-y-4">
+                <div class="flex items-center justify-between pb-2 border-b border-slate-200">
+                    <div class="flex items-center gap-2">
+                        <i data-lucide="map-pin" class="w-4 h-4 text-emerald-600"></i>
+                        <h3 class="font-display font-bold text-base text-slate-900">2. Grundstück, Erwerb &amp; Erschließung (Seite 1)</h3>
+                    </div>
+                    <span id="form-subtotal-1" class="font-mono font-bold text-slate-900 text-sm">0,00 €</span>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 text-xs">
+                    <div>
+                        <label class="block font-semibold text-slate-700 mb-1">Grundstückskaufpreis (€):</label>
+                        <input type="number" step="100" id="form-grundstueck" onchange="handleFormChange('grundstueck', this.value)" class="w-full px-3 py-2 border border-slate-200 rounded-xl">
+                    </div>
+                    <div>
+                        <label class="block font-semibold text-slate-700 mb-1">Notar- &amp; Grundbuch (€):</label>
+                        <input type="number" step="50" id="form-notar" onchange="handleFormChange('notar', this.value)" class="w-full px-3 py-2 border border-slate-200 rounded-xl">
+                    </div>
+                    <div>
+                        <label class="block font-semibold text-slate-700 mb-1">Grunderwerbsteuer (€):</label>
+                        <input type="number" step="50" id="form-steuer" onchange="handleFormChange('steuer', this.value)" class="w-full px-3 py-2 border border-slate-200 rounded-xl">
+                    </div>
+                    <div>
+                        <label class="block font-semibold text-slate-700 mb-1">Maklerprovision (€):</label>
+                        <input type="number" step="50" id="form-makler" onchange="handleFormChange('makler', this.value)" class="w-full px-3 py-2 border border-slate-200 rounded-xl">
+                    </div>
+                    <div>
+                        <label class="block font-semibold text-slate-700 mb-1">Sonstige Erwerbskosten (€):</label>
+                        <input type="number" step="50" id="form-sonstige_erwerb" onchange="handleFormChange('sonstige_erwerb', this.value)" class="w-full px-3 py-2 border border-slate-200 rounded-xl">
+                    </div>
+                    <div>
+                        <label class="block font-semibold text-slate-700 mb-1">Abfindungen/Entschädigungen (€):</label>
+                        <input type="number" step="50" id="form-abfindungen" onchange="handleFormChange('abfindungen', this.value)" class="w-full px-3 py-2 border border-slate-200 rounded-xl">
+                    </div>
+                    <div>
+                        <label class="block font-semibold text-slate-700 mb-1">Herrichten des Bauplatzes (€):</label>
+                        <input type="number" step="50" id="form-herrichten" onchange="handleFormChange('herrichten', this.value)" class="w-full px-3 py-2 border border-slate-200 rounded-xl">
+                    </div>
+                    <div>
+                        <label class="block font-semibold text-slate-700 mb-1">Öfftl. Erschließungsbeiträge (€):</label>
+                        <input type="number" step="50" id="form-erschliessung" onchange="handleFormChange('erschliessung', this.value)" class="w-full px-3 py-2 border border-slate-200 rounded-xl">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Baukosten Einzelgewerke Card -->
+            <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-xs space-y-4">
+                <div class="flex items-center justify-between pb-2 border-b border-slate-200">
+                    <div class="flex items-center gap-2">
+                        <i data-lucide="hammer" class="w-4 h-4 text-blue-600"></i>
+                        <h3 class="font-display font-bold text-base text-slate-900">3. Baukosten Einzelgewerke &amp; Eigenleistungen (Seite 2)</h3>
+                    </div>
+                    <div class="flex items-center gap-4 text-xs font-mono font-bold">
+                        <span>Kosten: <span id="form-subtotal-2-kosten" class="text-slate-900">0,00 €</span></span>
+                        <span>Eigenleistung: <span id="form-subtotal-2-eigen" class="text-emerald-600">0,00 €</span></span>
+                    </div>
+                </div>
+
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left text-xs">
+                        <thead>
+                            <tr class="border-b border-slate-200 text-slate-500 uppercase text-[10px] font-bold">
+                                <th class="py-2 px-3">Gewerk / Kostenposition</th>
+                                <th class="py-2 px-3 text-right w-44">Gesamtkosten (€)</th>
+                                <th class="py-2 px-3 text-right w-44">davon Eigenleistung (€)</th>
+                            </tr>
+                        </thead>
+                        <tbody id="form-gewerke-tbody" class="divide-y divide-slate-100">
+                            <!-- Dynamic Row Render -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Baunebenkosten Card -->
+            <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-xs space-y-4">
+                <div class="flex items-center justify-between pb-2 border-b border-slate-200">
+                    <div class="flex items-center gap-2">
+                        <i data-lucide="file-check" class="w-4 h-4 text-purple-600"></i>
+                        <h3 class="font-display font-bold text-base text-slate-900">4. Baunebenkosten &amp; Hausanschlüsse (Seite 2)</h3>
+                    </div>
+                    <div class="flex items-center gap-4 text-xs font-mono font-bold">
+                        <span>Kosten: <span id="form-subtotal-3-kosten" class="text-slate-900">0,00 €</span></span>
+                        <span>Eigenleistung: <span id="form-subtotal-3-eigen" class="text-emerald-600">0,00 €</span></span>
+                    </div>
+                </div>
+
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left text-xs">
+                        <thead>
+                            <tr class="border-b border-slate-200 text-slate-500 uppercase text-[10px] font-bold">
+                                <th class="py-2 px-3">Position</th>
+                                <th class="py-2 px-3 text-right w-44">Gesamtkosten (€)</th>
+                                <th class="py-2 px-3 text-right w-44">davon Eigenleistung (€)</th>
+                            </tr>
+                        </thead>
+                        <tbody id="form-neben-tbody" class="divide-y divide-slate-100">
+                            <!-- Dynamic Row Render -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Außenanlagen Card -->
+            <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-xs space-y-4">
+                <div class="flex items-center justify-between pb-2 border-b border-slate-200">
+                    <div class="flex items-center gap-2">
+                        <i data-lucide="trees" class="w-4 h-4 text-emerald-600"></i>
+                        <h3 class="font-display font-bold text-base text-slate-900">5. Kosten der Außenanlagen (Seite 3)</h3>
+                    </div>
+                    <div class="flex items-center gap-4 text-xs font-mono font-bold">
+                        <span>Kosten: <span id="form-subtotal-4-kosten" class="text-slate-900">0,00 €</span></span>
+                        <span>Eigenleistung: <span id="form-subtotal-4-eigen" class="text-emerald-600">0,00 €</span></span>
+                    </div>
+                </div>
+
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left text-xs">
+                        <thead>
+                            <tr class="border-b border-slate-200 text-slate-500 uppercase text-[10px] font-bold">
+                                <th class="py-2 px-3">Außenanlage</th>
+                                <th class="py-2 px-3 text-right w-44">Gesamtkosten (€)</th>
+                                <th class="py-2 px-3 text-right w-44">davon Eigenleistung (€)</th>
+                            </tr>
+                        </thead>
+                        <tbody id="form-aussen-tbody" class="divide-y divide-slate-100">
+                            <!-- Dynamic Row Render -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+
+    </main>
+
+    <!-- Core State & Calculation Script -->
+    <script>
+        // Default Sample Data matching the User's uploaded PDF exactly
+        const SAMPLE_DATA = {
+            meta: {
+                anfrage: "Haus Jakob KfW-40 Holzhaus",
+                antragsteller: "Paul Epp",
+                adresse: "Projektgrundstück 444 m²",
+                vermittler: "Baufinanzierung / Bank"
+            },
+            values: {
+                // Page 1: Grundstück & Erwerb & Erschließung
+                grundstueck: 81984,
+                notar: 5330,
+                steuer: 1600,
+                makler: 0,
+                sonstige_erwerb: 0,
+                abfindungen: 0,
+                herrichten: 0,
+                erschliessung: 0,
+
+                // Page 2: Baukosten Einzelgewerke (Kosten | Eigenleistung)
+                hausbauvertrag_kosten: 0,
+                hausbauvertrag_eigen: 0,
+                erdarbeiten_kosten: 5500,
+                erdarbeiten_eigen: 2500,
+                maurer_kosten: 24675,
+                maurer_eigen: 9000,
+                zimmerer_kosten: 145000,
+                zimmerer_eigen: 20000,
+                dach_kosten: 18200,
+                dach_eigen: 7500,
+                klempner_kosten: 3400,
+                klempner_eigen: 1200,
+                sanitaer_kosten: 15100,
+                sanitaer_eigen: 7500,
+                heizung_kosten: 18600,
+                heizung_eigen: 6000,
+                elektro_kosten: 14800,
+                elektro_eigen: 6500,
+                metallbau_kosten: 0,
+                metallbau_eigen: 0,
+                boden_kosten: 9000,
+                boden_eigen: 2000,
+                fliesen_kosten: 2885,
+                fliesen_eigen: 1755,
+                naturstein_kosten: 700,
+                naturstein_eigen: 300,
+                tischler_kosten: 0,
+                tischler_eigen: 0,
+                glaser_kosten: 4600,
+                glaser_eigen: 1050,
+                maler_kosten: 7211.28,
+                maler_eigen: 5061.28,
+                rolladen_kosten: 8935,
+                rolladen_eigen: 1710,
+                baukosten_sonstiges_kosten: 0,
+                baukosten_sonstiges_eigen: 0,
+
+                // Page 2: Baunebenkosten
+                architekt_kosten: 7500,
+                architekt_eigen: 0,
+                verwaltung_kosten: 0,
+                verwaltung_eigen: 0,
+                finanzierung_kosten: 0,
+                finanzierung_eigen: 0,
+                sonstige_neben_kosten: 0,
+                sonstige_neben_eigen: 0,
+                wasser_kosten: 1936.70,
+                wasser_eigen: 1070,
+                gas_kosten: 2000,
+                gas_eigen: 0,
+                strom_kosten: 1500,
+                strom_eigen: 0,
+
+                // Page 3: Außenanlagen
+                entwaesserung_kosten: 2300,
+                entwaesserung_eigen: 900,
+                hof_kosten: 4750,
+                hof_eigen: 2100,
+                aussen_sonstige_kosten: 12755,
+                aussen_sonstige_eigen: 3765,
+                garagen_kosten: 5950,
+                garagen_eigen: 2100
+            }
+        };
+
+        // App State loaded from localStorage or Sample
+        let appState = JSON.parse(localStorage.getItem('kfw40_baukosten_aufstellung_v1')) || JSON.parse(JSON.stringify(SAMPLE_DATA));
+
+        // Format number in German format (e.g. "12.345,67" or "12.345")
+        function formatEUR(val, showZero = true) {
+            if (val === undefined || val === null || isNaN(val)) return showZero ? "0,00" : "";
+            if (val === 0 && !showZero) return "0";
+            return Number(val).toLocaleString('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+        }
+
+        // Parse German or raw number string to float
+        function parseEUR(str) {
+            if (typeof str === 'number') return str;
+            if (!str) return 0;
+            // clean up EUR, dots, commas
+            let clean = str.replace(/[€EUR\s]/g, '').trim();
+            if (clean.includes(',') && clean.includes('.')) {
+                clean = clean.replace(/\./g, '').replace(',', '.');
+            } else if (clean.includes(',')) {
+                clean = clean.replace(',', '.');
+            }
+            const num = parseFloat(clean);
+            return isNaN(num) ? 0 : num;
+        }
+
+        // Save state to LocalStorage
+        function saveState() {
+            localStorage.setItem('kfw40_baukosten_aufstellung_v1', JSON.stringify(appState));
+        }
+
+        // Update Meta Information
+        function updateMeta(field, val) {
+            appState.meta[field] = val;
+            const formInput = document.getElementById(`form-${field}`);
+            if (formInput && formInput.value !== val) formInput.value = val;
+            saveState();
+        }
+
+        function syncMeta(field, val) {
+            appState.meta[field] = val;
+            const previewInput = document.getElementById(`meta-${field}`);
+            if (previewInput && previewInput.value !== val) previewInput.value = val;
+            saveState();
+        }
+
+        // Handle value change from live preview inputs
+        function handleValueChange(key, rawVal) {
+            const num = parseEUR(rawVal);
+            appState.values[key] = num;
+            saveState();
+            recalcAll();
+            renderPreviewValues();
+            renderFormValues();
+        }
+
+        // Handle value change from Formular view
+        function handleFormChange(key, rawVal) {
+            const num = parseEUR(rawVal);
+            appState.values[key] = num;
+            saveState();
+            recalcAll();
+            renderPreviewValues();
+        }
+
+        // Recalculate all totals
+        function recalcAll() {
+            const v = appState.values;
+
+            // Zwischensumme 1: Grundstück + Erwerb + Erschließung
+            const zs1 = (v.grundstueck || 0) + 
+                        (v.notar || 0) + (v.steuer || 0) + (v.makler || 0) + (v.sonstige_erwerb || 0) +
+                        (v.abfindungen || 0) + (v.herrichten || 0) + (v.erschliessung || 0);
+
+            // Zwischensumme 2: Baukosten
+            const gewerkeKostenKeys = [
+                'hausbauvertrag_kosten', 'erdarbeiten_kosten', 'maurer_kosten', 'zimmerer_kosten', 
+                'dach_kosten', 'klempner_kosten', 'sanitaer_kosten', 'heizung_kosten', 'elektro_kosten', 
+                'metallbau_kosten', 'boden_kosten', 'fliesen_kosten', 'naturstein_kosten', 'tischler_kosten', 
+                'glaser_kosten', 'maler_kosten', 'rolladen_kosten', 'baukosten_sonstiges_kosten'
+            ];
+            const gewerkeEigenKeys = [
+                'hausbauvertrag_eigen', 'erdarbeiten_eigen', 'maurer_eigen', 'zimmerer_eigen', 
+                'dach_eigen', 'klempner_eigen', 'sanitaer_eigen', 'heizung_eigen', 'elektro_eigen', 
+                'metallbau_eigen', 'boden_eigen', 'fliesen_eigen', 'naturstein_eigen', 'tischler_eigen', 
+                'glaser_eigen', 'maler_eigen', 'rolladen_eigen', 'baukosten_sonstiges_eigen'
+            ];
+
+            const zs2_kosten = gewerkeKostenKeys.reduce((acc, k) => acc + (v[k] || 0), 0);
+            const zs2_eigen = gewerkeEigenKeys.reduce((acc, k) => acc + (v[k] || 0), 0);
+
+            // Zwischensumme 3: Baunebenkosten
+            const nebenKostenKeys = [
+                'architekt_kosten', 'verwaltung_kosten', 'finanzierung_kosten', 'sonstige_neben_kosten', 
+                'wasser_kosten', 'gas_kosten', 'strom_kosten'
+            ];
+            const nebenEigenKeys = [
+                'architekt_eigen', 'verwaltung_eigen', 'finanzierung_eigen', 'sonstige_neben_eigen', 
+                'wasser_eigen', 'gas_eigen', 'strom_eigen'
+            ];
+            const zs3_kosten = nebenKostenKeys.reduce((acc, k) => acc + (v[k] || 0), 0);
+            const zs3_eigen = nebenEigenKeys.reduce((acc, k) => acc + (v[k] || 0), 0);
+
+            // Zwischensumme 4: Außenanlagen
+            const aussenKostenKeys = ['entwaesserung_kosten', 'hof_kosten', 'aussen_sonstige_kosten', 'garagen_kosten'];
+            const aussenEigenKeys = ['entwaesserung_eigen', 'hof_eigen', 'aussen_sonstige_eigen', 'garagen_eigen'];
+            const zs4_kosten = aussenKostenKeys.reduce((acc, k) => acc + (v[k] || 0), 0);
+            const zs4_eigen = aussenEigenKeys.reduce((acc, k) => acc + (v[k] || 0), 0);
+
+            // Zusammenfassung
+            const sum_total_kosten = zs1 + zs2_kosten + zs3_kosten + zs4_kosten;
+            const sum_total_eigen = zs2_eigen + zs3_eigen + zs4_eigen;
+            const sum_total_bank = sum_total_kosten - sum_total_eigen;
+
+            // DOM Updates in Preview
+            document.getElementById('disp-zs-1').innerText = formatEUR(zs1);
+            document.getElementById('disp-zs-2-kosten').innerText = formatEUR(zs2_kosten);
+            document.getElementById('disp-zs-2-eigen').innerText = formatEUR(zs2_eigen);
+            document.getElementById('disp-zs-3-kosten').innerText = formatEUR(zs3_kosten);
+            document.getElementById('disp-zs-3-eigen').innerText = formatEUR(zs3_eigen);
+            document.getElementById('disp-zs-4-kosten').innerText = formatEUR(zs4_kosten);
+            document.getElementById('disp-zs-4-eigen').innerText = formatEUR(zs4_eigen);
+
+            document.getElementById('disp-sum-grundstueck').innerText = formatEUR(zs1);
+            document.getElementById('disp-sum-baukosten').innerText = formatEUR(zs2_kosten);
+            document.getElementById('disp-sum-baukosten-eigen').innerText = formatEUR(zs2_eigen);
+            document.getElementById('disp-sum-nebenkosten').innerText = formatEUR(zs3_kosten);
+            document.getElementById('disp-sum-nebenkosten-eigen').innerText = formatEUR(zs3_eigen);
+            document.getElementById('disp-sum-aussenanlagen').innerText = formatEUR(zs4_kosten);
+            document.getElementById('disp-sum-aussenanlagen-eigen').innerText = formatEUR(zs4_eigen);
+
+            document.getElementById('disp-sum-total-kosten').innerText = formatEUR(sum_total_kosten);
+            document.getElementById('disp-sum-total-eigen').innerText = formatEUR(sum_total_eigen);
+
+            // DOM Updates in Badges
+            document.getElementById('badge-total-cost').innerText = formatEUR(sum_total_kosten) + ' €';
+            document.getElementById('badge-total-eigen').innerText = formatEUR(sum_total_eigen) + ' €';
+            document.getElementById('badge-total-bank').innerText = formatEUR(sum_total_bank) + ' €';
+
+            // DOM Updates in Form view
+            const f1 = document.getElementById('form-subtotal-1');
+            if (f1) f1.innerText = formatEUR(zs1) + ' €';
+            const f2k = document.getElementById('form-subtotal-2-kosten');
+            if (f2k) f2k.innerText = formatEUR(zs2_kosten) + ' €';
+            const f2e = document.getElementById('form-subtotal-2-eigen');
+            if (f2e) f2e.innerText = formatEUR(zs2_eigen) + ' €';
+            const f3k = document.getElementById('form-subtotal-3-kosten');
+            if (f3k) f3k.innerText = formatEUR(zs3_kosten) + ' €';
+            const f3e = document.getElementById('form-subtotal-3-eigen');
+            if (f3e) f3e.innerText = formatEUR(zs3_eigen) + ' €';
+            const f4k = document.getElementById('form-subtotal-4-kosten');
+            if (f4k) f4k.innerText = formatEUR(zs4_kosten) + ' €';
+            const f4e = document.getElementById('form-subtotal-4-eigen');
+            if (f4e) f4e.innerText = formatEUR(zs4_eigen) + ' €';
+        }
+
+        // Render all input fields in the 1:1 Preview
+        function renderPreviewValues() {
+            // Meta
+            document.getElementById('meta-anfrage').value = appState.meta.anfrage || '';
+            document.getElementById('meta-antragsteller').value = appState.meta.antragsteller || '';
+            document.getElementById('meta-adresse').value = appState.meta.adresse || '';
+            document.getElementById('meta-vermittler').value = appState.meta.vermittler || '';
+
+            // Values
+            for (const [key, val] of Object.entries(appState.values)) {
+                const el = document.getElementById(`cell-${key.replace(/_/g, '-')}`);
+                if (el) {
+                    el.value = formatEUR(val, false);
+                }
+            }
+        }
+
+        // Render all input fields in Form view
+        function renderFormValues() {
+            // Meta
+            document.getElementById('form-anfrage').value = appState.meta.anfrage || '';
+            document.getElementById('form-antragsteller').value = appState.meta.antragsteller || '';
+            document.getElementById('form-adresse').value = appState.meta.adresse || '';
+            document.getElementById('form-vermittler').value = appState.meta.vermittler || '';
+
+            // Fixed Page 1 fields
+            const page1Keys = ['grundstueck', 'notar', 'steuer', 'makler', 'sonstige_erwerb', 'abfindungen', 'herrichten', 'erschliessung'];
+            page1Keys.forEach(k => {
+                const el = document.getElementById(`form-${k}`);
+                if (el) el.value = appState.values[k] || 0;
+            });
+
+            // Gewerke Rows
+            const gewerke = [
+                { id: 'hausbauvertrag', label: 'Hausbauvertrag – Gesamtauftrag' },
+                { id: 'erdarbeiten', label: 'Erdarbeiten' },
+                { id: 'maurer', label: 'Maurer-, Beton-, Putz- und Isolierungsarbeiten' },
+                { id: 'zimmerer', label: 'Zimmerarbeiten' },
+                { id: 'dach', label: 'Dachdeckerarbeiten' },
+                { id: 'klempner', label: 'Klempnerarbeiten' },
+                { id: 'sanitaer', label: 'Sanitär-Installation' },
+                { id: 'heizung', label: 'Heizungsarbeiten' },
+                { id: 'elektro', label: 'Elektro-Installation' },
+                { id: 'metallbau', label: 'Metallbauarbeiten' },
+                { id: 'boden', label: 'Fußbodenarbeiten (Estrich, Belag)' },
+                { id: 'fliesen', label: 'Fliesenarbeiten' },
+                { id: 'naturstein', label: 'Natur- und Betonwerksteinarbeiten' },
+                { id: 'tischler', label: 'Tischlerarbeiten' },
+                { id: 'glaser', label: 'Glaserarbeiten' },
+                { id: 'maler', label: 'Malerarbeiten' },
+                { id: 'rolladen', label: 'Rolladenarbeiten' },
+                { id: 'baukosten_sonstiges', label: 'Sonstiges (Baukosten)' }
+            ];
+
+            const tbodyGewerke = document.getElementById('form-gewerke-tbody');
+            if (tbodyGewerke) {
+                tbodyGewerke.innerHTML = gewerke.map(g => `
+                    <tr class="hover:bg-slate-50 transition-colors">
+                        <td class="py-2 px-3 font-medium text-slate-900">${g.label}</td>
+                        <td class="py-1 px-3 text-right">
+                            <input type="number" step="50" value="${appState.values[g.id + '_kosten'] || 0}" 
+                                   onchange="handleFormChange('${g.id}_kosten', this.value)" 
+                                   class="w-full text-right px-2 py-1.5 border border-slate-200 rounded-lg text-xs font-mono font-medium focus:border-slate-800 outline-none">
+                        </td>
+                        <td class="py-1 px-3 text-right">
+                            <input type="number" step="50" value="${appState.values[g.id + '_eigen'] || 0}" 
+                                   onchange="handleFormChange('${g.id}_eigen', this.value)" 
+                                   class="w-full text-right px-2 py-1.5 border border-slate-200 rounded-lg text-xs font-mono font-medium text-emerald-700 focus:border-slate-800 outline-none">
+                        </td>
+                    </tr>
+                `).join('');
+            }
+
+            // Baunebenkosten Rows
+            const neben = [
+                { id: 'architekt', label: 'Architekten- und Statikergebühren' },
+                { id: 'verwaltung', label: 'Verwaltungs- bzw. Behördenkosten' },
+                { id: 'finanzierung', label: 'Kosten Beschaffung Finanzierungsmittel' },
+                { id: 'sonstige_neben', label: 'Sonstige Baunebenkosten' },
+                { id: 'wasser', label: 'Wasseranschluss' },
+                { id: 'gas', label: 'Gasanschluss' },
+                { id: 'strom', label: 'Elektrizitätsanschluss' }
+            ];
+
+            const tbodyNeben = document.getElementById('form-neben-tbody');
+            if (tbodyNeben) {
+                tbodyNeben.innerHTML = neben.map(n => `
+                    <tr class="hover:bg-slate-50 transition-colors">
+                        <td class="py-2 px-3 font-medium text-slate-900">${n.label}</td>
+                        <td class="py-1 px-3 text-right">
+                            <input type="number" step="50" value="${appState.values[n.id + '_kosten'] || 0}" 
+                                   onchange="handleFormChange('${n.id}_kosten', this.value)" 
+                                   class="w-full text-right px-2 py-1.5 border border-slate-200 rounded-lg text-xs font-mono font-medium focus:border-slate-800 outline-none">
+                        </td>
+                        <td class="py-1 px-3 text-right">
+                            <input type="number" step="50" value="${appState.values[n.id + '_eigen'] || 0}" 
+                                   onchange="handleFormChange('${n.id}_eigen', this.value)" 
+                                   class="w-full text-right px-2 py-1.5 border border-slate-200 rounded-lg text-xs font-mono font-medium text-emerald-700 focus:border-slate-800 outline-none">
+                        </td>
+                    </tr>
+                `).join('');
+            }
+
+            // Außenanlagen Rows
+            const aussen = [
+                { id: 'entwaesserung', label: 'Entwässerung' },
+                { id: 'hof', label: 'Hofbefestigung' },
+                { id: 'aussen_sonstige', label: 'Sonstige Außenanlagen, Erdarbeiten, Grünanlagen etc.' },
+                { id: 'garagen', label: 'Garagen, Carports etc.' }
+            ];
+
+            const tbodyAussen = document.getElementById('form-aussen-tbody');
+            if (tbodyAussen) {
+                tbodyAussen.innerHTML = aussen.map(a => `
+                    <tr class="hover:bg-slate-50 transition-colors">
+                        <td class="py-2 px-3 font-medium text-slate-900">${a.label}</td>
+                        <td class="py-1 px-3 text-right">
+                            <input type="number" step="50" value="${appState.values[a.id + '_kosten'] || 0}" 
+                                   onchange="handleFormChange('${a.id}_kosten', this.value)" 
+                                   class="w-full text-right px-2 py-1.5 border border-slate-200 rounded-lg text-xs font-mono font-medium focus:border-slate-800 outline-none">
+                        </td>
+                        <td class="py-1 px-3 text-right">
+                            <input type="number" step="50" value="${appState.values[a.id + '_eigen'] || 0}" 
+                                   onchange="handleFormChange('${a.id}_eigen', this.value)" 
+                                   class="w-full text-right px-2 py-1.5 border border-slate-200 rounded-lg text-xs font-mono font-medium text-emerald-700 focus:border-slate-800 outline-none">
+                        </td>
+                    </tr>
+                `).join('');
+            }
+        }
+
+        // View Mode Switcher
+        function switchView(view) {
+            const previewWrap = document.getElementById('preview-wrapper');
+            const editorView = document.getElementById('editor-view');
+            const tabPreview = document.getElementById('tab-btn-preview');
+            const tabForm = document.getElementById('tab-btn-form');
+
+            if (view === 'preview') {
+                previewWrap.classList.remove('hidden');
+                editorView.classList.add('hidden');
+                tabPreview.className = "flex-1 md:flex-none px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all bg-white text-slate-900 shadow-xs flex items-center justify-center gap-1.5";
+                tabForm.className = "flex-1 md:flex-none px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all text-slate-600 hover:text-slate-900 flex items-center justify-center gap-1.5";
+                renderPreviewValues();
+            } else {
+                previewWrap.classList.add('hidden');
+                editorView.classList.remove('hidden');
+                tabPreview.className = "flex-1 md:flex-none px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all text-slate-600 hover:text-slate-900 flex items-center justify-center gap-1.5";
+                tabForm.className = "flex-1 md:flex-none px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all bg-white text-slate-900 shadow-xs flex items-center justify-center gap-1.5";
+                renderFormValues();
+            }
+        }
+
+        // Smart Import from Materialplaner (localStorage: kfw40_material_data_v29)
+        function importFromMaterialplaner() {
+            try {
+                const matData = JSON.parse(localStorage.getItem('kfw40_material_data_v29'));
+                if (!matData) {
+                    showToast('Keine Materialplaner-Daten im Browser gefunden. Standardwerte geladen.', 'amber');
+                    return;
+                }
+
+                // Sum helper for an array of row objects
+                const sumRows = (arr) => (arr || []).reduce((acc, row) => acc + ((row.qty || 0) * (row.price || 0)), 0);
+
+                // Helper to find sum of specific items matching regex title
+                const sumMatch = (arr, regex) => (arr || []).filter(r => regex.test(r.title || '') || regex.test(r.spec || '')).reduce((acc, r) => acc + ((r.qty || 0) * (r.price || 0)), 0);
+
+                const v = appState.values;
+
+                // 1. Grundstück & Nebenkosten (Phase 1)
+                v.grundstueck = sumMatch(matData.nebenkosten, /Grundstückskauf/i) || 88800;
+                v.steuer = sumMatch(matData.nebenkosten, /Grunderwerbsteuer/i) || 4440;
+                v.notar = sumMatch(matData.nebenkosten, /Notar/i) || 1600;
+                v.sonstige_erwerb = sumMatch(matData.nebenkosten, /Rechtsanwalt|Bodengutachten|Versicherungen/i) || 2750;
+                
+                // Architekt & Genehmigung
+                v.architekt_kosten = sumMatch(matData.nebenkosten, /Architekt|Statik|Energieberater/i) || 13100;
+                v.verwaltung_kosten = sumMatch(matData.nebenkosten, /Baugenehmigung/i) || 1300;
+                v.sonstige_neben_kosten = sumMatch(matData.nebenkosten, /Baustelleneinrichtung/i) || 3200;
+                
+                // Hausanschlüsse
+                const anschluesse = sumMatch(matData.nebenkosten, /Hausanschlusskosten/i) || 6500;
+                v.wasser_kosten = Math.round(anschluesse * 0.35);
+                v.strom_kosten = Math.round(anschluesse * 0.45);
+                v.gas_kosten = Math.round(anschluesse * 0.20);
+
+                // 2. Erdarbeiten & Bodenplatte (Phase 2)
+                v.erdarbeiten_kosten = sumMatch(matData.boden, /Bagger|Erdaushub/i) || 1500;
+                v.erdarbeiten_eigen = Math.round(v.erdarbeiten_kosten * 0.4);
+
+                v.maurer_kosten = sumMatch(matData.boden, /Transportbeton|XPS|Gitterbewehrung|Schotter|Bitumen/i) || 14500;
+                v.maurer_eigen = 4500;
+
+                // 3. Palmatin Holzbau & Gewerke (Phase 3 & 4)
+                v.zimmerer_kosten = sumMatch(matData.palmatin, /Außenwände|Innenwände|Zwischendecke|Kehlbalkenlage|Treppe/i) || 109200;
+                v.zimmerer_eigen = 18000; // Eigenleistung Richten & Dämmen
+
+                v.dach_kosten = (sumMatch(matData.palmatin, /Dachkonstruktion/i) + sumMatch(matData.huelle, /Dachpfannen/i)) || 22300;
+                v.dach_eigen = 6500;
+
+                v.klempner_kosten = sumMatch(matData.huelle, /Dachrinnen/i) || 1950;
+                v.klempner_eigen = 800;
+
+                // 4. Glaser / Fenster
+                v.glaser_kosten = (sumMatch(matData.palmatin, /Fenster/i) + sumMatch(matData.bauelemente, /Haustür|Abdichtungsset/i)) || 18150;
+                v.glaser_eigen = 2500;
+
+                // 5. Haustechnik (Phase 6)
+                v.heizung_kosten = (sumMatch(matData.boden, /Fußbodenheizung/i) + sumMatch(matData.haustechnik, /Wärmepumpe|Speicher|Verrohrung|Lüftung/i)) || 26118;
+                v.heizung_eigen = 5000;
+
+                v.elektro_kosten = sumMatch(matData.haustechnik, /Zählerschrank|Kabel|Schalter|LED|Photovoltaik|Wallbox|Elektro/i) || 20200;
+                v.elektro_eigen = 6500;
+
+                // 6. Trockenbau & Finish (Phase 7 & 8)
+                v.boden_kosten = (sumMatch(matData.trockenbau, /Estrich/i) + sumMatch(matData.finish, /Klick-Vinyl|Sockelleisten/i)) || 11830;
+                v.boden_eigen = 3500;
+
+                v.maler_kosten = sumMatch(matData.finish, /Spachtel|Malervlies|Silikat/i) || 6854;
+                v.maler_eigen = 4800;
+
+                v.tischler_kosten = sumMatch(matData.finish, /Innentüren|Fensterbänke/i) || 5480;
+                v.tischler_eigen = 1800;
+
+                // 7. Sanitär (Phase 9)
+                v.sanitaer_kosten = sumRows(matData.sanitaer) || 12860;
+                v.sanitaer_eigen = 5200;
+
+                // 8. Außenanlagen (Phase 2 & 4 & Sonstiges)
+                v.entwaesserung_kosten = sumMatch(matData.boden, /Betonschacht/i) || 1100;
+                v.entwaesserung_eigen = 400;
+
+                v.garagen_kosten = (sumMatch(matData.palmatin, /Carport/i) + sumMatch(matData.huelle, /Carport|Terrassenüberdachung/i)) || 8117;
+                v.garagen_eigen = 2800;
+
+                v.hof_kosten = 5500;
+                v.hof_eigen = 2200;
+                v.aussen_sonstige_kosten = 8500;
+                v.aussen_sonstige_eigen = 3500;
+
+                saveState();
+                recalcAll();
+                renderPreviewValues();
+                renderFormValues();
+
+                showToast('Erfolgreich: Reale Zahlen aus Haus Jakob Materialplaner importiert!', 'emerald');
+            } catch(err) {
+                console.error('Import error:', err);
+                showToast('Fehler beim Importieren der Daten: ' + err.message, 'rose');
+            }
+        }
+
+        // Load original sample data from PDF
+        function loadSampleData() {
+            appState = JSON.parse(JSON.stringify(SAMPLE_DATA));
+            saveState();
+            recalcAll();
+            renderPreviewValues();
+            renderFormValues();
+            showToast('Musterzahlen aus Bankvorlage erfolgreich geladen.', 'blue');
+        }
+
+        // Reset data to 0
+        function resetData() {
+            if (!confirm('Möchten Sie wirklich alle Kostenfelder leeren?')) return;
+            for (const k in appState.values) {
+                appState.values[k] = 0;
+            }
+            saveState();
+            recalcAll();
+            renderPreviewValues();
+            renderFormValues();
+            showToast('Alle Felder geleert.', 'slate');
+        }
+
+        // Direct PDF Download via html2pdf.js
+        async function downloadDirectPDF() {
+            const btn = document.getElementById('btn-dl-pdf');
+            const btnText = document.getElementById('dl-btn-text');
+            const originalText = btnText.innerText;
+            
+            // Switch to preview first if currently in form view
+            switchView('preview');
+
+            btn.disabled = true;
+            btnText.innerText = 'PDF wird generiert...';
+            showToast('PDF-Generierung gestartet. Bitte einen kurzen Moment Geduld...', 'blue');
+
+            try {
+                const element = document.getElementById('pdf-export-content');
+                
+                const opt = {
+                    margin: 0,
+                    filename: 'Aufstellung_Baukosten_Haus_Jakob.pdf',
+                    image: { type: 'jpeg', quality: 0.98 },
+                    html2canvas: { 
+                        scale: 2, 
+                        useCORS: true, 
+                        letterRendering: true,
+                        scrollY: 0
+                    },
+                    jsPDF: { 
+                        unit: 'mm', 
+                        format: 'a4', 
+                        orientation: 'portrait' 
+                    }
+                };
+
+                await html2pdf().set(opt).from(element).save();
+                showToast('PDF erfolgreich heruntergeladen!', 'emerald');
+            } catch (err) {
+                console.error('PDF error:', err);
+                showToast('Fehler bei direkter PDF-Erstellung. Nutzen Sie alternativ "Drucken / PDF".', 'rose');
+            } finally {
+                btn.disabled = false;
+                btnText.innerText = originalText;
+            }
+        }
+
+        // Toast Notification System
+        function showToast(msg, type = 'slate') {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            
+            let colorClasses = "bg-slate-900 text-white border-slate-700";
+            if (type === 'emerald') colorClasses = "bg-emerald-950 text-emerald-100 border-emerald-700";
+            if (type === 'blue') colorClasses = "bg-blue-950 text-blue-100 border-blue-700";
+            if (type === 'amber') colorClasses = "bg-amber-950 text-amber-100 border-amber-700";
+            if (type === 'rose') colorClasses = "bg-rose-950 text-rose-100 border-rose-700";
+
+            toast.className = `px-4 py-3 rounded-xl text-xs font-semibold shadow-lg border flex items-center gap-2.5 transition-all duration-300 transform translate-y-2 opacity-0 ${colorClasses}`;
+            toast.innerHTML = `
+                <i data-lucide="${type === 'emerald' ? 'check-circle-2' : (type === 'rose' ? 'alert-circle' : 'info')}" class="w-4 h-4 shrink-0"></i>
+                <span>${msg}</span>
+            `;
+            container.appendChild(toast);
+            lucide.createIcons();
+
+            requestAnimationFrame(() => {
+                toast.classList.remove('translate-y-2', 'opacity-0');
+            });
+
+            setTimeout(() => {
+                toast.classList.add('opacity-0', 'translate-y-2');
+                setTimeout(() => toast.remove(), 300);
+            }, 3500);
+        }
+
+        // Initialize on DOM load
+        window.addEventListener('DOMContentLoaded', () => {
+            lucide.createIcons();
+            recalcAll();
+            renderPreviewValues();
+            renderFormValues();
+        });
+    </script>
+</body>
+</html>

@@ -94,6 +94,11 @@
                     <i data-lucide="calculator" class="w-3.5 h-3.5 text-emerald-600"></i>
                     <span>Materialplaner</span>
                 </a>
+                <!-- 5. Baukosten (Bank-PDF) -->
+                <a href="baukosten.html" class="px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all text-slate-600 hover:text-slate-900 hover:bg-white/80 flex items-center gap-1.5 whitespace-nowrap">
+                    <i data-lucide="landmark" class="w-3.5 h-3.5 text-amber-600"></i>
+                    <span>Baukosten (Bank-PDF)</span>
+                </a>
             </nav>
 
             <!-- Right Actions -->
@@ -1433,16 +1438,16 @@
                 if (wall.type.includes('Außenwand')) {
                     totalAwBrutto += brutto;
                     totalAwNetto += netto;
-                    // Bauseits: 1 Lage OSB (12mm) über Inst.-Ebene + 1 Lage Rigips (12.5mm)
+                    // Bauseits Außenwand: 1 Lage OSB (12mm) vor Inst.-Ebene + 1 Lage Rigips (12.5mm)
                     osb = netto;
                     rigips = netto;
                 } else if (wall.type.includes('Schallschutzwand ELW')) {
-                    // ELW Trennwand: bauseits 2 Lagen OSB + 2 Lagen Rigips/Fermacell
+                    // ELW Trennwand: beidseitig je 1 Lage OSB + Rigips (bzw. Doppelbeplankung 53 dB)
                     osb = netto * 2;
                     rigips = netto * 2;
                 } else {
-                    // Innenwand: bauseits 1 Wandseite OSB + 2 Wandseiten Rigips
-                    osb = netto * 1;
+                    // Innenwand: beidseitig je 1 Lage OSB (12mm) + 1 Lage Rigips (12.5mm) -> Gesamt 2x OSB + 2x Rigips
+                    osb = netto * 2;
                     rigips = netto * 2;
                 }
 
@@ -1459,7 +1464,7 @@
                             <select onchange="updateWall(${idx}, 'type', this.value)" class="w-full bg-slate-50 border border-slate-200 rounded-lg text-xs py-1 px-2 font-medium">
                                 <option value="Außenwand 374 mm (Fassade + STEICO + 180mm Ständer)" ${wall.type.includes('Außenwand') ? 'selected' : ''}>Außenwand (374 mm | 50 dB | U=0,128)</option>
                                 <option value="Schallschutzwand ELW (53 dB - 2x OSB + 2x Rigips)" ${wall.type.includes('Schallschutzwand') ? 'selected' : ''}>ELW-Schallschutzwand (53 dB)</option>
-                                <option value="Innenwand 129 mm (80 mm Ständer + 2x OSB + 2x Rigips)" ${wall.type.includes('129') || wall.type.includes('80') || wall.type.includes('Raumteiler') ? 'selected' : ''}>Innenwand (129 mm | 80er Ständer + 2x OSB + 2x Rigips)</option>
+                                <option value="Innenwand 129 mm (80 mm Ständer + 2x OSB + 2x Rigips)" ${!wall.type.includes('Außenwand') && !wall.type.includes('Schallschutzwand') && !wall.type.includes('120') && !wall.type.includes('Tragende') ? 'selected' : ''}>Innenwand (129 mm | 80er Ständer + 2x OSB + 2x Rigips)</option>
                                 <option value="Tragende Innenwand 169 mm (120 mm Ständer)" ${wall.type.includes('120') || wall.type.includes('Tragende') ? 'selected' : ''}>Tragende Innenwand (169 mm | 120er Ständer)</option>
                             </select>
                         </td>
