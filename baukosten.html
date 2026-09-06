@@ -321,7 +321,7 @@
                         </div>
                         <div class="flex items-baseline">
                             <span class="w-48 font-bold text-slate-900">Adresse des Objekts:</span>
-                            <input type="text" id="meta-adresse" oninput="updateMeta('adresse', this.value)" placeholder="Straße, PLZ Ort (Flurstück 444 m²)" class="flex-1 border-b border-slate-300 pb-0.5 outline-none font-medium focus:border-slate-800 bg-transparent">
+                            <input type="text" id="meta-adresse" oninput="updateMeta('adresse', this.value)" placeholder="Straße, PLZ Ort (Flurstück 427 m²)" class="flex-1 border-b border-slate-300 pb-0.5 outline-none font-medium focus:border-slate-800 bg-transparent">
                         </div>
                         <div class="flex items-baseline">
                             <span class="w-48 font-bold text-slate-900">Vermittler:</span>
@@ -931,19 +931,19 @@
     <!-- Core State & Calculation Script -->
     <script>
         // 1. Reale Baukostenkalkulation für Haus Jakob (14 x 9 m | 2 Vollgeschosse | Satteldach | KfW 40)
-        // Einheitliche Datenbasis: Fremdkosten (Kosten - Eigenleistung) entsprechen exakt den 388.397,95 € Material-/Anschaffungskosten
+        // Einheitliche Datenbasis: Fremdkosten (Kosten - Eigenleistung) entsprechen exakt den 382.470,95 € Material-/Anschaffungskosten
         const JAKOB_14x9_DATA = {
             meta: {
                 anfrage: "Neubau KfW-40 Holzhaus 14x9m (2 Vollgeschosse, Satteldach)",
                 antragsteller: "Jakob Epp",
-                adresse: "Baugrundstück 444 m²",
+                adresse: "Baugrundstück 427 m²",
                 vermittler: "Baufinanzierung / Bank"
             },
             values: {
                 // Seite 1: Grundstück, Erwerb & Erschließung (Phase 1)
-                grundstueck: 88800,        // Pos 1.1: 444 m² @ 200 €/m²
+                grundstueck: 81984,        // Pos 1.1: 427 m² @ 192 €/m²
                 notar: 1600,              // Pos 1.3: Notar- & Grundbuchkosten (ca. 1,5-2%)
-                steuer: 4440,             // Pos 1.2: Grunderwerbsteuer (5,0% auf 88.800 €)
+                steuer: 5329,             // Pos 1.2: Grunderwerbsteuer (ca. 6,5% auf 81.984 €)
                 makler: 0,                // Provisionsfrei
                 sonstige_erwerb: 5150,    // Pos 1.4 Anwalt (750 €) + Pos 1.6 Vermesser (2.400 €) + Pos 1.7 Baugrund (1.200 €) + Pos 1.13 Versicherung (800 €)
                 abfindungen: 0,
@@ -955,13 +955,13 @@
                 hausbauvertrag_eigen: 0,
                 erdarbeiten_kosten: 3000,         erdarbeiten_eigen: 1500,     // Pos 2.1: Bagger 2 Tage (1.500 €) + Eigenleistung Aushub & Planum (1.500 €)
                 maurer_kosten: 22678.50,          maurer_eigen: 8000,          // Pos 2.3-2.6, 2.8-2.10: Thermobodenplatte Sohle 126 m² (14.678,50 €) + Eigenleistung Bewehrung, Dämmung, Beton (8.000 €)
-                zimmerer_kosten: 115900,          zimmerer_eigen: 18000,       // Pos 3.1, 3.2, 3.4, 3.5, 3.8, 3.9: Palmatin Holzrahmenbausatz & Treppe (97.900 €) + Eigenleistung Montage & Dämmen (18.000 €)
-                dach_kosten: 30683.05,            dach_eigen: 6500,            // Pos 3.3 Dachstuhl (19.800 €) + Pos 4.1 Tondachziegel 178,9 m² (4.383,05 €) + Eigenleistung Eindeckung (6.500 €)
+                zimmerer_kosten: 113200,          zimmerer_eigen: 18000,       // Pos 3.1, 3.2, 3.4, 3.5, 3.8, 3.9: Palmatin Holzrahmenbausatz, Treppe & Transport (95.200 €) + Eigenleistung Montage & Dämmen (18.000 €)
+                dach_kosten: 29383.05,            dach_eigen: 6500,            // Pos 3.3 Dachstuhl (18.500 €) + Pos 4.1 Tondachziegel 178,9 m² (4.383,05 €) + Eigenleistung Eindeckung (6.500 €)
                 klempner_kosten: 2750,            klempner_eigen: 800,         // Pos 4.4: Titanzink Dachrinnen Set (1.950 €) + Eigenleistung Montage (800 €)
                 glaser_kosten: 20650,             glaser_eigen: 2500,          // Pos 3.6 Fenster-Set (12.000 €) + Pos 5.1-5.3 2 Haustüren & RAL-Set (6.150 €) + Eigenleistung (2.500 €)
-                heizung_kosten: 33209,            heizung_eigen: 5500,         // Pos 2.7 FBH EG (2.409 €) + Pos 6.1-6.5 Wärmepumpe R290, KWL, Speicher (25.300 €) + Eigenleistung (5.500 €)
-                elektro_kosten: 28700,            elektro_eigen: 6500,         // Pos 6.6-6.11, 6.13: Elektroinstallation, PV 10 kWp + Speicher (22.200 €) + Eigenleistung Kabel & Dosen (6.500 €)
-                sanitaer_kosten: 17360,           sanitaer_eigen: 4500,        // Pos 9.1-9.5: Trink-/Abwasser Rohre & 3 Bäder (12.860 €) + Eigenleistung (4.500 €)
+                heizung_kosten: 31709,            heizung_eigen: 5500,         // Pos 2.7 FBH EG (2.409 €) + Pos 6.1-6.5 Wärmepumpe R290, KWL, Speicher (26.209 €) + Eigenleistung (5.500 €)
+                elektro_kosten: 29200,            elektro_eigen: 6500,         // Pos 6.6-6.11, 6.13: Elektroinstallation, PV 10 kWp + Speicher, 2x Wallbox (22.700 €) + Eigenleistung Kabel & Dosen (6.500 €)
+                sanitaer_kosten: 22360,           sanitaer_eigen: 4500,        // Pos 9.1-9.5: Trink-/Abwasser Rohre & 3 Bäder (17.860 €) + Eigenleistung (4.500 €)
                 metallbau_kosten: 0,              metallbau_eigen: 0,
                 boden_kosten: 15721,              boden_eigen: 4000,           // Pos 7.4 Estrich OG (3.723 €) + Pos 8.4-8.5 Klick-Vinyl 219 m² & Leisten (7.998 €) + Eigenleistung (4.000 €)
                 fliesen_kosten: 0,                fliesen_eigen: 0,            // Vollflächiges SPC-Vinyl in Phase 8 eingeplant
@@ -1031,10 +1031,10 @@
         };
 
         // App State loaded from localStorage or Standard 14x9 Data
-        let appState = JSON.parse(localStorage.getItem('kfw40_baukosten_aufstellung_v4'));
-        if (!appState || appState.values?.grundstueck === 81984 || appState.values?.maurer_kosten === 28500) {
+        let appState = JSON.parse(localStorage.getItem('kfw40_baukosten_aufstellung_v5'));
+        if (!appState || appState.values?.grundstueck === 88800 || appState.values?.maurer_kosten === 28500) {
             appState = JSON.parse(JSON.stringify(JAKOB_14x9_DATA));
-            localStorage.setItem('kfw40_baukosten_aufstellung_v4', JSON.stringify(appState));
+            localStorage.setItem('kfw40_baukosten_aufstellung_v5', JSON.stringify(appState));
         }
 
         // Format number in German format (e.g. "12.345,67" or "12.345")
@@ -1061,8 +1061,9 @@
 
         // Save state to LocalStorage
         function saveState() {
-            localStorage.setItem('kfw40_baukosten_aufstellung_v4', JSON.stringify(appState));
+            localStorage.setItem('kfw40_baukosten_aufstellung_v5', JSON.stringify(appState));
         }
+
 
         // Update Meta Information
         function updateMeta(field, val) {
@@ -1368,8 +1369,8 @@
                 const v = appState.values;
 
                 // 1. Grundstück & Erwerbskosten (Phase 1)
-                v.grundstueck = sumPos(matData.nebenkosten, ['1.1']) || 88800;
-                v.steuer = sumPos(matData.nebenkosten, ['1.2']) || 4440;
+                v.grundstueck = sumPos(matData.nebenkosten, ['1.1']) || 81984;
+                v.steuer = sumPos(matData.nebenkosten, ['1.2']) || 5329;
                 v.notar = sumPos(matData.nebenkosten, ['1.3']) || 1600;
                 v.makler = 0;
                 v.sonstige_erwerb = sumPos(matData.nebenkosten, ['1.4', '1.6', '1.7', '1.13']) || 5150;
@@ -1417,14 +1418,14 @@
                 v.maurer_kosten = maurerMat + v.maurer_eigen; // 22.678,50 €
 
                 // Zimmerer / Palmatin Holzbau (Phase 3 Pos 3.1, 3.2, 3.4, 3.5, 3.8, 3.9)
-                const zimmererMat = sumPos(matData.palmatin, ['3.1', '3.2', '3.4', '3.5', '3.8', '3.9']) || 97900;
+                const zimmererMat = sumPos(matData.palmatin, ['3.1', '3.2', '3.4', '3.5', '3.8', '3.9']) || 95200;
                 v.zimmerer_eigen = 18000;
-                v.zimmerer_kosten = zimmererMat + v.zimmerer_eigen; // 115.900 €
+                v.zimmerer_kosten = zimmererMat + v.zimmerer_eigen; // 113.200 €
 
                 // Dach (Phase 3 Pos 3.3 Dachstuhl + Phase 4 Pos 4.1 Ziegel 178,9 m²)
-                const dachMat = (sumPos(matData.palmatin, ['3.3']) || 19800) + (sumPos(matData.huelle, ['4.1']) || 4383.05);
+                const dachMat = (sumPos(matData.palmatin, ['3.3']) || 18500) + (sumPos(matData.huelle, ['4.1']) || 4383.05);
                 v.dach_eigen = 6500;
-                v.dach_kosten = dachMat + v.dach_eigen; // 30.683,05 €
+                v.dach_kosten = dachMat + v.dach_eigen; // 29.383,05 €
 
                 // Klempner / Dachrinnen (Phase 4 Pos 4.4)
                 const klempnerMat = sumPos(matData.huelle, ['4.4']) || 1950;
@@ -1437,19 +1438,19 @@
                 v.glaser_kosten = glaserMat + v.glaser_eigen; // 20.650 €
 
                 // Heizung & Lüftung (Phase 2 Pos 2.7 FBH EG + Phase 6 Pos 6.1-6.5)
-                const heizungMat = (sumPos(matData.boden, ['2.7']) || 2409) + (sumPos(matData.haustechnik, ['6.1', '6.2', '6.3', '6.4', '6.5']) || 25300);
+                const heizungMat = (sumPos(matData.boden, ['2.7']) || 2409) + (sumPos(matData.haustechnik, ['6.1', '6.2', '6.3', '6.4', '6.5']) || 23800);
                 v.heizung_eigen = 5500;
-                v.heizung_kosten = heizungMat + v.heizung_eigen; // 33.209 €
+                v.heizung_kosten = heizungMat + v.heizung_eigen; // 31.709 €
 
                 // Elektro & PV (Phase 6 Pos 6.6-6.11, 6.13)
-                const elektroMat = sumPos(matData.haustechnik, ['6.6', '6.7', '6.8', '6.9', '6.10', '6.11', '6.13']) || 22200;
+                const elektroMat = sumPos(matData.haustechnik, ['6.6', '6.7', '6.8', '6.9', '6.10', '6.11', '6.13']) || 22700;
                 v.elektro_eigen = 6500;
-                v.elektro_kosten = elektroMat + v.elektro_eigen; // 28.700 €
+                v.elektro_kosten = elektroMat + v.elektro_eigen; // 29.200 €
 
                 // Sanitär (Phase 9 Pos 9.1-9.5)
-                const sanitaerMat = sumPos(matData.sanitaer, ['9.1', '9.2', '9.3', '9.4', '9.5']) || 12860;
+                const sanitaerMat = sumPos(matData.sanitaer, ['9.1', '9.2', '9.3', '9.4', '9.5']) || 17860;
                 v.sanitaer_eigen = 4500;
-                v.sanitaer_kosten = sanitaerMat + v.sanitaer_eigen; // 17.360 €
+                v.sanitaer_kosten = sanitaerMat + v.sanitaer_eigen; // 22.360 €
 
                 // Bodenbeläge & Estrich (Phase 7 Pos 7.4 Estrich OG + Phase 8 Pos 8.4 Vinyl 219m², 8.5 Leisten)
                 const bodenMat = (sumPos(matData.trockenbau, ['7.4']) || 3723) + (sumPos(matData.finish, ['8.4', '8.5']) || 7998);

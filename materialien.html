@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Haus Jakob | Chronologischer Gewerke- &amp; Einkaufsplaner</title>
-    <meta name="description" content="Chronologischer Material-, Mengen- und Einkaufsplaner nach Bauphasen für das Projekt Haus Jakob (140 m² Haus + 50 m² ELW + Garage + 444 m² Grundstück).">
+    <meta name="description" content="Chronologischer Material-, Mengen- und Einkaufsplaner nach Bauphasen für das Projekt Haus Jakob (140 m² Haus + 50 m² ELW + Garage + 427 m² Grundstück).">
     
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -170,7 +170,7 @@
                     </span>
                     <div class="space-y-0.5">
                         <h3 class="font-display font-bold text-lg text-slate-900 tracking-tight">Grundstück, Kaufnebenkosten &amp; Planung</h3>
-                        <p class="text-xs text-slate-500 leading-relaxed">Grundstück (444 m²), Steuer, Notar, Anwalt, Architekt (LPH 1-4 Bauantrag), Vermesser, Statik, Baugenehmigung, Hausanschlüsse &amp; Versicherungen</p>
+                        <p class="text-xs text-slate-500 leading-relaxed">Grundstück (427 m² @ 192 €/m² = 81.984 €), Steuer (5.329 €), Notar, Anwalt, Architekt (LPH 1-4 Bauantrag), Vermesser, Statik, Baugenehmigung, Hausanschlüsse &amp; Versicherungen</p>
                     </div>
                 </div>
                 
@@ -635,8 +635,8 @@
     <script>
         const DEFAULT_DATA = {
             nebenkosten: [
-                { pos: '1.1', title: 'Grundstückskauf (444 m² @ 200 €/m²)', spec: 'Flurstück Haus Jakob, vollerschlossen, 444 m²', usage: 'Grundstücksfläche Haus Jakob', qty: 444, unit: 'm²', price: 200.00, forTrader: false },
-                { pos: '1.2', title: 'Grunderwerbsteuer (ca. 5,0% vom Grundstück)', spec: 'Steuersatz Bundesland auf Grundstücksreinkaufswert', usage: 'Steuer Finanzamt Grundstückskauf', qty: 1, unit: 'Pauschale', price: 4440.00, forTrader: false },
+                { pos: '1.1', title: 'Grundstückskauf (427 m² @ 192 €/m²)', spec: 'Flurstück Haus Jakob, vollerschlossen, 427 m²', usage: 'Grundstücksfläche Haus Jakob', qty: 427, unit: 'm²', price: 192.00, forTrader: false },
+                { pos: '1.2', title: 'Grunderwerbsteuer (ca. 6,5% vom Grundstück)', spec: 'Steuersatz auf Grundstückskaufwert (81.984 €)', usage: 'Steuer Finanzamt Grundstückskauf', qty: 1, unit: 'Pauschale', price: 5329.00, forTrader: false },
                 { pos: '1.3', title: 'Notar- & Grundbuchkosten (ca. 1,5% - 2,0%)', spec: 'Notariatsgebühren & Eintragung Auflassungsvormerkung/Grundschuld', usage: 'Beurkundung & Grundbucheintragung', qty: 1, unit: 'Pauschale', price: 1600.00, forTrader: false },
                 { pos: '1.4', title: 'Rechtsanwalt / Vertragsprüfung Kaufvertrag', spec: 'Prüfung Notarvertragsentwurf & Werkvertrag', usage: 'Rechtliche Beratung & Prüfung', qty: 1, unit: 'Pauschale', price: 750.00, forTrader: false },
                 { pos: '1.5', title: 'Architekt / Bauvorlageberechtigter (Entwurf & Bauantrag 2 Vollgeschosse 14x9m)', spec: 'Leistungsphasen 1-4 HOAI inkl. Entwässerungsgesuch & Lageplan', usage: 'Genehmigungsplanung, Bauantrag & Entwässerung', qty: 1, unit: 'Pauschale', price: 6200.00, forTrader: false },
@@ -662,15 +662,15 @@
                 { pos: '2.10', title: 'Miete Flügelglätter / Helikopter (Glätten Betonoberfläche)', spec: 'Benzinbetriebener 90cm Einfachflügelglätter inkl. Glättteller, Glättflügel & Curing-Nachbehandlungsmittel', usage: '1 Tag Maschinenverleih + Benzin & Curing-Folie', qty: 1, unit: 'Pauschale', price: 250.00, forTrader: false }
             ],
             palmatin: [
-                { pos: '3.1', title: 'Palmatin Vorgefertigte Außenwände (2 Vollgeschosse 14x9m | 18mm Fichtenholz + 60mm STEICO + 180mm Ständer m. 180mm Steinwolle + 1. Lage OSB + 50mm Inst.-Ebene)', spec: 'Werkslieferung Palmatin: Vorgefertigte Außenwandelemente (U-Wert ca. 0,13 W/m²K) für 44,52 lfm Umfang x 5,70m Höhe (253,9 m² Brutto, 211,9 m² Netto nach 42,0 m² Öffnungen)', usage: 'Werkseitig komplett abgebundene & gedämmte Außenwand-Elemente (44,52 lfm Umfang, 211,9 m² Netto)', qty: 1, unit: 'Set', price: 56000.00, forTrader: false },
-                { pos: '3.2', title: 'Palmatin Vorgefertigte Innenwände EG & OG (Ständer + Dämmung + Folie + 1. Lage OSB auf einer Wandseite)', spec: 'Werkslieferung Palmatin: Vorgefertigte Innenwandelemente (Ständer 80/120mm, Dämmung, 1-seitig OSB) für 76,29 lfm Innenwände (164,1 m² Netto 1-seitig, 328,2 m² beidseitig)', usage: 'Werkseitige Innenwand-Elemente für 2 Vollgeschosse (76,29 lfm, 1-seitig werkseitig beplankt)', qty: 1, unit: 'Set', price: 19500.00, forTrader: false },
-                { pos: '3.3', title: 'Palmatin Dachkonstruktion (240 mm Sparren, Pfetten & Lattung ab Werk für 178,9 m² geneigte Dachfläche)', spec: 'Werkslieferung Palmatin: KVH-Sparren 240mm, Pfetten, Firstbohlen, USB-Unterspannbahn & Konterlattung für 178,9 m² geneigte Dachfläche', usage: 'Dach-Tragkonstruktion ab Werk (Satteldach 178,9 m²)', qty: 1, unit: 'Set', price: 19800.00, forTrader: false },
-                { pos: '3.4', title: 'Palmatin Zwischendecken-Balkenlage EG/OG (KVH 240 mm für 126 m² Grundfläche / 109,5 m² Netto)', spec: 'Werkslieferung Palmatin: Konstruktionsvollholz C24 240mm Balkenlage nach Statik für 126 m² Decke', usage: 'Holzbalkenlage Zwischendecke EG/OG (126 m² Sohlenmaß / 109,5 m² Netto)', qty: 1, unit: 'Set', price: 9800.00, forTrader: false },
-                { pos: '3.5', title: 'Palmatin Oberste Geschossdecke / Kehlbalkenlage (160 mm Balken für 126 m² Grundfläche / 109,5 m² Netto)', spec: 'Werkslieferung Palmatin: KVH 160mm Kehlbalkenlage zum ungedämmten Dachboden', usage: 'Balkenlage Decke OG zum Dachboden (126 m² Sohlenmaß / 109,5 m² Netto)', qty: 1, unit: 'Set', price: 6200.00, forTrader: false },
+                { pos: '3.1', title: 'Palmatin Vorgefertigte Außenwände (2 Vollgeschosse 14x9m | 18mm Fichtenholz + 60mm STEICO + 180mm Ständer m. 180mm Steinwolle + 1. Lage OSB + 50mm Inst.-Ebene)', spec: 'Werkslieferung Palmatin: Vorgefertigte Außenwandelemente (U-Wert ca. 0,13 W/m²K) für 44,52 lfm Umfang x 5,70m Höhe (253,9 m² Brutto, 211,9 m² Netto nach 42,0 m² Öffnungen)', usage: 'Werkseitig komplett abgebundene & gedämmte Außenwand-Elemente (44,52 lfm Umfang, 211,9 m² Netto)', qty: 1, unit: 'Set', price: 54000.00, forTrader: false },
+                { pos: '3.2', title: 'Palmatin Vorgefertigte Innenwände EG & OG (Ständer + Dämmung + Folie + 1. Lage OSB auf einer Wandseite)', spec: 'Werkslieferung Palmatin: Vorgefertigte Innenwandelemente (Ständer 80/120mm, Dämmung, 1-seitig OSB) für 76,29 lfm Innenwände (164,1 m² Netto 1-seitig, 328,2 m² beidseitig)', usage: 'Werkseitige Innenwand-Elemente für 2 Vollgeschosse (76,29 lfm, 1-seitig werkseitig beplankt)', qty: 1, unit: 'Set', price: 18500.00, forTrader: false },
+                { pos: '3.3', title: 'Palmatin Dachkonstruktion (240 mm Sparren, Pfetten & Lattung ab Werk für 178,9 m² geneigte Dachfläche)', spec: 'Werkslieferung Palmatin: KVH-Sparren 240mm, Pfetten, Firstbohlen, USB-Unterspannbahn & Konterlattung für 178,9 m² geneigte Dachfläche', usage: 'Dach-Tragkonstruktion ab Werk (Satteldach 178,9 m²)', qty: 1, unit: 'Set', price: 18500.00, forTrader: false },
+                { pos: '3.4', title: 'Palmatin Zwischendecken-Balkenlage EG/OG (KVH 240 mm für 126 m² Grundfläche / 109,5 m² Netto)', spec: 'Werkslieferung Palmatin: Konstruktionsvollholz C24 240mm Balkenlage nach Statik für 126 m² Decke', usage: 'Holzbalkenlage Zwischendecke EG/OG (126 m² Sohlenmaß / 109,5 m² Netto)', qty: 1, unit: 'Set', price: 9200.00, forTrader: false },
+                { pos: '3.5', title: 'Palmatin Oberste Geschossdecke / Kehlbalkenlage (160 mm Balken für 126 m² Grundfläche / 109,5 m² Netto)', spec: 'Werkslieferung Palmatin: KVH 160mm Kehlbalkenlage zum ungedämmten Dachboden', usage: 'Balkenlage Decke OG zum Dachboden (126 m² Sohlenmaß / 109,5 m² Netto)', qty: 1, unit: 'Set', price: 5800.00, forTrader: false },
                 { pos: '3.6', title: 'Palmatin Fenster-Komplettsatz (3-fach Verglasung Passivhaus-Standard inkl. Terrassen-/Schiebetür)', spec: 'Werkslieferung Palmatin: 18 Fenster 3-fach Verglasung (Ug=0,5 W/m²K, warme Kante) + 1 Hebe-Schiebetür 300x225cm (Gesamt-Öffnungsfläche ca. 42,0 m² inkl. Türen)', usage: 'Komplette Fenster-Werkslieferung von Palmatin für beide Vollgeschosse', qty: 1, unit: 'Komplett', price: 12000.00, forTrader: false },
                 { pos: '3.7', title: 'Palmatin Carport- & Terrassenüberdachungs-Holzbausatz (KVH/BSH Stützen & Träger)', spec: 'Werkslieferung Palmatin: BSH/KVH Holzbausatz für 36 m² Doppel-Carport & 21 m² Terrassendach', usage: 'Konstruktionsholz für 36 m² Carport + 21 m² Terrassenüberdachung', qty: 1, unit: 'Set', price: 4200.00, forTrader: false },
                 { pos: '3.8', title: 'Palmatin Echtholz-Geschosstreppe EG-OG', spec: 'Werkslieferung Palmatin: 1/4-gewendelte Massivholztreppe Buche/Eiche mit Geländer & Edelstahlsprossen', usage: 'Verbindungstreppe Hauptwohnung (Palmatin Werkslieferung)', qty: 1, unit: 'Set', price: 3200.00, forTrader: false },
-                { pos: '3.9', title: 'LKW-Transport & Logistik Palmatin Werkssatz (Sattelzüge ab Werk)', spec: 'Transport per Mega-Sattelzug inkl. Entladekoordination zur Baustelle', usage: 'Anlieferung Baustelle (Palmatin Transport)', qty: 1, unit: 'Pauschale', price: 3200.00, forTrader: false }
+                { pos: '3.9', title: 'LKW-Transport & Logistik Palmatin Werkssatz (3 Mega-Sattelzüge)', spec: 'Transport per Mega-Sattelzug inkl. Entladekoordination zur Baustelle (3 Fahrten à 1.500 €)', usage: 'Anlieferung Baustelle (Palmatin Transport 3 Züge)', qty: 3, unit: 'Fahrten', price: 1500.00, forTrader: false }
             ],
             huelle: [
                 { pos: '4.1', title: 'Dachpfannen / Tondachziegel & Dachsteine (bauseits in DE eingekauft für 178,9 m² Steildach)', spec: 'Braas Rubin 11V / Creaton Domino anthrazit engobiert für 178,9 m² Steildach inkl. 28 lfm Firstziegel & 32 Ortgänge', usage: 'Steildach-Eindeckung bauseits (178,9 m²)', qty: 178.9, unit: 'm²', price: 24.50, forTrader: true },
@@ -684,7 +684,7 @@
                 { pos: '5.3', title: 'RAL-Fenstermontage- & Abdichtungsset (Kompribänder, Dichtfolien & Montageschrauben)', spec: '3-Ebenen Multifunktionsband (z.B. illbruck TP652) + EPDM-Folien & Rahmenschrauben für 19 Fensterelemente', usage: 'Luft- & schlagregendichter Einbau der Palmatin-Fenster bauseits', qty: 1, unit: 'Set', price: 750.00, forTrader: true }
             ],
             haustechnik: [
-                { pos: '6.1', title: 'Luft-Wasser-Wärmepumpe 9-12 kW (aroTHERM plus / Vitocal)', spec: 'Monoblock-Wärmepumpe R290 (Propan), SCOP ≥ 4,8, Vorlauftemperatur bis 75°C inkl. Außeneinheit & Hydraulikstation', usage: 'Wärmeerzeuger R290 Propan für 2 Vollgeschosse', qty: 1, unit: 'Gerät', price: 11500.00, forTrader: true },
+                { pos: '6.1', title: 'Luft-Wasser-Wärmepumpe 9-12 kW (aroTHERM plus / Vitocal)', spec: 'Monoblock-Wärmepumpe R290 (Propan), SCOP ≥ 4,8, Vorlauftemperatur bis 75°C inkl. Außeneinheit & Hydraulikstation', usage: 'Wärmeerzeuger R290 Propan für 2 Vollgeschosse', qty: 1, unit: 'Gerät', price: 10000.00, forTrader: true },
                 { pos: '6.2', title: 'Warmwasserspeicher 300L + Pufferspeicher 100L', spec: 'Emaillierter 300L Warmwasserspeicher mit großflächigem Wärmetauscher für WP + 100L Trennpufferspeicher', usage: 'Heizung & Brauchwasser', qty: 1, unit: 'Set', price: 2800.00, forTrader: true },
                 { pos: '6.3', title: 'Verrohrung, Pumpengruppe, Ausdehnungsgefäß & Kältemittel', spec: 'Hocheffizienz-Umwälzpumpe Wilo/Grundfos, MAG 35L, Schlammabscheider mit Magnet & Kappenventile', usage: 'Heizungsanschluss & Hydraulik', qty: 1, unit: 'Set', price: 2400.00, forTrader: true },
                 { pos: '6.4', title: 'Kontrollierte Wohnraumlüftung (KWL mit WRG Set für 2 Vollgeschosse)', spec: 'Zentrales Lüftungsgerät mit Enthalpie-Wärmetauscher (Wärmebereitstellungsgrad ≥ 85%), Schalldämpfer & Rundrohrverteiler', usage: 'Lüftungsanlage KfW-40 komplett', qty: 1, unit: 'Set', price: 6800.00, forTrader: true },
@@ -694,7 +694,7 @@
                 { pos: '6.8', title: 'Schalter- & Steckdosenprogramm (z.B. Gira E2 / Busch-Jaeger)', spec: '200x Schutzkontakt-Steckdosen, 40x Wechselschalter, 30x Taster/Rollladenschalter in Reinweiß glänzend', usage: '200 Steckdosen, 70 Schalter & Dosen', qty: 1, unit: 'Paket', price: 2600.00, forTrader: true },
                 { pos: '6.9', title: 'LED-Einbauspots, Carport- & Terrassen-Außenleuchten', spec: '45x Einbauspots 6W warmweiß dimmbar (IP44 für Bäder) + 6x LED Außenwandleuchten anthrazit mit Bewegungsmelder', usage: 'Beleuchtung innen & außen', qty: 1, unit: 'Paket', price: 1900.00, forTrader: true },
                 { pos: '6.10', title: 'Photovoltaik-Anlage Komplettset (ca. 10-12 kWp + Hybrid-Wechselrichter & Speicher)', spec: '28x Glas-Glas Module 430Wp Full Black (N-Type TOPCon) + Hybridwechselrichter 10 kW + 7,7 kWh LFP Batteriespeicher', usage: 'Stromerzeugung Dach komplett inkl. PV-Module & Batterie-Speicher', qty: 1, unit: 'Komplett', price: 8500.00, forTrader: true },
-                { pos: '6.11', title: 'Wallbox 11 kW Ladesäule (am Carport montiert)', spec: '11 kW Typ 2 Ladebox mit 5m Ladekabel, RFID-Freischaltung, integriertem DC-Fehlerstromschutz & PV-Überschussladung', usage: 'E-Auto Ladestation 11 kW am Carport', qty: 1, unit: 'Stk', price: 500.00, forTrader: true },
+                { pos: '6.11', title: 'Wallbox 11 kW Ladesäule (am Carport montiert)', spec: '11 kW Typ 2 Ladebox mit 5m Ladekabel, RFID-Freischaltung, integriertem DC-Fehlerstromschutz & PV-Überschussladung', usage: 'E-Auto Ladestation 11 kW am Carport', qty: 2, unit: 'Stk', price: 500.00, forTrader: true },
                 { pos: '6.12', title: 'Blower-Door-Test & Zertifikat (Luftdichtigkeit KfW 40)', spec: 'Differenzdruck-Messung nach DIN EN ISO 9972 Verfahren A (n50-Grenzwert ≤ 1,0 h⁻¹) inkl. Leckageortung', usage: 'Pflichtprüfungsnachweis Förderbank', qty: 1, unit: 'Pauschale', price: 450.00, forTrader: false },
                 { pos: '6.13', title: 'Elektro-Inbetriebnahme & Messprotokoll (Elektriker)', spec: 'VDE 0100-600 Messungen (Schleifenimpedanz, RCD-Auslösezeit, Isolationswiderstand) & Fertigmeldung Netzbetreiber', usage: 'Abnahme & Zählersetzung', qty: 1, unit: 'Pauschale', price: 2500.00, forTrader: false }
             ],
@@ -717,14 +717,15 @@
             ],
             sanitaer: [
                 { pos: '9.1', title: 'Trinkwasser- & Abwasser-Rohinstallationspaket', spec: 'Mehrschichtverbundrohr PE-RT/Alu 16/20/26 mm mit Wärmedämmung + Geberit Silent-PP Abwasserrohre DN 50/75/110', usage: 'Mehrschichtverbundrohre & HT-Rohre für 2 Vollgeschosse', qty: 1, unit: 'Paket', price: 3400.00, forTrader: true },
-                { pos: '9.2', title: 'Hauptbad OG (1x Bodenebene Dusche + 1x Badewanne + WC + Doppel-Waschtisch)', spec: 'TECE Duschrinne 900mm + Glaswand 120cm + Badewanne 180x80cm + Geberit Sigma WC + Doppelwaschtisch 120cm inkl. Armaturen', usage: 'Hauptbad OG Sanitärobjekte & Armaturen', qty: 1, unit: 'Set', price: 5200.00, forTrader: true },
-                { pos: '9.3', title: 'Duschbad / ELW-Bad EG (1x Bodenebene Dusche + 1x WC + Waschtisch)', spec: 'Duschrinne 800mm + Walk-In Glas 90cm + Geberit Vorwand-WC + Waschtisch 60cm Unterschrank inkl. Armaturen', usage: 'Zusatzbad / ELW Sanitärobjekte', qty: 1, unit: 'Set', price: 2600.00, forTrader: true },
-                { pos: '9.4', title: 'Gäste-WC EG (1x Wand-WC + 1x Handwaschbecken & Armatur)', spec: 'Geberit Duofix Kompakt-WC spülrandlos + Handwaschbecken 45cm Keramik inkl. Kalt-/Warm-Einhebelmischer', usage: 'Gäste-WC Sanitärobjekte', qty: 1, unit: 'Set', price: 1100.00, forTrader: true },
+                { pos: '9.2', title: 'Hauptbad OG (1x Bodenebene Dusche + 1x Badewanne + WC + Doppel-Waschtisch)', spec: 'TECE Duschrinne 900mm + Glaswand 120cm + Badewanne 180x80cm + Geberit Sigma WC + Doppelwaschtisch 120cm inkl. Armaturen', usage: 'Hauptbad OG Sanitärobjekte & Armaturen', qty: 1, unit: 'Set', price: 7200.00, forTrader: true },
+                { pos: '9.3', title: 'Duschbad / ELW-Bad EG (1x Bodenebene Dusche + 1x WC + Waschtisch)', spec: 'Duschrinne 800mm + Walk-In Glas 90cm + Geberit Vorwand-WC + Waschtisch 60cm Unterschrank inkl. Armaturen', usage: 'Zusatzbad / ELW Sanitärobjekte', qty: 1, unit: 'Set', price: 4600.00, forTrader: true },
+                { pos: '9.4', title: 'Gäste-WC EG (1x Wand-WC + 1x Handwaschbecken & Armatur)', spec: 'Geberit Duofix Kompakt-WC spülrandlos + Handwaschbecken 45cm Keramik inkl. Kalt-/Warm-Einhebelmischer', usage: 'Gäste-WC Sanitärobjekte', qty: 1, unit: 'Set', price: 2100.00, forTrader: true },
                 { pos: '9.5', title: 'Frostfreie Kemper-Außenarmatur (Terrasse & Carport)', spec: '2x Kemper Frosti-Plus frostfreie Außenzapfstelle DN 15 für Wandstärken bis 415 mm', usage: 'Außenzapfstellen für Garten & Carport', qty: 2, unit: 'Stk', price: 280.00, forTrader: true }
             ]
         };
 
-        let appData = JSON.parse(localStorage.getItem('kfw40_material_data_v30')) || DEFAULT_DATA;
+        let appData = JSON.parse(localStorage.getItem('kfw40_material_data_v31')) || DEFAULT_DATA;
+
 
         // Firebase Configuration & Realtime Cloud Firestore Integration
         const firebaseConfig = {
