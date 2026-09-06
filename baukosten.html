@@ -229,13 +229,17 @@
 
             <!-- Smart Data Actions -->
             <div class="flex items-center gap-2 flex-wrap justify-end w-full md:w-auto">
-                <button onclick="importFromMaterialplaner()" class="px-3 py-1.5 bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-300 rounded-xl text-xs font-bold flex items-center gap-1.5 transition-all shadow-2xs" title="Liest die aktuellen Zahlen aus Phase 1 bis 9 von Haus Jakob ein">
-                    <i data-lucide="sparkles" class="w-3.5 h-3.5 text-emerald-600"></i>
-                    <span>Zahlen aus Materialplaner importieren</span>
+                <button onclick="loadJakob14x9Data()" class="px-3 py-1.5 bg-emerald-700 hover:bg-emerald-800 text-white rounded-xl text-xs font-bold flex items-center gap-1.5 transition-all shadow-xs" title="Lädt die neu berechnete Aufstellung für Haus Jakob (14x9m, 2 Vollgeschosse, Satteldach)">
+                    <i data-lucide="check-circle-2" class="w-3.5 h-3.5 text-white"></i>
+                    <span>Kalkulation 14x9m laden (Standard)</span>
                 </button>
-                <button onclick="loadSampleData()" class="px-3 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-200 rounded-xl text-xs font-bold flex items-center gap-1.5 transition-all shadow-2xs" title="Lädt die originalen Beispielwerte aus der Bankvorlage">
-                    <i data-lucide="file-text" class="w-3.5 h-3.5 text-slate-600"></i>
-                    <span>Musterzahlen laden</span>
+                <button onclick="importFromMaterialplaner()" class="px-3 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-800 border border-slate-300 rounded-xl text-xs font-bold flex items-center gap-1.5 transition-all shadow-2xs" title="Liest die Zahlen aus dem Materialplaner ein">
+                    <i data-lucide="sparkles" class="w-3.5 h-3.5 text-emerald-600"></i>
+                    <span>Aus Materialplaner</span>
+                </button>
+                <button onclick="loadSampleData()" class="px-3 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-600 border border-slate-200 rounded-xl text-xs font-bold flex items-center gap-1.5 transition-all shadow-2xs" title="Altes PDF-Musterbeispiel">
+                    <i data-lucide="file-text" class="w-3.5 h-3.5 text-slate-500"></i>
+                    <span>Altes PDF-Muster</span>
                 </button>
                 <button onclick="resetData()" class="px-3 py-1.5 bg-rose-50 hover:bg-rose-100 text-rose-700 border border-rose-200 rounded-xl text-xs font-bold flex items-center gap-1.5 transition-all shadow-2xs" title="Alle Beträge leeren">
                     <i data-lucide="trash-2" class="w-3.5 h-3.5 text-rose-600"></i>
@@ -259,13 +263,13 @@
                     <span class="px-2.5 py-0.5 rounded-full text-[11px] font-extrabold bg-amber-100 text-amber-900 border border-amber-300">
                         Bankstandard Formular
                     </span>
-                    <span class="text-xs text-slate-500 font-medium">Baukosten &amp; Eigenleistungsaufstellung nach DIN 276</span>
+                    <span class="text-xs text-slate-500 font-medium">Baukosten &amp; Eigenleistungsaufstellung (DIN 276)</span>
                 </div>
                 <h2 class="font-display font-bold text-lg text-slate-900">
-                    Baukostenaufstellung für Finanzierungsanfrage &amp; KfW
+                    Baukostenaufstellung: Haus Jakob (14 x 9 m | 2 Vollgeschosse | Satteldach)
                 </h2>
                 <p class="text-xs text-slate-500">
-                    Sie können die Werte direkt in der 1:1 Vorschau bearbeiten oder im Tab „Formular-Schnelleingabe“. Alle Summen und Eigenleistungen berechnen sich live.
+                    Kalkulation für 126 m² Grundfläche (252 m² BGF), KfW-40 Holzrahmenbauweise und Eigenleistungen (Muskelhypothek).
                 </p>
             </div>
 
@@ -926,96 +930,110 @@
 
     <!-- Core State & Calculation Script -->
     <script>
-        // Default Sample Data matching the User's uploaded PDF exactly
-        const SAMPLE_DATA = {
+        // 1. Reale Baukostenkalkulation für Haus Jakob (14 x 9 m | 2 Vollgeschosse | Satteldach | KfW 40)
+        const JAKOB_14x9_DATA = {
             meta: {
-                anfrage: "Haus Jakob KfW-40 Holzhaus",
+                anfrage: "Neubau KfW-40 Holzhaus 14x9m (2 Vollgeschosse, Satteldach)",
                 antragsteller: "Jakob Epp",
-                adresse: "Projektgrundstück 444 m²",
+                adresse: "Baugrundstück 444 m²",
                 vermittler: "Baufinanzierung / Bank"
             },
             values: {
-                // Page 1: Grundstück & Erwerb & Erschließung
-                grundstueck: 81984,
-                notar: 5330,
-                steuer: 1600,
-                makler: 0,
-                sonstige_erwerb: 0,
+                // Seite 1: Grundstück, Erwerb & Erschließung
+                grundstueck: 88800,        // 444 m² @ 200 €/m²
+                notar: 1800,              // Beurkundung Kaufvertrag & Grundbuch (ca. 2% auf Grundstück)
+                steuer: 4440,             // 5,0% Grunderwerbsteuer auf 88.800 €
+                makler: 0,                // Provisionsfrei
+                sonstige_erwerb: 1500,    // Bodengutachten & amtliche Vermessung Schnurgerüst
                 abfindungen: 0,
-                herrichten: 0,
-                erschliessung: 0,
+                herrichten: 2500,         // Baustraße, Baufeldfreimachung, Bauzaun
+                erschliessung: 0,         // Vollerschlossen
 
-                // Page 2: Baukosten Einzelgewerke (Kosten | Eigenleistung)
+                // Seite 2: Baukosten Einzelgewerke (Kosten | davon Eigenleistungen / Lohnkosten)
                 hausbauvertrag_kosten: 0,
                 hausbauvertrag_eigen: 0,
-                erdarbeiten_kosten: 5500,
-                erdarbeiten_eigen: 2500,
-                maurer_kosten: 24675,
-                maurer_eigen: 9000,
-                zimmerer_kosten: 145000,
-                zimmerer_eigen: 20000,
-                dach_kosten: 18200,
-                dach_eigen: 7500,
-                klempner_kosten: 3400,
-                klempner_eigen: 1200,
-                sanitaer_kosten: 15100,
-                sanitaer_eigen: 7500,
-                heizung_kosten: 18600,
-                heizung_eigen: 6000,
-                elektro_kosten: 14800,
-                elektro_eigen: 6500,
-                metallbau_kosten: 0,
-                metallbau_eigen: 0,
-                boden_kosten: 9000,
-                boden_eigen: 2000,
-                fliesen_kosten: 2885,
-                fliesen_eigen: 1755,
-                naturstein_kosten: 700,
-                naturstein_eigen: 300,
-                tischler_kosten: 0,
-                tischler_eigen: 0,
-                glaser_kosten: 4600,
-                glaser_eigen: 1050,
-                maler_kosten: 7211.28,
-                maler_eigen: 5061.28,
-                rolladen_kosten: 8935,
-                rolladen_eigen: 1710,
-                baukosten_sonstiges_kosten: 0,
-                baukosten_sonstiges_eigen: 0,
+                erdarbeiten_kosten: 6500,         erdarbeiten_eigen: 2500,     // Aushub 14x9m + Schacht + Feinplanum
+                maurer_kosten: 28500,             maurer_eigen: 9500,          // Thermobodenplatte 126 m², 160mm XPS, C25/30 Beton, Bewehrung
+                zimmerer_kosten: 138000,          zimmerer_eigen: 25000,       // Palmatin Holzrahmenbausatz 14x9m (5,70m Höhe), Zwischendecke 126m², Kehlbalken 126m², Dachstuhl
+                dach_kosten: 18500,               dach_eigen: 7000,            // Satteldach 175 m² Tondachziegel, Lattung, Unterdeckbahn, First/Ortgang
+                klempner_kosten: 3800,            klempner_eigen: 1200,        // Zink-Dachrinnen halbrunnd RG 125 Traufe 2x15m, Fallrohre
+                sanitaer_kosten: 16500,           sanitaer_eigen: 6500,        // Rohinstallation Trinkwasser/Abwasser Geberit, Hauptbad OG, Duschbad ELW, Gäste-WC, Kemper-Zapfstellen
+                heizung_kosten: 28500,            heizung_eigen: 7500,         // Luft-Wasser-WP 10-12 kW R290, 300L WW, 230 m² FBH EG/OG, KWL Lüftung mit WRG
+                elektro_kosten: 24500,            elektro_eigen: 8000,         // Zählerschrank Haus+ELW, 2.800m NYM, Schalter Gira, PV-Anlage 10 kWp + 7,7 kWh Batterie, Wallbox
+                metallbau_kosten: 1500,           metallbau_eigen: 500,        // Treppengeländer & Absturzsicherung
+                boden_kosten: 13500,              boden_eigen: 5500,           // 115 m² Fließestrich OG + 210 m² Klick-Vinyl vollflächig + Sockelleisten
+                fliesen_kosten: 4500,             fliesen_eigen: 2200,         // Fliesenarbeiten Bäder & WC Nassbereich
+                naturstein_kosten: 1200,          naturstein_eigen: 500,       // Fensterbänke innen & außen (Agglo/Alu)
+                tischler_kosten: 7500,            tischler_eigen: 2500,        // 14 CPL Weißlack Innentüren mit Zargen, Geschosstreppe Echtholz
+                glaser_kosten: 19500,             glaser_eigen: 3500,          // 19 Passivhaus-Fenster 3-fach Ug=0,5, Hebe-Schiebetür 3x2,25m, Haustüren
+                maler_kosten: 9500,               maler_eigen: 6500,           // 950 m² Trockenbau spachteln Q2/Q3, Glattvlies, 2x Silikatfarbe
+                rolladen_kosten: 6500,            rolladen_eigen: 1500,        // Elektrische Alu-Rollläden anthrazit
+                baukosten_sonstiges_kosten: 2500, baukosten_sonstiges_eigen: 1000, // Gerüstbau Mithilfe, Bauschuttcontainer
 
-                // Page 2: Baunebenkosten
-                architekt_kosten: 7500,
-                architekt_eigen: 0,
-                verwaltung_kosten: 0,
-                verwaltung_eigen: 0,
-                finanzierung_kosten: 0,
-                finanzierung_eigen: 0,
-                sonstige_neben_kosten: 0,
-                sonstige_neben_eigen: 0,
-                wasser_kosten: 1936.70,
-                wasser_eigen: 1070,
-                gas_kosten: 2000,
-                gas_eigen: 0,
-                strom_kosten: 1500,
-                strom_eigen: 0,
+                // Seite 2: Baunebenkosten
+                architekt_kosten: 12500,          architekt_eigen: 0,          // Architekt LPH 1-4 Bauantrag, Statik Eurocode, Energieberater KfW 40
+                verwaltung_kosten: 1800,          verwaltung_eigen: 0,         // Baugenehmigungsgebühr Kreis/Bauamt
+                finanzierung_kosten: 0,           finanzierung_eigen: 0,
+                sonstige_neben_kosten: 4500,      sonstige_neben_eigen: 500,   // Baustelleneinrichtung, Baustrom, Vermesser, Blower-Door KfW 40
+                wasser_kosten: 2500,              wasser_eigen: 800,           // Trinkwasseranschluss Stadtwerke
+                gas_kosten: 0,                    gas_eigen: 0,                // 0 € - Reine Wärmepumpe / KfW 40 (kein Gas!)
+                strom_kosten: 2800,               strom_eigen: 0,              // Baustrom & Hausanschluss Stromnetz
 
-                // Page 3: Außenanlagen
-                entwaesserung_kosten: 2300,
-                entwaesserung_eigen: 900,
-                hof_kosten: 4750,
-                hof_eigen: 2100,
-                aussen_sonstige_kosten: 12755,
-                aussen_sonstige_eigen: 3765,
-                garagen_kosten: 5950,
-                garagen_eigen: 2100
+                // Seite 3: Außenanlagen
+                entwaesserung_kosten: 3500,       entwaesserung_eigen: 1200,   // Regenwasser-Rigolen/Versickerung, Revisionsschacht DN 1000
+                hof_kosten: 6500,                 hof_eigen: 2800,             // 60 m² Pflaster/Schottertragschicht für Auffahrt & 2 Stellplätze
+                aussen_sonstige_kosten: 8500,     aussen_sonstige_eigen: 4000, // 25 m² Terrasse, Geländemodellierung, Mutterboden, Einfriedung
+                garagen_kosten: 7500,             garagen_eigen: 3200          // Doppel-Carport 36 m² Bausatz Palmatin mit Trapezblech & Terrassendach
             }
         };
 
-        // App State loaded from localStorage or Sample
-        let appState = JSON.parse(localStorage.getItem('kfw40_baukosten_aufstellung_v1')) || JSON.parse(JSON.stringify(SAMPLE_DATA));
-        if (appState.meta && (!appState.meta.antragsteller || appState.meta.antragsteller === 'Paul Epp')) {
-            appState.meta.antragsteller = 'Jakob Epp';
-            localStorage.setItem('kfw40_baukosten_aufstellung_v1', JSON.stringify(appState));
+        // 2. Altes PDF-Muster (nur als Referenzbeispiel aus ursprünglicher PDF)
+        const SAMPLE_DATA = {
+            meta: {
+                anfrage: "Altes Musterbeispiel",
+                antragsteller: "Jakob Epp",
+                adresse: "Beispielstraße 1",
+                vermittler: "Bank"
+            },
+            values: {
+                grundstueck: 81984, notar: 5330, steuer: 1600, makler: 0, sonstige_erwerb: 0, abfindungen: 0, herrichten: 0, erschliessung: 0,
+                hausbauvertrag_kosten: 0, hausbauvertrag_eigen: 0,
+                erdarbeiten_kosten: 5500, erdarbeiten_eigen: 2500,
+                maurer_kosten: 24675, maurer_eigen: 9000,
+                zimmerer_kosten: 145000, zimmerer_eigen: 20000,
+                dach_kosten: 18200, dach_eigen: 7500,
+                klempner_kosten: 3400, klempner_eigen: 1200,
+                sanitaer_kosten: 15100, sanitaer_eigen: 7500,
+                heizung_kosten: 18600, heizung_eigen: 6000,
+                elektro_kosten: 14800, elektro_eigen: 6500,
+                metallbau_kosten: 0, metallbau_eigen: 0,
+                boden_kosten: 9000, boden_eigen: 2000,
+                fliesen_kosten: 2885, fliesen_eigen: 1755,
+                naturstein_kosten: 700, naturstein_eigen: 300,
+                tischler_kosten: 0, tischler_eigen: 0,
+                glaser_kosten: 4600, glaser_eigen: 1050,
+                maler_kosten: 7211.28, maler_eigen: 5061.28,
+                rolladen_kosten: 8935, rolladen_eigen: 1710,
+                baukosten_sonstiges_kosten: 0, baukosten_sonstiges_eigen: 0,
+                architekt_kosten: 7500, architekt_eigen: 0,
+                verwaltung_kosten: 0, verwaltung_eigen: 0,
+                finanzierung_kosten: 0, finanzierung_eigen: 0,
+                sonstige_neben_kosten: 0, sonstige_neben_eigen: 0,
+                wasser_kosten: 1936.70, wasser_eigen: 1070,
+                gas_kosten: 2000, gas_eigen: 0,
+                strom_kosten: 1500, strom_eigen: 0,
+                entwaesserung_kosten: 2300, entwaesserung_eigen: 900,
+                hof_kosten: 4750, hof_eigen: 2100,
+                aussen_sonstige_kosten: 12755, aussen_sonstige_eigen: 3765,
+                garagen_kosten: 5950, garagen_eigen: 2100
+            }
+        };
+
+        // App State loaded from localStorage or Standard 14x9 Data
+        let appState = JSON.parse(localStorage.getItem('kfw40_baukosten_aufstellung_v2'));
+        if (!appState || appState.values?.grundstueck === 81984) {
+            appState = JSON.parse(JSON.stringify(JAKOB_14x9_DATA));
+            localStorage.setItem('kfw40_baukosten_aufstellung_v2', JSON.stringify(appState));
         }
 
         // Format number in German format (e.g. "12.345,67" or "12.345")
@@ -1042,7 +1060,7 @@
 
         // Save state to LocalStorage
         function saveState() {
-            localStorage.setItem('kfw40_baukosten_aufstellung_v1', JSON.stringify(appState));
+            localStorage.setItem('kfw40_baukosten_aufstellung_v2', JSON.stringify(appState));
         }
 
         // Update Meta Information
@@ -1421,6 +1439,16 @@
                 console.error('Import error:', err);
                 showToast('Fehler beim Importieren der Daten: ' + err.message, 'rose');
             }
+        }
+
+        // Load newly calculated Haus Jakob 14x9m data (Standard)
+        function loadJakob14x9Data() {
+            appState = JSON.parse(JSON.stringify(JAKOB_14x9_DATA));
+            saveState();
+            recalcAll();
+            renderPreviewValues();
+            renderFormValues();
+            showToast('Kalkulation für Haus Jakob (14x9m, 2 Vollgeschosse, Satteldach) geladen!', 'emerald');
         }
 
         // Load original sample data from PDF
