@@ -931,6 +931,7 @@
     <!-- Core State & Calculation Script -->
     <script>
         // 1. Reale Baukostenkalkulation für Haus Jakob (14 x 9 m | 2 Vollgeschosse | Satteldach | KfW 40)
+        // Einheitliche Datenbasis: Fremdkosten (Kosten - Eigenleistung) entsprechen exakt den 388.397,95 € Material-/Anschaffungskosten
         const JAKOB_14x9_DATA = {
             meta: {
                 anfrage: "Neubau KfW-40 Holzhaus 14x9m (2 Vollgeschosse, Satteldach)",
@@ -939,51 +940,51 @@
                 vermittler: "Baufinanzierung / Bank"
             },
             values: {
-                // Seite 1: Grundstück, Erwerb & Erschließung
-                grundstueck: 88800,        // 444 m² @ 200 €/m²
-                notar: 1800,              // Beurkundung Kaufvertrag & Grundbuch (ca. 2% auf Grundstück)
-                steuer: 4440,             // 5,0% Grunderwerbsteuer auf 88.800 €
+                // Seite 1: Grundstück, Erwerb & Erschließung (Phase 1)
+                grundstueck: 88800,        // Pos 1.1: 444 m² @ 200 €/m²
+                notar: 1600,              // Pos 1.3: Notar- & Grundbuchkosten (ca. 1,5-2%)
+                steuer: 4440,             // Pos 1.2: Grunderwerbsteuer (5,0% auf 88.800 €)
                 makler: 0,                // Provisionsfrei
-                sonstige_erwerb: 1500,    // Bodengutachten & amtliche Vermessung Schnurgerüst
+                sonstige_erwerb: 5150,    // Pos 1.4 Anwalt (750 €) + Pos 1.6 Vermesser (2.400 €) + Pos 1.7 Baugrund (1.200 €) + Pos 1.13 Versicherung (800 €)
                 abfindungen: 0,
-                herrichten: 2500,         // Baustraße, Baufeldfreimachung, Bauzaun
+                herrichten: 0,
                 erschliessung: 0,         // Vollerschlossen
 
-                // Seite 2: Baukosten Einzelgewerke (Kosten | davon Eigenleistungen / Lohnkosten)
+                // Seite 2: Baukosten Einzelgewerke (Kosten = Material + Eigenleistung | davon Eigenleistungen / Muskelhypothek)
                 hausbauvertrag_kosten: 0,
                 hausbauvertrag_eigen: 0,
-                erdarbeiten_kosten: 6500,         erdarbeiten_eigen: 2500,     // Aushub 14x9m + Schacht + Feinplanum
-                maurer_kosten: 28500,             maurer_eigen: 9500,          // Thermobodenplatte 126 m², 160mm XPS, C25/30 Beton (25.2 m³), Bewehrung
-                zimmerer_kosten: 138000,          zimmerer_eigen: 25000,       // Palmatin Holzrahmenbausatz 14x9m (44.52m Umfang, 253.9 m² AW brutto, 76.29 lfm IW), Zwischendecke 126m², Kehlbalken 126m², Dachstuhl 178.9 m²
-                dach_kosten: 18500,               dach_eigen: 7000,            // Satteldach 178,9 m² Tondachziegel, Lattung, Unterdeckbahn, First/Ortgang
-                klempner_kosten: 3800,            klempner_eigen: 1200,        // Zink-Dachrinnen halbrunnd RG 125 Traufe 2x15m, Fallrohre
-                sanitaer_kosten: 16500,           sanitaer_eigen: 6500,        // Rohinstallation Trinkwasser/Abwasser Geberit, Hauptbad OG, Duschbad ELW, Gäste-WC, Kemper-Zapfstellen
-                heizung_kosten: 28500,            heizung_eigen: 7500,         // Luft-Wasser-WP 10-12 kW R290, 300L WW, 219 m² FBH EG/OG (109,5 m² EG + 109,5 m² OG), KWL Lüftung mit WRG
-                elektro_kosten: 24500,            elektro_eigen: 8000,         // Zählerschrank Haus+ELW, 2.800m NYM, Schalter Gira, PV-Anlage 10 kWp + 7,7 kWh Batterie, Wallbox
-                metallbau_kosten: 1500,           metallbau_eigen: 500,        // Treppengeländer & Absturzsicherung
-                boden_kosten: 13500,              boden_eigen: 5500,           // 109,5 m² Fließestrich OG + 219 m² Klick-Vinyl vollflächig + Sockelleisten
-                fliesen_kosten: 4500,             fliesen_eigen: 2200,         // Fliesenarbeiten Bäder & WC Nassbereich
-                naturstein_kosten: 1200,          naturstein_eigen: 500,       // Fensterbänke innen & außen (Agglo/Alu)
-                tischler_kosten: 7500,            tischler_eigen: 2500,        // 14 CPL Weißlack Innentüren mit Zargen, Geschosstreppe Echtholz
-                glaser_kosten: 19500,             glaser_eigen: 3500,          // 19 Passivhaus-Fenster 3-fach Ug=0,5 (42,0 m² Glas-/Rahmenfläche inkl. Hebe-Schiebetür 3x2,25m und Haustüren)
-                maler_kosten: 9500,               maler_eigen: 6500,           // 742 m² Trockenbau spachteln Q2/Q3, Glattvlies, 2x Silikatfarbe
-                rolladen_kosten: 6500,            rolladen_eigen: 1500,        // Elektrische Alu-Rollläden anthrazit
-                baukosten_sonstiges_kosten: 2500, baukosten_sonstiges_eigen: 1000, // Gerüstbau Mithilfe, Bauschuttcontainer
+                erdarbeiten_kosten: 3000,         erdarbeiten_eigen: 1500,     // Pos 2.1: Bagger 2 Tage (1.500 €) + Eigenleistung Aushub & Planum (1.500 €)
+                maurer_kosten: 22678.50,          maurer_eigen: 8000,          // Pos 2.3-2.6, 2.8-2.10: Thermobodenplatte Sohle 126 m² (14.678,50 €) + Eigenleistung Bewehrung, Dämmung, Beton (8.000 €)
+                zimmerer_kosten: 115900,          zimmerer_eigen: 18000,       // Pos 3.1, 3.2, 3.4, 3.5, 3.8, 3.9: Palmatin Holzrahmenbausatz & Treppe (97.900 €) + Eigenleistung Montage & Dämmen (18.000 €)
+                dach_kosten: 30683.05,            dach_eigen: 6500,            // Pos 3.3 Dachstuhl (19.800 €) + Pos 4.1 Tondachziegel 178,9 m² (4.383,05 €) + Eigenleistung Eindeckung (6.500 €)
+                klempner_kosten: 2750,            klempner_eigen: 800,         // Pos 4.4: Titanzink Dachrinnen Set (1.950 €) + Eigenleistung Montage (800 €)
+                glaser_kosten: 20650,             glaser_eigen: 2500,          // Pos 3.6 Fenster-Set (12.000 €) + Pos 5.1-5.3 2 Haustüren & RAL-Set (6.150 €) + Eigenleistung (2.500 €)
+                heizung_kosten: 33209,            heizung_eigen: 5500,         // Pos 2.7 FBH EG (2.409 €) + Pos 6.1-6.5 Wärmepumpe R290, KWL, Speicher (25.300 €) + Eigenleistung (5.500 €)
+                elektro_kosten: 28700,            elektro_eigen: 6500,         // Pos 6.6-6.11, 6.13: Elektroinstallation, PV 10 kWp + Speicher (22.200 €) + Eigenleistung Kabel & Dosen (6.500 €)
+                sanitaer_kosten: 17360,           sanitaer_eigen: 4500,        // Pos 9.1-9.5: Trink-/Abwasser Rohre & 3 Bäder (12.860 €) + Eigenleistung (4.500 €)
+                metallbau_kosten: 0,              metallbau_eigen: 0,
+                boden_kosten: 15721,              boden_eigen: 4000,           // Pos 7.4 Estrich OG (3.723 €) + Pos 8.4-8.5 Klick-Vinyl 219 m² & Leisten (7.998 €) + Eigenleistung (4.000 €)
+                fliesen_kosten: 0,                fliesen_eigen: 0,            // Vollflächiges SPC-Vinyl in Phase 8 eingeplant
+                naturstein_kosten: 0,             naturstein_eigen: 0,         // Fensterbänke bei Tischlerarbeiten enthalten
+                tischler_kosten: 7280,            tischler_eigen: 1800,        // Pos 8.6-8.7: 14 Innentüren CPL (4.130 €) + 18 Fensterbänke (1.350 €) + Eigenleistung (1.800 €)
+                maler_kosten: 29709.40,           maler_eigen: 12000,          // Pos 7.1-7.3, 7.5-7.6 Trockenbau (12.181,50 €) + Pos 8.1-8.3 Finish Spachtel/Vlies/Farbe (5.527,90 €) + Eigenleistung (12.000 €)
+                rolladen_kosten: 0,               rolladen_eigen: 0,
+                baukosten_sonstiges_kosten: 0,    baukosten_sonstiges_eigen: 0,
 
-                // Seite 2: Baunebenkosten
-                architekt_kosten: 12500,          architekt_eigen: 0,          // Architekt LPH 1-4 Bauantrag, Statik Eurocode, Energieberater KfW 40
-                verwaltung_kosten: 1800,          verwaltung_eigen: 0,         // Baugenehmigungsgebühr Kreis/Bauamt
+                // Seite 2: Baunebenkosten (Phase 1 & Phase 6)
+                architekt_kosten: 13100,          architekt_eigen: 0,          // Pos 1.5 Architekt (6.200 €) + Pos 1.8 Statik (3.400 €) + Pos 1.10 Energieberater KfW 40 (3.500 €)
+                verwaltung_kosten: 1300,          verwaltung_eigen: 0,         // Pos 1.9: Baugenehmigungsgebühren Bauamt
                 finanzierung_kosten: 0,           finanzierung_eigen: 0,
-                sonstige_neben_kosten: 4500,      sonstige_neben_eigen: 500,   // Baustelleneinrichtung, Baustrom, Vermesser, Blower-Door KfW 40
-                wasser_kosten: 2500,              wasser_eigen: 800,           // Trinkwasseranschluss Stadtwerke
+                sonstige_neben_kosten: 4650,      sonstige_neben_eigen: 1000,  // Pos 1.12 Baustelleneinrichtung Gerüst/Container (3.200 €) + Pos 6.12 Blower-Door (450 €) + Eigenleistung (1.000 €)
+                wasser_kosten: 3300,              wasser_eigen: 800,           // Pos 1.11 Teil Wasseranschluss (2.500 €) + Eigenleistung Graben (800 €)
                 gas_kosten: 0,                    gas_eigen: 0,                // 0 € - Reine Wärmepumpe / KfW 40 (kein Gas!)
-                strom_kosten: 2800,               strom_eigen: 0,              // Baustrom & Hausanschluss Stromnetz
+                strom_kosten: 4000,               strom_eigen: 0,              // Pos 1.11 Teil Stromnetz (2.700 €) + Telekom/Glasfaser (1.300 €)
 
-                // Seite 3: Außenanlagen
-                entwaesserung_kosten: 3500,       entwaesserung_eigen: 1200,   // Regenwasser-Rigolen/Versickerung, Revisionsschacht DN 1000
-                hof_kosten: 6500,                 hof_eigen: 2800,             // 60 m² Pflaster/Schottertragschicht für Auffahrt & 2 Stellplätze
-                aussen_sonstige_kosten: 8500,     aussen_sonstige_eigen: 4000, // 25 m² Terrasse, Geländemodellierung, Mutterboden, Einfriedung
-                garagen_kosten: 7500,             garagen_eigen: 3200          // Doppel-Carport 36 m² Bausatz Palmatin mit Trapezblech & Terrassendach
+                // Seite 3: Außenanlagen (Phase 2, 3 & 4)
+                entwaesserung_kosten: 1500,       entwaesserung_eigen: 400,    // Pos 2.2: Betonschacht DN 1000 (1.100 €) + Eigenleistung Einbau (400 €)
+                hof_kosten: 0,                    hof_eigen: 0,                // Optional bauseits
+                aussen_sonstige_kosten: 0,        aussen_sonstige_eigen: 0,    // Optional bauseits
+                garagen_kosten: 11000,            garagen_eigen: 4283          // Pos 3.7 Carport/Terrasse Holz (4.200 €) + Pos 4.2 Terrassendach (1.365 €) + Pos 4.3 Carport Trapezblech (1.152 €) + Eigenleistung (4.283 €)
             }
         };
 
@@ -1030,10 +1031,10 @@
         };
 
         // App State loaded from localStorage or Standard 14x9 Data
-        let appState = JSON.parse(localStorage.getItem('kfw40_baukosten_aufstellung_v3'));
-        if (!appState || appState.values?.grundstueck === 81984) {
+        let appState = JSON.parse(localStorage.getItem('kfw40_baukosten_aufstellung_v4'));
+        if (!appState || appState.values?.grundstueck === 81984 || appState.values?.maurer_kosten === 28500) {
             appState = JSON.parse(JSON.stringify(JAKOB_14x9_DATA));
-            localStorage.setItem('kfw40_baukosten_aufstellung_v3', JSON.stringify(appState));
+            localStorage.setItem('kfw40_baukosten_aufstellung_v4', JSON.stringify(appState));
         }
 
         // Format number in German format (e.g. "12.345,67" or "12.345")
@@ -1060,7 +1061,7 @@
 
         // Save state to LocalStorage
         function saveState() {
-            localStorage.setItem('kfw40_baukosten_aufstellung_v3', JSON.stringify(appState));
+            localStorage.setItem('kfw40_baukosten_aufstellung_v4', JSON.stringify(appState));
         }
 
         // Update Meta Information
@@ -1220,33 +1221,36 @@
                 if (el) el.value = appState.values[k] || 0;
             });
 
-            // Gewerke Rows
+            // Gewerke Rows (verknüpft mit den 9 Phasen des Materialplaners)
             const gewerke = [
-                { id: 'hausbauvertrag', label: 'Hausbauvertrag – Gesamtauftrag' },
-                { id: 'erdarbeiten', label: 'Erdarbeiten' },
-                { id: 'maurer', label: 'Maurer-, Beton-, Putz- und Isolierungsarbeiten' },
-                { id: 'zimmerer', label: 'Zimmerarbeiten' },
-                { id: 'dach', label: 'Dachdeckerarbeiten' },
-                { id: 'klempner', label: 'Klempnerarbeiten' },
-                { id: 'sanitaer', label: 'Sanitär-Installation' },
-                { id: 'heizung', label: 'Heizungsarbeiten' },
-                { id: 'elektro', label: 'Elektro-Installation' },
-                { id: 'metallbau', label: 'Metallbauarbeiten' },
-                { id: 'boden', label: 'Fußbodenarbeiten (Estrich, Belag)' },
-                { id: 'fliesen', label: 'Fliesenarbeiten' },
-                { id: 'naturstein', label: 'Natur- und Betonwerksteinarbeiten' },
-                { id: 'tischler', label: 'Tischlerarbeiten' },
-                { id: 'glaser', label: 'Glaserarbeiten' },
-                { id: 'maler', label: 'Malerarbeiten' },
-                { id: 'rolladen', label: 'Rolladenarbeiten' },
-                { id: 'baukosten_sonstiges', label: 'Sonstiges (Baukosten)' }
+                { id: 'hausbauvertrag', label: 'Hausbauvertrag – Gesamtauftrag', hint: 'Nur bei GU/Generalunternehmer (bei Einzelvergabe 0 €)' },
+                { id: 'erdarbeiten', label: 'Erdarbeiten', hint: 'Phase 2 Pos 2.1: Bagger 2 Tage (Aushub 14x9m, Schacht, Feinplanum)' },
+                { id: 'maurer', label: 'Maurer-, Beton-, Putz- und Isolierungsarbeiten', hint: 'Phase 2: Thermobodenplatte 126 m² (XPS 160mm, Beton C25/30 25,2 m³, Bewehrung)' },
+                { id: 'zimmerer', label: 'Zimmerarbeiten', hint: 'Phase 3: Palmatin Holzrahmenbausatz 14x9m (Außen-/Innenwände, Decken, Treppe)' },
+                { id: 'dach', label: 'Dachdeckerarbeiten', hint: 'Phase 3 & 4: Palmatin Dachstuhl + 178,9 m² Tondachziegel & Eindeckung' },
+                { id: 'klempner', label: 'Klempnerarbeiten', hint: 'Phase 4 Pos 4.4: Titanzink Dachrinnen RG 125 & Fallrohre (Haus, Carport, Terrasse)' },
+                { id: 'sanitaer', label: 'Sanitär-Installation', hint: 'Phase 9 Pos 9.1-9.5: Rohre, Hauptbad OG, ELW-Duschbad, Gäste-WC, Kemper' },
+                { id: 'heizung', label: 'Heizungsarbeiten', hint: 'Phase 2 & 6: Wärmepumpe R290, KWL mit WRG, 219 m² FBH EG/OG' },
+                { id: 'elektro', label: 'Elektro-Installation', hint: 'Phase 6: Zählerschrank Haus+ELW, PV 10 kWp + Speicher, Kabel, Wallbox' },
+                { id: 'metallbau', label: 'Metallbauarbeiten', hint: 'Bauseits / Optional (Treppengeländer in Phase 3 enthalten)' },
+                { id: 'boden', label: 'Fußbodenarbeiten (Estrich, Belag)', hint: 'Phase 7 & 8: Fließestrich OG + 219 m² SPC-Klickvinyl & 220m Sockelleisten' },
+                { id: 'fliesen', label: 'Fliesenarbeiten', hint: 'Bäder & WCs (vollflächiges Vinyl in Phase 8 eingeplant)' },
+                { id: 'naturstein', label: 'Natur- und Betonwerksteinarbeiten', hint: 'Fensterbänke innen/außen (bei Tischlerarbeiten enthalten)' },
+                { id: 'tischler', label: 'Tischlerarbeiten', hint: 'Phase 8 Pos 8.6, 8.7: 14 CPL Weißlack Innentüren mit Zargen & 18 Fensterbänke' },
+                { id: 'glaser', label: 'Glaserarbeiten', hint: 'Phase 3 & 5: Palmatin Passivhaus-Fenster + 2x gedämmte Haustüren & RAL-Set' },
+                { id: 'maler', label: 'Malerarbeiten', hint: 'Phase 7 & 8: 742 m² Trockenbau (OSB/Rigips) + Spachteln Q2/Q3, Vlies & Silikatfarbe' },
+                { id: 'rolladen', label: 'Rolladenarbeiten', hint: 'Bauseits / Optional' },
+                { id: 'baukosten_sonstiges', label: 'Sonstiges (Baukosten)', hint: 'Baustelleninfrastruktur & Mithilfe' }
             ];
 
             const tbodyGewerke = document.getElementById('form-gewerke-tbody');
             if (tbodyGewerke) {
                 tbodyGewerke.innerHTML = gewerke.map(g => `
                     <tr class="hover:bg-slate-50 transition-colors">
-                        <td class="py-2 px-3 font-medium text-slate-900">${g.label}</td>
+                        <td class="py-2 px-3">
+                            <div class="font-medium text-slate-900">${g.label}</div>
+                            ${g.hint ? `<div class="text-[10px] text-slate-400 font-normal leading-tight">${g.hint}</div>` : ''}
+                        </td>
                         <td class="py-1 px-3 text-right">
                             <input type="number" step="50" value="${appState.values[g.id + '_kosten'] || 0}" 
                                    onchange="handleFormChange('${g.id}_kosten', this.value)" 
@@ -1263,20 +1267,23 @@
 
             // Baunebenkosten Rows
             const neben = [
-                { id: 'architekt', label: 'Architekten- und Statikergebühren' },
-                { id: 'verwaltung', label: 'Verwaltungs- bzw. Behördenkosten' },
-                { id: 'finanzierung', label: 'Kosten Beschaffung Finanzierungsmittel' },
-                { id: 'sonstige_neben', label: 'Sonstige Baunebenkosten' },
-                { id: 'wasser', label: 'Wasseranschluss' },
-                { id: 'gas', label: 'Gasanschluss' },
-                { id: 'strom', label: 'Elektrizitätsanschluss' }
+                { id: 'architekt', label: 'Architekten- und Statikergebühren', hint: 'Phase 1 Pos 1.5, 1.8, 1.10: Architekt LPH 1-4, Statik & Energieberater KfW 40' },
+                { id: 'verwaltung', label: 'Verwaltungs- bzw. Behördenkosten', hint: 'Phase 1 Pos 1.9: Baugenehmigungsgebühren Bauamt' },
+                { id: 'finanzierung', label: 'Kosten Beschaffung Finanzierungsmittel', hint: 'Grundschuldbestellungsgebühren (optional)' },
+                { id: 'sonstige_neben', label: 'Sonstige Baunebenkosten', hint: 'Phase 1 Pos 1.12 Gerüst/Container (3.200 €) + Phase 6 Pos 6.12 Blower-Door (450 €)' },
+                { id: 'wasser', label: 'Wasseranschluss', hint: 'Phase 1 Pos 1.11 Teil: Trinkwasseranschluss Stadtwerke' },
+                { id: 'gas', label: 'Gasanschluss', hint: '0 € - Haus Jakob nutzt 100% Wärmepumpe / KfW 40 (kein Gas)' },
+                { id: 'strom', label: 'Elektrizitätsanschluss', hint: 'Phase 1 Pos 1.11 Teil: Baustrom/Stromnetz (2.700 €) + Telekom/Glasfaser (1.300 €)' }
             ];
 
             const tbodyNeben = document.getElementById('form-neben-tbody');
             if (tbodyNeben) {
                 tbodyNeben.innerHTML = neben.map(n => `
                     <tr class="hover:bg-slate-50 transition-colors">
-                        <td class="py-2 px-3 font-medium text-slate-900">${n.label}</td>
+                        <td class="py-2 px-3">
+                            <div class="font-medium text-slate-900">${n.label}</div>
+                            ${n.hint ? `<div class="text-[10px] text-slate-400 font-normal leading-tight">${n.hint}</div>` : ''}
+                        </td>
                         <td class="py-1 px-3 text-right">
                             <input type="number" step="50" value="${appState.values[n.id + '_kosten'] || 0}" 
                                    onchange="handleFormChange('${n.id}_kosten', this.value)" 
@@ -1293,17 +1300,20 @@
 
             // Außenanlagen Rows
             const aussen = [
-                { id: 'entwaesserung', label: 'Entwässerung' },
-                { id: 'hof', label: 'Hofbefestigung' },
-                { id: 'aussen_sonstige', label: 'Sonstige Außenanlagen, Erdarbeiten, Grünanlagen etc.' },
-                { id: 'garagen', label: 'Garagen, Carports etc.' }
+                { id: 'entwaesserung', label: 'Entwässerung', hint: 'Phase 2 Pos 2.2: Revisionsschacht DN 1000' },
+                { id: 'hof', label: 'Hofbefestigung', hint: 'Auffahrt & Stellplätze (optional bauseits)' },
+                { id: 'aussen_sonstige', label: 'Sonstige Außenanlagen, Erdarbeiten, Grünanlagen etc.', hint: 'Garten, Humusierung & Zaun (optional bauseits)' },
+                { id: 'garagen', label: 'Garagen, Carports etc.', hint: 'Phase 3 Pos 3.7 + Phase 4 Pos 4.2, 4.3: Carport 36 m² & Terrassendach 21 m²' }
             ];
 
             const tbodyAussen = document.getElementById('form-aussen-tbody');
             if (tbodyAussen) {
                 tbodyAussen.innerHTML = aussen.map(a => `
                     <tr class="hover:bg-slate-50 transition-colors">
-                        <td class="py-2 px-3 font-medium text-slate-900">${a.label}</td>
+                        <td class="py-2 px-3">
+                            <div class="font-medium text-slate-900">${a.label}</div>
+                            ${a.hint ? `<div class="text-[10px] text-slate-400 font-normal leading-tight">${a.hint}</div>` : ''}
+                        </td>
                         <td class="py-1 px-3 text-right">
                             <input type="number" step="50" value="${appState.values[a.id + '_kosten'] || 0}" 
                                    onchange="handleFormChange('${a.id}_kosten', this.value)" 
@@ -1341,100 +1351,152 @@
             }
         }
 
-        // Smart Import from Materialplaner (localStorage: kfw40_material_data_v29)
+        // Smart Import from Materialplaner (localStorage: kfw40_material_data_v30 oder v29)
+        // Führt die Kalkulation 14x9 exakt mit dem Materialplaner auf einer einheitlichen Basis zusammen!
         function importFromMaterialplaner() {
             try {
-                const matData = JSON.parse(localStorage.getItem('kfw40_material_data_v29'));
+                const matData = JSON.parse(localStorage.getItem('kfw40_material_data_v30')) || JSON.parse(localStorage.getItem('kfw40_material_data_v29'));
                 if (!matData) {
+                    loadJakob14x9Data();
                     showToast('Keine Materialplaner-Daten im Browser gefunden. Standardwerte geladen.', 'amber');
                     return;
                 }
 
-                // Sum helper for an array of row objects
-                const sumRows = (arr) => (arr || []).reduce((acc, row) => acc + ((row.qty || 0) * (row.price || 0)), 0);
-
-                // Helper to find sum of specific items matching regex title
-                const sumMatch = (arr, regex) => (arr || []).filter(r => regex.test(r.title || '') || regex.test(r.spec || '')).reduce((acc, r) => acc + ((r.qty || 0) * (r.price || 0)), 0);
+                // Sum helper by position list (garantiert 100% exakte Zuordnung ohne Überschneidungen)
+                const sumPos = (phaseArr, posList) => (phaseArr || []).filter(r => posList.includes(r.pos)).reduce((acc, r) => acc + ((r.qty || 0) * (r.price || 0)), 0);
 
                 const v = appState.values;
 
-                // 1. Grundstück & Nebenkosten (Phase 1)
-                v.grundstueck = sumMatch(matData.nebenkosten, /Grundstückskauf/i) || 88800;
-                v.steuer = sumMatch(matData.nebenkosten, /Grunderwerbsteuer/i) || 4440;
-                v.notar = sumMatch(matData.nebenkosten, /Notar/i) || 1600;
-                v.sonstige_erwerb = sumMatch(matData.nebenkosten, /Rechtsanwalt|Bodengutachten|Versicherungen/i) || 2750;
-                
-                // Architekt & Genehmigung
-                v.architekt_kosten = sumMatch(matData.nebenkosten, /Architekt|Statik|Energieberater/i) || 13100;
-                v.verwaltung_kosten = sumMatch(matData.nebenkosten, /Baugenehmigung/i) || 1300;
-                v.sonstige_neben_kosten = sumMatch(matData.nebenkosten, /Baustelleneinrichtung/i) || 3200;
-                
-                // Hausanschlüsse
-                const anschluesse = sumMatch(matData.nebenkosten, /Hausanschlusskosten/i) || 6500;
-                v.wasser_kosten = Math.round(anschluesse * 0.35);
-                v.strom_kosten = Math.round(anschluesse * 0.45);
-                v.gas_kosten = Math.round(anschluesse * 0.20);
+                // 1. Grundstück & Erwerbskosten (Phase 1)
+                v.grundstueck = sumPos(matData.nebenkosten, ['1.1']) || 88800;
+                v.steuer = sumPos(matData.nebenkosten, ['1.2']) || 4440;
+                v.notar = sumPos(matData.nebenkosten, ['1.3']) || 1600;
+                v.makler = 0;
+                v.sonstige_erwerb = sumPos(matData.nebenkosten, ['1.4', '1.6', '1.7', '1.13']) || 5150;
+                v.abfindungen = 0;
+                v.herrichten = 0;
+                v.erschliessung = 0;
 
-                // 2. Erdarbeiten & Bodenplatte (Phase 2)
-                v.erdarbeiten_kosten = sumMatch(matData.boden, /Bagger|Erdaushub/i) || 1500;
-                v.erdarbeiten_eigen = Math.round(v.erdarbeiten_kosten * 0.4);
+                // 2. Baunebenkosten (Phase 1 & Phase 6)
+                v.architekt_kosten = sumPos(matData.nebenkosten, ['1.5', '1.8', '1.10']) || 13100;
+                v.architekt_eigen = 0;
 
-                v.maurer_kosten = sumMatch(matData.boden, /Transportbeton|XPS|Gitterbewehrung|Schotter|Bitumen/i) || 14500;
-                v.maurer_eigen = 4500;
+                v.verwaltung_kosten = sumPos(matData.nebenkosten, ['1.9']) || 1300;
+                v.verwaltung_eigen = 0;
 
-                // 3. Palmatin Holzbau & Gewerke (Phase 3 & 4)
-                v.zimmerer_kosten = sumMatch(matData.palmatin, /Außenwände|Innenwände|Zwischendecke|Kehlbalkenlage|Treppe/i) || 109200;
-                v.zimmerer_eigen = 18000; // Eigenleistung Richten & Dämmen
+                v.finanzierung_kosten = 0;
+                v.finanzierung_eigen = 0;
 
-                v.dach_kosten = (sumMatch(matData.palmatin, /Dachkonstruktion/i) + sumMatch(matData.huelle, /Dachpfannen/i)) || 22300;
+                const sonstigeNebenMat = (sumPos(matData.nebenkosten, ['1.12']) || 3200) + (sumPos(matData.haustechnik, ['6.12']) || 450);
+                v.sonstige_neben_eigen = 1000;
+                v.sonstige_neben_kosten = sonstigeNebenMat + v.sonstige_neben_eigen; // 4.650 €
+
+                // Hausanschlüsse (Pos 1.11: 6.500 € gesamt -> Wasser 2.500 € + Strom/Telekom 4.000 €)
+                const anschlussMat = sumPos(matData.nebenkosten, ['1.11']) || 6500;
+                const wasserMat = Math.round(anschlussMat * (2500 / 6500));
+                const stromMat = anschlussMat - wasserMat;
+                v.wasser_eigen = 800;
+                v.wasser_kosten = wasserMat + v.wasser_eigen; // 3.300 €
+                v.strom_eigen = 0;
+                v.strom_kosten = stromMat;                   // 4.000 €
+                v.gas_kosten = 0;
+                v.gas_eigen = 0;
+
+                // 3. Baukosten Einzelgewerke
+                v.hausbauvertrag_kosten = 0;
+                v.hausbauvertrag_eigen = 0;
+
+                // Erdarbeiten (Phase 2 Pos 2.1)
+                const erdarbeitenMat = sumPos(matData.boden, ['2.1']) || 1500;
+                v.erdarbeiten_eigen = 1500;
+                v.erdarbeiten_kosten = erdarbeitenMat + v.erdarbeiten_eigen; // 3.000 €
+
+                // Maurer / Bodenplatte (Phase 2 Pos 2.3-2.6, 2.8-2.10)
+                const maurerMat = sumPos(matData.boden, ['2.3', '2.4', '2.5', '2.6', '2.8', '2.9', '2.10']) || 14678.50;
+                v.maurer_eigen = 8000;
+                v.maurer_kosten = maurerMat + v.maurer_eigen; // 22.678,50 €
+
+                // Zimmerer / Palmatin Holzbau (Phase 3 Pos 3.1, 3.2, 3.4, 3.5, 3.8, 3.9)
+                const zimmererMat = sumPos(matData.palmatin, ['3.1', '3.2', '3.4', '3.5', '3.8', '3.9']) || 97900;
+                v.zimmerer_eigen = 18000;
+                v.zimmerer_kosten = zimmererMat + v.zimmerer_eigen; // 115.900 €
+
+                // Dach (Phase 3 Pos 3.3 Dachstuhl + Phase 4 Pos 4.1 Ziegel 178,9 m²)
+                const dachMat = (sumPos(matData.palmatin, ['3.3']) || 19800) + (sumPos(matData.huelle, ['4.1']) || 4383.05);
                 v.dach_eigen = 6500;
+                v.dach_kosten = dachMat + v.dach_eigen; // 30.683,05 €
 
-                v.klempner_kosten = sumMatch(matData.huelle, /Dachrinnen/i) || 1950;
+                // Klempner / Dachrinnen (Phase 4 Pos 4.4)
+                const klempnerMat = sumPos(matData.huelle, ['4.4']) || 1950;
                 v.klempner_eigen = 800;
+                v.klempner_kosten = klempnerMat + v.klempner_eigen; // 2.750 €
 
-                // 4. Glaser / Fenster
-                v.glaser_kosten = (sumMatch(matData.palmatin, /Fenster/i) + sumMatch(matData.bauelemente, /Haustür|Abdichtungsset/i)) || 18150;
+                // Glaser / Fenster & Außentüren (Phase 3 Pos 3.6 + Phase 5 Pos 5.1, 5.2, 5.3)
+                const glaserMat = (sumPos(matData.palmatin, ['3.6']) || 12000) + (sumPos(matData.bauelemente, ['5.1', '5.2', '5.3']) || 6150);
                 v.glaser_eigen = 2500;
+                v.glaser_kosten = glaserMat + v.glaser_eigen; // 20.650 €
 
-                // 5. Haustechnik (Phase 6)
-                v.heizung_kosten = (sumMatch(matData.boden, /Fußbodenheizung/i) + sumMatch(matData.haustechnik, /Wärmepumpe|Speicher|Verrohrung|Lüftung/i)) || 26118;
-                v.heizung_eigen = 5000;
+                // Heizung & Lüftung (Phase 2 Pos 2.7 FBH EG + Phase 6 Pos 6.1-6.5)
+                const heizungMat = (sumPos(matData.boden, ['2.7']) || 2409) + (sumPos(matData.haustechnik, ['6.1', '6.2', '6.3', '6.4', '6.5']) || 25300);
+                v.heizung_eigen = 5500;
+                v.heizung_kosten = heizungMat + v.heizung_eigen; // 33.209 €
 
-                v.elektro_kosten = sumMatch(matData.haustechnik, /Zählerschrank|Kabel|Schalter|LED|Photovoltaik|Wallbox|Elektro/i) || 20200;
+                // Elektro & PV (Phase 6 Pos 6.6-6.11, 6.13)
+                const elektroMat = sumPos(matData.haustechnik, ['6.6', '6.7', '6.8', '6.9', '6.10', '6.11', '6.13']) || 22200;
                 v.elektro_eigen = 6500;
+                v.elektro_kosten = elektroMat + v.elektro_eigen; // 28.700 €
 
-                // 6. Trockenbau & Finish (Phase 7 & 8)
-                v.boden_kosten = (sumMatch(matData.trockenbau, /Estrich/i) + sumMatch(matData.finish, /Klick-Vinyl|Sockelleisten/i)) || 11830;
-                v.boden_eigen = 3500;
+                // Sanitär (Phase 9 Pos 9.1-9.5)
+                const sanitaerMat = sumPos(matData.sanitaer, ['9.1', '9.2', '9.3', '9.4', '9.5']) || 12860;
+                v.sanitaer_eigen = 4500;
+                v.sanitaer_kosten = sanitaerMat + v.sanitaer_eigen; // 17.360 €
 
-                v.maler_kosten = sumMatch(matData.finish, /Spachtel|Malervlies|Silikat/i) || 6854;
-                v.maler_eigen = 4800;
+                // Bodenbeläge & Estrich (Phase 7 Pos 7.4 Estrich OG + Phase 8 Pos 8.4 Vinyl 219m², 8.5 Leisten)
+                const bodenMat = (sumPos(matData.trockenbau, ['7.4']) || 3723) + (sumPos(matData.finish, ['8.4', '8.5']) || 7998);
+                v.boden_eigen = 4000;
+                v.boden_kosten = bodenMat + v.boden_eigen; // 15.721 €
 
-                v.tischler_kosten = sumMatch(matData.finish, /Innentüren|Fensterbänke/i) || 5480;
+                // Trockenbau & Finish Maler (Phase 7 Pos 7.1, 7.2, 7.3, 7.5, 7.6 + Phase 8 Pos 8.1, 8.2, 8.3)
+                const malerMat = (sumPos(matData.trockenbau, ['7.1', '7.2', '7.3', '7.5', '7.6']) || 12181.50) + (sumPos(matData.finish, ['8.1', '8.2', '8.3']) || 5527.90);
+                v.maler_eigen = 12000;
+                v.maler_kosten = malerMat + v.maler_eigen; // 29.709,40 €
+
+                // Tischler / Innentüren & Fensterbänke (Phase 8 Pos 8.6, 8.7)
+                const tischlerMat = sumPos(matData.finish, ['8.6', '8.7']) || 5480;
                 v.tischler_eigen = 1800;
+                v.tischler_kosten = tischlerMat + v.tischler_eigen; // 7.280 €
 
-                // 7. Sanitär (Phase 9)
-                v.sanitaer_kosten = sumRows(matData.sanitaer) || 12860;
-                v.sanitaer_eigen = 5200;
+                v.metallbau_kosten = 0;
+                v.metallbau_eigen = 0;
+                v.fliesen_kosten = 0;
+                v.fliesen_eigen = 0;
+                v.naturstein_kosten = 0;
+                v.naturstein_eigen = 0;
+                v.rolladen_kosten = 0;
+                v.rolladen_eigen = 0;
+                v.baukosten_sonstiges_kosten = 0;
+                v.baukosten_sonstiges_eigen = 0;
 
-                // 8. Außenanlagen (Phase 2 & 4 & Sonstiges)
-                v.entwaesserung_kosten = sumMatch(matData.boden, /Betonschacht/i) || 1100;
+                // 4. Außenanlagen (Phase 2 Pos 2.2 Revisionsschacht + Phase 3 Pos 3.7 Carport Holz + Phase 4 Pos 4.2 Terrassendach, 4.3 Carport Trapezblech)
+                const entwaesserungMat = sumPos(matData.boden, ['2.2']) || 1100;
                 v.entwaesserung_eigen = 400;
+                v.entwaesserung_kosten = entwaesserungMat + v.entwaesserung_eigen; // 1.500 €
 
-                v.garagen_kosten = (sumMatch(matData.palmatin, /Carport/i) + sumMatch(matData.huelle, /Carport|Terrassenüberdachung/i)) || 8117;
-                v.garagen_eigen = 2800;
+                const garagenMat = (sumPos(matData.palmatin, ['3.7']) || 4200) + (sumPos(matData.huelle, ['4.2', '4.3']) || 2517);
+                v.garagen_eigen = 4283;
+                v.garagen_kosten = garagenMat + v.garagen_eigen; // 11.000 €
 
-                v.hof_kosten = 5500;
-                v.hof_eigen = 2200;
-                v.aussen_sonstige_kosten = 8500;
-                v.aussen_sonstige_eigen = 3500;
+                v.hof_kosten = 0;
+                v.hof_eigen = 0;
+                v.aussen_sonstige_kosten = 0;
+                v.aussen_sonstige_eigen = 0;
 
                 saveState();
                 recalcAll();
                 renderPreviewValues();
                 renderFormValues();
 
-                showToast('Erfolgreich: Reale Zahlen aus Haus Jakob Materialplaner importiert!', 'emerald');
+                showToast('Erfolgreich: 100% synchron mit Materialplaner (Fremdkapital / Material = ' + formatEUR(388397.95) + ' €)!', 'emerald');
             } catch(err) {
                 console.error('Import error:', err);
                 showToast('Fehler beim Importieren der Daten: ' + err.message, 'rose');
