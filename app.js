@@ -109,7 +109,7 @@ const HOTSPOTS_DATA = [
         title: 'Luftdichte OSB-Dampfbremse & Gebäudehülle',
         badge: 'Gebäudehülle',
         text: 'Die 12 mm OSB/3 Platten auf den Ständern und unter den Sparren dienen stoßverklebt direkt als Dampfbremse und Luftdichtungsebene. Keine separate Folie an den Außenwänden/Dach nötig.',
-        extra: '✓ OSB-Stöße mit TESCON VANA luftdicht verklebt<br>✓ 50 mm Installationsebene schützt die OSB-Dichtebene vor Kabeldurchdringungen'
+        extra: '✓ OSB-Stöße mit TESCON VANA luftdicht verklebt<br>✓ 45 mm Installationsebene schützt die OSB-Dichtebene vor Kabeldurchdringungen'
     }
 ];
 
@@ -368,11 +368,11 @@ function build3DModel() {
 
     scene.add(groups.wallSill);
 
-    // B) Wall Studs (220 mm Palmatin KVH Ständerwerk)
+    // B) Wall Studs (195 mm Palmatin KVH Ständerwerk)
     groups.wallStuds = new THREE.Group();
     const studMat = sillWoodMat; // Same Palmatin wood
 
-    const studGeo = new THREE.BoxGeometry(0.18, 2.4, 0.08);
+    const studGeo = new THREE.BoxGeometry(0.195, 2.4, 0.08);
 
     // Place studs along z-axis
     for (let z = -1.0; z <= 1.2; z += 0.6) {
@@ -420,12 +420,12 @@ function build3DModel() {
     groups.wallOuterBoard.add(wfMesh);
     scene.add(groups.wallOuterBoard);
 
-    // E) Hinterlüftung (30 mm) & HardiePlank Fassadenverkleidung (Palmatin)
+    // E) Hinterlüftung (35 mm) & HardiePlank Fassadenverkleidung (Palmatin)
     groups.wallFacade = new THREE.Group();
     
-    // Vertical Counter Battens (Lattung 30 mm)
+    // Vertical Counter Battens (Lattung 35 mm)
     const battenMat = studMat;
-    const battenGeo = new THREE.BoxGeometry(0.03, 2.55, 0.05);
+    const battenGeo = new THREE.BoxGeometry(0.035, 2.55, 0.05);
     for (let z = -1.0; z <= 1.2; z += 0.6) {
         const battenMesh = new THREE.Mesh(battenGeo, battenMat);
         battenMesh.position.set(1.8, 1.275, z);
@@ -450,7 +450,7 @@ function build3DModel() {
     }
     scene.add(groups.wallFacade);
 
-    // F) Interior Side: 12 mm OSB directly on studs + Vapor Brake + 50 mm Inst. Layer + 12 mm OSB + 12 mm Rigips
+    // F) Interior Side: 12 mm OSB directly on studs + Vapor Brake + 45 mm Inst. Layer + 12 mm OSB + 12 mm Rigips
     groups.wallInner = new THREE.Group();
 
     // 1. OSB/3 Platte 12 mm direkt auf Ständern
@@ -475,13 +475,13 @@ function build3DModel() {
     vbMesh.position.set(1.5165, 1.275, 0.125);
     groups.wallInner.add(vbMesh);
 
-    // 3. Installation Layer Battens & Insulation (50 mm)
+    // 3. Installation Layer Battens & Insulation (45 mm)
     const instMat = createManagedMaterial({
         standard: { color: 0xE2E8F0, roughness: 0.8 },
         gewerke: { color: COLORS.eigenleistung },
         thermal: { color: COLORS.thermalHot }
     });
-    const instGeo = new THREE.BoxGeometry(0.05, 2.55, 2.5);
+    const instGeo = new THREE.BoxGeometry(0.045, 2.55, 2.5);
     const instMesh = new THREE.Mesh(instGeo, instMat);
     instMesh.position.set(1.49, 1.275, 0.125);
     groups.wallInner.add(instMesh);
