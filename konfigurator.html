@@ -647,9 +647,9 @@
                 { id: 'w3', name: 'AW Ost (Giebelseite)', type: 'Außenwand 390 mm (Fassade + STEICO + 195mm Ständer)', len: 9.0, height: 5.70, cutouts: 3.2 },
                 { id: 'w4', name: 'AW West (Giebelseite mit Eingang)', type: 'Außenwand 390 mm (Fassade + STEICO + 195mm Ständer)', len: 9.0, height: 5.70, cutouts: 3.3 },
                 { id: 'w5', name: 'Wohnungstrennwand ELW (EG)', type: 'Schallschutzwand ELW (53 dB - 2x OSB + 2x Rigips)', len: 8.5, height: 2.65, cutouts: 0.0 },
-                { id: 'w6', name: 'Tragende Innenwand EG Längsachse', type: 'Tragende Innenwand (Ständer 120 mm)', len: 10.0, height: 2.65, cutouts: 3.0 },
+                { id: 'w6', name: 'Tragende Innenwand EG Längsachse', type: 'Tragende Innenwand (Ständer 145 mm)', len: 10.0, height: 2.65, cutouts: 3.0 },
                 { id: 'w7', name: 'Nichttragende Trennwände EG', type: 'Innenwand Raumteiler (Ständer 70 mm)', len: 18.11, height: 2.65, cutouts: 8.9 },
-                { id: 'w8', name: 'Tragende Innenwand OG Längsachse', type: 'Tragende Innenwand (Ständer 120 mm)', len: 4.60, height: 2.60, cutouts: 1.9 },
+                { id: 'w8', name: 'Tragende Innenwand OG Längsachse', type: 'Tragende Innenwand (Ständer 145 mm)', len: 4.60, height: 2.60, cutouts: 1.9 },
                 { id: 'w9', name: 'Nichttragende Trennwände OG (Zimmer/Bad)', type: 'Innenwand Raumteiler (Ständer 70 mm)', len: 35.08, height: 2.60, cutouts: 9.6 }
             ],
 
@@ -753,7 +753,7 @@
                     category: 'trockenbau',
                     pos: '1.4',
                     title: 'OSB/3 Verlegeplatten 22 mm Nut & Feder 4-seitig (DIN EN 300)',
-                    spec: 'Format 2.500 × 675 mm, geschliffen/ungeschliffen. Als statische Tragschicht auf der 240mm KVH-Zwischendecke OG (109,5 m²) und als begehbarer Dachbodenbelag (109,5 m²).',
+                    spec: 'Format 2.500 × 675 mm, geschliffen/ungeschliffen. Als statische Tragschicht auf der 195mm KVH-Zwischendecke OG (109,5 m²) und als begehbarer Dachbodenbelag (109,5 m²).',
                     qty: 219,
                     unit: 'm²',
                     brand: 'EGGER OSB 4 Top',
@@ -1463,8 +1463,8 @@
                             <select onchange="updateWall(${idx}, 'type', this.value)" class="w-full bg-slate-50 border border-slate-200 rounded-lg text-xs py-1 px-2 font-medium">
                                 <option value="Außenwand 390 mm (Fassade + STEICO + 195mm Ständer)" ${wall.type.includes('Außenwand') ? 'selected' : ''}>Außenwand (390 mm | 50 dB | U=0,124)</option>
                                 <option value="Schallschutzwand ELW (53 dB - 2x OSB + 2x Rigips)" ${wall.type.includes('Schallschutzwand') ? 'selected' : ''}>ELW-Schallschutzwand (53 dB)</option>
-                                <option value="Innenwand 119 mm (70 mm Ständer + 2x OSB + 2x Rigips)" ${!wall.type.includes('Außenwand') && !wall.type.includes('Schallschutzwand') && !wall.type.includes('120') && !wall.type.includes('Tragende') ? 'selected' : ''}>Innenwand (119 mm | 70er Ständer + 2x OSB + 2x Rigips)</option>
-                                <option value="Tragende Innenwand 169 mm (120 mm Ständer)" ${wall.type.includes('120') || wall.type.includes('Tragende') ? 'selected' : ''}>Tragende Innenwand (169 mm | 120er Ständer)</option>
+                                <option value="Innenwand 119 mm (70 mm Ständer + 2x OSB + 2x Rigips)" ${!wall.type.includes('Außenwand') && !wall.type.includes('Schallschutzwand') && !wall.type.includes('120') && !wall.type.includes('145') && !wall.type.includes('Tragende') ? 'selected' : ''}>Innenwand (119 mm | 70er Ständer + 2x OSB + 2x Rigips)</option>
+                                <option value="Tragende Innenwand 194 mm (145 mm Ständer)" ${wall.type.includes('145') || wall.type.includes('120') || wall.type.includes('Tragende') ? 'selected' : ''}>Tragende Innenwand (194 mm | 145er Ständer)</option>
                             </select>
                         </td>
                         <td class="py-3 px-2 text-right">
