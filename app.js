@@ -510,11 +510,11 @@ function build3DModel() {
     // ----------------------------------------------------
     const roofAngle = 0.25; // Slope in radians (~14 deg)
 
-    // A) Rafters (Sparren 240 mm - Palmatin)
+    // A) Rafters (Sparren 220 mm - Palmatin)
     groups.roofRafters = new THREE.Group();
     const rafterMat = studMat;
 
-    const rafterGeo = new THREE.BoxGeometry(2.4, 0.24, 0.08);
+    const rafterGeo = new THREE.BoxGeometry(2.4, 0.22, 0.08);
 
     for (let z = -1.0; z <= 1.2; z += 0.6) {
         const rafterMesh = new THREE.Mesh(rafterGeo, rafterMat);
@@ -525,12 +525,12 @@ function build3DModel() {
     }
     scene.add(groups.roofRafters);
 
-    // B) Roof Cellulose Fill (240 mm - Eigenleistung)
+    // B) Roof Insulation Fill (220 mm)
     groups.roofInsulation = new THREE.Group();
     const roofCellMat = cellMat;
 
     for (let z = -0.7; z <= 0.8; z += 0.6) {
-        const rCellGeo = new THREE.BoxGeometry(2.4, 0.24, 0.52);
+        const rCellGeo = new THREE.BoxGeometry(2.4, 0.22, 0.52);
         const rCellMesh = new THREE.Mesh(rCellGeo, roofCellMat);
         rCellMesh.position.set(0.6, 2.85, z);
         rCellMesh.rotation.z = roofAngle;
