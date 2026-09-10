@@ -327,7 +327,7 @@
                             1. Wand- &amp; Raumgeometrie
                         </span>
                         <h2 class="font-display font-bold text-2xl text-slate-900 mt-1">Exakte Wandabschnitts-Eingabe (8,5 × 14,0 m | 2 Vollgeschosse)</h2>
-                        <p class="text-xs text-slate-500">Hier können alle Außenwände (390 mm) und Innenwände (129 mm: 12,5 mm Rigips + 12 mm OSB + 80 mm Steinwolle + 12 mm OSB + 12,5 mm Rigips) mit Länge, Höhe und Abzügen (Fenster/Türen) eingegeben werden. Schnittskizzen: <a href="wand.html" target="_blank" class="text-blue-600 hover:text-blue-800 underline font-bold">Außenwand (390 mm)</a> &bull; <a href="innenwand.html" target="_blank" class="text-blue-600 hover:text-blue-800 underline font-bold">Innenwand (129 mm)</a>.</p>
+                        <p class="text-xs text-slate-500">Hier können alle Außenwände (390 mm) und Innenwände (119 mm: 12,5 mm Rigips + 12 mm OSB + 70 mm Steinwolle + 12 mm OSB + 12,5 mm Rigips) mit Länge, Höhe und Abzügen (Fenster/Türen) eingegeben werden. Schnittskizzen: <a href="wand.html" target="_blank" class="text-blue-600 hover:text-blue-800 underline font-bold">Außenwand (390 mm)</a> &bull; <a href="innenwand.html" target="_blank" class="text-blue-600 hover:text-blue-800 underline font-bold">Innenwand (119 mm)</a>.</p>
                     </div>
 
                     <div class="flex items-center gap-2 no-print flex-wrap">
@@ -648,9 +648,9 @@
                 { id: 'w4', name: 'AW West (Giebelseite mit Eingang)', type: 'Außenwand 390 mm (Fassade + STEICO + 195mm Ständer)', len: 9.0, height: 5.70, cutouts: 3.3 },
                 { id: 'w5', name: 'Wohnungstrennwand ELW (EG)', type: 'Schallschutzwand ELW (53 dB - 2x OSB + 2x Rigips)', len: 8.5, height: 2.65, cutouts: 0.0 },
                 { id: 'w6', name: 'Tragende Innenwand EG Längsachse', type: 'Tragende Innenwand (Ständer 120 mm)', len: 10.0, height: 2.65, cutouts: 3.0 },
-                { id: 'w7', name: 'Nichttragende Trennwände EG', type: 'Innenwand Raumteiler (Ständer 80 mm)', len: 18.11, height: 2.65, cutouts: 8.9 },
+                { id: 'w7', name: 'Nichttragende Trennwände EG', type: 'Innenwand Raumteiler (Ständer 70 mm)', len: 18.11, height: 2.65, cutouts: 8.9 },
                 { id: 'w8', name: 'Tragende Innenwand OG Längsachse', type: 'Tragende Innenwand (Ständer 120 mm)', len: 4.60, height: 2.60, cutouts: 1.9 },
-                { id: 'w9', name: 'Nichttragende Trennwände OG (Zimmer/Bad)', type: 'Innenwand Raumteiler (Ständer 80 mm)', len: 35.08, height: 2.60, cutouts: 9.6 }
+                { id: 'w9', name: 'Nichttragende Trennwände OG (Zimmer/Bad)', type: 'Innenwand Raumteiler (Ständer 70 mm)', len: 35.08, height: 2.60, cutouts: 9.6 }
             ],
 
             fenster: [
@@ -1463,7 +1463,7 @@
                             <select onchange="updateWall(${idx}, 'type', this.value)" class="w-full bg-slate-50 border border-slate-200 rounded-lg text-xs py-1 px-2 font-medium">
                                 <option value="Außenwand 390 mm (Fassade + STEICO + 195mm Ständer)" ${wall.type.includes('Außenwand') ? 'selected' : ''}>Außenwand (390 mm | 50 dB | U=0,124)</option>
                                 <option value="Schallschutzwand ELW (53 dB - 2x OSB + 2x Rigips)" ${wall.type.includes('Schallschutzwand') ? 'selected' : ''}>ELW-Schallschutzwand (53 dB)</option>
-                                <option value="Innenwand 129 mm (80 mm Ständer + 2x OSB + 2x Rigips)" ${!wall.type.includes('Außenwand') && !wall.type.includes('Schallschutzwand') && !wall.type.includes('120') && !wall.type.includes('Tragende') ? 'selected' : ''}>Innenwand (129 mm | 80er Ständer + 2x OSB + 2x Rigips)</option>
+                                <option value="Innenwand 119 mm (70 mm Ständer + 2x OSB + 2x Rigips)" ${!wall.type.includes('Außenwand') && !wall.type.includes('Schallschutzwand') && !wall.type.includes('120') && !wall.type.includes('Tragende') ? 'selected' : ''}>Innenwand (119 mm | 70er Ständer + 2x OSB + 2x Rigips)</option>
                                 <option value="Tragende Innenwand 169 mm (120 mm Ständer)" ${wall.type.includes('120') || wall.type.includes('Tragende') ? 'selected' : ''}>Tragende Innenwand (169 mm | 120er Ständer)</option>
                             </select>
                         </td>
@@ -1615,7 +1615,7 @@
             appConfig.waende.push({
                 id: 'w_' + Date.now(),
                 name: 'Neuer Wandabschnitt',
-                type: 'Innenwand Raumteiler (Ständer 80 mm)',
+                type: 'Innenwand Raumteiler (Ständer 70 mm)',
                 len: 5.0,
                 height: 2.80,
                 cutouts: 0.0
